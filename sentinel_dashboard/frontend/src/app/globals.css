@@ -349,3 +349,54 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent-primary);
 }
+
+/* Tactical Cockpit HUD Utilities (Reference FUI Cockpit) */
+@keyframes radar-sweep {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-radar-sweep {
+  animation: radar-sweep 4s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes pitch-horizon-drift {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-4px) rotate(1.5deg); }
+  75% { transform: translateY(3px) rotate(-1.5deg); }
+}
+.animate-pitch-horizon {
+  animation: pitch-horizon-drift 6s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes trajectory-pulse {
+  0%, 100% { filter: drop-shadow(0 0 3px rgba(250, 204, 21, 0.8)); opacity: 1; }
+  50% { filter: drop-shadow(0 0 8px rgba(250, 204, 21, 1)); opacity: 0.85; }
+}
+.animate-trajectory-glow {
+  animation: trajectory-pulse 2.5s ease-in-out infinite;
+}
+
+.hatch-pattern {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(250, 204, 21, 0.08) 0,
+    rgba(250, 204, 21, 0.08) 2px,
+    transparent 2px,
+    transparent 8px
+  );
+}
+
+.cockpit-frame-cut {
+  clip-path: polygon(
+    0 20px,
+    20px 0,
+    calc(100% - 20px) 0,
+    100% 20px,
+    100% calc(100% - 20px),
+    calc(100% - 20px) 100%,
+    20px 100%,
+    0 calc(100% - 20px)
+  );
+}

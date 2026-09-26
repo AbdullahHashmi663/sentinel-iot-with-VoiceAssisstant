@@ -238,8 +238,8 @@ export default function MasterDashboardPage() {
         onOpenResearch={() => setIsResearchOpen(true)}
       />
 
-      {/* 2. MAIN VIEW CONTAINER */}
-      <main className="max-w-[1920px] w-full mx-auto px-4 space-y-4">
+      {/* 2. MAIN VIEW CONTAINER (SPACIOUS SCI-FI FUI LAYOUT) */}
+      <main className="max-w-[1920px] w-full mx-auto px-4 sm:px-6 lg:px-8 space-y-6 md:space-y-8">
         
         {/* AUTONOMOUS CONTINUOUS VOICE COPILOT (SECTION 9) */}
         <VoiceCopilot />

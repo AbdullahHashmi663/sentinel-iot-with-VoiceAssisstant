@@ -25,6 +25,7 @@ import {
   Sparkles
 } from "lucide-react";
 import { useTelemetryStore } from "@/store/useTelemetryStore";
+import TacticalCockpitHUD from "@/components/TacticalCockpitHUD";
 
 export default function OverviewConsole() {
   const {
@@ -72,12 +73,12 @@ export default function OverviewConsole() {
   }, [radarPoints]);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-8">
       
       {/* 1. TOP KPI RIBBON (SECTION 5.2) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Active Protected Nodes */}
-        <div className="cyber-card p-4 flex items-center justify-between border-l-4 border-l-[var(--brand-cyan)]">
+        <div className="cyber-card p-5 md:p-6 flex items-center justify-between border-l-4 border-l-[var(--brand-cyan)]">
           <div className="space-y-1">
             <span className="text-[11px] font-['JetBrains_Mono'] text-[var(--text-secondary)] uppercase tracking-wider">
               Protected Fleet Nodes
@@ -89,13 +90,13 @@ export default function OverviewConsole() {
               100% Industrial Coverage
             </div>
           </div>
-          <div className="p-3 rounded-lg bg-[var(--brand-cyan)]/15 text-[var(--brand-cyan)]">
+          <div className="p-3.5 rounded-xl bg-[var(--brand-cyan)]/15 text-[var(--brand-cyan)]">
             <Server className="w-6 h-6" />
           </div>
         </div>
 
         {/* Ingestion Velocity */}
-        <div className="cyber-card p-4 flex items-center justify-between border-l-4 border-l-[var(--brand-primary)]">
+        <div className="cyber-card p-5 md:p-6 flex items-center justify-between border-l-4 border-l-[var(--brand-primary)]">
           <div className="space-y-1">
             <span className="text-[11px] font-['JetBrains_Mono'] text-[var(--text-secondary)] uppercase tracking-wider">
               Ingestion Velocity
@@ -107,13 +108,13 @@ export default function OverviewConsole() {
               Sub-25ms WebSocket Stream
             </div>
           </div>
-          <div className="p-3 rounded-lg bg-[var(--brand-primary)]/15 text-[var(--brand-primary)]">
+          <div className="p-3.5 rounded-xl bg-[var(--brand-primary)]/15 text-[var(--brand-primary)]">
             <Zap className="w-6 h-6" />
           </div>
         </div>
 
         {/* Threats Contained */}
-        <div className="cyber-card p-4 flex items-center justify-between border-l-4 border-l-[var(--alert-critical)]">
+        <div className="cyber-card p-5 md:p-6 flex items-center justify-between border-l-4 border-l-[var(--alert-critical)]">
           <div className="space-y-1">
             <span className="text-[11px] font-['JetBrains_Mono'] text-[var(--text-secondary)] uppercase tracking-wider">
               Autonomous Blocks
@@ -125,13 +126,13 @@ export default function OverviewConsole() {
               Zero Human Delay (MTTR {mttrCurrentMs}ms)
             </div>
           </div>
-          <div className="p-3 rounded-lg bg-[var(--alert-critical)]/15 text-[var(--alert-critical)]">
+          <div className="p-3.5 rounded-xl bg-[var(--alert-critical)]/15 text-[var(--alert-critical)]">
             <ShieldCheck className="w-6 h-6" />
           </div>
         </div>
 
         {/* NIST CSF Score */}
-        <div className="cyber-card p-4 flex items-center justify-between border-l-4 border-l-[var(--alert-nominal)]">
+        <div className="cyber-card p-5 md:p-6 flex items-center justify-between border-l-4 border-l-[var(--alert-nominal)]">
           <div className="space-y-1">
             <span className="text-[11px] font-['JetBrains_Mono'] text-[var(--text-secondary)] uppercase tracking-wider">
               NIST CSF 2.0 Score
@@ -143,17 +144,20 @@ export default function OverviewConsole() {
               Continuous Cryptographic AU-9
             </div>
           </div>
-          <div className="p-3 rounded-lg bg-[var(--alert-nominal)]/15 text-[var(--alert-nominal)]">
+          <div className="p-3.5 rounded-xl bg-[var(--alert-nominal)]/15 text-[var(--alert-nominal)]">
             <Award className="w-6 h-6" />
           </div>
         </div>
       </div>
 
-      {/* 2. MIDDLE ROW: BLAST RADIUS TOPOLOGY & NIST 5-SPOKE RADAR */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+      {/* 2. TACTICAL COCKPIT HUD (AEROSPACE FUI COCKPIT DUAL RETICLE & PLANETARY SECTOR RADAR) */}
+      <TacticalCockpitHUD />
+
+      {/* 3. MIDDLE ROW: BLAST RADIUS TOPOLOGY & NIST 5-SPOKE RADAR */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* BLAST RADIUS & LATERAL PROVENANCE GRAPH (7 COLS) */}
-        <div className="lg:col-span-7 cyber-card p-4 space-y-3">
+        <div className="lg:col-span-7 cyber-card p-5 md:p-6 space-y-4">
           <div className="flex items-center justify-between border-b border-[var(--border-color)] pb-2.5">
             <div className="flex items-center gap-2">
               <Network className="w-4 h-4 text-[var(--brand-cyan)]" />
@@ -273,7 +277,7 @@ export default function OverviewConsole() {
         </div>
 
         {/* NIST SP 800-53 FIVE-SPOKE RADAR (5 COLS) */}
-        <div className="lg:col-span-5 cyber-card p-4 space-y-3">
+        <div className="lg:col-span-5 cyber-card p-5 md:p-6 space-y-4">
           <div className="flex items-center justify-between border-b border-[var(--border-color)] pb-2.5">
             <div className="flex items-center gap-2">
               <Award className="w-4 h-4 text-[var(--alert-nominal)]" />
@@ -365,7 +369,7 @@ export default function OverviewConsole() {
       </div>
 
       {/* 3. BOTTOM SECTION: REAL-TIME INCIDENT STREAM (HIGH DENSITY TABLE) */}
-      <div className="cyber-card p-4 space-y-3">
+      <div className="cyber-card p-5 md:p-6 space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border-color)] pb-2.5">
           <div className="flex items-center gap-2">
             <Activity className="w-4 h-4 text-[var(--brand-primary)]" />
