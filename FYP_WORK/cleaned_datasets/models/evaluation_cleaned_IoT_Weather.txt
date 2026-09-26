@@ -1,0 +1,28 @@
+=== EVALUATION REPORT FOR cleaned_IoT_Weather.csv (UPGRADED OPTIMIZED CONFORMER) ===
+
+--- ZERO-DAY DETECTION (BINARY) ---
+              precision    recall  f1-score   support
+
+         0.0       1.00      1.00      1.00      3000
+         1.0       1.00      1.00      1.00      4850
+
+    accuracy                           1.00      7850
+   macro avg       1.00      1.00      1.00      7850
+weighted avg       1.00      1.00      1.00      7850
+
+
+--- FORENSIC ATTACK CLASSIFICATION (MULTICLASS) ---
+              precision    recall  f1-score   support
+
+           0       0.97      1.00      0.98       992
+           1       1.00      0.97      0.98      1004
+           2       1.00      1.00      1.00       953
+           3       1.00      1.00      1.00      3000
+           4       1.00      1.00      1.00      1063
+           5       1.00      1.00      1.00       557
+           6       0.99      1.00      0.99        98
+           7       1.00      0.99      1.00       183
+
+    accuracy                           0.99      7850
+   macro avg       0.99      0.99      0.99      7850
+weighted avg       0.99      0.99      0.99      7850

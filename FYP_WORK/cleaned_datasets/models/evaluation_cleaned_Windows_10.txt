@@ -1,0 +1,28 @@
+=== EVALUATION REPORT FOR cleaned_Windows_10.csv (UPGRADED OPTIMIZED CONFORMER) ===
+
+--- ZERO-DAY DETECTION (BINARY) ---
+              precision    recall  f1-score   support
+
+         0.0       1.00      1.00      1.00      2000
+         1.0       1.00      1.00      1.00      2219
+
+    accuracy                           1.00      4219
+   macro avg       1.00      1.00      1.00      4219
+weighted avg       1.00      1.00      1.00      4219
+
+
+--- FORENSIC ATTACK CLASSIFICATION (MULTICLASS) ---
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00       918
+           1       1.00      0.99      1.00       104
+           2       1.00      1.00      1.00       120
+           3       1.00      1.00      1.00         3
+           4       1.00      1.00      1.00      2000
+           5       1.00      1.00      1.00       712
+           6       1.00      1.00      1.00       107
+           7       1.00      1.00      1.00       255
+
+    accuracy                           1.00      4219
+   macro avg       1.00      1.00      1.00      4219
+weighted avg       1.00      1.00      1.00      4219

@@ -1,0 +1,180 @@
+{
+    "Network_Traffic": {
+        "num_features": 17,
+        "num_classes": 10,
+        "class_names": [
+            "backdoor",
+            "ddos",
+            "dos",
+            "injection",
+            "mitm",
+            "normal",
+            "password",
+            "ransomware",
+            "scanning",
+            "xss"
+        ]
+    },
+    "IoT_Fridge": {
+        "num_features": 10,
+        "num_classes": 7,
+        "class_names": [
+            "backdoor",
+            "ddos",
+            "injection",
+            "normal",
+            "password",
+            "ransomware",
+            "xss"
+        ]
+    },
+    "IoT_GPS_Tracker": {
+        "num_features": 14,
+        "num_classes": 8,
+        "class_names": [
+            "backdoor",
+            "ddos",
+            "injection",
+            "normal",
+            "password",
+            "ransomware",
+            "scanning",
+            "xss"
+        ]
+    },
+    "IoT_Garage_Door": {
+        "num_features": 10,
+        "num_classes": 8,
+        "class_names": [
+            "backdoor",
+            "ddos",
+            "injection",
+            "normal",
+            "password",
+            "ransomware",
+            "scanning",
+            "xss"
+        ]
+    },
+    "IoT_Modbus": {
+        "num_features": 4,
+        "num_classes": 6,
+        "class_names": [
+            "backdoor",
+            "injection",
+            "normal",
+            "password",
+            "scanning",
+            "xss"
+        ]
+    },
+    "IoT_Motion_Light": {
+        "num_features": 10,
+        "num_classes": 8,
+        "class_names": [
+            "backdoor",
+            "ddos",
+            "injection",
+            "normal",
+            "password",
+            "ransomware",
+            "scanning",
+            "xss"
+        ]
+    },
+    "IoT_Thermostat": {
+        "num_features": 10,
+        "num_classes": 7,
+        "class_names": [
+            "backdoor",
+            "injection",
+            "normal",
+            "password",
+            "ransomware",
+            "scanning",
+            "xss"
+        ]
+    },
+    "IoT_Weather": {
+        "num_features": 3,
+        "num_classes": 8,
+        "class_names": [
+            "backdoor",
+            "ddos",
+            "injection",
+            "normal",
+            "password",
+            "ransomware",
+            "scanning",
+            "xss"
+        ]
+    },
+    "Linux_disk": {
+        "num_features": 5,
+        "num_classes": 8,
+        "class_names": [
+            "ddos",
+            "dos",
+            "injection",
+            "mitm",
+            "normal",
+            "password",
+            "scanning",
+            "xss"
+        ]
+    },
+    "Linux_memory": {
+        "num_features": 9,
+        "num_classes": 6,
+        "class_names": [
+            "ddos",
+            "dos",
+            "injection",
+            "mitm",
+            "normal",
+            "password"
+        ]
+    },
+    "Linux_process": {
+        "num_features": 12,
+        "num_classes": 8,
+        "class_names": [
+            "ddos",
+            "dos",
+            "injection",
+            "mitm",
+            "normal",
+            "password",
+            "scanning",
+            "xss"
+        ]
+    },
+    "Windows_10": {
+        "num_features": 124,
+        "num_classes": 8,
+        "class_names": [
+            "ddos",
+            "dos",
+            "injection",
+            "mitm",
+            "normal",
+            "password",
+            "scanning",
+            "xss"
+        ]
+    },
+    "Windows_7": {
+        "num_features": 132,
+        "num_classes": 8,
+        "class_names": [
+            "backdoor",
+            "ddos",
+            "injection",
+            "normal",
+            "password",
+            "ransomware",
+            "scanning",
+            "xss"
+        ]
+    }
+}

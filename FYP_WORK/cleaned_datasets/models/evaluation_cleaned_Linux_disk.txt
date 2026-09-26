@@ -1,0 +1,28 @@
+=== EVALUATION REPORT FOR cleaned_Linux_disk.csv (UPGRADED BALANCED CONFORMER) ===
+
+--- ZERO-DAY DETECTION (BINARY) ---
+              precision    recall  f1-score   support
+
+         0.0       0.97      0.97      0.97      1570
+         1.0       1.00      1.00      1.00     10990
+
+    accuracy                           0.99     12560
+   macro avg       0.98      0.98      0.98     12560
+weighted avg       0.99      0.99      0.99     12560
+
+
+--- FORENSIC ATTACK CLASSIFICATION (MULTICLASS) ---
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00      1560
+           1       0.99      1.00      0.99      1583
+           2       0.97      0.97      0.97      1649
+           3       1.00      0.99      1.00      1542
+           4       0.97      0.97      0.97      1570
+           5       0.97      0.96      0.97      1557
+           6       1.00      1.00      1.00      1502
+           7       0.98      0.97      0.98      1597
+
+    accuracy                           0.98     12560
+   macro avg       0.98      0.98      0.98     12560
+weighted avg       0.98      0.98      0.98     12560

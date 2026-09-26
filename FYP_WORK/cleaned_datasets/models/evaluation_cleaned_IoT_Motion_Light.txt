@@ -1,0 +1,28 @@
+=== EVALUATION REPORT FOR cleaned_IoT_Motion_Light.csv (UPGRADED CONFORMER WITH ROLLING STATS) ===
+
+--- ZERO-DAY DETECTION (BINARY) ---
+              precision    recall  f1-score   support
+
+         0.0       0.89      0.85      0.87       959
+         1.0       0.98      0.99      0.98      6710
+
+    accuracy                           0.97      7669
+   macro avg       0.94      0.92      0.93      7669
+weighted avg       0.97      0.97      0.97      7669
+
+
+--- FORENSIC ATTACK CLASSIFICATION (MULTICLASS) ---
+              precision    recall  f1-score   support
+
+           0       0.71      0.55      0.62       996
+           1       1.00      1.00      1.00       942
+           2       0.74      0.43      0.54       990
+           3       0.86      0.88      0.87       959
+           4       0.54      0.71      0.62       937
+           5       0.55      0.56      0.55       941
+           6       0.95      0.95      0.95       948
+           7       0.68      0.88      0.77       956
+
+    accuracy                           0.74      7669
+   macro avg       0.75      0.75      0.74      7669
+weighted avg       0.75      0.74      0.74      7669

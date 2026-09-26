@@ -1,0 +1,62 @@
+# ==============================================================================
+# SENTINEL-IOT: REPOSITORY GITIGNORE CONFIGURATION
+# ==============================================================================
+
+# Dependencies
+node_modules/
+*/node_modules/
+*/*/node_modules/
+
+# Next.js Build Outputs & Caches
+.next/
+*/.next/
+*/*/.next/
+out/
+build/
+dist/
+*.tsbuildinfo
+
+# Python Artifacts & Environments
+__pycache__/
+*/__pycache__/
+*/*/__pycache__/
+*/*/*/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE & Editor Metadata
+.gemini/
+*/.gemini/
+*/*/.gemini/
+.system_generated/
+.tempmediaStorage/
+.vscode/
+.idea/
+
+# OS-Specific Files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Logs & Temporary Files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# LaTeX Auxiliary Compilation Files
+*.aux
+*.out
+*.toc
+*.bbl
+*.blg
+*.synctex.gz

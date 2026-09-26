@@ -1,0 +1,28 @@
+=== EVALUATION REPORT FOR cleaned_Linux_process.csv (UPGRADED BALANCED CONFORMER) ===
+
+--- ZERO-DAY DETECTION (BINARY) ---
+              precision    recall  f1-score   support
+
+         0.0       0.92      0.99      0.95       799
+         1.0       1.00      0.99      0.99      5587
+
+    accuracy                           0.99      6386
+   macro avg       0.96      0.99      0.97      6386
+weighted avg       0.99      0.99      0.99      6386
+
+
+--- FORENSIC ATTACK CLASSIFICATION (MULTICLASS) ---
+              precision    recall  f1-score   support
+
+           0       0.95      0.96      0.95       816
+           1       0.94      0.86      0.90       793
+           2       0.92      0.92      0.92       800
+           3       0.96      0.99      0.97       812
+           4       0.92      0.99      0.95       799
+           5       1.00      0.99      0.99       783
+           6       0.99      0.96      0.98       794
+           7       0.98      0.97      0.98       789
+
+    accuracy                           0.96      6386
+   macro avg       0.96      0.96      0.96      6386
+weighted avg       0.96      0.96      0.96      6386

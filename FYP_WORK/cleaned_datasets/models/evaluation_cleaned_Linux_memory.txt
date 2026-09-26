@@ -1,0 +1,26 @@
+=== EVALUATION REPORT FOR cleaned_Linux_memory.csv (UPGRADED OPTIMIZED CONFORMER) ===
+
+--- ZERO-DAY DETECTION (BINARY) ---
+              precision    recall  f1-score   support
+
+         0.0       0.97      0.98      0.98      1556
+         1.0       0.99      0.98      0.98      2075
+
+    accuracy                           0.98      3631
+   macro avg       0.98      0.98      0.98      3631
+weighted avg       0.98      0.98      0.98      3631
+
+
+--- FORENSIC ATTACK CLASSIFICATION (MULTICLASS) ---
+              precision    recall  f1-score   support
+
+           0       0.86      0.94      0.90       716
+           1       0.91      0.80      0.85       280
+           2       0.97      0.87      0.92       299
+           3       0.70      0.83      0.76        23
+           4       0.97      0.98      0.98      1556
+           5       0.96      0.95      0.96       757
+
+    accuracy                           0.94      3631
+   macro avg       0.90      0.89      0.89      3631
+weighted avg       0.94      0.94      0.94      3631

@@ -1,0 +1,61 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{booktabs}
+
+\geometry{
+  a4paper,
+  top=25mm,
+  bottom=25mm,
+  left=25mm,
+  right=25mm
+}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue
+}
+
+\onehalfspacing
+
+\begin{document}
+
+\begin{center}
+    {\LARGE \textbf{Sentinel-IoT: An Autonomous Explainable XDR Framework for Heterogeneous Industrial IoT Security and Compliance Auditing}}\\[1.5em]
+    
+    {\large \textbf{Muhammad Wajahat}}\\[0.4em]
+    {\normalsize Department of Computer Science, University of Engineering and Technology}\\[0.2em]
+    {\normalsize Email: wajahat@sentinel-iot.org}\\[1.5em]
+\end{center}
+
+\begin{abstract}
+\noindent The proliferation of heterogeneous Industrial Internet of Things (IIoT) ecosystems has exacerbated vulnerability to sophisticated, multi-vector cyber-attacks, including distributed denial-of-service, process injection, and ransomware exfiltration. Traditional intrusion detection systems (IDS) suffer from fundamental architectural bottlenecks: sequential recurrent models (e.g., CNN-BiLSTM) incur substantial GPU latency scaling at $\mathcal{O}(T)$, operate as opaque black-box classifiers without verifiable mathematical proofs, stop short of automated threat remediation, and remain divorced from industrial regulatory compliance auditing. To overcome these limitations, this paper presents \textbf{Sentinel-IoT}, an autonomous, cross-layer Extended Detection and Response (XDR) framework. Sentinel-IoT features a dual-head \textbf{Google Conformer} core that interleaves Depthwise Separable Convolutions with Multi-Head Self-Attention in a parallel Macaron-style sandwich structure to concurrently extract high-frequency local sensor transients and long-range temporal dependencies over 10-step telemetry buffers. To eliminate the computational overhead of standard feature attribution methods, we formulate a PyTorch-based Saliency Gradient mapping mechanism that computes normalized explainability scores in $0.78\,\text{ms}$ ($99.97\%$ faster than Kernel SHAP), satisfying sub-second edge deployment constraints. Predictions exceeding calibrated anomaly thresholds ($\tau > 0.85$) dynamically trigger autonomous host- and network-level active mitigation scripts (via Wazuh-integrated \texttt{iptables} filtering and process termination) while concurrently logging structured audit trails to \textbf{NIST SP 800-53 Rev.~5} and \textbf{ISO/IEC 27001:2022} control frameworks. Extensive empirical validation across all $13$ distinct sub-datasets of the ToN\_IoT benchmark suite demonstrates state-of-the-art efficacy: $99.70\%$ binary anomaly detection accuracy ($F_1 = 0.9983$) on network flows, and an average $98.37\%$ forensic multi-class accuracy across IoT sensor and host OS domains. Rigorous non-parametric hypothesis testing confirms the statistical superiority of Conformer-Sentinel over competitive GRU, LSTM, and 1D-CNN baselines (Wilcoxon $W=0.0, p < 10^{-4}$; Friedman $\chi_F^2 = 39.00, p < 10^{-7}$; Cohen's $d = 16.09$), while live system profiling validates an end-to-end Mean Time to Respond of $\text{MTTR} = 21.5\,\text{ms} \ll 1000\,\text{ms}$, establishing a robust blueprint for autonomous, self-defending industrial cyber-physical infrastructures.
+\end{abstract}
+
+\vspace{1.2em}
+\noindent\textbf{Keywords:} Industrial Internet of Things (IIoT), Google Conformer, Extended Detection and Response (XDR), Explainable AI (XAI), Active Mitigation, NIST SP 800-53, ToN\_IoT Dataset.
+
+\vspace{2em}
+\hrule
+\vspace{1.5em}
+
+\section*{Key Research Contributions}
+\begin{enumerate}
+    \item \textbf{Cross-Layer Heterogeneous Evaluation:} Comprehensive validation across all $13$ datasets in the ToN\_IoT suite spanning network telemetry, physical IoT sensors (GPS, Modbus, Weather), and host OS kernels (Linux process/disk/memory, Windows 7/10).
+    \item \textbf{Sub-Millisecond Edge Explainability:} A first-order gradient saliency mapping yielding $0.78\,\text{ms}$ feature attributions, resolving the latency-explainability trade-off for real-time edge security.
+    \item \textbf{Autonomous Closed-Loop Mitigation:} Real-time Wazuh-integrated active response achieving $\text{MTTR} = 21.5\,\text{ms}$ with zero human intervention.
+    \item \textbf{Automated GRC Governance:} Seamless translation of deep learning anomaly vectors into auditable NIST SP 800-53 and ISO 27001 regulatory compliance matrices.
+\end{enumerate}
+
+\end{document}

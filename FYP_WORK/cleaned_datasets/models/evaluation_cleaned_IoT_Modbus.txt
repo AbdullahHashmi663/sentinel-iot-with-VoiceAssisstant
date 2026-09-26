@@ -1,0 +1,26 @@
+=== EVALUATION REPORT FOR cleaned_IoT_Modbus.csv (UPGRADED BALANCED CONFORMER) ===
+
+--- ZERO-DAY DETECTION (BINARY) ---
+              precision    recall  f1-score   support
+
+         0.0       0.95      0.93      0.94      1000
+         1.0       0.99      0.99      0.99      4998
+
+    accuracy                           0.98      5998
+   macro avg       0.97      0.96      0.96      5998
+weighted avg       0.98      0.98      0.98      5998
+
+
+--- FORENSIC ATTACK CLASSIFICATION (MULTICLASS) ---
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00      1012
+           1       0.89      0.75      0.82      1007
+           2       0.94      0.94      0.94      1000
+           3       0.83      0.86      0.84      1005
+           4       0.95      0.94      0.94       993
+           5       0.88      1.00      0.93       981
+
+    accuracy                           0.91      5998
+   macro avg       0.91      0.91      0.91      5998
+weighted avg       0.91      0.91      0.91      5998
