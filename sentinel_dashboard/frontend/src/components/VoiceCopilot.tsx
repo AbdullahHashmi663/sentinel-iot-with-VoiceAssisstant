@@ -573,25 +573,29 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
       <section
         ref={copilotSectionRef}
         aria-label="Mereoleona Autonomous Combat Voice Copilot"
-        className="cyber-card relative w-full overflow-hidden transition-all duration-300"
+        className="cyber-card glass-panel-deep relative w-full overflow-hidden transition-all duration-300"
       >
-      {/* THEMED CORNER HUD BRACKETS */}
-      <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[var(--accent-primary)] z-20 pointer-events-none" />
-      <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-[var(--accent-primary)] z-20 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-[var(--accent-primary)] z-20 pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[var(--accent-primary)] z-20 pointer-events-none" />
+      {/* TOP SPECULAR LIGHT BEAM */}
+      <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[var(--accent-primary)]/70 to-transparent pointer-events-none z-30" />
+      <div className="laser-scan-line opacity-30 pointer-events-none" />
 
-      {/* 1. TOP HEADER TELEMETRY RIBBON (THEMED) */}
-      <header className="px-4 py-2.5 bg-[var(--bg-canvas)]/90 border-b border-[var(--border-color)] flex flex-wrap items-center justify-between gap-3 relative z-10">
+      {/* THEMED CORNER HUD BRACKETS */}
+      <div className="absolute top-0 left-0 w-3.5 h-3.5 border-t-2 border-l-2 border-[var(--accent-primary)] shadow-[0_0_8px_var(--accent-primary)] z-20 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-3.5 h-3.5 border-t-2 border-r-2 border-[var(--accent-primary)] shadow-[0_0_8px_var(--accent-primary)] z-20 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-3.5 h-3.5 border-b-2 border-l-2 border-[var(--accent-primary)] shadow-[0_0_8px_var(--accent-primary)] z-20 pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-3.5 h-3.5 border-b-2 border-r-2 border-[var(--accent-primary)] shadow-[0_0_8px_var(--accent-primary)] z-20 pointer-events-none" />
+
+      {/* 1. TOP HEADER TELEMETRY RIBBON (THEMED & GLASS-FROSTED) */}
+      <header className="px-4 py-3 bg-[var(--bg-canvas)]/65 backdrop-blur-xl border-b border-white/10 flex flex-wrap items-center justify-between gap-3 relative z-10">
         <div className="flex items-center gap-3">
           {/* Flame Insignia with Theme Reactive Glow */}
           <div
-            className={`relative flex items-center justify-center w-8 h-8 rounded-lg border transition-all ${
+            className={`relative flex items-center justify-center w-8 h-8 rounded-xl border transition-all ${
               isListening
                 ? "bg-[var(--accent-primary)]/20 border-[var(--accent-primary)] shadow-[var(--border-glow)]"
                 : isSpeaking
                 ? "bg-[var(--alert-critical)]/20 border-[var(--alert-critical)] shadow-[0_0_15px_var(--alert-critical)]"
-                : "bg-[var(--bg-surface)] border-[var(--border-color)]"
+                : "bg-white/5 border-white/15 shadow-inner"
             }`}
           >
             <Flame
@@ -613,15 +617,15 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
               <h2 className="font-['Orbitron'] font-black text-sm tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-[var(--text-primary)] via-[var(--accent-primary)] to-[var(--brand-cyan)]">
                 M.E.R.E.O.L.E.O.N.A.
               </h2>
-              <span className="text-[9px] font-['JetBrains_Mono'] px-2 py-0.5 rounded bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] border border-[var(--accent-primary)]/30 font-bold uppercase tracking-wider">
+              <span className="glass-pill text-[9px] font-['JetBrains_Mono'] px-2.5 py-0.5 text-[var(--accent-primary)] font-bold uppercase tracking-wider">
                 COMBAT SOC COMMANDER v3.5
               </span>
-              <span className="hidden sm:inline-flex items-center gap-1 text-[9px] font-['JetBrains_Mono'] px-2 py-0.5 rounded bg-[var(--alert-nominal)]/10 text-[var(--alert-nominal)] border border-[var(--alert-nominal)]/30">
+              <span className="hidden sm:inline-flex items-center gap-1.5 text-[9px] font-['JetBrains_Mono'] px-2.5 py-0.5 rounded-full bg-[var(--alert-nominal)]/10 text-[var(--alert-nominal)] border border-[var(--alert-nominal)]/30 backdrop-blur-md">
                 <span className="w-1.5 h-1.5 rounded-full bg-[var(--alert-nominal)] animate-pulse" />
                 CONFORMER RAG ACTIVE
               </span>
             </div>
-            <p className="text-[10px] text-[var(--text-muted)] font-['Space_Grotesk'] leading-tight">
+            <p className="text-[10px] text-[var(--text-muted)] font-['Space_Grotesk'] leading-tight mt-0.5">
               High-Velocity Action Initiative • Two-Phase Authorization • 13 IoT Sensor Domains
             </p>
           </div>
@@ -631,7 +635,7 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
         <div className="flex items-center gap-2">
           {/* Air-gapped Offline badge */}
           <div
-            className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-[11px] font-['Orbitron'] font-bold uppercase shadow-sm bg-[var(--alert-nominal)]/10 border-[var(--alert-nominal)]/30 text-[var(--alert-nominal)]"
+            className="hidden md:flex items-center gap-1.5 px-3 py-1 rounded-full border text-[10px] font-['Orbitron'] font-bold uppercase shadow-sm bg-[var(--alert-nominal)]/10 border-[var(--alert-nominal)]/30 text-[var(--alert-nominal)] backdrop-blur-md"
             title="100% Local Air-Gapped Vector RAG • Zero Cloud Keys Required"
           >
             <ShieldCheck className="w-3.5 h-3.5 text-[var(--alert-nominal)]" />
@@ -644,7 +648,7 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
               type="button"
               onClick={stopDefenseTour}
               aria-label={`Halt defense tour at stage ${tourStage} of 6`}
-              className="cursor-pointer flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[var(--alert-critical)] text-white text-xs font-['Orbitron'] font-bold uppercase animate-pulse shadow-md active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--alert-critical)]"
+              className="cursor-pointer flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[var(--alert-critical)] text-white text-xs font-['Orbitron'] font-bold uppercase animate-pulse shadow-[0_0_15px_var(--alert-critical)] active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--alert-critical)] border border-red-300/40"
             >
               <Square className="w-3.5 h-3.5 fill-white" />
               <span>HALT TOUR ({tourStage}/6)</span>
@@ -654,7 +658,7 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
               type="button"
               onClick={startDefenseTour}
               aria-label="Start 3-Minute FYP-II Oral Defense Tour"
-              className="cursor-pointer flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[var(--brand-primary)] to-[var(--accent-primary)] hover:brightness-110 text-black text-xs font-['Orbitron'] font-black uppercase transition-all shadow-md active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)]"
+              className="cursor-pointer flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[var(--brand-primary)] to-[var(--accent-primary)] hover:brightness-110 text-black text-xs font-['Orbitron'] font-black uppercase transition-all shadow-md active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] border border-white/20"
             >
               <Play className="w-3.5 h-3.5 fill-black" />
               <span>START 3-MIN TOUR</span>
@@ -666,7 +670,7 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
             type="button"
             onClick={handleResetHistory}
             aria-label="Reset Conversation Log"
-            className="cursor-pointer p-1.5 rounded-lg border border-[var(--border-color)] bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--accent-primary)] hover:border-[var(--accent-primary)]/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)]"
+            className="cursor-pointer p-2 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-[var(--text-secondary)] hover:text-[var(--accent-primary)] hover:border-[var(--accent-primary)]/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] backdrop-blur-md shadow-sm"
             title="Reset Conversation Stream"
           >
             <RotateCcw className="w-3.5 h-3.5" />
@@ -677,7 +681,7 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
             type="button"
             onClick={() => setIsMuted(!isMuted)}
             aria-label={isMuted ? "Unmute Assistant Voice" : "Mute Assistant Voice"}
-            className="cursor-pointer p-1.5 rounded-lg border border-[var(--border-color)] bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--accent-primary)] hover:border-[var(--accent-primary)]/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)]"
+            className="cursor-pointer p-2 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-[var(--text-secondary)] hover:text-[var(--accent-primary)] hover:border-[var(--accent-primary)]/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] backdrop-blur-md shadow-sm"
             title={isMuted ? "Unmute Voice" : "Mute Voice"}
           >
             {isMuted ? <VolumeX className="w-3.5 h-3.5 text-[var(--alert-critical)]" /> : <Volume2 className="w-3.5 h-3.5 text-[var(--accent-primary)]" />}
@@ -688,34 +692,34 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
             type="button"
             onClick={() => setIsExpanded(!isExpanded)}
             aria-label={isExpanded ? "Collapse Voice Copilot HUD" : "Expand Voice Copilot HUD"}
-            className="cursor-pointer p-1.5 rounded-lg border border-[var(--border-color)] bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)]"
+            className="cursor-pointer p-2 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] backdrop-blur-md shadow-sm"
           >
             {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
           </button>
         </div>
       </header>
 
-      {/* 2. EXPANDED WORKSPACE CONTENT (THEME-ALIGNED) */}
+      {/* 2. EXPANDED WORKSPACE CONTENT (DEEP GLASS-FROSTED) */}
       {isExpanded && (
-        <div className="p-4 space-y-3.5">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-stretch">
+        <div className="p-4 space-y-4">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
             
             {/* COLUMN 1: 3D HOLOGRAPHIC AVATAR POD */}
-            <div className="lg:col-span-3 flex flex-col justify-between p-2.5 rounded-xl bg-[var(--bg-surface)]/80 border border-[var(--border-color)] shadow-inner relative overflow-hidden group min-h-[162px]">
+            <div className="lg:col-span-3 flex flex-col justify-between p-3 rounded-2xl glass-inset border border-white/10 relative overflow-hidden group min-h-[170px] shadow-[inset_0_2px_18px_rgba(0,0,0,0.6)]">
               {/* Corner crosshairs */}
-              <span className="absolute top-1 left-1.5 text-[8px] font-['JetBrains_Mono'] text-[var(--accent-primary)]/40 select-none">+</span>
-              <span className="absolute top-1 right-1.5 text-[8px] font-['JetBrains_Mono'] text-[var(--accent-primary)]/40 select-none">+</span>
-              <span className="absolute bottom-1 left-1.5 text-[8px] font-['JetBrains_Mono'] text-[var(--accent-primary)]/40 select-none">+</span>
-              <span className="absolute bottom-1 right-1.5 text-[8px] font-['JetBrains_Mono'] text-[var(--accent-primary)]/40 select-none">+</span>
+              <span className="absolute top-1 left-2 text-[8px] font-['JetBrains_Mono'] text-[var(--accent-primary)]/50 select-none">+</span>
+              <span className="absolute top-1 right-2 text-[8px] font-['JetBrains_Mono'] text-[var(--accent-primary)]/50 select-none">+</span>
+              <span className="absolute bottom-1 left-2 text-[8px] font-['JetBrains_Mono'] text-[var(--accent-primary)]/50 select-none">+</span>
+              <span className="absolute bottom-1 right-2 text-[8px] font-['JetBrains_Mono'] text-[var(--accent-primary)]/50 select-none">+</span>
 
               {/* Status Header */}
               <div className="flex items-center justify-between w-full px-1 text-[9px] font-['JetBrains_Mono'] uppercase z-10">
-                <span className="text-[var(--accent-primary)] font-bold flex items-center gap-1">
+                <span className="text-[var(--accent-primary)] font-bold flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)] animate-pulse" />
                   01 // MANA CORE
                 </span>
                 <span
-                  className={`px-1.5 py-0.5 rounded font-bold text-[8px] tracking-wider border ${
+                  className={`px-2 py-0.5 rounded-full font-bold text-[8px] tracking-wider border backdrop-blur-md ${
                     isProactiveAlertActive
                       ? "bg-[var(--alert-critical)]/20 text-[var(--alert-critical)] border-[var(--alert-critical)] animate-pulse"
                       : isSpeaking
@@ -724,7 +728,7 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
                       ? "bg-[var(--alert-warning)]/20 text-[var(--alert-warning)] border-[var(--alert-warning)]"
                       : isThinking
                       ? "bg-[var(--brand-cyan)]/20 text-[var(--brand-cyan)] border-[var(--brand-cyan)] animate-pulse"
-                      : "bg-[var(--bg-card)] text-[var(--text-muted)] border-[var(--border-color)]"
+                      : "bg-white/5 text-[var(--text-muted)] border-white/10"
                   }`}
                 >
                   {isProactiveAlertActive
@@ -739,19 +743,19 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
                 </span>
               </div>
 
-              {/* Central Three.js Static Hologram Viewport */}
-              <div className="relative w-full flex-1 flex items-center justify-center my-0.5 overflow-hidden">
+              {/* Central Three.js Static Hologram Viewport with Radial Base Halo */}
+              <div className="relative w-full flex-1 flex items-center justify-center my-0.5 overflow-hidden rounded-xl bg-[radial-gradient(ellipse_at_bottom,var(--accent-primary)/12_0%,transparent_75%)]">
                 <MereoleonaFace3D
                   isSpeaking={isSpeaking}
                   isListening={isListening}
                   isThinking={isThinking}
                   isCritAlert={(latestEvent?.anomalyProbability ?? 0) > 0.85 || isProactiveAlertActive}
                   onClick={toggleListening}
-                  className="w-full h-[126px]"
+                  className="w-full h-[128px]"
                 />
 
                 {/* Animated Spectrum Wave Bars (Theme Synchronized) */}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex items-end gap-1 pointer-events-none select-none z-10 opacity-80">
+                <div className="absolute bottom-1 left-1/2 -translate-x-1/2 flex items-end gap-1 pointer-events-none select-none z-10 opacity-80">
                   {[2, 5, 8, 12, 7, 4, 2].map((height, i) => (
                     <span
                       key={i}
@@ -767,7 +771,7 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
                           ? "bg-gradient-to-t from-[var(--brand-primary)] to-[var(--accent-primary)]"
                           : isListening
                           ? "bg-[var(--alert-warning)]"
-                          : "bg-[var(--border-color)]"
+                          : "bg-white/20"
                       }`}
                     />
                   ))}
@@ -775,17 +779,17 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
               </div>
 
               {/* Bottom Telemetry Ticker */}
-              <div className="flex items-center justify-between w-full px-1 text-[8px] font-['JetBrains_Mono'] text-[var(--text-muted)] uppercase border-t border-[var(--border-color)] pt-1">
+              <div className="flex items-center justify-between w-full px-1 text-[8px] font-['JetBrains_Mono'] text-[var(--text-muted)] uppercase border-t border-white/10 pt-1.5">
                 <span>FPS: 60</span>
-                <span className="text-[var(--brand-cyan)]">LATENCY: 21.5ms</span>
-                <span className="text-[var(--alert-nominal)]">SYNC: 100%</span>
+                <span className="text-[var(--brand-cyan)] font-bold">LATENCY: 21.5ms</span>
+                <span className="text-[var(--alert-nominal)] font-bold">SYNC: 100%</span>
               </div>
             </div>
 
             {/* COLUMN 2: COMBAT STREAM & DIALOGUE DISPATCH */}
-            <div className="lg:col-span-6 p-3 rounded-xl bg-[var(--bg-surface)]/80 border border-[var(--border-color)] flex flex-col justify-between min-h-[162px] overflow-hidden relative shadow-[inset_0_0_20px_rgba(0,0,0,0.3)]">
+            <div className="lg:col-span-6 p-3.5 rounded-2xl glass-inset border border-white/10 flex flex-col justify-between min-h-[170px] overflow-hidden relative shadow-[inset_0_2px_22px_rgba(0,0,0,0.65)]">
               {/* Stream Header */}
-              <div className="flex items-center justify-between text-[10px] font-['JetBrains_Mono'] text-[var(--accent-primary)] border-b border-[var(--border-color)] pb-1.5 mb-2">
+              <div className="flex items-center justify-between text-[10px] font-['JetBrains_Mono'] text-[var(--accent-primary)] border-b border-white/10 pb-2 mb-2">
                 <div className="flex items-center gap-1.5">
                   <Flame className="w-3.5 h-3.5 text-[var(--accent-primary)]" />
                   <span className="font-bold tracking-wider">02 // COMBAT COMMUNICATIONS STREAM</span>
@@ -796,24 +800,24 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
                     &quot;{interimTranscript}&quot;
                   </span>
                 ) : (
-                  <span className="text-[9px] text-[var(--text-muted)] font-bold">
+                  <span className="glass-pill px-2 py-0.5 text-[8px] text-[var(--text-muted)] font-bold">
                     {messages.length} DISPATCHES
                   </span>
                 )}
               </div>
 
               {/* Conversation Log Feed */}
-              <div className="flex-1 overflow-y-auto space-y-2 pr-1 text-xs max-h-[165px]">
+              <div className="flex-1 overflow-y-auto space-y-2.5 pr-1 text-xs max-h-[165px]">
                 {messages.slice(-4).map((m) => (
                   <div
                     key={m.id}
-                    className={`group relative p-2.5 rounded-lg leading-relaxed transition-all ${
+                    className={`group relative p-3 rounded-xl leading-relaxed transition-all ${
                       m.sender === "user"
-                        ? "bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/30 text-[var(--text-primary)] ml-6 shadow-sm"
-                        : "bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-primary)] font-['Space_Grotesk'] mr-3 shadow-md"
+                        ? "bg-[var(--accent-primary)]/15 border border-[var(--accent-primary)]/40 text-[var(--text-primary)] ml-6 shadow-[0_4px_16px_rgba(0,0,0,0.35)] backdrop-blur-md"
+                        : "bg-black/45 border border-white/15 text-[var(--text-primary)] font-['Space_Grotesk'] mr-3 shadow-[0_6px_20px_rgba(0,0,0,0.45),inset_0_1px_1px_rgba(255,255,255,0.12)] backdrop-blur-md"
                     }`}
                   >
-                    <div className="flex items-center justify-between text-[9px] font-['JetBrains_Mono'] opacity-80 mb-1 pb-0.5 border-b border-[var(--border-color)]/40">
+                    <div className="flex items-center justify-between text-[9px] font-['JetBrains_Mono'] opacity-80 mb-1 pb-1 border-b border-white/10">
                       <span className="font-bold text-[var(--accent-primary)] flex items-center gap-1">
                         {m.sender === "user" ? (
                           <>
@@ -861,7 +865,7 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
 
                 {/* Thinking Synapse Animation */}
                 {isThinking && (
-                  <div className="p-2.5 rounded-lg bg-[var(--bg-card)] border border-[var(--accent-primary)]/40 text-xs text-[var(--accent-primary)] italic flex items-center gap-2.5 animate-pulse">
+                  <div className="p-3 rounded-xl bg-black/50 border border-[var(--accent-primary)]/50 text-xs text-[var(--accent-primary)] italic flex items-center gap-2.5 animate-pulse backdrop-blur-md shadow-md">
                     <div className="relative flex items-center justify-center">
                       <span className="w-2.5 h-2.5 rounded-full bg-[var(--accent-primary)] animate-ping" />
                       <span className="absolute w-1.5 h-1.5 rounded-full bg-[var(--brand-cyan)]" />
@@ -875,7 +879,7 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
             </div>
 
             {/* COLUMN 3: TRI-MODAL VOICE & ACTION CONTROLS */}
-            <div className="lg:col-span-3 flex flex-col justify-between p-3 rounded-xl bg-[var(--bg-surface)]/80 border border-[var(--border-color)] min-h-[162px] shadow-[inset_0_0_20px_rgba(0,0,0,0.3)] space-y-2">
+            <div className="lg:col-span-3 flex flex-col justify-between p-3.5 rounded-2xl glass-inset border border-white/10 min-h-[170px] shadow-[inset_0_2px_22px_rgba(0,0,0,0.65)] space-y-2.5 relative">
               <div className="space-y-1">
                 <div className="flex items-center justify-between text-[9px] font-['JetBrains_Mono'] text-[var(--accent-primary)] uppercase">
                   <span>03 // AUDIO PROTOCOL</span>
@@ -889,15 +893,15 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
                 </p>
               </div>
 
-              {/* Primary PTT Button (Theme Dynamic Action Target) */}
+              {/* Primary PTT Button (Theme Dynamic Action Target with In-Depth Specular Glow) */}
               <button
                 type="button"
                 onClick={toggleListening}
                 aria-label={isListening ? "Deactivate Voice Recognition" : "Activate Mereoleona Voice Recognition"}
                 className={`cursor-pointer w-full flex items-center justify-center gap-2 py-3 rounded-xl font-['Orbitron'] font-black text-xs uppercase transition-all shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] active:scale-[0.98] ${
                   isListening
-                    ? "bg-[var(--alert-critical)] text-white shadow-[0_0_25px_var(--alert-critical)] border border-red-300 animate-pulse"
-                    : "bg-gradient-to-r from-[var(--brand-primary)] via-[var(--brand-cyan)] to-[var(--accent-primary)] text-black hover:brightness-110 shadow-[var(--border-glow)] border border-[var(--accent-primary)]"
+                    ? "bg-[var(--alert-critical)] text-white shadow-[0_0_30px_var(--alert-critical)] border border-red-300 animate-pulse"
+                    : "bg-gradient-to-r from-[var(--brand-primary)] via-[var(--brand-cyan)] to-[var(--accent-primary)] text-black hover:brightness-110 shadow-[var(--border-glow)] border border-white/30"
                 }`}
               >
                 {isListening ? (
@@ -914,8 +918,8 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
               </button>
 
               {/* Barge-In Readiness Indicator */}
-              <div className="flex items-center justify-between text-[9px] font-['JetBrains_Mono'] px-2 py-1 rounded bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-muted)]">
-                <span className="flex items-center gap-1 text-[var(--accent-primary)]">
+              <div className="flex items-center justify-between text-[9px] font-['JetBrains_Mono'] px-2.5 py-1.5 rounded-lg bg-black/40 border border-white/10 text-[var(--text-muted)] backdrop-blur-sm">
+                <span className="flex items-center gap-1.5 text-[var(--accent-primary)] font-bold">
                   <Waves className="w-3 h-3 text-[var(--accent-primary)]" />
                   BARGE-IN READY
                 </span>
@@ -926,9 +930,9 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
 
           {/* TWO-PHASE ACTION PROPOSAL INTERLOCK BANNER */}
           {pendingAction && (
-            <div className="p-3.5 rounded-xl bg-[var(--alert-warning)]/10 border-2 border-[var(--alert-warning)] text-[var(--alert-warning)] flex flex-wrap items-center justify-between gap-3 shadow-[0_0_25px_rgba(245,158,11,0.2)] animate-pulse">
+            <div className="p-4 rounded-2xl bg-gradient-to-r from-[var(--alert-warning)]/20 via-[var(--alert-warning)]/10 to-black/40 border-2 border-[var(--alert-warning)] text-[var(--alert-warning)] flex flex-wrap items-center justify-between gap-3 shadow-[0_8px_30px_rgba(245,158,11,0.25)] backdrop-blur-xl animate-pulse">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-[var(--alert-warning)]/20 border border-[var(--alert-warning)]">
+                <div className="p-2.5 rounded-xl bg-[var(--alert-warning)]/20 border border-[var(--alert-warning)]">
                   <AlertTriangle className="w-5 h-5 text-[var(--alert-warning)] animate-bounce" />
                 </div>
                 <div>
@@ -944,14 +948,14 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
                 <button
                   type="button"
                   onClick={() => executeCopilotCommand("Yes, do it")}
-                  className="cursor-pointer px-4 py-2 rounded-lg bg-[var(--alert-warning)] text-black font-['Orbitron'] font-black text-xs hover:brightness-110 active:scale-95 transition-all shadow-md flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--alert-warning)]"
+                  className="cursor-pointer px-4 py-2 rounded-xl bg-[var(--alert-warning)] text-black font-['Orbitron'] font-black text-xs hover:brightness-110 active:scale-95 transition-all shadow-md flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--alert-warning)] border border-white/20"
                 >
                   <span>AUTHORIZE & EXECUTE</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => executeCopilotCommand("No, stand down")}
-                  className="cursor-pointer px-3.5 py-2 rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-secondary)] font-['Orbitron'] font-bold text-xs hover:bg-[var(--bg-surface)] active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)]"
+                  className="cursor-pointer px-3.5 py-2 rounded-xl bg-white/10 border border-white/20 text-[var(--text-secondary)] font-['Orbitron'] font-bold text-xs hover:bg-white/20 active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] backdrop-blur-md"
                 >
                   STAND DOWN
                 </button>
@@ -959,9 +963,9 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
             </div>
           )}
 
-          {/* TACTICAL FOLLOW-UP PROMPT CHIPS (THEMED) */}
-          <div className="flex flex-wrap items-center gap-2 pt-0.5 text-xs font-['JetBrains_Mono']">
-            <span className="text-[var(--text-muted)] text-[10px] mr-1 flex items-center gap-1 font-bold uppercase tracking-wider">
+          {/* TACTICAL FOLLOW-UP PROMPT CHIPS (THEMED & GLASS-PILL) */}
+          <div className="flex flex-wrap items-center gap-2 pt-1 text-xs font-['JetBrains_Mono']">
+            <span className="text-[var(--text-muted)] text-[10px] mr-1 flex items-center gap-1.5 font-bold uppercase tracking-wider">
               <Zap className="w-3 h-3 text-[var(--accent-primary)]" />
               <span>TACTICAL PROMPTS:</span>
             </span>
@@ -970,7 +974,7 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
                 key={prompt}
                 onClick={() => executeCopilotCommand(prompt)}
                 aria-label={`Execute voice prompt: ${prompt}`}
-                className="cursor-pointer px-3 py-1 rounded-lg bg-[var(--bg-surface)] hover:bg-[var(--accent-primary)]/15 border border-[var(--border-color)] hover:border-[var(--accent-primary)]/60 text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] active:scale-95 text-[11px]"
+                className="glass-pill cursor-pointer px-3 py-1 bg-white/5 hover:bg-[var(--accent-primary)]/20 border border-white/15 hover:border-[var(--accent-primary)]/70 text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] active:scale-95 text-[11px]"
               >
                 {prompt}
               </button>
@@ -981,10 +985,10 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
           <form
             onSubmit={handleManualSubmit}
             aria-label="Typed Command to Mereoleona"
-            className="flex items-center gap-2 pt-0.5"
+            className="flex items-center gap-2 pt-1"
           >
             <div className="relative flex-1">
-              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[11px] font-['JetBrains_Mono'] text-[var(--accent-primary)]/70 select-none">
+              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[11px] font-['JetBrains_Mono'] text-[var(--accent-primary)]/80 select-none">
                 &gt;_
               </span>
               <input
@@ -993,13 +997,13 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
                 onChange={(e) => setManualInput(e.target.value)}
                 aria-label="Input query for Mereoleona"
                 placeholder="Address Mereoleona e.g., 'Mereoleona, threat status', 'Why did alert fire?', 'Incinerate intruder'..."
-                className="w-full pl-8 pr-3.5 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-color)] text-xs text-[var(--text-primary)] font-['JetBrains_Mono'] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--accent-primary)] focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] transition-colors shadow-inner"
+                className="w-full pl-8 pr-3.5 py-2.5 rounded-xl glass-inset border border-white/15 text-xs text-[var(--text-primary)] font-['JetBrains_Mono'] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--accent-primary)] focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] transition-colors shadow-inner"
               />
             </div>
             <button
               type="submit"
               aria-label="Dispatch query to Mereoleona"
-              className="cursor-pointer px-5 py-2.5 rounded-xl bg-gradient-to-r from-[var(--brand-primary)] to-[var(--accent-primary)] hover:brightness-115 text-black text-xs font-['Orbitron'] font-black uppercase transition-all flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] active:scale-95 shadow-md"
+              className="cursor-pointer px-5 py-2.5 rounded-xl bg-gradient-to-r from-[var(--brand-primary)] to-[var(--accent-primary)] hover:brightness-115 text-black text-xs font-['Orbitron'] font-black uppercase transition-all flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] active:scale-95 shadow-md border border-white/20"
             >
               <Send className="w-3.5 h-3.5" />
               <span>COMMAND</span>
@@ -1013,19 +1017,19 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
     {isScrolledOutOfView && (
       <aside
         aria-label="Mereoleona Floating Voice Copilot Mini-HUD"
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-3 py-2.5 rounded-2xl bg-[var(--bg-canvas)]/95 backdrop-blur-xl border border-[var(--border-color)] hover:border-[var(--accent-primary)]/80 shadow-[0_12px_40px_rgba(0,0,0,0.6)] shadow-[var(--border-glow)] transition-all duration-300 group"
+        className="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-3.5 py-3 rounded-2xl bg-[var(--bg-canvas)]/80 backdrop-blur-2xl border border-white/20 hover:border-[var(--accent-primary)]/80 shadow-[0_16px_45px_rgba(0,0,0,0.85),0_0_20px_var(--accent-primary)/25] transition-all duration-300 group"
       >
         {/* Mini Themed Corner Accents */}
-        <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-[var(--accent-primary)] rounded-tl-sm pointer-events-none" />
-        <div className="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-[var(--accent-primary)] rounded-tr-sm pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-2 h-2 border-b-2 border-l-2 border-[var(--accent-primary)] rounded-bl-sm pointer-events-none" />
-        <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-[var(--accent-primary)] rounded-br-sm pointer-events-none" />
+        <div className="absolute top-0 left-0 w-2.5 h-2.5 border-t-2 border-l-2 border-[var(--accent-primary)] rounded-tl-sm pointer-events-none" />
+        <div className="absolute top-0 right-0 w-2.5 h-2.5 border-t-2 border-r-2 border-[var(--accent-primary)] rounded-tr-sm pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-2.5 h-2.5 border-b-2 border-l-2 border-[var(--accent-primary)] rounded-bl-sm pointer-events-none" />
+        <div className="absolute bottom-0 right-0 w-2.5 h-2.5 border-b-2 border-r-2 border-[var(--accent-primary)] rounded-br-sm pointer-events-none" />
 
         {/* Mini 3D Avatar */}
         <div
           onClick={toggleListening}
           title="Click to Toggle Voice Listening"
-          className="w-12 h-12 rounded-xl overflow-hidden bg-[var(--bg-card)] border border-[var(--border-color)] relative flex items-center justify-center cursor-pointer hover:border-[var(--accent-primary)] transition-all flex-shrink-0"
+          className="w-12 h-12 rounded-xl overflow-hidden glass-inset border border-white/20 relative flex items-center justify-center cursor-pointer hover:border-[var(--accent-primary)] transition-all flex-shrink-0"
         >
           <MereoleonaFace3D
             isSpeaking={isSpeaking}
@@ -1049,26 +1053,35 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
               MEREOLEONA
             </span>
             {isSpeaking ? (
-              <span className="px-1.5 py-0.5 rounded text-[8px] font-['JetBrains_Mono'] font-bold bg-[var(--alert-critical)]/15 text-[var(--alert-critical)] border border-[var(--alert-critical)]/30 flex items-center gap-0.5 animate-pulse">
+              <span className="px-2 py-0.5 rounded-full text-[8px] font-['JetBrains_Mono'] font-bold bg-[var(--alert-critical)]/20 text-[var(--alert-critical)] border border-[var(--alert-critical)]/40 flex items-center gap-0.5 animate-pulse backdrop-blur-sm">
                 <Flame className="w-2.5 h-2.5 text-[var(--alert-critical)]" />
                 VOICE
               </span>
             ) : isListening ? (
-              <span className="px-1.5 py-0.5 rounded text-[8px] font-['JetBrains_Mono'] font-bold bg-[var(--accent-primary)]/15 text-[var(--accent-primary)] border border-[var(--accent-primary)]/30 flex items-center gap-0.5 animate-pulse">
+              <span className="px-2 py-0.5 rounded-full text-[8px] font-['JetBrains_Mono'] font-bold bg-[var(--accent-primary)]/20 text-[var(--accent-primary)] border border-[var(--accent-primary)]/40 flex items-center gap-0.5 animate-pulse backdrop-blur-sm">
                 <Radio className="w-2.5 h-2.5 text-[var(--accent-primary)] animate-spin" />
                 LISTEN
               </span>
             ) : isThinking ? (
-              <span className="px-1.5 py-0.5 rounded text-[8px] font-['JetBrains_Mono'] font-bold bg-[var(--brand-cyan)]/15 text-[var(--brand-cyan)] border border-[var(--brand-cyan)]/30 flex items-center gap-0.5 animate-pulse">
+              <span className="px-2 py-0.5 rounded-full text-[8px] font-['JetBrains_Mono'] font-bold bg-[var(--brand-cyan)]/20 text-[var(--brand-cyan)] border border-[var(--brand-cyan)]/40 flex items-center gap-0.5 animate-pulse backdrop-blur-sm">
                 <Activity className="w-2.5 h-2.5 text-[var(--brand-cyan)]" />
                 RAG
               </span>
             ) : (
-              <span className="px-1.5 py-0.5 rounded text-[8px] font-['JetBrains_Mono'] font-bold bg-[var(--alert-nominal)]/15 text-[var(--alert-nominal)] border border-[var(--alert-nominal)]/30">
+              <span className="px-2 py-0.5 rounded-full text-[8px] font-['JetBrains_Mono'] font-bold bg-white/10 text-[var(--text-muted)] border border-white/15 backdrop-blur-sm">
                 STANDBY
               </span>
             )}
           </div>
+          <span className="text-[9px] font-['JetBrains_Mono'] text-[var(--text-secondary)] truncate">
+            {isListening
+              ? "Capturing voice command..."
+              : isSpeaking
+              ? "Synthesizing vocal response..."
+              : isThinking
+              ? "Querying Conformer embeddings..."
+              : "Voice Command Standby"}
+          </span>
 
           {/* Subtext ticker / interim transcript / speech wave */}
           <div className="text-[10px] text-[var(--text-muted)] font-['Space_Grotesk'] truncate mt-0.5">
@@ -1091,16 +1104,16 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
         </div>
 
         {/* Mini Quick Actions */}
-        <div className="flex items-center gap-1.5 pl-1 border-l border-[var(--border-color)]">
+        <div className="flex items-center gap-1.5 pl-2 border-l border-white/15">
           {/* Quick PTT Button */}
           <button
             type="button"
             onClick={toggleListening}
             aria-label={isListening ? "Deactivate Voice Listening" : "Activate Voice Listening"}
-            className={`cursor-pointer p-2 rounded-xl font-['Orbitron'] font-black transition-all active:scale-95 shadow-sm ${
+            className={`cursor-pointer p-2.5 rounded-xl font-['Orbitron'] font-black transition-all active:scale-95 shadow-md ${
               isListening
-                ? "bg-[var(--alert-critical)] text-white shadow-[0_0_15px_var(--alert-critical)] border border-red-300 animate-pulse"
-                : "bg-gradient-to-r from-[var(--brand-primary)] to-[var(--accent-primary)] text-black hover:brightness-110 shadow-sm border border-[var(--accent-primary)]/50"
+                ? "bg-[var(--alert-critical)] text-white shadow-[0_0_20px_var(--alert-critical)] border border-red-300 animate-pulse"
+                : "bg-gradient-to-r from-[var(--brand-primary)] to-[var(--accent-primary)] text-black hover:brightness-110 shadow-md border border-white/30"
             }`}
             title={isListening ? "Halt Voice Listening" : "Speak to Mereoleona"}
           >
@@ -1112,7 +1125,7 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
             type="button"
             onClick={() => executeCopilotCommand("Why did alert fire?")}
             aria-label="Ask Mereoleona: Why did alert fire?"
-            className="cursor-pointer p-2 rounded-xl bg-[var(--bg-surface)] hover:bg-[var(--accent-primary)]/20 border border-[var(--border-color)] hover:border-[var(--accent-primary)] text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-all active:scale-95"
+            className="cursor-pointer p-2.5 rounded-xl bg-white/5 hover:bg-[var(--accent-primary)]/20 border border-white/15 hover:border-[var(--accent-primary)] text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-all active:scale-95 backdrop-blur-md"
             title="Forensic Saliency: 'Why did alert fire?'"
           >
             <Zap className="w-3.5 h-3.5" />
@@ -1125,7 +1138,7 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
               copilotSectionRef.current?.scrollIntoView({ behavior: "smooth" });
             }}
             aria-label="Scroll back to main Voice Copilot HUD"
-            className="cursor-pointer p-2 rounded-xl bg-[var(--bg-surface)] hover:bg-[var(--accent-primary)]/20 border border-[var(--border-color)] hover:border-[var(--accent-primary)] text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-all active:scale-95"
+            className="cursor-pointer p-2.5 rounded-xl bg-white/5 hover:bg-[var(--accent-primary)]/20 border border-white/15 hover:border-[var(--accent-primary)] text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-all active:scale-95 backdrop-blur-md"
             title="Scroll back to full Voice Copilot HUD"
           >
             <ChevronUp className="w-3.5 h-3.5" />

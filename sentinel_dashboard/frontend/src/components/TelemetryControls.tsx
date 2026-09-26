@@ -72,16 +72,19 @@ export default function TelemetryControls(props: TelemetryControlsProps) {
   const currentDomainMeta = domains[activeDomain] || { num_features: 17, num_classes: 10 };
 
   return (
-    <div className="cyber-card p-4 space-y-4">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border-color)] pb-3">
+    <div className="cyber-card glass-panel-deep relative overflow-hidden p-5 space-y-4">
+      {/* TOP SPECULAR LIGHT BEAM */}
+      <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[var(--accent-primary)]/60 to-transparent pointer-events-none z-10" />
+
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4">
         
         {/* MODE TOGGLE */}
-        <div className="flex items-center gap-1.5 p-1 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-color)]">
+        <div className="flex items-center gap-1.5 p-1 rounded-xl glass-inset border border-white/10">
           <button
             onClick={() => onModeChange("simulator")}
-            className={`cursor-pointer flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-['Rajdhani'] font-bold uppercase transition-colors focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] focus-visible:outline-none ${
+            className={`cursor-pointer flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-['Rajdhani'] font-bold uppercase transition-all focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] focus-visible:outline-none ${
               mode === "simulator"
-                ? "bg-[var(--accent-primary)] text-[var(--bg-primary)] shadow-[0_0_12px_var(--accent-primary)]"
+                ? "bg-[var(--accent-primary)] text-black shadow-[0_0_15px_var(--accent-primary)] border border-white/30"
                 : "text-[var(--text-secondary)] hover:text-white"
             }`}
           >
@@ -91,9 +94,9 @@ export default function TelemetryControls(props: TelemetryControlsProps) {
 
           <button
             onClick={() => onModeChange("live_host")}
-            className={`cursor-pointer flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-['Rajdhani'] font-bold uppercase transition-colors focus-visible:ring-2 focus-visible:ring-[var(--alert-nominal)] focus-visible:outline-none ${
+            className={`cursor-pointer flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-['Rajdhani'] font-bold uppercase transition-all focus-visible:ring-2 focus-visible:ring-[var(--alert-nominal)] focus-visible:outline-none ${
               mode === "live_host"
-                ? "bg-[var(--alert-nominal)] text-[var(--bg-primary)] shadow-[0_0_12px_var(--alert-nominal)]"
+                ? "bg-[var(--alert-nominal)] text-black shadow-[0_0_15px_var(--alert-nominal)] border border-white/30"
                 : "text-[var(--text-secondary)] hover:text-white"
             }`}
           >
@@ -112,12 +115,12 @@ export default function TelemetryControls(props: TelemetryControlsProps) {
             onChange={(e) => onDomainChange(e.target.value)}
             disabled={mode === "live_host"}
             aria-label="Active Telemetry Domain Selection"
-            className="flex-1 px-3 py-1.5 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-color)] text-xs font-['JetBrains_Mono'] text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] cursor-pointer disabled:opacity-50 transition-colors"
+            className="flex-1 px-3.5 py-2 rounded-xl glass-inset border border-white/15 text-xs font-['JetBrains_Mono'] text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] cursor-pointer disabled:opacity-50 transition-colors shadow-inner"
           >
             {Object.keys(domains).map((d) => {
               const meta = domains[d] || { num_features: 10, num_classes: 5 };
               return (
-                <option key={d} value={d} className="bg-[#0f1226] text-white">
+                <option key={d} value={d} className="bg-[#070D17] text-white">
                   {d} — ({meta.num_features} feats, {meta.num_classes} classes)
                 </option>
               );
@@ -131,10 +134,10 @@ export default function TelemetryControls(props: TelemetryControlsProps) {
           <button
             onClick={onTogglePlay}
             aria-label={isPlaying ? "Pause Telemetry Stream" : "Resume Telemetry Stream"}
-            className={`cursor-pointer p-2 rounded-lg border transition-colors focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] focus-visible:outline-none ${
+            className={`cursor-pointer p-2.5 rounded-xl border transition-all focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] focus-visible:outline-none shadow-sm ${
               isPlaying
-                ? "bg-[var(--accent-primary)]/20 border-[var(--accent-primary)] text-[var(--accent-primary)] hover:bg-[var(--accent-primary)] hover:text-black"
-                : "bg-[var(--bg-surface)] border-[var(--border-color)] text-[var(--text-primary)] hover:border-[var(--accent-primary)]"
+                ? "bg-[var(--accent-primary)]/20 border-[var(--accent-primary)] text-[var(--accent-primary)] hover:bg-[var(--accent-primary)] hover:text-black shadow-[0_0_15px_var(--accent-glow)]"
+                : "bg-white/5 border-white/15 text-[var(--text-primary)] hover:border-[var(--accent-primary)] hover:bg-white/10"
             }`}
             title={isPlaying ? "Pause Stream" : "Resume Stream"}
           >
@@ -146,22 +149,22 @@ export default function TelemetryControls(props: TelemetryControlsProps) {
             onClick={props.onStep || (() => {})}
             disabled={isPlaying}
             aria-label="Step 1 Telemetry Packet Forward"
-            className="cursor-pointer p-2 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-color)] text-[var(--text-primary)] hover:border-[var(--accent-primary)] disabled:opacity-40 transition-colors focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] focus-visible:outline-none disabled:cursor-not-allowed"
+            className="cursor-pointer p-2.5 rounded-xl bg-white/5 border border-white/15 text-[var(--text-primary)] hover:border-[var(--accent-primary)] hover:bg-white/10 disabled:opacity-30 transition-all focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] focus-visible:outline-none disabled:cursor-not-allowed shadow-sm"
             title="Step 1 Telemetry Packet Forward"
           >
             <SkipForward className="w-4 h-4" />
           </button>
 
           {/* Speed Multipliers */}
-          <div className="flex items-center gap-1 bg-[var(--bg-surface)] p-1 rounded-lg border border-[var(--border-color)] text-xs font-['JetBrains_Mono']">
+          <div className="flex items-center gap-1 glass-inset p-1 rounded-xl border border-white/10 text-xs font-['JetBrains_Mono']">
             {SPEED_OPTIONS.map((s) => (
               <button
                 key={s}
                 onClick={() => onSpeedChange(s)}
                 aria-label={`Set speed to ${s}x`}
-                className={`cursor-pointer px-2 py-0.5 rounded text-[11px] font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] focus-visible:outline-none ${
+                className={`cursor-pointer px-2.5 py-1 rounded-lg text-[11px] font-semibold transition-all focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] focus-visible:outline-none ${
                   speed === s
-                    ? "bg-[var(--accent-primary)] text-[var(--bg-primary)] shadow-sm font-bold"
+                    ? "bg-[var(--accent-primary)] text-black shadow-md font-bold"
                     : "text-[var(--text-muted)] hover:text-white"
                 }`}
               >
@@ -180,35 +183,41 @@ export default function TelemetryControls(props: TelemetryControlsProps) {
           <span className="text-xs font-['Orbitron'] font-bold text-[var(--text-primary)] tracking-wide">
             10-STEP SLIDING SEQUENCE BUFFER
           </span>
-          <span className="text-[11px] font-['JetBrains_Mono'] px-2 py-0.5 rounded bg-[var(--bg-surface)] text-[var(--accent-tertiary)] border border-[var(--border-color)]">
+          <span className="glass-pill text-[11px] font-['JetBrains_Mono'] px-2.5 py-0.5 text-[var(--accent-tertiary)] border border-white/15">
             {bufferedSteps} / 10 Time-Steps
           </span>
         </div>
 
-        {/* 10 LED SLOTS */}
-        <div className="flex items-center gap-1.5 flex-1 max-w-[420px]">
+        {/* 10 CRYOGENIC GLOWING GLASS VIALS */}
+        <div className="flex items-center gap-2 flex-1 max-w-[440px] px-2 py-1.5 rounded-xl glass-inset border border-white/10">
           {Array.from({ length: 10 }).map((_, i) => {
             const isFilled = i < bufferedSteps;
             const isLatest = i === bufferedSteps - 1;
             return (
               <div
                 key={i}
-                className={`flex-1 h-3 rounded-sm transition-all duration-200 ${
+                className={`flex-1 h-3.5 rounded-sm relative overflow-hidden transition-all duration-200 ${
                   isFilled
                     ? isLatest
-                      ? "bg-[var(--accent-primary)] shadow-[0_0_10px_var(--accent-primary)] scale-y-110"
-                      : "bg-[var(--accent-primary)]/80 shadow-[0_0_6px_var(--accent-primary)]"
-                    : "bg-[var(--bg-surface)] border border-[var(--border-color)]/60"
+                      ? "bg-[var(--accent-primary)] shadow-[0_0_14px_var(--accent-primary)] scale-y-125 border border-white/60"
+                      : "bg-[var(--accent-primary)]/80 shadow-[0_0_8px_var(--accent-primary)] border border-white/20"
+                    : "bg-white/5 border border-white/10"
                 }`}
                 title={`Buffer Slot ${i + 1}/10: ${isFilled ? "Active" : "Empty"}`}
-              />
+              >
+                {/* Specular Highlight reflection */}
+                <div className="absolute top-0 left-0 right-0 h-[1px] bg-white/40 pointer-events-none" />
+              </div>
             );
           })}
         </div>
 
         <div className="text-[11px] font-['JetBrains_Mono'] text-[var(--text-muted)] hidden md:block">
           {bufferedSteps === 10 ? (
-            <span className="text-[var(--alert-nominal)] font-bold">⚡ INFERENCE TRIGGERED (10/10)</span>
+            <span className="text-[var(--alert-nominal)] font-bold flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[var(--alert-nominal)] animate-ping" />
+              INFERENCE TRIGGERED (10/10)
+            </span>
           ) : (
             <span>Buffering temporal sequence...</span>
           )}

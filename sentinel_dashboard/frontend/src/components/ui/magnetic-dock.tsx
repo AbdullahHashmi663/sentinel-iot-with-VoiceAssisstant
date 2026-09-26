@@ -137,27 +137,29 @@ function DockItem({
       <motion.div
         className={cn(
           "relative w-full h-full rounded-2xl overflow-hidden",
-          "bg-gradient-to-b from-[var(--bg-surface-elevated)] to-[var(--bg-surface)]",
-          "border transition-all duration-200 flex items-center justify-center",
+          "backdrop-blur-xl transition-all duration-200 flex items-center justify-center",
           item.isActive
-            ? "border-[var(--accent-primary)] shadow-[0_0_16px_var(--accent-glow)]"
-            : "border-[var(--border-color)] hover:border-[var(--accent-primary)]/60"
+            ? "border border-[var(--accent-primary)] shadow-[0_0_20px_var(--accent-glow),inset_0_1px_2px_rgba(255,255,255,0.3)] bg-gradient-to-b from-white/20 via-white/5 to-black/60"
+            : "border border-white/15 hover:border-[var(--accent-primary)]/70 bg-gradient-to-b from-white/10 via-white/2 to-black/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.15)]"
         )}
         style={{
           boxShadow: isHovered
-            ? `0 10px 28px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.2), 0 0 16px ${itemColor}44`
+            ? `0 12px 32px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.3), 0 0 20px ${itemColor}55`
             : item.isActive
-            ? `0 6px 18px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.15), 0 0 12px ${itemColor}33`
-            : "0 4px 12px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.08)",
+            ? `0 8px 24px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.25), 0 0 16px ${itemColor}44`
+            : "0 4px 16px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.12)",
         }}
       >
+        {/* Subtle top specular sheen */}
+        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none" />
+
         {/* Interactive Icon */}
         <div
           aria-hidden="true"
           className={cn(
             "w-[56%] h-[56%] flex items-center justify-center transition-colors duration-200",
             item.isActive
-              ? "text-[var(--accent-primary)] drop-shadow-[0_0_8px_var(--accent-glow)]"
+              ? "text-[var(--accent-primary)] drop-shadow-[0_0_10px_var(--accent-glow)]"
               : "text-[var(--text-secondary)] hover:text-white"
           )}
           style={{
@@ -296,13 +298,13 @@ export function MagneticDock({
 
   const variantStyles = {
     cyber: cn(
-      "bg-[#0B101B]/85 border border-[var(--border-color)]",
-      "backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.7)]",
-      "ring-1 ring-white/10"
+      "bg-[var(--bg-canvas)]/80 border border-white/20",
+      "backdrop-blur-3xl backdrop-saturate-200 shadow-[0_24px_60px_rgba(0,0,0,0.85)]",
+      "shadow-[inset_0_1px_2px_rgba(255,255,255,0.25)] relative overflow-hidden"
     ),
     glass: cn(
       "bg-white/10 dark:bg-neutral-900/80",
-      "backdrop-blur-xl backdrop-saturate-150",
+      "backdrop-blur-2xl backdrop-saturate-180",
       "border border-white/20 dark:border-neutral-700",
       "shadow-2xl shadow-black/40"
     ),
@@ -328,7 +330,7 @@ export function MagneticDock({
       onMouseMove={reducedMotion ? undefined : handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "inline-flex items-end gap-2.5 px-4 py-2.5 rounded-3xl",
+        "inline-flex items-end gap-2.5 px-4 py-2.5 rounded-3xl relative overflow-hidden",
         variantStyles[variant],
         positionStyles[position],
         className
@@ -337,6 +339,8 @@ export function MagneticDock({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
+      {/* Top Specular Light Beam on Dock */}
+      <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none" />
       {items.map((item) => (
         <DockItem
           key={item.id}
