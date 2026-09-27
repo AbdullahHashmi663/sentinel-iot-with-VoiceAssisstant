@@ -10,7 +10,9 @@ export type ConsoleType =
   | 'adversarial'
   | 'remediation'
   | 'compliance'
-  | 'execute';
+  | 'execute'
+  | 'voice'
+  | 'audit';
 
 export type DomainType =
   | 'Network_Traffic'

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "secondary-container": "#00e3fd", "background": "#101418", "on-secondary-fixed": "#001f24", "inverse-surface": "#e0e3e8", "secondary-fixed-dim": "#00daf3", "on-tertiary": "#472a00", "on-surface": "#e0e3e8", "on-primary": "#003911", "primary": "#edffe8", "inverse-primary": "#006e27", "outline": "#849581", "on-tertiary-fixed": "#2a1700", "inverse-on-surface": "#2d3135", "surface": "#101418", "tertiary-container": "#ffd7aa", "surface-container-highest": "#31353a", "on-error": "#690005", "surface-bright": "#353a3e", "tertiary-fixed-dim": "#ffb95f", "on-primary-fixed": "#002107", "on-tertiary-container": "#895600", "primary-container": "#00ff66", "on-surface-variant": "#b9ccb5", "primary-fixed": "#6bff83", "surface-tint": "#00e55b", "surface-dim": "#101418", "surface-container-lowest": "#0a0f13", "on-secondary-fixed-variant": "#004f58", "outline-variant": "#3b4b3a", "on-secondary": "#00363d", "surface-container-high": "#262a2f", "on-secondary-container": "#00616d", "error": "#ffb4ab", "surface-container-low": "#181c20", "on-background": "#e0e3e8", "primary-fixed-dim": "#00e55b", "on-error-container": "#ffdad6", "on-tertiary-fixed-variant": "#653e00", "secondary-fixed": "#9cf0ff", "on-primary-fixed-variant": "#00531b", "tertiary": "#fff9f6", "surface-container": "#1c2024", "error-container": "#93000a", "surface-variant": "#31353a", "tertiary-fixed": "#ffddb8", "secondary": "#bdf4ff", "on-primary-container": "#007128" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-md": "0.75rem", "space-sm": "0.5rem", "margin": "1rem", "space-xs": "0.25rem", "space-xl": "2rem", "gutter-desktop": "1rem", "gutter": "0.75rem", "space-lg": "1.25rem", "margin-desktop": "1.5rem" }, "fontFamily": { "telemetry-metric-sm": [ "JetBrains Mono" ], "headline-xl-mobile": [ "Space Grotesk" ], "headline-lg": [ "Space Grotesk" ], "body-sm": [ "Space Grotesk" ], "label-sm": [ "JetBrains Mono" ], "headline-md": [ "Space Grotesk" ], "headline-xl": [ "Space Grotesk" ], "telemetry-metric": [ "JetBrains Mono" ], "body-lg": [ "Space Grotesk" ], "label-md": [ "JetBrains Mono" ], "label-lg": [ "JetBrains Mono" ], "body-md": [ "Space Grotesk" ] }, "fontSize": { "telemetry-metric-sm": [ "16px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "600" } ], "headline-xl-mobile": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" } ], "headline-lg": [ "22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "body-sm": [ "11px", { "lineHeight": "16px", "fontWeight": "400" } ], "label-sm": [ "10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "500" } ], "headline-md": [ "18px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600" } ], "headline-xl": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "telemetry-metric": [ "24px", { "lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "body-lg": [ "15px", { "lineHeight": "22px", "fontWeight": "400" } ], "label-md": [ "11px", { "lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "500" } ], "label-lg": [ "13px", { "lineHeight": "18px", "letterSpacing": "0.04em", "fontWeight": "600" } ], "body-md": [ "13px", { "lineHeight": "18px", "fontWeight": "400" } ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="flex flex-col"><div class="h-16 px-gutter-desktop flex items-center justify-between bg-surface-container-low"><div class="flex items-center gap-space-sm"><div class="w-2.5 h-2.5 bg-primary-container animate-pulse"></div><div class="flex flex-col"><span class="font-label-lg text-label-lg tracking-wider text-primary uppercase">SENTINEL-IoT</span><span class="font-label-sm text-label-sm text-on-surface-variant">BUNDLE // v4.2.1-SEC</span></div></div><div class="px-space-xs py-0.5 bg-surface-container-highest text-secondary font-label-sm text-label-sm">OT/ICS</div></div><div class="p-gutter-desktop"><div class="p-space-sm bg-surface-container-low mb-space-md flex flex-col gap-space-xs"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Node Identity</span><span class="font-label-md text-label-md text-secondary truncate">urn:sntnl:us-east:0x98EF..B41</span></div><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest px-space-xs mb-space-sm block">Command Docks</span><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-label-md font-bold"><a aria-current="page" class="flex items-center gap-space-md px-space-md py-space-sm rounded transition-all bg-primary-container text-on-primary-container font-label-md font-bold" data-path="cli-terminal" href="#"><span class="material-symbols-outlined text-[18px]">terminal</span>CLI Terminal</a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="audit-tools" href="#"><span class="material-symbols-outlined text-[18px]">security</span>Audit Tools</a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="proof-verifier" href="#"><span class="material-symbols-outlined text-[18px]">fact_check</span>Proof Verifier</a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="merkle-inspector" href="#"><span class="material-symbols-outlined text-[18px]">account_tree</span>Merkle Inspector</a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="hardware-attestation" href="#"><span class="material-symbols-outlined text-[18px]">memory</span>Hardware Attestation</a></nav></div></div><div class="p-gutter-desktop flex flex-col gap-space-sm bg-surface-container-low"><div class="flex items-center justify-between font-label-sm text-label-sm"><span class="text-on-surface-variant">LATENCY</span><span class="text-primary font-telemetry-metric-sm">1.84ms</span></div><div class="flex items-center justify-between font-label-sm text-label-sm"><span class="text-on-surface-variant">HEARTBEAT</span><span class="text-secondary font-telemetry-metric-sm">SYNCED (1000Hz)</span></div><div class="h-1 w-full bg-surface-container-highest overflow-hidden"><div class="h-full bg-primary-container w-full animate-pulse"></div></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl z-40 flex items-center justify-between px-gutter-desktop shadow-[0_1px_8px_rgba(0,0,0,0.3)]"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm bg-surface-container px-space-md py-space-xs"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase">DEFCON</span><span class="px-space-xs py-0.2 bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold">5: NOMINAL</span></div><div class="flex items-center gap-space-sm bg-surface-container px-space-md py-space-xs"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase">TPM 2.0</span><div class="w-2 h-2 rounded-full bg-primary-container"></div><span class="font-label-sm text-label-sm text-primary">ENCLAVE LOCKED</span></div><div class="hidden xl:flex items-center gap-space-sm bg-surface-container px-space-md py-space-xs"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase">MERKLE ROOT</span><span class="font-label-sm text-label-sm text-secondary truncate max-w-xs">0x8f2c..47e9a0d81b31</span></div><div class="hidden 2xl:flex items-center gap-space-sm bg-surface-container px-space-md py-space-xs"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase">SESSION</span><span class="font-label-sm text-label-sm text-on-surface font-label-sm">AUD-2024-X992</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-md py-space-xs bg-surface-container font-label-sm text-label-sm text-on-surface-variant"><span class="material-symbols-outlined text-[16px] text-secondary">lock</span><span>TLS 1.3 / E2EE</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 bg-surface min-h-screen w-full px-gutter-desktop pb-margin-desktop"><div class="flex flex-col w-full">
+<!-- TOP SUB-HEADER AUDIT BANNER -->
+<section class="w-full mb-space-lg">
+<div class="bg-surface-container-low p-space-md shadow-md relative">
+<div class="flex flex-col xl:flex-row xl:items-center justify-between gap-space-md">
+<!-- Left Meta Block -->
+<div class="flex flex-col gap-space-xs min-w-0">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="px-space-xs py-0.5 bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold tracking-wider">
+              [ PKG: TACTICAL-VERIFIER-BUNDLE ]
+            </span>
+<span class="font-label-md text-label-md text-primary font-bold truncate">
+              sentinel-audit-bundle-v2.4.9-AUD-2025-0891-ZK.tar.gz.sig
+            </span>
+<span class="px-space-xs py-0.5 bg-surface-container-high text-secondary font-label-sm text-label-sm">
+              FIPS 140-3 L4 // IEC 62443-4-2 SL-3
+            </span>
+</div>
+<div class="flex items-center gap-space-lg text-on-surface-variant font-label-sm text-label-sm flex-wrap mt-0.5">
+<div class="flex items-center gap-space-xs">
+<span class="text-on-surface-variant uppercase">TARGET TPM:</span>
+<span class="text-secondary font-telemetry-metric-sm">STMicro ST33TPHF20 TPM 2.0 (I2C 0x2E)</span>
+</div>
+<span class="text-outline-variant">/</span>
+<div class="flex items-center gap-space-xs">
+<span class="text-on-surface-variant uppercase">SIG HASH:</span>
+<span class="text-primary font-telemetry-metric-sm">0x9f4a8be10477bc698a9d</span>
+</div>
+<span class="text-outline-variant">/</span>
+<div class="flex items-center gap-space-xs">
+<span class="text-on-surface-variant uppercase">SECURITY LEVEL:</span>
+<span class="text-primary-container font-bold">SOVEREIGN-PASS-CLEARANCE</span>
+</div>
+</div>
+</div>
+<!-- Right Quick Actions & Status Badges -->
+<div class="flex items-center gap-space-sm self-start xl:self-center flex-shrink-0">
+<div class="flex items-center gap-space-xs px-space-sm py-1 bg-surface-container text-primary font-label-sm text-label-sm shadow-sm">
+<span class="w-1.5 h-1.5 bg-primary-container rounded-full animate-pulse"></span>
+<span>AUDITOR-CLI-STREAM</span>
+</div>
+<div class="flex items-center gap-space-xs px-space-sm py-1 bg-surface-container text-secondary font-label-sm text-label-sm shadow-sm">
+<span class="material-symbols-outlined text-[14px]">offline_bolt</span>
+<span>REPEATABLE AIR-GAP VERIFIER</span>
+</div>
+<button class="px-space-sm py-1 bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-sm text-label-sm transition-colors flex items-center gap-space-xs" id="copy-summary-btn">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>EXTRACT SHA256</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- MAIN 2-COLUMN VIEWPORT (Center-Left CLI: 66%, Right Decomposition: 34%) -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-md w-full mb-space-lg">
+<!-- LEFT COLUMN: TACTICAL CLI CONSOLE (Col-span 8) -->
+<div class="xl:col-span-8 flex flex-col gap-space-md">
+<!-- Interactive Action Ribbon -->
+<div class="bg-surface-container-low p-space-sm shadow-sm flex items-center justify-between flex-wrap gap-space-sm">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-label-sm text-label-sm text-on-surface-variant px-space-xs uppercase">Routines:</span>
+<button class="px-space-md py-1 bg-primary-container text-on-primary-container font-label-md text-label-md font-bold hover:bg-primary-fixed transition-colors flex items-center gap-space-xs shadow-sm" id="btn-run-all">
+<span class="material-symbols-outlined text-[16px]">play_arrow</span>
+<span>RUN ALL CHECKS</span>
+</button>
+<button class="px-space-sm py-1 bg-surface-container hover:bg-surface-container-high text-secondary font-label-sm text-label-sm transition-colors" id="btn-zk-proof">
+            &gt; VERIFY ZK PROOF
+          </button>
+<button class="px-space-sm py-1 bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors" id="btn-merkle">
+            &gt; INSPECT MERKLE BRANCH
+          </button>
+<button class="px-space-sm py-1 bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors" id="btn-tpm">
+            &gt; ATTEST TPM PCRS
+          </button>
+<button class="px-space-sm py-1 bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm transition-colors" id="btn-export-json">
+            &gt; EXPORT JSON
+          </button>
+</div>
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px] text-primary">security</span>
+<span>SANDBOX: GVISOR-ISOLATED</span>
+</div>
+</div>
+<!-- Tactical Terminal Window -->
+<div class="bg-surface-container-lowest shadow-xl flex flex-col h-[670px] overflow-hidden">
+<!-- Window Titlebar -->
+<div class="h-10 bg-surface-container-high px-space-md flex items-center justify-between select-none">
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 bg-error rounded-full inline-block"></span>
+<span class="w-2.5 h-2.5 bg-tertiary-fixed-dim rounded-full inline-block"></span>
+<span class="w-2.5 h-2.5 bg-primary-container rounded-full inline-block"></span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px] text-secondary">terminal</span>
+<span class="text-on-surface">root@auditor-workstation: ~/audit-verification/sentinel-audit-verify-cli</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant hidden md:inline">TTY: /dev/pts/4 (9600-8N1)</span>
+<button class="p-1 hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" id="btn-copy-term" title="Copy CLI Stream">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+<button class="p-1 hover:bg-surface-container text-on-surface-variant hover:text-error transition-colors" id="btn-clear-term" title="Clear Console">
+<span class="material-symbols-outlined text-[16px]">delete_sweep</span>
+</button>
+</div>
+</div>
+<!-- Terminal Output Viewport -->
+<div class="flex-1 p-space-md overflow-y-auto font-label-sm text-label-sm space-y-space-md bg-surface-container-lowest" id="terminal-body">
+<!-- Boot Message -->
+<div class="text-on-surface-variant leading-relaxed">
+<span class="text-secondary font-bold">SENTINEL SOVEREIGN ATTESTATION ENVIRONMENT [v4.2.1-SEC]</span><br/>
+            Cryptographic Audit Bundle Engine. Zero-Knowledge Groth16 Snark Prover/Verifier Online.<br/>
+            Hardware Security Module: STMicro TPM 2.0 via /dev/tpmrm0 (Verified 2.0-rev1.38)<br/>
+            All executed verification operations generate signed nonces anchored into ICS bus log.
+          </div>
+<!-- Executed Step 1 -->
+<div class="space-y-space-xs">
+<div class="flex items-center gap-space-xs text-primary font-bold">
+<span class="text-secondary">auditor@sovereign-lab:~/bundle$</span>
+<span>sha256sum -c sentinel-audit-bundle.tar.gz.sig</span>
+</div>
+<div class="pl-space-md text-on-surface space-y-0.5">
+<div class="text-on-surface-variant">[STEP 01/05] Resolving multi-signature governance quorum...</div>
+<div>&gt; Signer 01: [Ed25519:SecOps-Key-0x892A] - SIGNATURE OK (Timestamp 2025-02-14T08:12:00Z)</div>
+<div>&gt; Signer 02: [Ed25519:Plant-Safety-0x44B1] - SIGNATURE OK (Timestamp 2025-02-14T08:12:04Z)</div>
+<div>&gt; Signer 03: [Ed25519:AI-Conformer-0x770E] - SIGNATURE OK (Timestamp 2025-02-14T08:12:09Z)</div>
+<div class="text-primary-container font-bold flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+                [PASS] TAR.GZ INTEGRITY VERIFIED (3/3 QUORUM REACHED - SHA256: 4f88e178c4a921d740)
+              </div>
+</div>
+</div>
+<!-- Executed Step 2 -->
+<div class="space-y-space-xs">
+<div class="flex items-center gap-space-xs text-primary font-bold">
+<span class="text-secondary">auditor@sovereign-lab:~/bundle$</span>
+<span>./sentinel-audit-verify --tpm-pcr-quote --verify-enclave</span>
+</div>
+<div class="pl-space-md text-on-surface space-y-0.5">
+<div class="text-on-surface-variant">[STEP 02/05] Requesting hardware quote via TPM2_Quote(nonce=0x7e39a2)...</div>
+<div>&gt; Enclave: ST33TPHF20 TPM2.0 Encrypted I2C bus channel initialized</div>
+<div>&gt; Reading PCR Bank: SHA256 [0, 2, 4, 5, 7]</div>
+<div class="font-telemetry-metric-sm text-secondary text-[10px]">
+                PCR-00: 4F 8C 1A 90 B2 C4 88 12 E4 91 3C 20 FA 18 01 9B<br/>
+                PCR-02: 88 31 00 F4 2E 1B A9 C3 77 41 89 E2 10 55 C9 3A<br/>
+                PCR-04: D1 09 EF 34 AA 99 21 88 47 B8 01 22 9F EA BB 04<br/>
+                PCR-07: 00 11 FA 9C 44 82 BB 19 C0 A2 87 31 FE 40 92 1A
+              </div>
+<div class="text-primary-container font-bold flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                [PASS] HARDWARE ATTESTATION: Enclave locked. Baseline Golden Digest identical.
+              </div>
+</div>
+</div>
+<!-- Executed Step 3 -->
+<div class="space-y-space-xs">
+<div class="flex items-center gap-space-xs text-primary font-bold">
+<span class="text-secondary">auditor@sovereign-lab:~/bundle$</span>
+<span>snarkjs groth16 verify verification_key.json public.json proof.json</span>
+</div>
+<div class="pl-space-md text-on-surface space-y-0.5">
+<div class="text-on-surface-variant">[STEP 03/05] Evaluating BN254 bilinear pairing e(A, B) = e(α, β) · e(x, γ) · e(C, δ)...</div>
+<div>&gt; Loading CRS verification key: 2,148 bytes from verification_key.json</div>
+<div>&gt; Public inputs parsed: 3 elements (MerkleRoot, TauThreshold, AirGapState)</div>
+<div>&gt; Constraints checked: 1,402,891 R1CS non-linear wire equations</div>
+<div class="text-primary-container font-bold flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[14px]">lock_clock</span>
+                [PASS] SNARK PROOF VALIDATED in 0.38ms (Soundness Error: 2^-128)
+              </div>
+</div>
+</div>
+<!-- Executed Step 4 -->
+<div class="space-y-space-xs">
+<div class="flex items-center gap-space-xs text-primary font-bold">
+<span class="text-secondary">auditor@sovereign-lab:~/bundle$</span>
+<span>./sentinel-audit-verify --merkle-ladder --leaf-index 4892104</span>
+</div>
+<div class="pl-space-md text-on-surface space-y-0.5">
+<div class="text-on-surface-variant">[STEP 04/05] Traversing 24-level Merkle Poseidon inclusion ladder...</div>
+<div>&gt; Leaf index: 0x4AA3C8 (Audit Record: Valve-Pressure-Overpressure-Interlock)</div>
+<div>&gt; Poseidon Hashes computed: 24 siblings across BN254 scalar field</div>
+<div>&gt; Computed Root: 0x8f2c09194e47e9a0d81b31a89c4412ef</div>
+<div>&gt; Hardware TPM Anchor: 0x8f2c09194e47e9a0d81b31a89c4412ef</div>
+<div class="text-primary-container font-bold flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[14px]">account_tree</span>
+                [PASS] MERKLE INCLUSION PROVEN: Zero leaf drift detected.
+              </div>
+</div>
+</div>
+<!-- Dynamic Output Container for interactive runs -->
+<div class="space-y-space-xs" id="dynamic-log-stream"></div>
+<!-- Interactive Input Line -->
+<div class="pt-space-xs flex items-center gap-space-xs text-on-surface">
+<span class="text-secondary font-bold">auditor@sovereign-lab:~/bundle$</span>
+<input autocomplete="off" class="flex-1 bg-transparent border-none outline-none font-label-sm text-label-sm text-primary focus:ring-0 p-0 selection:bg-primary-container selection:text-on-primary-container" id="cli-custom-input" spellcheck="false" type="text" value="./sentinel-audit-verify --verbose --strict"/>
+<span class="inline-block w-2 h-4 bg-primary-container animate-pulse"></span>
+</div>
+</div>
+<!-- Terminal Status Bar -->
+<div class="h-7 bg-surface-container px-space-md flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant border-t-0">
+<div class="flex items-center gap-space-md">
+<span class="text-primary flex items-center gap-space-xs">
+<span class="w-1.5 h-1.5 bg-primary-container rounded-full"></span>
+              CRS: Powers of Tau #54 (Perpetual Tau)
+            </span>
+<span class="text-outline-variant">|</span>
+<span>RAM: 84.2 MB</span>
+<span class="text-outline-variant">|</span>
+<span>VCPU USAGE: 1.8%</span>
+</div>
+<div class="flex items-center gap-space-sm text-secondary">
+<span>BN254 / ALT_BN128</span>
+<span class="text-primary-container font-bold">READY</span>
+</div>
+</div>
+</div>
+<!-- Quick Command Execution Cheatsheet -->
+<div class="bg-surface-container-low p-space-sm flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm flex-wrap gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="text-secondary font-bold uppercase tracking-wider">Fast Syntaxes:</span>
+<code class="px-space-xs py-0.5 bg-surface-container text-on-surface">--verify-signatures</code>
+<code class="px-space-xs py-0.5 bg-surface-container text-on-surface">--zero-knowledge-full</code>
+<code class="px-space-xs py-0.5 bg-surface-container text-on-surface">--recompute-root</code>
+</div>
+<div class="text-primary font-telemetry-metric-sm">
+          CLI-RETURN-CODE: 0x00000000 (SUCCESS)
+        </div>
+</div>
+</div>
+<!-- RIGHT COLUMN: AUDIT PAYLOAD DECOMPOSITION & CRYPTO TELEMETRY (Col-span 4) -->
+<div class="xl:col-span-4 flex flex-col gap-space-md">
+<!-- CARD 1: BUNDLE ARTIFACTS EXPLORER -->
+<div class="bg-surface-container-low p-space-md shadow-md flex flex-col gap-space-sm relative">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">folder_zip</span>
+<h3 class="font-headline-md text-headline-md text-primary">Bundle Structure</h3>
+</div>
+<span class="font-label-sm text-label-sm text-secondary">42.8 MB ARCHIVE</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Cryptographically sealed file hierarchy inside the sovereign ICS verification container.
+        </p>
+<!-- File Tree Items -->
+<div class="space-y-1 font-label-sm text-label-sm mt-space-xs">
+<div class="p-space-xs bg-surface-container flex items-center justify-between hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-xs min-w-0">
+<span class="material-symbols-outlined text-[14px] text-tertiary-fixed-dim">lock</span>
+<span class="text-on-surface font-bold truncate">audit-bundle.tar.gz</span>
+</div>
+<span class="text-on-surface-variant font-telemetry-metric-sm text-[10px]">42.8 MB</span>
+</div>
+<div class="p-space-xs bg-surface-container flex items-center justify-between hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-xs min-w-0">
+<span class="material-symbols-outlined text-[14px] text-primary-container">data_object</span>
+<span class="text-primary font-bold truncate">proof.json</span>
+</div>
+<span class="text-primary font-telemetry-metric-sm text-[10px]">Groth16 BN254</span>
+</div>
+<div class="p-space-xs bg-surface-container flex items-center justify-between hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-xs min-w-0">
+<span class="material-symbols-outlined text-[14px] text-secondary">tune</span>
+<span class="text-secondary font-bold truncate">public.json</span>
+</div>
+<span class="text-on-surface-variant font-telemetry-metric-sm text-[10px]">3 Inputs</span>
+</div>
+<div class="p-space-xs bg-surface-container flex items-center justify-between hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-xs min-w-0">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">key</span>
+<span class="text-on-surface truncate">verification_key.json</span>
+</div>
+<span class="text-on-surface-variant font-telemetry-metric-sm text-[10px]">CRS 2.1 KB</span>
+</div>
+<div class="p-space-xs bg-surface-container flex items-center justify-between hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-xs min-w-0">
+<span class="material-symbols-outlined text-[14px] text-primary">memory</span>
+<span class="text-primary truncate">tpm_pcr_quote.bin</span>
+</div>
+<span class="text-primary font-telemetry-metric-sm text-[10px]">TPM2_Quote</span>
+</div>
+<div class="p-space-xs bg-surface-container flex items-center justify-between hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-xs min-w-0">
+<span class="material-symbols-outlined text-[14px] text-secondary">account_tree</span>
+<span class="text-on-surface truncate">merkle_witness_path.dat</span>
+</div>
+<span class="text-on-surface-variant font-telemetry-metric-sm text-[10px]">24 Siblings</span>
+</div>
+<div class="p-space-xs bg-surface-container flex items-center justify-between hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-xs min-w-0">
+<span class="material-symbols-outlined text-[14px] text-tertiary-fixed-dim">verified_user</span>
+<span class="text-on-surface truncate">signatures.pem</span>
+</div>
+<span class="text-primary-container font-telemetry-metric-sm text-[10px]">3/3 Quorum</span>
+</div>
+</div>
+</div>
+<!-- CARD 2: CRYPTOGRAPHIC ZK MATHEMATICS TELEMETRY -->
+<div class="bg-surface-container-low p-space-md shadow-md flex flex-col gap-space-sm relative">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">functions</span>
+<h3 class="font-headline-md text-headline-md text-secondary">ZK Verification Engine</h3>
+</div>
+<span class="px-space-xs py-0.5 bg-surface-container text-primary font-label-sm text-label-sm">
+            SNARK-BN254
+          </span>
+</div>
+<!-- Formula Callout -->
+<div class="p-space-sm bg-surface-container-lowest font-telemetry-metric-sm text-[11px] text-primary space-y-1">
+<div class="text-on-surface-variant text-[9px] uppercase tracking-wider">Pairing Product Equation:</div>
+<div class="text-secondary font-bold overflow-x-auto whitespace-nowrap">
+            e(A, B) = e(α, β) · e(∑ xᵢ · γ, δ) · e(C, δ)
+          </div>
+<div class="text-[9px] text-on-surface-variant">Curve: ALT_BN128 | Fr: 254-bit prime | G1/G2 Pairing</div>
+</div>
+<!-- Realtime Benchmarks Grid -->
+<div class="grid grid-cols-2 gap-space-xs">
+<div class="p-space-xs bg-surface-container flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">VERIFIER TIME</span>
+<span class="font-telemetry-metric text-telemetry-metric text-primary-container">0.38ms</span>
+<span class="font-label-sm text-label-sm text-secondary">⚡ Ultra-low latency</span>
+</div>
+<div class="p-space-xs bg-surface-container flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">SOUNDNESS ERROR</span>
+<span class="font-telemetry-metric text-telemetry-metric text-primary">2⁻¹²⁸</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Negligible breach</span>
+</div>
+<div class="p-space-xs bg-surface-container flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">CONSTRAINTS</span>
+<span class="font-telemetry-metric text-telemetry-metric text-on-surface">1.40M</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">R1CS circuits</span>
+</div>
+<div class="p-space-xs bg-surface-container flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">MERKLE DEPTH</span>
+<span class="font-telemetry-metric text-telemetry-metric text-secondary">24 Tier</span>
+<span class="font-label-sm text-label-sm text-primary-container">Poseidon Native</span>
+</div>
+</div>
+<!-- Multi-Sig Signer Ledger Strip -->
+<div class="space-y-space-xs pt-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block">Multi-Sig Quorum Verification</span>
+<div class="flex items-center justify-between p-space-xs bg-surface-container text-on-surface font-label-sm text-label-sm">
+<div class="flex items-center gap-space-xs">
+<span class="w-1.5 h-1.5 bg-primary-container rounded-full"></span>
+<span class="font-bold">SecOps Operator (YubiKey 5 FIPS)</span>
+</div>
+<span class="text-primary font-telemetry-metric-sm">0x892A..VALID</span>
+</div>
+<div class="flex items-center justify-between p-space-xs bg-surface-container text-on-surface font-label-sm text-label-sm">
+<div class="flex items-center gap-space-xs">
+<span class="w-1.5 h-1.5 bg-primary-container rounded-full"></span>
+<span class="font-bold">Plant Safety Interlock Token</span>
+</div>
+<span class="text-primary font-telemetry-metric-sm">0x44B1..VALID</span>
+</div>
+<div class="flex items-center justify-between p-space-xs bg-surface-container text-on-surface font-label-sm text-label-sm">
+<div class="flex items-center gap-space-xs">
+<span class="w-1.5 h-1.5 bg-primary-container rounded-full"></span>
+<span class="font-bold">Conformer AI Safety Governor</span>
+</div>
+<span class="text-primary font-telemetry-metric-sm">0x770E..VALID</span>
+</div>
+</div>
+</div>
+<!-- CARD 3: AUDIT PACKAGE DOWNLOAD & EXPORT HUB -->
+<div class="bg-surface-container-low p-space-md shadow-md flex flex-col gap-space-sm relative">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">download</span>
+<h3 class="font-headline-md text-headline-md text-primary">Attestation Exports</h3>
+</div>
+<span class="px-space-xs py-0.5 bg-surface-container text-secondary font-label-sm text-label-sm font-bold">
+            SIGNED PDF/TTY
+          </span>
+</div>
+<button class="w-full py-space-sm px-space-md bg-primary-container text-on-primary-container font-label-md text-label-md font-bold hover:bg-primary-fixed transition-colors flex items-center justify-center gap-space-sm shadow-md" id="btn-download-bundle">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>DOWNLOAD VERIFIED TAR.GZ + SHA256</span>
+</button>
+<button class="w-full py-space-sm px-space-md bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md transition-colors flex items-center justify-center gap-space-sm" id="btn-export-tty">
+<span class="material-symbols-outlined text-[18px]">description</span>
+<span>EXPORT AUDIT LOG (.RAW TTY RECORD)</span>
+</button>
+<!-- Bash Quick Runner Box -->
+<div class="mt-space-xs p-space-sm bg-surface-container-lowest flex flex-col gap-space-xs">
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>OFFLINE BASH RUNNER:</span>
+<button class="text-secondary hover:text-primary transition-colors flex items-center gap-1" id="btn-copy-curl">
+<span class="material-symbols-outlined text-[12px]">content_copy</span>
+<span>COPY</span>
+</button>
+</div>
+<code class="font-label-sm text-label-sm text-primary break-all select-all">
+            curl -sSfL https://audit.sentinel-soc.internal/verify.sh | bash -s -- --bundle AUD-2025-0891-ZK
+          </code>
+</div>
+</div>
+</div>
+</div>
+<!-- BOTTOM HUD TELEMETRY DOCK -->
+<section class="w-full bg-surface-container-lowest p-space-md shadow-xl flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-lg flex-wrap">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 bg-primary-container"></span>
+<span class="font-label-md text-label-md text-primary font-bold">SENTINEL-ICS VERIFIED</span>
+</div>
+<div class="flex items-center gap-space-sm font-label-sm text-label-sm">
+<span class="text-on-surface-variant uppercase">EVALUATION TIME:</span>
+<span class="text-primary font-telemetry-metric-sm">0.38 ms</span>
+</div>
+<div class="flex items-center gap-space-sm font-label-sm text-label-sm">
+<span class="text-on-surface-variant uppercase">AIR-GAP ISOLATION:</span>
+<span class="text-secondary font-telemetry-metric-sm">HARDWARE-LOCKED</span>
+</div>
+<div class="flex items-center gap-space-sm font-label-sm text-label-sm">
+<span class="text-on-surface-variant uppercase">CERTIFICATE HASH:</span>
+<span class="text-on-surface font-telemetry-metric-sm truncate max-w-[200px]">0x37a912bb01c8fa90</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="px-space-sm py-1 bg-surface-container text-primary-container font-label-sm text-label-sm font-bold flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span>AUD-2025-0891-PASS</span>
+</div>
+<div class="text-on-surface-variant font-label-sm text-label-sm">
+        NODE: <span class="text-secondary">urn:sntnl:us-east:0x98EF..B41</span>
+</div>
+</div>
+</section>
+<!-- Notification Toast Container -->
+<div class="fixed bottom-6 right-6 z-50 flex flex-col gap-space-xs pointer-events-none" id="toast-container"></div>
+<!-- Interactive Terminal Simulation Logic -->
+<script>
+    (function initAuditConsole() {
+      const terminalBody = document.getElementById('terminal-body');
+      const dynamicStream = document.getElementById('dynamic-log-stream');
+      const cliInput = document.getElementById('cli-custom-input');
+      const toastContainer = document.getElementById('toast-container');
+
+      function showToast(message, type = 'primary') {
+        const toast = document.createElement('div');
+        toast.className = 'px-space-md py-space-sm bg-surface-container-high text-on-surface font-label-sm text-label-sm shadow-xl flex items-center gap-space-sm transition-all transform duration-200 ease-out translate-y-2 opacity-0 pointer-events-auto';
+        
+        let colorClass = 'text-primary-container';
+        let icon = 'check_circle';
+        if (type === 'secondary') {
+          colorClass = 'text-secondary';
+          icon = 'info';
+        } else if (type === 'error') {
+          colorClass = 'text-error';
+          icon = 'warning';
+        }
+
+        toast.innerHTML = `
+          <span class="material-symbols-outlined text-[16px] ${colorClass}">${icon}</span>
+          <span>${message}</span>
+        `;
+        toastContainer.appendChild(toast);
+
+        requestAnimationFrame(() => {
+          toast.classList.remove('translate-y-2', 'opacity-0');
+        });
+
+        setTimeout(() => {
+          toast.classList.add('opacity-0', 'translate-y-2');
+          setTimeout(() => toast.remove(), 250);
+        }, 3200);
+      }
+
+      function scrollToBottom() {
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+      }
+
+      function appendTerminalStep(command, lines, passText) {
+        const stepEl = document.createElement('div');
+        stepEl.className = 'space-y-space-xs';
+
+        let innerContent = `
+          <div class="flex items-center gap-space-xs text-primary font-bold">
+            <span class="text-secondary">auditor@sovereign-lab:~/bundle$</span>
+            <span>${command}</span>
+          </div>
+          <div class="pl-space-md text-on-surface space-y-0.5">
+        `;
+
+        lines.forEach(line => {
+          innerContent += `<div>&gt; ${line}</div>`;
+        });
+
+        if (passText) {
+          innerContent += `
+            <div class="text-primary-container font-bold flex items-center gap-space-xs">
+              <span class="material-symbols-outlined text-[14px]">verified</span>
+              ${passText}
+            </div>
+          `;
+        }
+
+        innerContent += `</div>`;
+        stepEl.innerHTML = innerContent;
+        dynamicStream.appendChild(stepEl);
+        scrollToBottom();
+      }
+
+      // Quick Action: Run All Checks
+      const btnRunAll = document.getElementById('btn-run-all');
+      btnRunAll.addEventListener('click', () => {
+        showToast('Running Full Sovereign Attestation Pipeline...', 'primary');
+        dynamicStream.innerHTML = '';
+        
+        appendTerminalStep(
+          './sentinel-audit-verify --suite full-airgap --strict',
+          [
+            'Executing multi-signature quorum extraction...',
+            'TPM 2.0 PCR registers [0..7] verified against golden hash',
+            'Groth16 ZK-SNARK 1,402,891 constraints solved (BN254)',
+            'Merkle tree depth 24 inclusion verification nominal'
+          ],
+          '[PASS] ALL 4 CHECKS VERIFIED IN 0.38ms (EXIT 0)'
+        );
+
+        setTimeout(() => {
+          appendTerminalStep(
+            './sentinel-audit-verify --generate-attestation-certificate',
+            [
+              'Compiling cryptographic proof witness tree...',
+              'Anchor: TPM2_Quote 0x8f2c09194e47e9a0d81b31a89c4412ef',
+              'Emitting Sovereign Audit Compliance Certificate: CERT-2025-IEC62443-SOVEREIGN-PASS.pdf'
+            ],
+            '[MINTED] Sovereign Audit Compliance Certificate ready for archive export'
+          );
+        }, 300);
+      });
+
+      // Quick Action: Verify ZK Proof
+      const btnZk = document.getElementById('btn-zk-proof');
+      btnZk.addEventListener('click', () => {
+        showToast('Groth16 BN254 verification executed: 0.38ms', 'secondary');
+        appendTerminalStep(
+          'snarkjs groth16 verify verification_key.json public.json proof.json',
+          [
+            'Bilinear pairing: e(A, B) = e(alpha, beta) * e(x, gamma) * e(C, delta)',
+            'Public inputs: MerkleRoot=0x8f2c..31, TauThreshold=0.942, AirGapState=0x01',
+            'Soundness error: 2^-128 (BN254 curve)'
+          ],
+          '[OK] SNARK PROOF VALIDATED in 0.38ms'
+        );
+      });
+
+      // Quick Action: Merkle Branch
+      const btnMerkle = document.getElementById('btn-merkle');
+      btnMerkle.addEventListener('click', () => {
+        showToast('Traversing 24-level Merkle Poseidon ladder...', 'primary');
+        appendTerminalStep(
+          './sentinel-audit-verify --merkle-ladder --leaf-index 4892104',
+          [
+            'Leaf Index 4892104: SCADA Register 40012 (Emergency Shutoff Valve)',
+            'Poseidon Siblings: 24 BN254 elements loaded from merkle_witness_path.dat',
+            'Root Computed: 0x8f2c09194e47e9a0d81b31a89c4412ef'
+          ],
+          '[PASS] Merkle Inclusion Matches Hardware Enclave Root'
+        );
+      });
+
+      // Quick Action: Attest TPM
+      const btnTpm = document.getElementById('btn-tpm');
+      btnTpm.addEventListener('click', () => {
+        showToast('TPM 2.0 Hardware Quote verified against AK pubkey', 'primary');
+        appendTerminalStep(
+          './sentinel-audit-verify --tpm-pcr-quote --verify-enclave',
+          [
+            'Target TPM: STMicro ST33TPHF20 (I2C addr 0x2E)',
+            'Reading PCRs [0, 2, 4, 5, 7] - SHA-256 bank',
+            'Signature verified with AK-8849-FIPS-140-3-L4-TPM2-ECDSA-P256'
+          ],
+          '[PASS] TPM Hardware Quote Authentic & PCRs Uncompromised'
+        );
+      });
+
+      // Quick Action: Export JSON
+      const btnJson = document.getElementById('btn-export-json');
+      btnJson.addEventListener('click', () => {
+        showToast('Generating audit_summary_attestation.json', 'secondary');
+        appendTerminalStep(
+          './sentinel-audit-verify --export-json --out audit_summary.json',
+          [
+            'Serializing Groth16 proof, TPM Quote, and Ed25519 signatures...',
+            'File written: ./audit_summary.json (48.2 KB)'
+          ],
+          '[SAVED] JSON Attestation Digest Exported'
+        );
+      });
+
+      // Clear terminal
+      const btnClear = document.getElementById('btn-clear-term');
+      btnClear.addEventListener('click', () => {
+        dynamicStream.innerHTML = '';
+        showToast('Terminal viewport cleared');
+      });
+
+      // Copy CLI buffer
+      const btnCopyTerm = document.getElementById('btn-copy-term');
+      btnCopyTerm.addEventListener('click', () => {
+        const text = terminalBody.innerText;
+        navigator.clipboard.writeText(text).then(() => {
+          showToast('Full terminal output copied to clipboard');
+        });
+      });
+
+      // Handle custom CLI input
+      cliInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const cmd = cliInput.value.trim();
+          if (!cmd) return;
+          
+          if (cmd.includes('clear')) {
+            dynamicStream.innerHTML = '';
+            cliInput.value = '';
+            return;
+          }
+
+          appendTerminalStep(cmd, [
+            `Executing: "${cmd}" under isolated security boundary`,
+            'Hardware attestation context: ENCLAVE_LOCKED',
+            'Constraint verification: PASSED'
+          ], '[PASS] STATUS: SUCCESS (0x0)');
+
+          cliInput.value = '';
+          showToast(`Executed: ${cmd}`);
+        }
+      });
+
+      // Download Bundle Button
+      const btnDownload = document.getElementById('btn-download-bundle');
+      btnDownload.addEventListener('click', () => {
+        showToast('Downloading verified bundle: sentinel-audit-bundle-v2.4.9.tar.gz');
+      });
+
+      // Export TTY Button
+      const btnExportTty = document.getElementById('btn-export-tty');
+      btnExportTty.addEventListener('click', () => {
+        showToast('Exporting RAW TTY session record: audit_session_2025.raw');
+      });
+
+      // Copy Curl Script Button
+      const btnCopyCurl = document.getElementById('btn-copy-curl');
+      btnCopyCurl.addEventListener('click', () => {
+        const bashCode = "curl -sSfL https://audit.sentinel-soc.internal/verify.sh | bash -s -- --bundle AUD-2025-0891-ZK";
+        navigator.clipboard.writeText(bashCode).then(() => {
+          showToast('Bash runner copied to clipboard', 'secondary');
+        });
+      });
+
+      // Top copy button
+      const copySummaryBtn = document.getElementById('copy-summary-btn');
+      copySummaryBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText('0x9f4a8be10477bc698a9d').then(() => {
+          showToast('SHA256 signature hash copied to clipboard');
+        });
+      });
+
+    })();
+  </script>
+</div></main></div></body></html>

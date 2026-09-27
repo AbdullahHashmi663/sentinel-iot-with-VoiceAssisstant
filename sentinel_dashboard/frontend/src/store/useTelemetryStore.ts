@@ -8,14 +8,15 @@ import {
   TelemetryEvent,
   DomainType,
   ActiveRule,
-  AdversarialState
+  AdversarialState,
+  ConsoleType
 } from '../types/sentinel';
 import { mockTelemetry } from '../services/mockTelemetryService';
 
 export interface TelemetryStoreState {
   // Navigation & View Mode
-  activeConsole: 'overview' | 'threat_lab' | 'xai' | 'adversarial' | 'remediation' | 'compliance' | 'execute';
-  setActiveConsole: (consoleId: 'overview' | 'threat_lab' | 'xai' | 'adversarial' | 'remediation' | 'compliance' | 'execute') => void;
+  activeConsole: ConsoleType;
+  setActiveConsole: (consoleId: ConsoleType) => void;
 
   // 1. Sliding queue of latest 50 incidents
   events: TelemetryEvent[];
@@ -75,9 +76,38 @@ export interface TelemetryStoreState {
   agenticIncident: any | null;
   openAgenticSoc: (incident?: any) => void;
   closeAgenticSoc: () => void;
+
+  isAuditReportModalOpen: boolean;
+  openAuditReportModal: () => void;
+  closeAuditReportModal: () => void;
+
+  // Active Theme State & Light/Dark Switcher
+  theme: string;
+  setTheme: (theme: string) => void;
+  toggleTheme: () => void;
 }
 
 export const useTelemetryStore = create<TelemetryStoreState>((set, get) => ({
+  theme: 'cyberpunk',
+  setTheme: (theme: string) => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('sentinel_theme', theme);
+      document.documentElement.setAttribute('data-theme', theme);
+      if (theme === 'alabaster' || theme === 'arctic' || theme === 'light') {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+      } else {
+        document.documentElement.classList.remove('light');
+        document.documentElement.classList.add('dark');
+      }
+    }
+    set({ theme });
+  },
+  toggleTheme: () => {
+    const current = get().theme;
+    const nextTheme = (current === 'alabaster' || current === 'arctic' || current === 'light') ? 'cyberpunk' : 'alabaster';
+    get().setTheme(nextTheme);
+  },
   activeConsole: 'overview',
   setActiveConsole: (consoleId) => set({ activeConsole: consoleId }),
 
@@ -285,6 +315,10 @@ export const useTelemetryStore = create<TelemetryStoreState>((set, get) => ({
   isAgenticSocOpen: false,
   agenticIncident: null,
   openAgenticSoc: (incident) => set({ isAgenticSocOpen: true, agenticIncident: incident || null }),
-  closeAgenticSoc: () => set({ isAgenticSocOpen: false, agenticIncident: null })
+  closeAgenticSoc: () => set({ isAgenticSocOpen: false, agenticIncident: null }),
+
+  isAuditReportModalOpen: false,
+  openAuditReportModal: () => set({ isAuditReportModalOpen: true }),
+  closeAuditReportModal: () => set({ isAuditReportModalOpen: false })
 }));
 

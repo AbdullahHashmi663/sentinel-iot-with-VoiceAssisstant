@@ -573,29 +573,27 @@ export default function VoiceCopilot({ onFocusElement }: VoiceCopilotProps) {
       <section
         ref={copilotSectionRef}
         aria-label="Mereoleona Autonomous Combat Voice Copilot"
-        className="cyber-card glass-panel-deep relative w-full overflow-hidden transition-all duration-300"
+        className="hud-box relative w-full overflow-hidden transition-all duration-300 bg-[#0b131e]/95 border border-[#00f0ff]/30 shadow-[0_0_30px_rgba(0,240,255,0.08)] rounded-xl"
       >
-      {/* TOP SPECULAR LIGHT BEAM */}
-      <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[var(--accent-primary)]/70 to-transparent pointer-events-none z-30" />
-      <div className="laser-scan-line opacity-30 pointer-events-none" />
+      {/* Reticle corners */}
+      <div className="hud-corner-tr" />
+      <div className="hud-corner-bl" />
 
-      {/* THEMED CORNER HUD BRACKETS */}
-      <div className="absolute top-0 left-0 w-3.5 h-3.5 border-t-2 border-l-2 border-[var(--accent-primary)] shadow-[0_0_8px_var(--accent-primary)] z-20 pointer-events-none" />
-      <div className="absolute top-0 right-0 w-3.5 h-3.5 border-t-2 border-r-2 border-[var(--accent-primary)] shadow-[0_0_8px_var(--accent-primary)] z-20 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-3.5 h-3.5 border-b-2 border-l-2 border-[var(--accent-primary)] shadow-[0_0_8px_var(--accent-primary)] z-20 pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-3.5 h-3.5 border-b-2 border-r-2 border-[var(--accent-primary)] shadow-[0_0_8px_var(--accent-primary)] z-20 pointer-events-none" />
+      {/* TOP SPECULAR LIGHT BEAM */}
+      <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#00f0ff]/70 to-transparent pointer-events-none z-30" />
+      <div className="hud-scanline opacity-25 pointer-events-none" />
 
       {/* 1. TOP HEADER TELEMETRY RIBBON (THEMED & GLASS-FROSTED) */}
-      <header className="px-4 py-3 bg-[var(--bg-canvas)]/65 backdrop-blur-xl border-b border-white/10 flex flex-wrap items-center justify-between gap-3 relative z-10">
+      <header className="px-4 py-3 bg-[#070d14]/90 backdrop-blur-xl border-b border-[#162536] flex flex-wrap items-center justify-between gap-3 relative z-10">
         <div className="flex items-center gap-3">
           {/* Flame Insignia with Theme Reactive Glow */}
           <div
-            className={`relative flex items-center justify-center w-8 h-8 rounded-xl border transition-all ${
+            className={`relative flex items-center justify-center w-8 h-8 rounded-lg border transition-all ${
               isListening
-                ? "bg-[var(--accent-primary)]/20 border-[var(--accent-primary)] shadow-[var(--border-glow)]"
+                ? "bg-[#00f0ff]/20 border-[#00f0ff] shadow-[0_0_15px_rgba(0,240,255,0.4)]"
                 : isSpeaking
-                ? "bg-[var(--alert-critical)]/20 border-[var(--alert-critical)] shadow-[0_0_15px_var(--alert-critical)]"
-                : "bg-white/5 border-white/15 shadow-inner"
+                ? "bg-[#ff2a5f]/20 border-[#ff2a5f] shadow-[0_0_15px_rgba(255,42,95,0.4)]"
+                : "bg-[#0b131e] border-[#162536] shadow-inner"
             }`}
           >
             <Flame

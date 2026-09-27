@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="web_dashboard" name="shell-type"/>
+<title>SENTINEL-IoT // TACTICAL SOC - Active Containment &amp; SOAR</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+        background-color: #070d14;
+        color: #dee3eb;
+      }
+      body {
+        overscroll-behavior: none;
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090f14;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #162536;
+      border-radius: 2px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00f0ff;
+    }
+    .hud-bracket {
+      position: relative;
+    }
+    .hud-bracket::before {
+      content: "┌";
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: rgba(0, 240, 255, 0.45);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .hud-bracket::after {
+      content: "┘";
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: rgba(0, 240, 255, 0.45);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .grid-mesh {
+      background-image: linear-gradient(to right, rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .scanline {
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 240, 255, 0.015) 50%);
+      background-size: 100% 3px;
+    }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-surface-variant": "#8da1b5",
+            "surface-container": "#111a24",
+            "surface-container-highest": "#1c2938",
+            "primary": "#dbfcff",
+            "on-tertiary-container": "#7d5800",
+            "surface-container-lowest": "#060a0f",
+            "tertiary-container": "#ffd387",
+            "void-surface": "#070d14",
+            "on-secondary-fixed": "#002107",
+            "primary-container": "#00f0ff",
+            "telemetry-bright": "#e2e8f0",
+            "on-tertiary-fixed": "#271900",
+            "on-secondary-container": "#007128",
+            "inverse-surface": "#dee3eb",
+            "on-error": "#690005",
+            "tertiary-fixed-dim": "#ffba26",
+            "surface-container-high": "#162230",
+            "tertiary-fixed": "#ffdea9",
+            "error": "#ffb4ab",
+            "on-secondary": "#003911",
+            "error-container": "#93000a",
+            "void-base": "#03070c",
+            "telemetry-muted": "#64748b",
+            "secondary-container": "#00fe66",
+            "void-elevated": "#0c1522",
+            "inverse-primary": "#006970",
+            "on-secondary-fixed-variant": "#00531b",
+            "surface-dim": "#070d14",
+            "secondary-fixed": "#6bff83",
+            "surface-tint": "#00f0ff",
+            "surface-container-low": "#0c141d",
+            "secondary": "#00ff66",
+            "on-background": "#dee3eb",
+            "surface-variant": "#162536",
+            "surface-bright": "#223348",
+            "surface": "#0a111a",
+            "secondary-fixed-dim": "#00e55b",
+            "laser-crimson": "#ff2a5f",
+            "outline": "#48627e",
+            "inverse-on-surface": "#2b3137",
+            "on-tertiary-fixed-variant": "#5e4100",
+            "neon-cyan": "#00f0ff",
+            "outline-variant": "#1c2b3d",
+            "plasma-purple": "#a855f7",
+            "background": "#070d14",
+            "on-error-container": "#ffdad6",
+            "solar-amber": "#ffb700",
+            "void-border": "#152435",
+            "tertiary": "#fff4e8",
+            "on-primary-fixed": "#002022",
+            "neon-emerald": "#00ff66",
+            "on-primary-fixed-variant": "#004f54",
+            "on-tertiary": "#422d00",
+            "on-primary-container": "#00363a",
+            "on-primary": "#00363a",
+            "on-surface": "#dee3eb",
+            "primary-fixed": "#7df4ff",
+            "primary-fixed-dim": "#00dbe9"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "sm": "0.125rem",
+            "md": "0.25rem",
+            "lg": "0.375rem",
+            "xl": "0.5rem",
+            "full": "9999px"
+          },
+          fontFamily: {
+            "body-md": ["Space Grotesk", "sans-serif"],
+            "headline-xl": ["Space Grotesk", "sans-serif"],
+            "label-md": ["JetBrains Mono", "monospace"],
+            "headline-lg": ["Space Grotesk", "sans-serif"],
+            "telemetry-metric-sm": ["JetBrains Mono", "monospace"],
+            "telemetry-metric": ["JetBrains Mono", "monospace"],
+            "label-sm": ["JetBrains Mono", "monospace"],
+            "label-lg": ["JetBrains Mono", "monospace"],
+            "body-lg": ["Space Grotesk", "sans-serif"],
+            "body-sm": ["Space Grotesk", "sans-serif"],
+            "headline-md": ["Space Grotesk", "sans-serif"]
+          },
+          fontSize: {
+            "body-md": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+            "headline-xl": ["28px", {"lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "label-md": ["11px", {"lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "500"}],
+            "headline-lg": ["20px", {"lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "telemetry-metric-sm": ["15px", {"lineHeight": "19px", "fontWeight": "600"}],
+            "telemetry-metric": ["24px", {"lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "label-sm": ["10px", {"lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "500"}],
+            "label-lg": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+            "body-lg": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+            "body-sm": ["11px", {"lineHeight": "15px", "fontWeight": "400"}],
+            "headline-md": ["16px", {"lineHeight": "22px", "fontWeight": "600"}]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-void-base font-body-md text-on-surface antialiased selection:bg-neon-cyan/20 selection:text-neon-cyan scanline">
+<!-- TOP PERSISTENT HUD HEADER -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#060a0f]/95 backdrop-blur-md border-b border-void-border">
+<!-- Level 1: Master Status & SOC Telemetry Bar -->
+<div class="h-14 px-4 lg:px-6 flex items-center justify-between border-b border-outline-variant/40">
+<!-- Left: Logo & Engine State -->
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2.5">
+<div class="relative w-8 h-8 rounded border border-neon-cyan/50 bg-neon-cyan/10 flex items-center justify-center shadow-[0_0_12px_rgba(0,240,255,0.25)]">
+<span class="material-symbols-outlined text-neon-cyan text-[18px]">verified_user</span>
+<span class="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-neon-emerald animate-ping"></span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-primary font-bold tracking-tight text-[15px] leading-none">SENTINEL-IoT</span>
+<span class="font-label-sm text-[9px] px-1 py-0.2 rounded bg-neon-cyan/15 text-neon-cyan border border-neon-cyan/30">v2.4-RT</span>
+</div>
+<span class="font-label-sm text-[9px] text-telemetry-muted tracking-widest uppercase">TACTICAL ICS/SCADA ZERO-TRUST CONTAINMENT</span>
+</div>
+</div>
+<div class="hidden xl:flex items-center gap-2 border-l border-void-border pl-4">
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-void-elevated border border-outline-variant/60">
+<span class="w-1.5 h-1.5 rounded-full bg-neon-emerald animate-pulse"></span>
+<span class="font-label-sm text-[10px] text-neon-emerald font-mono">eBPF XDP: ATTACHED (Ring0)</span>
+</div>
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-void-elevated border border-outline-variant/60">
+<span class="font-label-sm text-[10px] text-telemetry-muted">LATENCY:</span>
+<span class="font-label-sm text-[10px] text-neon-cyan font-mono font-bold">18.4 µs</span>
+</div>
+</div>
+</div>
+<!-- Right: Clock, Live Switchers & Emergency Controls -->
+<div class="flex items-center gap-3">
+<!-- Live WS / Mock toggle -->
+<div class="hidden md:flex items-center p-0.5 rounded bg-void-base border border-void-border">
+<button class="flex items-center gap-1 px-2 py-0.5 rounded bg-neon-cyan/15 text-neon-cyan font-label-sm text-[10px] font-bold border border-neon-cyan/30 shadow-[0_0_8px_rgba(0,240,255,0.25)]" type="button">
+<span class="w-1.5 h-1.5 rounded-full bg-neon-cyan animate-pulse"></span> LIVE WS (FastAPI)
+          </button>
+<button class="px-2 py-0.5 font-label-sm text-[10px] text-telemetry-muted hover:text-on-surface" type="button">MOCK REPLAY</button>
+</div>
+<!-- Telemetry Metrics Counters -->
+<div class="hidden lg:flex items-center gap-3 px-3 py-1 rounded bg-void-elevated border border-void-border">
+<div class="flex flex-col text-right">
+<span class="font-label-sm text-[9px] text-telemetry-muted">UTC MASTER</span>
+<span class="font-label-md text-[11px] text-neon-cyan font-mono font-bold">14:22:09.841</span>
+</div>
+<div class="w-px h-5 bg-outline-variant"></div>
+<div class="flex flex-col">
+<span class="font-label-sm text-[9px] text-telemetry-muted">TOTAL INTERCEPTED</span>
+<span class="font-label-md text-[11px] text-neon-emerald font-mono font-bold">2,841,920 EVT</span>
+</div>
+</div>
+<!-- Emergency Kill Switch button -->
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded bg-laser-crimson/20 border border-laser-crimson text-laser-crimson hover:bg-laser-crimson hover:text-white font-label-sm text-[11px] font-bold tracking-wider transition-all shadow-[0_0_15px_rgba(255,42,95,0.35)]" type="button">
+<span class="material-symbols-outlined text-[15px] animate-pulse">power_settings_new</span>
+<span>AIR-GAP TRIP LOCKDOWN</span>
+</button>
+</div>
+</div>
+<!-- Level 2: Domain Context & Micro Sub-ribbon -->
+<div class="h-9 px-4 lg:px-6 flex items-center justify-between bg-[#04080c]/90 border-b border-void-border font-label-sm text-[11px]">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1.5">
+<span class="text-neon-cyan font-bold tracking-wider">DOMAIN:</span>
+<select class="bg-void-elevated border border-outline-variant text-telemetry-bright text-[11px] px-2 py-0.5 rounded focus:outline-none focus:border-neon-cyan font-mono">
+<option>Modbus Industrial PLC (ToN_IoT #04) // CRITICAL SUBSTATION</option>
+<option>Network Core Telemetry (ToN_IoT #01)</option>
+<option>SCADA Thermostat Rig (ToN_IoT #07)</option>
+<option>Smart Grid Energy Meter (ToN_IoT #11)</option>
+<option>ICS Robotic Actuator (ToN_IoT #09)</option>
+</select>
+</div>
+<div class="hidden sm:flex items-center gap-2 text-telemetry-muted">
+<span>|</span>
+<span class="text-on-surface-variant font-mono">POLICY: <span class="text-neon-emerald">IEC-62443-4-2 STRICT</span></span>
+<span class="text-outline-variant">•</span>
+<span class="text-on-surface-variant font-mono">MERKLE ROOT: <span class="text-neon-cyan">#8FA1..D49E</span></span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1.5 bg-void-elevated px-2 py-0.5 rounded border border-outline-variant/50">
+<span class="text-telemetry-muted">SHM FIFO:</span>
+<span class="text-neon-emerald font-mono font-bold">LOCKED (0.00% DROP)</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-neon-cyan animate-pulse"></span>
+<span class="text-telemetry-muted font-mono">RING0 SECURE</span>
+</div>
+</div>
+</div>
+</header>
+<!-- MAIN VIEWPORT -->
+<main class="w-full pt-28 pb-28 min-h-screen bg-void-base grid-mesh px-3 lg:px-6">
+<div class="max-w-[1720px] mx-auto flex flex-col gap-3.5">
+<!-- TOP METRIC TELEMETRY TILES & CONSOLE MODE SWITCHER -->
+<div class="flex flex-col gap-2 p-2.5 rounded border border-void-border bg-void-surface/90 shadow-[0_4px_20px_rgba(0,0,0,0.6)] hud-bracket">
+<!-- Controls & Mode Selector -->
+<div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-void-border">
+<div class="flex items-center gap-1.5 bg-void-base p-0.5 rounded border border-outline-variant">
+<button class="flex items-center gap-1.5 px-3 py-1 rounded bg-neon-cyan/20 border border-neon-cyan text-neon-cyan font-label-md text-[11px] font-bold shadow-[0_0_10px_rgba(0,240,255,0.3)] transition-all" id="view-ledger-btn" type="button">
+<span class="material-symbols-outlined text-[15px]">gavel</span>
+<span>ACTIVE CONTAINMENT LEDGER (47)</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1 rounded text-telemetry-muted hover:text-telemetry-bright font-label-md text-[11px] transition-all" id="view-playbook-btn" type="button">
+<span class="material-symbols-outlined text-[15px]">account_tree</span>
+<span>SOAR PLAYBOOK DAG BUILDER</span>
+</button>
+</div>
+<div class="flex items-center gap-2 font-label-sm text-[10px]">
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-void-elevated border border-outline-variant text-telemetry-bright font-mono">
+<span class="text-neon-cyan">HOOKS:</span>
+<span class="text-neon-emerald">xdp_drop</span> /
+              <span class="text-neon-emerald">cgroup_freeze</span> /
+              <span class="text-neon-emerald">tc_bpf</span>
+</div>
+<button class="flex items-center gap-1 px-3 py-1 rounded bg-neon-emerald/20 border border-neon-emerald text-neon-emerald hover:bg-neon-emerald hover:text-black font-label-sm text-[11px] font-bold transition-all shadow-[0_0_10px_rgba(0,255,102,0.25)]" type="button">
+<span class="material-symbols-outlined text-[15px]">add_task</span>
+<span>+ DEPLOY MITRE DEFENSE RULE</span>
+</button>
+</div>
+</div>
+<!-- 5-Metric Telemetry Ribbon -->
+<div class="grid grid-cols-2 md:grid-cols-5 gap-2">
+<!-- Metric 1 -->
+<div class="flex flex-col p-2.5 rounded bg-void-base border border-void-border">
+<div class="flex items-center justify-between text-telemetry-muted">
+<span class="font-label-sm text-[10px] tracking-wider">ACTIVE KERNEL RULES</span>
+<span class="material-symbols-outlined text-neon-cyan text-[14px]">security</span>
+</div>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-telemetry-metric text-neon-cyan font-mono text-[24px]">47</span>
+<span class="font-label-sm text-[10px] text-neon-emerald font-mono">ZERO COLLISION</span>
+</div>
+<span class="font-label-sm text-[10px] text-telemetry-muted mt-1 font-mono">31 eBPF + 16 Wazuh AR</span>
+</div>
+<!-- Metric 2 -->
+<div class="flex flex-col p-2.5 rounded bg-void-base border border-void-border">
+<div class="flex items-center justify-between text-telemetry-muted">
+<span class="font-label-sm text-[10px] tracking-wider">AUTONOMOUS DROPS</span>
+<span class="material-symbols-outlined text-neon-emerald text-[14px]">bolt</span>
+</div>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-telemetry-metric text-neon-emerald font-mono text-[24px]">1,429</span>
+<span class="font-label-sm text-[10px] text-neon-cyan font-mono">+38 in 15m</span>
+</div>
+<span class="font-label-sm text-[10px] text-telemetry-muted mt-1 font-mono">Drop efficiency: 99.999%</span>
+</div>
+<!-- Metric 3 -->
+<div class="flex flex-col p-2.5 rounded bg-void-base border border-void-border">
+<div class="flex items-center justify-between text-telemetry-muted">
+<span class="font-label-sm text-[10px] tracking-wider">MEAN MTTR CONTAINMENT</span>
+<span class="material-symbols-outlined text-primary text-[14px]">speed</span>
+</div>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-telemetry-metric text-primary font-mono text-[24px]">16.27</span>
+<span class="font-label-sm text-[10px] text-telemetry-muted font-mono">MILLISECONDS</span>
+</div>
+<span class="font-label-sm text-[10px] text-telemetry-bright mt-1 font-mono">eBPF XDP: 82 µs</span>
+</div>
+<!-- Metric 4 -->
+<div class="flex flex-col p-2.5 rounded bg-void-base border border-void-border">
+<div class="flex items-center justify-between text-telemetry-muted">
+<span class="font-label-sm text-[10px] tracking-wider">MERKLE AUDIT ANCHOR</span>
+<span class="material-symbols-outlined text-secondary text-[14px]">verified</span>
+</div>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-telemetry-metric text-telemetry-bright font-mono text-[22px]">#8FA1..D4</span>
+<span class="font-label-sm text-[10px] text-neon-emerald font-mono">ED25519</span>
+</div>
+<span class="font-label-sm text-[10px] text-telemetry-muted mt-1 font-mono">Synced epoch: 0.9s ago</span>
+</div>
+<!-- Metric 5: IEC Interlock Indicator -->
+<div class="col-span-2 md:col-span-1 flex flex-col justify-between p-2.5 rounded bg-solar-amber/10 border border-solar-amber/40 text-solar-amber shadow-[0_0_12px_rgba(255,183,0,0.15)]">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-[10px] font-bold tracking-wider flex items-center gap-1 font-mono">
+<span class="material-symbols-outlined text-[14px]">gavel</span> IEC 62443-4-2
+              </span>
+<span class="px-1.5 py-0.2 rounded bg-solar-amber text-black font-label-sm text-[9px] font-extrabold animate-pulse">4-EYES ARMED</span>
+</div>
+<div class="mt-1">
+<div class="font-label-md text-[12px] font-bold font-mono">1 TRIP PENDING AUTH</div>
+<span class="font-label-sm text-[10px] text-solar-amber/80 block mt-0.5">Physical Solenoid Breaker #03</span>
+</div>
+</div>
+</div>
+</div>
+<!-- MAIN DUAL-COLUMN CYBER-PHYSICAL INTERFACE -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-start">
+<!-- LEFT COLUMN: LEDGER & DAG PIPELINE (Col 8) -->
+<div class="lg:col-span-8 flex flex-col gap-3.5">
+<!-- CARD 1: ACTIVE CONTAINMENT RULES LEDGER -->
+<div class="flex flex-col rounded border border-void-border bg-void-surface/95 shadow-lg hud-bracket">
+<!-- Header -->
+<div class="flex flex-wrap items-center justify-between gap-2 p-3 border-b border-void-border bg-void-elevated/40">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded border border-neon-cyan/40 bg-neon-cyan/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-neon-cyan text-[17px]">shield</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-primary font-bold text-[14px]">Active Zero-Trust Containment Ledger</span>
+<span class="font-label-sm text-[9px] px-1.5 py-0.2 rounded bg-neon-emerald/15 text-neon-emerald border border-neon-emerald/30 font-mono">eBPF XDP + WAZUH-AR</span>
+</div>
+<span class="font-label-sm text-[10px] text-telemetry-muted">Ring0 socket drop, PID freeze, TCP RST injection and hardware isolation catalog</span>
+</div>
+</div>
+<!-- Filter Search Input -->
+<div class="flex items-center gap-1.5">
+<div class="flex items-center px-2 py-1 rounded bg-void-base border border-outline-variant/80">
+<span class="material-symbols-outlined text-telemetry-muted text-[14px] mr-1">search</span>
+<input class="bg-transparent font-label-sm text-[11px] text-neon-cyan focus:outline-none w-48 placeholder:text-telemetry-muted font-mono" placeholder="FILTER RULE / SOURCE IP / PID..." type="text"/>
+</div>
+<button class="p-1 rounded bg-void-base border border-outline-variant text-neon-cyan hover:bg-neon-cyan hover:text-black transition-all" title="Export Ledger as RFC-5424 Telemetry CSV">
+<span class="material-symbols-outlined text-[15px]">download</span>
+</button>
+</div>
+</div>
+<!-- Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left font-mono">
+<thead>
+<tr class="bg-[#05090e] border-b border-void-border text-telemetry-muted font-label-sm text-[10px] uppercase tracking-wider">
+<th class="py-2 px-3">RULE ID / HASH</th>
+<th class="py-2 px-3">TRIGGER / SOURCE</th>
+<th class="py-2 px-3">TARGET / BOUNDARY</th>
+<th class="py-2 px-3">KERNEL CONTAINMENT ACTION</th>
+<th class="py-2 px-3 text-right">VELOCITY</th>
+<th class="py-2 px-3">STANDARD</th>
+<th class="py-2 px-3 text-center">STATUS / EXEC</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-void-border text-[11px]">
+<!-- Row 1 -->
+<tr class="hover:bg-neon-cyan/5 transition-colors group">
+<td class="py-2.5 px-3">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-neon-cyan animate-pulse"></span>
+<span class="font-bold text-neon-cyan">CR-8942-X</span>
+</div>
+<span class="text-[9px] text-telemetry-muted">sha256:3e10fa</span>
+</td>
+<td class="py-2.5 px-3">
+<div class="flex flex-col">
+<span class="text-laser-crimson font-bold">192.168.100.45:502</span>
+<span class="text-[9px] text-telemetry-muted">Modbus FC16 Flood</span>
+</div>
+</td>
+<td class="py-2.5 px-3">
+<span class="text-telemetry-bright font-bold">eth0</span>
+<span class="text-telemetry-muted block text-[10px]">Modbus-GW-04</span>
+</td>
+<td class="py-2.5 px-3">
+<div class="flex flex-col">
+<span class="px-1.5 py-0.5 rounded bg-void-base border border-neon-cyan/40 text-neon-cyan text-[10px] font-bold w-max">
+                          iptables -j DROP + xdp_drop
+                        </span>
+<span class="text-[9px] text-telemetry-muted mt-0.5">Ring0 hardware NIC drop bypass</span>
+</div>
+</td>
+<td class="py-2.5 px-3 text-right">
+<span class="text-neon-cyan font-bold">0.082 ms</span>
+<span class="text-[9px] text-telemetry-muted block">82 µs</span>
+</td>
+<td class="py-2.5 px-3">
+<span class="px-1.5 py-0.5 rounded bg-void-elevated border border-outline-variant text-[9px] text-on-surface-variant font-bold">
+                        NIST SC-5
+                      </span>
+</td>
+<td class="py-2.5 px-3 text-center">
+<div class="flex items-center justify-center gap-1">
+<span class="px-1.5 py-0.5 rounded bg-neon-emerald/15 text-neon-emerald border border-neon-emerald/30 text-[9px] font-extrabold tracking-wider">
+                          ENFORCED
+                        </span>
+<button class="px-1.5 py-0.5 rounded bg-laser-crimson/10 border border-laser-crimson/40 text-laser-crimson hover:bg-laser-crimson hover:text-white text-[9px] font-bold transition-all" title="Revoke Rule">
+                          REVOKE
+                        </button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="bg-void-base/40 hover:bg-neon-cyan/5 transition-colors group">
+<td class="py-2.5 px-3">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-neon-emerald"></span>
+<span class="font-bold text-neon-emerald">CR-8941-K</span>
+</div>
+<span class="text-[9px] text-telemetry-muted">sha256:88bb41</span>
+</td>
+<td class="py-2.5 px-3">
+<div class="flex flex-col">
+<span class="text-laser-crimson font-bold">PID 4921</span>
+<span class="text-[9px] text-telemetry-muted">/bin/modbus_poller</span>
+</div>
+</td>
+<td class="py-2.5 px-3">
+<span class="text-telemetry-bright font-bold">cgroup-v2</span>
+<span class="text-telemetry-muted block text-[10px]">/scada/plc_isolated</span>
+</td>
+<td class="py-2.5 px-3">
+<div class="flex flex-col">
+<span class="px-1.5 py-0.5 rounded bg-void-base border border-neon-emerald/40 text-neon-emerald text-[10px] font-bold w-max">
+                          cgroup_freeze &amp; SIGKILL (-9)
+                        </span>
+<span class="text-[9px] text-telemetry-muted mt-0.5">CPU slice zeroed &amp; page lock</span>
+</div>
+</td>
+<td class="py-2.5 px-3 text-right">
+<span class="text-neon-emerald font-bold">1.45 ms</span>
+</td>
+<td class="py-2.5 px-3">
+<span class="px-1.5 py-0.5 rounded bg-void-elevated border border-outline-variant text-[9px] text-on-surface-variant font-bold">
+                        NIST SI-3
+                      </span>
+</td>
+<td class="py-2.5 px-3 text-center">
+<div class="flex items-center justify-center gap-1">
+<span class="px-1.5 py-0.5 rounded bg-neon-cyan/15 text-neon-cyan border border-neon-cyan/30 text-[9px] font-extrabold tracking-wider">
+                          QUARANTINED
+                        </span>
+<button class="px-1.5 py-0.5 rounded bg-void-elevated border border-outline-variant text-telemetry-muted hover:text-on-surface text-[9px] transition-all" title="Rollback isolation">
+                          ROLLBACK
+                        </button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-neon-cyan/5 transition-colors group">
+<td class="py-2.5 px-3">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-neon-cyan"></span>
+<span class="font-bold text-neon-cyan">CR-8939-V</span>
+</div>
+<span class="text-[9px] text-telemetry-muted">sha256:6c09a2</span>
+</td>
+<td class="py-2.5 px-3">
+<div class="flex flex-col">
+<span class="text-solar-amber font-bold">10.0.4.12:4840</span>
+<span class="text-[9px] text-telemetry-muted">OPC-UA Session Hijack</span>
+</div>
+</td>
+<td class="py-2.5 px-3">
+<span class="text-telemetry-bright font-bold">OPC-UA Core</span>
+<span class="text-telemetry-muted block text-[10px]">Endpoint #02</span>
+</td>
+<td class="py-2.5 px-3">
+<div class="flex flex-col">
+<span class="px-1.5 py-0.5 rounded bg-void-base border border-neon-cyan/40 text-neon-cyan text-[10px] font-bold w-max">
+                          TCP RST Inject + Revoke Cert
+                        </span>
+<span class="text-[9px] text-telemetry-muted mt-0.5">X.509 CRL broadcast active</span>
+</div>
+</td>
+<td class="py-2.5 px-3 text-right">
+<span class="text-neon-cyan font-bold">0.34 ms</span>
+</td>
+<td class="py-2.5 px-3">
+<span class="px-1.5 py-0.5 rounded bg-void-elevated border border-outline-variant text-[9px] text-on-surface-variant font-bold">
+                        ISO A.9.4.2
+                      </span>
+</td>
+<td class="py-2.5 px-3 text-center">
+<div class="flex items-center justify-center gap-1">
+<span class="px-1.5 py-0.5 rounded bg-neon-emerald/15 text-neon-emerald border border-neon-emerald/30 text-[9px] font-extrabold tracking-wider">
+                          ENFORCED
+                        </span>
+<button class="px-1.5 py-0.5 rounded bg-laser-crimson/10 border border-laser-crimson/40 text-laser-crimson hover:bg-laser-crimson hover:text-white text-[9px] font-bold transition-all" title="Revoke Rule">
+                          REVOKE
+                        </button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="bg-void-base/40 hover:bg-neon-cyan/5 transition-colors group">
+<td class="py-2.5 px-3">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-solar-amber animate-ping"></span>
+<span class="font-bold text-solar-amber">CR-8935-A</span>
+</div>
+<span class="text-[9px] text-telemetry-muted">sha256:14f2e0</span>
+</td>
+<td class="py-2.5 px-3">
+<div class="flex flex-col">
+<span class="text-solar-amber font-bold">ID:0x04 Reg:0x002B</span>
+<span class="text-[9px] text-telemetry-muted">Thermal Overrun Command</span>
+</div>
+</td>
+<td class="py-2.5 px-3">
+<span class="text-solar-amber font-bold">PLC Coil Solenoid</span>
+<span class="text-telemetry-muted block text-[10px]">Actuator #3</span>
+</td>
+<td class="py-2.5 px-3">
+<div class="flex flex-col">
+<span class="px-1.5 py-0.5 rounded bg-void-base border border-solar-amber/50 text-solar-amber text-[10px] font-bold w-max">
+                          Physical Air-Gap Safety Trip
+                        </span>
+<span class="text-[9px] text-solar-amber/80 mt-0.5">Physical mechanical breaker opened</span>
+</div>
+</td>
+<td class="py-2.5 px-3 text-right">
+<span class="text-solar-amber font-bold">16.27 ms</span>
+</td>
+<td class="py-2.5 px-3">
+<span class="px-1.5 py-0.5 rounded bg-solar-amber/20 border border-solar-amber/40 text-[9px] text-solar-amber font-bold">
+                        IEC 62443-4-2 SR 3.1
+                      </span>
+</td>
+<td class="py-2.5 px-3 text-center">
+<div class="flex items-center justify-center gap-1">
+<span class="px-1.5 py-0.5 rounded bg-solar-amber/20 border border-solar-amber/40 text-solar-amber text-[9px] font-extrabold tracking-wider">
+                          TRIPPED SAFE
+                        </span>
+<button class="px-1.5 py-0.5 rounded bg-neon-cyan/15 border border-neon-cyan/40 text-neon-cyan hover:bg-neon-cyan hover:text-black text-[9px] font-bold transition-all" title="Reset Relay">
+                          RESET
+                        </button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Ledger Footer -->
+<div class="flex flex-wrap items-center justify-between gap-2 p-2.5 bg-void-base/80 border-t border-void-border font-label-sm text-[10px] text-telemetry-muted font-mono">
+<div class="flex items-center gap-3">
+<span>SHOWING 4 OF 47 ACTIVE RULES</span>
+<span class="text-outline-variant">|</span>
+<span class="text-neon-cyan">RING0 BPF MAP OVERHEAD: 84.1 KB</span>
+<span class="text-outline-variant">|</span>
+<span class="text-neon-emerald">PACKET LOSS: 0.000%</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="px-2 py-0.5 rounded bg-void-elevated border border-outline-variant text-telemetry-muted hover:text-telemetry-bright font-mono">PREV</button>
+<span class="px-2 py-0.5 text-neon-cyan font-bold font-mono">PAGE 1 / 12</span>
+<button class="px-2 py-0.5 rounded bg-void-elevated border border-outline-variant text-telemetry-muted hover:text-telemetry-bright font-mono">NEXT</button>
+</div>
+</div>
+</div>
+<!-- CARD 2: REAL-TIME SOAR EXECUTION PIPELINE (DAG WATERFALL) -->
+<div class="flex flex-col rounded border border-void-border bg-void-surface/95 p-3.5 shadow-lg hud-bracket">
+<div class="flex flex-wrap items-center justify-between gap-2 pb-2.5 mb-2 border-b border-void-border">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded border border-neon-emerald/40 bg-neon-emerald/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-neon-emerald text-[17px]">account_tree</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-primary font-bold text-[14px]">Active Execution Pipeline (DAG)</span>
+<span class="font-label-sm text-[9px] px-1.5 py-0.2 rounded bg-void-elevated border border-outline-variant text-neon-cyan font-mono">PB-ICS-04: Modbus Safeguard</span>
+</div>
+<span class="font-label-sm text-[10px] text-telemetry-muted">Real-time DAG flow from AI Conformer trigger to eBPF drop, IEC interlock &amp; Merkle ledger</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-neon-emerald/10 border border-neon-emerald/30 font-label-sm text-[10px] font-mono text-neon-emerald">
+<span class="w-1.5 h-1.5 rounded-full bg-neon-emerald animate-pulse"></span>
+<span>PIPELINE NOMINAL // 0 FAULTS</span>
+</div>
+</div>
+<!-- Visual Waterfall Timeline Nodes -->
+<div class="relative w-full overflow-x-auto py-2">
+<div class="min-w-[820px] flex items-center justify-between gap-1 relative font-mono">
+<!-- Node 1 -->
+<div class="flex-1 flex flex-col p-2.5 rounded bg-void-base border border-outline-variant/80 hover:border-neon-cyan transition-colors">
+<div class="flex items-center justify-between text-telemetry-muted mb-1">
+<span class="text-[9px] text-neon-cyan font-bold">NODE 01</span>
+<span class="w-1.5 h-1.5 rounded-full bg-neon-cyan"></span>
+</div>
+<span class="text-[12px] font-bold text-primary">Conformer Trigger</span>
+<span class="text-[10px] text-telemetry-muted mt-0.5">τ &gt; 0.85 Sigmoid</span>
+<div class="mt-2 text-center py-0.5 rounded bg-neon-cyan/15 border border-neon-cyan/30 text-neon-cyan font-bold text-[10px]">
+                    PASS: 0.941
+                  </div>
+<span class="text-[9px] text-telemetry-muted mt-1 text-right">t: +0.00 ms</span>
+</div>
+<!-- Connector Arrow -->
+<div class="w-5 flex items-center justify-center text-neon-cyan/60">
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+<!-- Node 2 -->
+<div class="flex-1 flex flex-col p-2.5 rounded bg-void-base border border-outline-variant/80 hover:border-neon-cyan transition-colors">
+<div class="flex items-center justify-between text-telemetry-muted mb-1">
+<span class="text-[9px] text-neon-cyan font-bold">NODE 02</span>
+<span class="w-1.5 h-1.5 rounded-full bg-neon-cyan"></span>
+</div>
+<span class="text-[12px] font-bold text-primary">Saliency Gate</span>
+<span class="text-[10px] text-telemetry-muted mt-0.5">Feature #01 FC16</span>
+<div class="mt-2 text-center py-0.5 rounded bg-neon-cyan/15 border border-neon-cyan/30 text-neon-cyan font-bold text-[10px]">
+                    SALIENCY: 0.88
+                  </div>
+<span class="text-[9px] text-telemetry-muted mt-1 text-right">t: +1.12 ms</span>
+</div>
+<!-- Connector Arrow -->
+<div class="w-5 flex items-center justify-center text-neon-cyan/60">
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+<!-- Node 3 -->
+<div class="flex-1 flex flex-col p-2.5 rounded bg-void-base border border-outline-variant/80 hover:border-neon-cyan transition-colors">
+<div class="flex items-center justify-between text-telemetry-muted mb-1">
+<span class="text-[9px] text-neon-cyan font-bold">NODE 03</span>
+<span class="w-1.5 h-1.5 rounded-full bg-neon-cyan"></span>
+</div>
+<span class="text-[12px] font-bold text-primary">Policy Arbiter</span>
+<span class="text-[10px] text-telemetry-muted mt-0.5">SOAR Rule-04</span>
+<div class="mt-2 text-center py-0.5 rounded bg-void-elevated border border-outline-variant text-neon-emerald font-bold text-[10px]">
+                    SPLIT ROUTE
+                  </div>
+<span class="text-[9px] text-telemetry-muted mt-1 text-right">t: +2.05 ms</span>
+</div>
+<!-- Connector Arrow -->
+<div class="w-5 flex items-center justify-center text-neon-cyan/60">
+<span class="material-symbols-outlined text-[16px]">alt_route</span>
+</div>
+<!-- Node 4 (Split Node) -->
+<div class="flex-[1.5] flex flex-col p-2.5 rounded bg-void-base border border-solar-amber/50 hover:border-solar-amber transition-colors">
+<div class="flex items-center justify-between text-telemetry-muted mb-1">
+<span class="text-[9px] text-solar-amber font-bold">NODE 04 (DUAL CONTAINMENT)</span>
+<span class="w-1.5 h-1.5 rounded-full bg-solar-amber animate-pulse"></span>
+</div>
+<div class="flex flex-col gap-1 mt-1">
+<div class="px-2 py-0.5 rounded bg-void-elevated border border-neon-cyan/30 flex items-center justify-between text-[10px]">
+<span class="text-neon-cyan font-bold">Branch A: eBPF XDP</span>
+<span class="text-neon-emerald font-bold">0.08 ms ✓</span>
+</div>
+<div class="px-2 py-0.5 rounded bg-solar-amber/15 border border-solar-amber/40 flex items-center justify-between text-[10px]">
+<span class="text-solar-amber font-bold">Branch B: IEC Breaker</span>
+<span class="text-solar-amber animate-pulse font-bold">WAITING 4-EYES</span>
+</div>
+</div>
+<span class="text-[9px] text-telemetry-muted mt-1 text-right">t: +2.13 ms</span>
+</div>
+<!-- Connector Arrow -->
+<div class="w-5 flex items-center justify-center text-neon-cyan/60">
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+<!-- Node 5 -->
+<div class="flex-1 flex flex-col p-2.5 rounded bg-void-base border border-neon-emerald/50 hover:border-neon-emerald transition-colors">
+<div class="flex items-center justify-between text-telemetry-muted mb-1">
+<span class="text-[9px] text-neon-emerald font-bold">NODE 05</span>
+<span class="w-1.5 h-1.5 rounded-full bg-neon-emerald"></span>
+</div>
+<span class="text-[12px] font-bold text-primary">Merkle Ledger</span>
+<span class="text-[10px] text-telemetry-muted mt-0.5">SHA-256 #8fa1..d4</span>
+<div class="mt-2 text-center py-0.5 rounded bg-neon-emerald/15 border border-neon-emerald/30 text-neon-emerald font-bold text-[10px]">
+                    COMMITTED
+                  </div>
+<span class="text-[9px] text-telemetry-muted mt-1 text-right">t: +16.27 ms</span>
+</div>
+</div>
+</div>
+<!-- Jitter & Precision Footer Bar -->
+<div class="flex flex-wrap items-center justify-between gap-2 mt-2 pt-2 border-t border-void-border font-label-sm text-[10px] text-telemetry-muted font-mono">
+<div class="flex items-center gap-3">
+<span>TRIGGER JITTER: <strong class="text-neon-cyan">± 0.004 ms</strong></span>
+<span class="text-outline-variant">•</span>
+<span>CONFIDENCE SCORE: <strong class="text-neon-emerald">99.82%</strong></span>
+<span class="text-outline-variant">•</span>
+<span>KERNEL PATH: <strong class="text-telemetry-bright">veth0 -&gt; xdp_drop_func()</strong></span>
+</div>
+<div class="flex items-center gap-1.5 text-neon-cyan">
+<span class="material-symbols-outlined text-[14px]">sync_alt</span>
+<span>RFC-5424 AUDIT STREAM ACTIVE</span>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: IEC INTERLOCK & HOST HUD (Col 4) -->
+<div class="lg:col-span-4 flex flex-col gap-3.5">
+<!-- CARD 3: IEC 62443 FOUR-EYES AIR-GAP HARDWARE INTERLOCK -->
+<div class="flex flex-col rounded border border-solar-amber/40 bg-void-surface/95 p-3.5 shadow-lg relative overflow-hidden hud-bracket">
+<!-- Caution striping -->
+<div class="h-1 bg-gradient-to-r from-solar-amber via-void-base to-solar-amber rounded-t mb-2.5"></div>
+<div class="flex items-center justify-between pb-2 border-b border-void-border">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded border border-solar-amber/60 bg-solar-amber/15 flex items-center justify-center">
+<span class="material-symbols-outlined text-solar-amber text-[17px]">lock</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-solar-amber font-bold text-[14px] leading-tight">IEC 62443 Interlock Panel</span>
+<span class="font-label-sm text-[9px] text-telemetry-muted font-mono">PHYSICAL AIR-GAP BREAKER CONTROLLER</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-solar-amber/20 border border-solar-amber text-solar-amber font-label-sm text-[9px] font-extrabold tracking-wider animate-pulse font-mono">
+                INTERLOCK LATCHED
+              </span>
+</div>
+<!-- Interlock Description -->
+<div class="p-2 rounded bg-void-base border border-outline-variant/60 my-2.5">
+<p class="font-body-sm text-[11px] text-telemetry-bright leading-relaxed">
+                Physical air-gap solenoid tripping on <strong class="text-solar-amber font-mono">PLC Coil Actuator #3</strong> requires dual-custody authorization (Four-Eyes Principle, SR 3.1) to isolate cyber threat without triggering secondary process runaway.
+              </p>
+</div>
+<!-- Countdown Bar -->
+<div class="flex flex-col p-2.5 rounded bg-void-base border border-solar-amber/30 mb-2.5">
+<div class="flex items-center justify-between text-telemetry-muted font-label-sm text-[10px] font-mono mb-1">
+<span>SAFETY BUFFER EXPIRATION</span>
+<span class="text-solar-amber font-bold">00:24.8 remaining</span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-void-elevated overflow-hidden border border-outline-variant/50">
+<div class="h-full bg-solar-amber rounded-full w-3/5 shadow-[0_0_8px_rgba(255,183,0,0.6)]"></div>
+</div>
+<span class="font-label-sm text-[9px] text-telemetry-muted mt-1 font-mono">Default fail-safe: Breaker unlatches safely at 00:00.0</span>
+</div>
+<!-- Dual Signer Status -->
+<div class="flex flex-col gap-1.5 mb-3 font-mono">
+<!-- Signer 1: AI Conformer Core -->
+<div class="flex items-center justify-between p-2 rounded bg-void-base border border-neon-emerald/30">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-neon-emerald text-[16px]">smart_toy</span>
+<div class="flex flex-col">
+<span class="text-[11px] text-neon-emerald font-bold">Signer 1: Sentinel AI Core</span>
+<span class="text-[9px] text-telemetry-muted">Conformer Signature (τ = 0.941)</span>
+</div>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-neon-emerald/20 text-neon-emerald text-[9px] font-bold border border-neon-emerald/40 flex items-center gap-1">
+<span class="material-symbols-outlined text-[11px]">check</span> VERIFIED
+                </span>
+</div>
+<!-- Signer 2: Human Operator Token -->
+<div class="flex items-center justify-between p-2 rounded bg-void-base border border-solar-amber/40 shadow-[0_0_10px_rgba(255,183,0,0.1)]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-solar-amber text-[16px]">person</span>
+<div class="flex flex-col">
+<span class="text-[11px] text-solar-amber font-bold">Signer 2: Plant Safety Officer</span>
+<span class="text-[9px] text-telemetry-muted">Ed25519 Cryptographic Token</span>
+</div>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-solar-amber/20 text-solar-amber text-[9px] font-bold border border-solar-amber/40 flex items-center gap-1 animate-pulse">
+                  PENDING AUTH
+                </span>
+</div>
+</div>
+<!-- Auth Input and Abort Controls -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center gap-1.5">
+<div class="flex-1 flex items-center px-2 py-1.5 rounded bg-void-base border border-outline-variant font-mono">
+<span class="material-symbols-outlined text-telemetry-muted text-[15px] mr-1">badge</span>
+<input class="w-full bg-transparent text-[11px] text-neon-cyan focus:outline-none placeholder:text-telemetry-muted font-mono" placeholder="INSERT TOKEN ID / BADGE..." type="text" value="OPERATOR-SEC-091"/>
+</div>
+<button class="px-3 py-1.5 rounded bg-neon-emerald/20 border border-neon-emerald text-neon-emerald hover:bg-neon-emerald hover:text-black font-label-sm text-[11px] font-bold transition-all shadow-[0_0_10px_rgba(0,255,102,0.3)] whitespace-nowrap font-mono" type="button">
+                  SIGN &amp; TRIP
+                </button>
+</div>
+<button class="w-full flex items-center justify-center gap-1.5 py-1.5 rounded bg-laser-crimson/15 border border-laser-crimson text-laser-crimson hover:bg-laser-crimson hover:text-white font-label-sm text-[11px] font-bold shadow-[0_0_10px_rgba(255,42,95,0.25)] transition-all font-mono" type="button">
+<span class="material-symbols-outlined text-[15px]">cancel</span>
+<span>ABORT TRIP &amp; KEEP ISOLATED IN KERNEL</span>
+</button>
+</div>
+</div>
+<!-- CARD 4: HOST OS PROCESS & eBPF HOOK HUD -->
+<div class="flex flex-col rounded border border-void-border bg-void-surface/95 p-3.5 shadow-lg hud-bracket">
+<div class="flex items-center justify-between pb-2 border-b border-void-border">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded border border-neon-cyan/40 bg-neon-cyan/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-neon-cyan text-[17px]">memory</span>
+</div>
+<div>
+<span class="font-headline-md text-primary font-bold text-[14px]">Host Kernel &amp; eBPF HUD</span>
+<span class="font-label-sm text-[9px] text-telemetry-muted block font-mono">Linux RT-Kernel 6.1.42-rt18 // Node #04</span>
+</div>
+</div>
+<span class="font-label-sm text-[9px] text-neon-cyan font-mono bg-void-elevated border border-outline-variant px-1.5 py-0.5 rounded">
+                cgroup-v2
+              </span>
+</div>
+<!-- Mini Telemetry Gauges -->
+<div class="grid grid-cols-3 gap-1.5 my-2.5 font-mono">
+<div class="flex flex-col p-2 rounded bg-void-base border border-void-border">
+<span class="font-label-sm text-[9px] text-telemetry-muted">CPU QUOTA</span>
+<span class="text-neon-cyan text-[15px] font-bold">24.2%</span>
+<div class="w-full h-1 bg-void-elevated rounded mt-1 overflow-hidden">
+<div class="h-full bg-neon-cyan w-1/4 rounded"></div>
+</div>
+</div>
+<div class="flex flex-col p-2 rounded bg-void-base border border-void-border">
+<span class="font-label-sm text-[9px] text-telemetry-muted">CGROUP RAM</span>
+<span class="text-primary text-[15px] font-bold">1.42 GB</span>
+<div class="w-full h-1 bg-void-elevated rounded mt-1 overflow-hidden">
+<div class="h-full bg-neon-emerald w-1/3 rounded"></div>
+</div>
+</div>
+<div class="flex flex-col p-2 rounded bg-void-base border border-void-border">
+<span class="font-label-sm text-[9px] text-telemetry-muted">eBPF PROGS</span>
+<span class="text-neon-emerald text-[15px] font-bold">14 HOOKS</span>
+<div class="w-full h-1 bg-void-elevated rounded mt-1 overflow-hidden">
+<div class="h-full bg-neon-emerald w-full rounded"></div>
+</div>
+</div>
+</div>
+<!-- Monitored Processes Table -->
+<div class="overflow-x-auto mb-2.5">
+<table class="w-full text-left font-mono text-[10px]">
+<thead>
+<tr class="bg-void-base text-telemetry-muted uppercase border-b border-void-border">
+<th class="py-1 px-2">PID</th>
+<th class="py-1 px-2">PROCESS</th>
+<th class="py-1 px-2">CGROUP STATE</th>
+<th class="py-1 px-2 text-right">MEM</th>
+<th class="py-1 px-2 text-center">FLAG</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-void-border">
+<tr class="bg-laser-crimson/5">
+<td class="py-1.5 px-2 text-laser-crimson font-bold">4921</td>
+<td class="py-1.5 px-2 text-primary font-bold">modbus_poller</td>
+<td class="py-1.5 px-2 text-laser-crimson">FROZEN (cgroup)</td>
+<td class="py-1.5 px-2 text-right text-telemetry-muted">48.2 MB</td>
+<td class="py-1.5 px-2 text-center"><span class="px-1 py-0.2 rounded bg-laser-crimson text-white font-bold text-[9px]">LOCKED</span></td>
+</tr>
+<tr>
+<td class="py-1.5 px-2 text-neon-cyan">1024</td>
+<td class="py-1.5 px-2 text-telemetry-bright">wazuh-agent</td>
+<td class="py-1.5 px-2 text-neon-emerald">RUNNING</td>
+<td class="py-1.5 px-2 text-right text-telemetry-muted">112.4 MB</td>
+<td class="py-1.5 px-2 text-center"><span class="text-telemetry-muted">OK</span></td>
+</tr>
+<tr>
+<td class="py-1.5 px-2 text-neon-cyan">884</td>
+<td class="py-1.5 px-2 text-telemetry-bright">s7comm_daemon</td>
+<td class="py-1.5 px-2 text-neon-emerald">RUNNING</td>
+<td class="py-1.5 px-2 text-right text-telemetry-muted">34.1 MB</td>
+<td class="py-1.5 px-2 text-center"><span class="text-telemetry-muted">OK</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Live Tail Log Stream -->
+<div class="flex flex-col rounded bg-void-base border border-void-border p-2 font-mono">
+<div class="flex items-center justify-between text-telemetry-muted mb-1 text-[9px] border-b border-void-border pb-1">
+<span class="flex items-center gap-1.5 text-neon-cyan">
+<span class="w-1.5 h-1.5 rounded-full bg-neon-cyan animate-pulse"></span>
+                  CONTAINMENT_DAEMON.LOG (TAIL -F)
+                </span>
+<span class="text-telemetry-muted">14:22:09.412</span>
+</div>
+<div class="space-y-0.5 text-[10px] text-telemetry-muted max-h-28 overflow-y-auto">
+<div><span class="text-telemetry-muted">[14:22:07]</span> <span class="text-neon-cyan">sysfs:</span> /sys/fs/cgroup/scada.freeze &lt;- 1 <span class="text-neon-emerald">(SUCCESS)</span></div>
+<div><span class="text-telemetry-muted">[14:22:08]</span> <span class="text-neon-emerald">ebpf:</span> attached xdp_drop prog_id:812 to eth0</div>
+<div><span class="text-telemetry-muted">[14:22:08]</span> <span class="text-solar-amber">wazuh-ar:</span> active-response: drop 192.168.100.45</div>
+<div><span class="text-telemetry-muted">[14:22:09]</span> <span class="text-neon-cyan">merkle:</span> block #94119 signed ed25519 (16.27ms)</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- PERSISTENT HUD BOTTOM TACTICAL NAVIGATION DOCK -->
+<div class="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-[96%] max-w-6xl">
+<div class="bg-[#060a0f]/95 backdrop-blur-xl rounded border border-void-border p-1.5 shadow-[0_0_30px_rgba(0,0,0,0.8)] flex flex-wrap items-center justify-between gap-2">
+<!-- Main Nav links with REMEDIATION glowing active in neon-cyan -->
+<nav class="flex items-center gap-1 overflow-x-auto py-0.5 font-label-md text-[11px] font-mono">
+<a class="px-3 py-1.5 rounded text-telemetry-muted hover:text-telemetry-bright hover:bg-void-elevated transition-colors whitespace-nowrap" data-path="overview" href="#">OVERVIEW</a>
+<a class="px-3 py-1.5 rounded text-telemetry-muted hover:text-telemetry-bright hover:bg-void-elevated transition-colors whitespace-nowrap" data-path="threat-lab" href="#">THREAT LAB</a>
+<a class="px-3 py-1.5 rounded text-telemetry-muted hover:text-telemetry-bright hover:bg-void-elevated transition-colors whitespace-nowrap" data-path="xai-engine" href="#">XAI ENGINE</a>
+<a class="px-3 py-1.5 rounded text-telemetry-muted hover:text-telemetry-bright hover:bg-void-elevated transition-colors whitespace-nowrap" data-path="adversarial" href="#">ADVERSARIAL</a>
+<a class="px-3 py-1.5 rounded bg-neon-cyan/20 border border-neon-cyan text-neon-cyan font-bold whitespace-nowrap shadow-[0_0_12px_rgba(0,240,255,0.4)] transition-all" data-path="remediation" href="#">REMEDIATION</a>
+<a class="px-3 py-1.5 rounded text-telemetry-muted hover:text-telemetry-bright hover:bg-void-elevated transition-colors whitespace-nowrap" data-path="compliance" href="#">COMPLIANCE</a>
+</nav>
+<!-- Tactical quick links -->
+<div class="flex items-center gap-1.5 font-label-sm text-[10px] font-mono">
+<a class="px-2.5 py-1 rounded bg-void-base border border-outline-variant text-telemetry-muted hover:text-neon-cyan whitespace-nowrap transition-colors" data-path="execute" href="#">EXECUTE PCB</a>
+<a class="px-2.5 py-1 rounded bg-void-base border border-outline-variant text-telemetry-muted hover:text-neon-cyan whitespace-nowrap transition-colors" data-path="live-sniffer" href="#">SNIFFER</a>
+<a class="px-3 py-1 rounded bg-neon-emerald/20 border border-neon-emerald text-neon-emerald hover:bg-neon-emerald hover:text-black font-bold whitespace-nowrap shadow-[0_0_10px_rgba(0,255,102,0.25)] transition-all" data-path="agentic-soc" href="#">AGENTIC SOC</a>
+</div>
+</div>
+</div>
+<script>
+    // Ledger and Playbook tab switching logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const btnLedger = document.getElementById('view-ledger-btn');
+      const btnPlaybook = document.getElementById('view-playbook-btn');
+
+      if (btnLedger && btnPlaybook) {
+        btnLedger.addEventListener('click', () => {
+          btnLedger.className = "flex items-center gap-1.5 px-3 py-1 rounded bg-neon-cyan/20 border border-neon-cyan text-neon-cyan font-label-md text-[11px] font-bold shadow-[0_0_10px_rgba(0,240,255,0.3)] transition-all";
+          btnPlaybook.className = "flex items-center gap-1.5 px-3 py-1 rounded text-telemetry-muted hover:text-telemetry-bright font-label-md text-[11px] transition-all";
+        });
+
+        btnPlaybook.addEventListener('click', () => {
+          btnPlaybook.className = "flex items-center gap-1.5 px-3 py-1 rounded bg-neon-emerald/20 border border-neon-emerald text-neon-emerald font-label-md text-[11px] font-bold shadow-[0_0_10px_rgba(0,255,102,0.3)] transition-all";
+          btnLedger.className = "flex items-center gap-1.5 px-3 py-1 rounded text-telemetry-muted hover:text-telemetry-bright font-label-md text-[11px] transition-all";
+        });
+      }
+    });
+  </script>
+</body></html>

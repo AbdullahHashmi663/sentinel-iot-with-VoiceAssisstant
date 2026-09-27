@@ -1,5 +1,5 @@
 // ==============================================================================
-// CONSOLE 1: EXECUTIVE OVERVIEW & COMMAND CENTER (SECTION 5.2)
+// CONSOLE 1: EXECUTIVE OVERVIEW & COMMAND CENTER (STITCH FUTURISTIC HUD)
 // Version 2.4 - Enterprise Production Edition - FYP-II
 // ==============================================================================
 
@@ -17,17 +17,19 @@ import {
   Cpu,
   Layers,
   CheckCircle2,
-  XCircle,
   ExternalLink,
   Radio,
   BrainCircuit,
   Workflow,
-  Sparkles
+  Sparkles,
+  Lock,
+  Flame
 } from "lucide-react";
 import { useTelemetryStore } from "@/store/useTelemetryStore";
 
 export default function OverviewConsole() {
   const {
+    theme,
     events,
     latestEvent,
     ingestionVelocity,
@@ -38,9 +40,10 @@ export default function OverviewConsole() {
     setActiveConsole,
     startInterlockCountdown,
     openPacketSniffer,
-    openAgenticSoc,
-    openSoarBuilder
+    openAgenticSoc
   } = useTelemetryStore();
+
+  const isLightMode = theme === "alabaster" || theme === "arctic" || theme === "light";
 
   // --------------------------------------------------------------------------
   // FIVE-SPOKE RADAR PLOT CALCULATIONS (NIST SP 800-53)
@@ -72,215 +75,356 @@ export default function OverviewConsole() {
   }, [radarPoints]);
 
   return (
-    <div className="space-y-8">
-      
-      {/* 1. TOP KPI RIBBON (SECTION 5.2 - IN-DEPTH GLASSMORPHIC) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {/* Active Protected Nodes */}
-        <div className="cyber-card glass-panel-deep relative overflow-hidden p-6 flex items-center justify-between border-l-4 border-l-[var(--brand-cyan)] group transition-all">
-          <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[var(--brand-cyan)]/70 to-transparent pointer-events-none" />
-          <div className="space-y-1">
-            <span className="text-[11px] font-['JetBrains_Mono'] text-[var(--text-secondary)] uppercase tracking-wider">
-              Protected Fleet Nodes
+    <div className="space-y-4">
+      {/* 1. METADATA SUB-BAR */}
+      <div
+        className={`flex flex-wrap items-center justify-between gap-2 px-3.5 py-1.5 rounded font-mono text-[11px] shadow-sm border transition-colors ${
+          isLightMode
+            ? "bg-[#eef0f2] border-[#daddd8] text-[#1c1c1c]"
+            : "bg-[#070d14]/90 border-[#162536] text-[#dee3eb]"
+        }`}
+      >
+        <div className="flex items-center gap-3 flex-wrap">
+          <div className="flex items-center gap-1.5">
+            <span
+              className={`w-2 h-2 rounded-full ${
+                isLightMode ? "bg-[#0284c7] animate-ping" : "bg-[#00f0ff] animate-ping"
+              }`}
+            />
+            <span
+              className={`font-bold tracking-wider ${
+                isLightMode ? "text-[#0284c7]" : "text-[#00f0ff] text-glow-cyan"
+              }`}
+            >
+              DEFCON 4 // ACTIVE SYNCHRONY
             </span>
-            <div className="text-3xl font-black font-['Orbitron'] text-[var(--text-primary)]">
-              {activeProtectedNodesCount}/13 <span className="text-xs text-[var(--alert-nominal)] font-normal ml-1">ONLINE</span>
-            </div>
-            <div className="text-[10px] font-['JetBrains_Mono'] text-[var(--brand-cyan)] flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-cyan)] animate-pulse" />
-              100% Industrial Coverage
-            </div>
           </div>
-          <div className="p-3.5 rounded-2xl glass-inset border border-[var(--brand-cyan)]/30 text-[var(--brand-cyan)] shadow-[0_0_20px_rgba(6,182,212,0.25)]">
-            <Server className="w-6 h-6" />
+          <span className={isLightMode ? "text-[#daddd8]" : "text-[#162536]"}>/</span>
+          <div className={`flex items-center gap-1 ${isLightMode ? "text-[#525252]" : "text-[#64748b]"}`}>
+            <span>SECTOR:</span>
+            <span className={isLightMode ? "text-[#0284c7] font-bold" : "text-[#00f0ff] font-bold"}>
+              DISTRIBUTED SCADA CELL #7
+            </span>
+          </div>
+          <span className={isLightMode ? "text-[#daddd8]" : "text-[#162536]"}>/</span>
+          <div className={`flex items-center gap-1 ${isLightMode ? "text-[#525252]" : "text-[#64748b]"}`}>
+            <span>SHM PIPELINE:</span>
+            <span className={isLightMode ? "text-[#059669] font-bold" : "text-[#00ff66] font-bold"}>
+              ring_buffer_0: OK (0.00% drop)
+            </span>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className={isLightMode ? "text-[#525252]" : "text-[#64748b]"}>INFERENCE ENGINE:</span>
+          <span
+            className={`px-2 py-0.5 rounded border font-bold ${
+              isLightMode
+                ? "bg-[#fafaff] text-[#0284c7] border-[#daddd8]"
+                : "bg-[#0b131e] text-[#00f0ff] border-[#162536]"
+            }`}
+          >
+            CONFORMER DUAL-CORE [FP16]
+          </span>
+        </div>
+      </div>
+
+      {/* 2. TOP 5 KPI TELEMETRY RIBBON */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+        {/* Card 1: Protected Nodes */}
+        <div className="hud-box p-3.5 rounded flex flex-col justify-between relative overflow-hidden group">
+          <span className="hud-corner-tr">┐</span>
+          <span className="hud-corner-bl">└</span>
+          <div className="flex items-center justify-between">
+            <span className="font-mono text-[10px] text-[#64748b] uppercase tracking-wider">
+              Protected IoT/OT Nodes
+            </span>
+            <Server className="w-4 h-4 text-[#00f0ff]" />
+          </div>
+          <div className="mt-2 flex items-baseline justify-between font-mono">
+            <div className="text-2xl font-bold text-white text-glow-cyan font-['Orbitron']">
+              {activeProtectedNodesCount}/13
+            </div>
+            <span className="text-[10px] text-[#00ff66] bg-[#00ff66]/10 border border-[#00ff66]/30 px-1.5 py-0.5 rounded font-bold">
+              ONLINE
+            </span>
+          </div>
+          <div className="mt-2 flex items-center gap-1 pt-1 border-t border-[#162536]">
+            {Array.from({ length: 13 }).map((_, i) => (
+              <span
+                key={i}
+                className="w-1.5 h-1.5 rounded-full bg-[#00ff66] shadow-[0_0_5px_#00ff66] animate-pulse"
+                style={{ animationDelay: `${i * 120}ms` }}
+              />
+            ))}
           </div>
         </div>
 
-        {/* Ingestion Velocity */}
-        <div className="cyber-card glass-panel-deep relative overflow-hidden p-6 flex items-center justify-between border-l-4 border-l-[var(--brand-primary)] group transition-all">
-          <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[var(--brand-primary)]/70 to-transparent pointer-events-none" />
-          <div className="space-y-1">
-            <span className="text-[11px] font-['JetBrains_Mono'] text-[var(--text-secondary)] uppercase tracking-wider">
+        {/* Card 2: Ingestion Velocity */}
+        <div className="hud-box p-3.5 rounded flex flex-col justify-between relative overflow-hidden group">
+          <span className="hud-corner-tr">┐</span>
+          <span className="hud-corner-bl">└</span>
+          <div className="flex items-center justify-between">
+            <span className="font-mono text-[10px] text-[#64748b] uppercase tracking-wider">
               Ingestion Velocity
             </span>
-            <div className="text-3xl font-black font-['Orbitron'] text-[var(--brand-primary)]">
-              {ingestionVelocity.toLocaleString()} <span className="text-xs text-[var(--text-muted)] font-normal ml-1">EVT/S</span>
-            </div>
-            <div className="text-[10px] font-['JetBrains_Mono'] text-[var(--text-muted)]">
-              Sub-25ms WebSocket Stream
-            </div>
+            <Zap className="w-4 h-4 text-[#00f0ff]" />
           </div>
-          <div className="p-3.5 rounded-2xl glass-inset border border-[var(--brand-primary)]/30 text-[var(--brand-primary)] shadow-[0_0_20px_rgba(2,132,199,0.25)]">
-            <Zap className="w-6 h-6" />
+          <div className="mt-2 flex items-baseline justify-between font-mono">
+            <div className="text-2xl font-bold text-[#00f0ff] font-['Orbitron']">
+              {ingestionVelocity.toLocaleString()}
+            </div>
+            <span className="text-[10px] text-[#00f0ff] font-bold">EVT/S</span>
+          </div>
+          <div className="mt-2 h-5 w-full flex items-center">
+            <svg className="w-full h-full text-[#00f0ff]" fill="none" viewBox="0 0 160 28" preserveAspectRatio="none">
+              <path d="M0,18 L15,14 L30,22 L45,10 L60,16 L75,6 L90,19 L105,12 L120,24 L135,8 L150,15 L160,11" stroke="currentColor" strokeWidth="1.8" />
+              <path d="M0,18 L15,14 L30,22 L45,10 L60,16 L75,6 L90,19 L105,12 L120,24 L135,8 L150,15 L160,11 L160,28 L0,28 Z" fill="currentColor" fillOpacity="0.12" />
+            </svg>
           </div>
         </div>
 
-        {/* Threats Contained */}
-        <div className="cyber-card glass-panel-deep relative overflow-hidden p-6 flex items-center justify-between border-l-4 border-l-[var(--alert-critical)] group transition-all">
-          <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[var(--alert-critical)]/70 to-transparent pointer-events-none" />
-          <div className="space-y-1">
-            <span className="text-[11px] font-['JetBrains_Mono'] text-[var(--text-secondary)] uppercase tracking-wider">
+        {/* Card 3: Threats Contained */}
+        <div className="hud-box p-3.5 rounded flex flex-col justify-between relative overflow-hidden group">
+          <span className="hud-corner-tr">┐</span>
+          <span className="hud-corner-bl">└</span>
+          <div className="flex items-center justify-between">
+            <span className="font-mono text-[10px] text-[#64748b] uppercase tracking-wider">
               Autonomous Blocks
             </span>
-            <div className="text-3xl font-black font-['Orbitron'] text-[var(--alert-critical)]">
-              {threatsContainedCount} <span className="text-xs text-[var(--alert-critical)] font-normal ml-1">MITIGATED</span>
-            </div>
-            <div className="text-[10px] font-['JetBrains_Mono'] text-[var(--alert-critical)]">
-              Zero Human Delay (MTTR {mttrCurrentMs}ms)
-            </div>
+            <ShieldCheck className="w-4 h-4 text-[#ff2a5f]" />
           </div>
-          <div className="p-3.5 rounded-2xl glass-inset border border-[var(--alert-critical)]/30 text-[var(--alert-critical)] shadow-[0_0_20px_rgba(239,68,68,0.25)]">
-            <ShieldCheck className="w-6 h-6" />
+          <div className="mt-2 flex items-baseline justify-between font-mono">
+            <div className="text-2xl font-bold text-[#ff2a5f] font-['Orbitron']">
+              {threatsContainedCount}
+            </div>
+            <span className="text-[10px] text-[#ff2a5f] bg-[#ff2a5f]/10 border border-[#ff2a5f]/30 px-1.5 py-0.5 rounded font-bold">
+              CONTAINED
+            </span>
+          </div>
+          <div className="mt-2 flex items-center justify-between text-[10px] font-mono text-[#64748b] pt-1 border-t border-[#162536]">
+            <span>AUTONOMOUS MTTR</span>
+            <span className="text-[#00f0ff] font-bold">{mttrCurrentMs.toFixed(1)} ms</span>
           </div>
         </div>
 
-        {/* NIST CSF Score */}
-        <div className="cyber-card glass-panel-deep relative overflow-hidden p-6 flex items-center justify-between border-l-4 border-l-[var(--alert-nominal)] group transition-all">
-          <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[var(--alert-nominal)]/70 to-transparent pointer-events-none" />
-          <div className="space-y-1">
-            <span className="text-[11px] font-['JetBrains_Mono'] text-[var(--text-secondary)] uppercase tracking-wider">
-              NIST CSF 2.0 Score
+        {/* Card 4: NIST CSF 2.0 Posture */}
+        <div className="hud-box p-3.5 rounded flex flex-col justify-between relative overflow-hidden group">
+          <span className="hud-corner-tr">┐</span>
+          <span className="hud-corner-bl">└</span>
+          <div className="flex items-center justify-between">
+            <span className="font-mono text-[10px] text-[#64748b] uppercase tracking-wider">
+              NIST CSF Posture
             </span>
-            <div className="text-3xl font-black font-['Orbitron'] text-[var(--alert-nominal)]">
-              {nistCsfScore}% <span className="text-xs text-[var(--alert-nominal)] font-normal ml-1">AUDITED</span>
-            </div>
-            <div className="text-[10px] font-['JetBrains_Mono'] text-[var(--alert-nominal)]">
-              Continuous Cryptographic AU-9
-            </div>
+            <Award className="w-4 h-4 text-[#00ff66]" />
           </div>
-          <div className="p-3.5 rounded-2xl glass-inset border border-[var(--alert-nominal)]/30 text-[var(--alert-nominal)] shadow-[0_0_20px_rgba(16,185,129,0.25)]">
-            <Award className="w-6 h-6" />
+          <div className="mt-2 flex items-baseline justify-between font-mono">
+            <div className="text-2xl font-bold text-[#00ff66] font-['Orbitron']">
+              {nistCsfScore}%
+            </div>
+            <span className="text-[10px] text-[#00ff66] bg-[#00ff66]/10 border border-[#00ff66]/30 px-1.5 py-0.5 rounded font-bold">
+              TIER 4 ADAPTIVE
+            </span>
+          </div>
+          <div className="mt-2 w-full bg-[#162536] rounded-full h-1.5 overflow-hidden">
+            <div
+              className="bg-[#00ff66] h-full rounded-full shadow-[0_0_8px_#00ff66] transition-all duration-500"
+              style={{ width: `${nistCsfScore}%` }}
+            />
+          </div>
+        </div>
+
+        {/* Card 5: eBPF XDP Line-Rate Drop */}
+        <div className="hud-box p-3.5 rounded flex flex-col justify-between relative overflow-hidden group">
+          <span className="hud-corner-tr">┐</span>
+          <span className="hud-corner-bl">└</span>
+          <div className="flex items-center justify-between">
+            <span className="font-mono text-[10px] text-[#64748b] uppercase tracking-wider">
+              eBPF Mitigation
+            </span>
+            <Activity className="w-4 h-4 text-[#00f0ff]" />
+          </div>
+          <div className="mt-2 flex items-baseline justify-between font-mono">
+            <div className="text-2xl font-bold text-[#00f0ff] font-['Orbitron']">
+              0.082 <span className="text-xs font-normal">ms</span>
+            </div>
+            <span className="text-[10px] text-[#00ff66] bg-[#00ff66]/10 border border-[#00ff66]/30 px-1.5 py-0.5 rounded font-bold">
+              LINE-RATE
+            </span>
+          </div>
+          <div className="mt-2 flex items-center justify-between text-[10px] font-mono text-[#64748b] pt-1 border-t border-[#162536]">
+            <span>KERNEL HOOK</span>
+            <span className="text-[#00ff66] font-bold">xdp_drop on eth0</span>
           </div>
         </div>
       </div>
 
-      {/* 2. MIDDLE ROW: BLAST RADIUS TOPOLOGY & NIST 5-SPOKE RADAR */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        
-        {/* BLAST RADIUS & LATERAL PROVENANCE GRAPH (7 COLS) */}
-        <div className="lg:col-span-7 cyber-card glass-panel-deep relative overflow-hidden p-6 space-y-4">
-          <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[var(--brand-cyan)]/60 to-transparent pointer-events-none" />
-          <div className="flex items-center justify-between border-b border-white/10 pb-3">
+      {/* 3. MIDDLE ROW: BLAST RADIUS TOPOLOGY & NIST RADAR (7 / 5) */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+        {/* BLAST RADIUS & PROVENANCE TOPOLOGY (7 COLS) */}
+        <div className="lg:col-span-7 hud-box p-4 rounded flex flex-col justify-between">
+          <span className="hud-corner-tr">┐</span>
+          <span className="hud-corner-bl">└</span>
+          <div className="flex items-center justify-between border-b border-[#162536] pb-2 mb-2 font-mono">
             <div className="flex items-center gap-2">
-              <Network className="w-4 h-4 text-[var(--brand-cyan)]" />
-              <h3 className="font-['Orbitron'] font-bold text-xs uppercase text-[var(--text-primary)]">
-                Blast Radius & Lateral Provenance Topology
+              <span className="w-1.5 h-3.5 bg-[#00f0ff] glow-cyan" />
+              <h3 className="font-['Orbitron'] font-bold text-xs uppercase text-white tracking-wide">
+                BLAST RADIUS &amp; LATERAL PROVENANCE TOPOLOGY
               </h3>
             </div>
-            <span className="glass-pill px-3 py-1 text-[10px] font-['JetBrains_Mono'] font-bold text-[var(--alert-critical)] border-[var(--alert-critical)]/40 bg-[var(--alert-critical)]/10">
+            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#ff2a5f]/15 border border-[#ff2a5f]/40 text-[#ff2a5f] shadow-[0_0_8px_rgba(255,42,95,0.3)] animate-pulse">
               CONTAINMENT ACTIVE
             </span>
           </div>
 
-          <div className="relative w-full h-[260px] glass-inset rounded-2xl border border-white/10 flex items-center justify-center overflow-hidden p-3 shadow-[inset_0_2px_30px_rgba(0,0,0,0.85)]">
+          {/* Topology Canvas */}
+          <div
+            className={`relative w-full h-[250px] rounded border flex items-center justify-center overflow-hidden transition-colors ${
+              isLightMode ? "bg-[#fafaff] border-[#daddd8]" : "bg-[#03070c] border-[#162536]"
+            }`}
+          >
             <svg className="w-full h-full" viewBox="0 0 700 240">
               <defs>
-                <linearGradient id="containment-pulse" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#ef4444" stopOpacity="0.8" />
-                  <stop offset="100%" stopColor="#0284c7" stopOpacity="0.8" />
-                </linearGradient>
-                <filter id="glow-node" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="3" result="blur" />
-                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                </filter>
+                <pattern id="grid-pattern" width="28" height="28" patternUnits="userSpaceOnUse">
+                  <path
+                    d="M 28 0 L 0 0 0 28"
+                    fill="none"
+                    stroke={isLightMode ? "rgba(28, 28, 28, 0.08)" : "rgba(0, 240, 255, 0.04)"}
+                    strokeWidth="1"
+                  />
+                </pattern>
               </defs>
-
-              {/* Grid Background */}
-              <pattern id="grid-pattern" width="30" height="30" patternUnits="userSpaceOnUse">
-                <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
-              </pattern>
               <rect width="100%" height="100%" fill="url(#grid-pattern)" />
 
               {/* Connecting Traces */}
-              {/* Node 1 to Node 2 */}
-              <line x1="120" y1="120" x2="270" y2="120" stroke="#ef4444" strokeWidth="2.5" strokeDasharray="6 4" />
-              {/* Node 2 to Node 3 */}
-              <line x1="330" y1="120" x2="470" y2="70" stroke="#f59e0b" strokeWidth="2" strokeDasharray="4 4" />
-              {/* Node 2 to Node 4 */}
-              <line x1="330" y1="120" x2="470" y2="170" stroke="#10b981" strokeWidth="2" />
-              {/* Node 4 to Node 5 */}
-              <line x1="530" y1="170" x2="630" y2="170" stroke="#10b981" strokeWidth="2" />
+              <line x1="120" y1="120" x2="270" y2="120" stroke="#ff2a5f" strokeWidth="2.5" strokeDasharray="6 4" />
+              <line x1="330" y1="120" x2="470" y2="70" stroke="#ffb700" strokeWidth="2" strokeDasharray="4 4" />
+              <line x1="330" y1="120" x2="470" y2="170" stroke="#00ff66" strokeWidth="2" />
+              <line x1="530" y1="170" x2="630" y2="170" stroke="#00ff66" strokeWidth="2" />
 
-              {/* Firewall Quarantine Barrier */}
-              <line x1="300" y1="20" x2="300" y2="220" stroke="#ef4444" strokeWidth="3" strokeDasharray="8 6" opacity="0.8" />
-              <rect x="245" y="8" width="110" height="22" rx="6" fill="#070D17" stroke="#ef4444" strokeWidth="1.2" />
-              <text x="300" y="23" fill="#ef4444" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">
+              {/* Firewall Barrier iptables DROP */}
+              <line x1="300" y1="20" x2="300" y2="220" stroke="#ff2a5f" strokeWidth="2.5" strokeDasharray="8 6" opacity="0.85" />
+              <rect
+                x="245"
+                y="8"
+                width="110"
+                height="22"
+                rx="4"
+                fill={isLightMode ? "#ecebe4" : "#070d14"}
+                stroke="#ff2a5f"
+                strokeWidth="1.2"
+              />
+              <text x="300" y="23" fill="#ff2a5f" fontSize="9" fontFamily="JetBrains Mono" textAnchor="middle" fontWeight="bold">
                 iptables DROP
               </text>
 
               {/* Node 1: Adversary Source */}
               <g transform="translate(100, 120)">
-                <circle r="26" fill="#0F172A" stroke="#ef4444" strokeWidth="2" filter="url(#glow-node)" />
-                <circle r="34" fill="none" stroke="#ef4444" strokeWidth="1" opacity="0.4" className="animate-ping" />
-                <text x="0" y="-35" fill="#ef4444" fontSize="10" fontFamily="Orbitron" textAnchor="middle" fontWeight="bold">
+                <circle r="26" fill={isLightMode ? "#ecebe4" : "#070d14"} stroke="#ff2a5f" strokeWidth="2" />
+                <circle r="34" fill="none" stroke="#ff2a5f" strokeWidth="1" opacity="0.4" className="animate-ping" />
+                <text x="0" y="-35" fill="#ff2a5f" fontSize="10" fontFamily="Orbitron" textAnchor="middle" fontWeight="bold">
                   ATTACK SOURCE
                 </text>
-                <text x="0" y="4" fill="#F8FAFC" fontSize="10" fontFamily="monospace" textAnchor="middle">
+                <text x="0" y="4" fill={isLightMode ? "#1c1c1c" : "#ffffff"} fontSize="9" fontFamily="JetBrains Mono" textAnchor="middle" fontWeight="bold">
                   192.168.100.45
                 </text>
-                <text x="0" y="16" fill="#94A3B8" fontSize="8" fontFamily="monospace" textAnchor="middle">
-                  [DDoS Vector]
+                <text x="0" y="16" fill={isLightMode ? "#525252" : "#64748b"} fontSize="8" fontFamily="JetBrains Mono" textAnchor="middle">
+                  [DDoS / Modbus]
                 </text>
               </g>
 
-              {/* Node 2: Network Gateway Boundary */}
+              {/* Node 2: Gateway Boundary */}
               <g transform="translate(300, 120)">
-                <rect x="-24" y="-24" width="48" height="48" rx="10" fill="#1E293B" stroke="#0284c7" strokeWidth="2" filter="url(#glow-node)" />
-                <text x="0" y="-32" fill="#0284c7" fontSize="10" fontFamily="Orbitron" textAnchor="middle" fontWeight="bold">
+                <rect
+                  x="-24"
+                  y="-24"
+                  width="48"
+                  height="48"
+                  rx="8"
+                  fill={isLightMode ? "#eef0f2" : "#0b131e"}
+                  stroke="#00f0ff"
+                  strokeWidth="2"
+                />
+                <text x="0" y="-32" fill={isLightMode ? "#0284c7" : "#00f0ff"} fontSize="9" fontFamily="Orbitron" textAnchor="middle" fontWeight="bold">
                   GATEWAY FIREWALL
                 </text>
-                <text x="0" y="4" fill="#00f3ff" fontSize="9" fontFamily="monospace" textAnchor="middle">
+                <text x="0" y="4" fill={isLightMode ? "#0284c7" : "#00f0ff"} fontSize="9" fontFamily="JetBrains Mono" textAnchor="middle" fontWeight="bold">
                   eth0 / Wazuh
                 </text>
               </g>
 
               {/* Node 3: Host OS Process */}
               <g transform="translate(500, 70)">
-                <rect x="-22" y="-22" width="44" height="44" rx="8" fill="#1E293B" stroke="#f59e0b" strokeWidth="2" />
-                <text x="0" y="-28" fill="#f59e0b" fontSize="10" fontFamily="Orbitron" textAnchor="middle" fontWeight="bold">
+                <rect
+                  x="-22"
+                  y="-22"
+                  width="44"
+                  height="44"
+                  rx="6"
+                  fill={isLightMode ? "#eef0f2" : "#0b131e"}
+                  stroke="#ffb700"
+                  strokeWidth="2"
+                />
+                <text x="0" y="-28" fill="#d97706" fontSize="9" fontFamily="Orbitron" textAnchor="middle" fontWeight="bold">
                   HOST OS PROCESS
                 </text>
-                <text x="0" y="4" fill="#F8FAFC" fontSize="9" fontFamily="monospace" textAnchor="middle">
+                <text x="0" y="4" fill={isLightMode ? "#1c1c1c" : "#ffffff"} fontSize="9" fontFamily="JetBrains Mono" textAnchor="middle" fontWeight="bold">
                   PID 4120
                 </text>
-                <text x="0" y="16" fill="#94A3B8" fontSize="8" fontFamily="monospace" textAnchor="middle">
+                <text x="0" y="16" fill={isLightMode ? "#525252" : "#64748b"} fontSize="8" fontFamily="JetBrains Mono" textAnchor="middle">
                   [Terminated]
                 </text>
               </g>
 
               {/* Node 4: Isolated Physical PLC */}
               <g transform="translate(500, 170)">
-                <rect x="-22" y="-22" width="44" height="44" rx="8" fill="#1E293B" stroke="#10b981" strokeWidth="2" />
-                <text x="0" y="-28" fill="#10b981" fontSize="10" fontFamily="Orbitron" textAnchor="middle" fontWeight="bold">
+                <rect
+                  x="-22"
+                  y="-22"
+                  width="44"
+                  height="44"
+                  rx="6"
+                  fill={isLightMode ? "#eef0f2" : "#0b131e"}
+                  stroke="#00ff66"
+                  strokeWidth="2"
+                />
+                <text x="0" y="-28" fill="#059669" fontSize="9" fontFamily="Orbitron" textAnchor="middle" fontWeight="bold">
                   PHYSICAL PLC
                 </text>
-                <text x="0" y="4" fill="#F8FAFC" fontSize="9" fontFamily="monospace" textAnchor="middle">
+                <text x="0" y="4" fill={isLightMode ? "#1c1c1c" : "#ffffff"} fontSize="9" fontFamily="JetBrains Mono" textAnchor="middle" fontWeight="bold">
                   Modbus Node 01
                 </text>
-                <text x="0" y="16" fill="#10b981" fontSize="8" fontFamily="monospace" textAnchor="middle">
+                <text x="0" y="16" fill="#059669" fontSize="8" fontFamily="JetBrains Mono" textAnchor="middle">
                   [100% Safe]
                 </text>
               </g>
 
               {/* Node 5: OT Actuator */}
               <g transform="translate(640, 170)">
-                <circle r="18" fill="#0F172A" stroke="#10b981" strokeWidth="2" />
-                <text x="0" y="-24" fill="#10b981" fontSize="9" fontFamily="Orbitron" textAnchor="middle" fontWeight="bold">
+                <circle r="18" fill={isLightMode ? "#ecebe4" : "#070d14"} stroke="#00ff66" strokeWidth="2" />
+                <text x="0" y="-24" fill="#059669" fontSize="8" fontFamily="Orbitron" textAnchor="middle" fontWeight="bold">
                   SCADA COIL
                 </text>
-                <text x="0" y="4" fill="#F8FAFC" fontSize="9" fontFamily="monospace" textAnchor="middle">
+                <text x="0" y="4" fill={isLightMode ? "#1c1c1c" : "#ffffff"} fontSize="8" fontFamily="JetBrains Mono" textAnchor="middle" fontWeight="bold">
                   RELAY
                 </text>
               </g>
             </svg>
           </div>
 
-          <div className="flex items-center justify-between text-xs font-['JetBrains_Mono'] text-[var(--text-secondary)] px-1">
-            <span>Containment Radius: Isolated to Ingress Edge</span>
+          <div
+            className={`flex items-center justify-between text-xs font-mono pt-2 border-t ${
+              isLightMode ? "border-[#daddd8] text-[#525252]" : "border-[#162536] text-[#64748b]"
+            }`}
+          >
+            <span>Containment Radius: Edge Perimeter Isolated</span>
             <button
+              type="button"
               onClick={() => startInterlockCountdown("192.168.100.45")}
-              aria-label="Launch IEC 62443 Safety Override Modal"
-              className="glass-pill cursor-pointer text-[var(--brand-cyan)] hover:text-white flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-[var(--brand-cyan)] focus-visible:outline-none px-3 py-1 transition-all"
+              className={`flex items-center gap-1.5 px-3 py-1 rounded transition-all font-mono text-[11px] cursor-pointer border ${
+                isLightMode
+                  ? "bg-[#0284c7]/10 border-[#0284c7]/30 text-[#0284c7] hover:bg-[#0284c7]/20"
+                  : "bg-[#00f0ff]/10 border-[#00f0ff]/40 text-[#00f0ff] hover:bg-[#00f0ff]/20"
+              }`}
             >
               <span>Test IEC 62443 Safety Override</span>
               <ExternalLink className="w-3 h-3" />
@@ -289,31 +433,46 @@ export default function OverviewConsole() {
         </div>
 
         {/* NIST SP 800-53 FIVE-SPOKE RADAR (5 COLS) */}
-        <div className="lg:col-span-5 cyber-card glass-panel-deep relative overflow-hidden p-6 space-y-4">
-          <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[var(--alert-nominal)]/60 to-transparent pointer-events-none" />
-          <div className="flex items-center justify-between border-b border-white/10 pb-3">
+        <div className="lg:col-span-5 hud-box p-4 rounded flex flex-col justify-between">
+          <span className="hud-corner-tr">┐</span>
+          <span className="hud-corner-bl">└</span>
+          <div
+            className={`flex items-center justify-between border-b pb-2 mb-2 font-mono ${
+              isLightMode ? "border-[#daddd8]" : "border-[#162536]"
+            }`}
+          >
             <div className="flex items-center gap-2">
-              <Award className="w-4 h-4 text-[var(--alert-nominal)]" />
-              <h3 className="font-['Orbitron'] font-bold text-xs uppercase text-[var(--text-primary)]">
-                NIST SP 800-53 Compliance Radar
+              <span className="w-1.5 h-3.5 bg-[#00ff66] glow-emerald" />
+              <h3
+                className={`font-['Orbitron'] font-bold text-xs uppercase tracking-wide ${
+                  isLightMode ? "text-[#1c1c1c]" : "text-white"
+                }`}
+              >
+                NIST SP 800-53 COMPLIANCE RADAR
               </h3>
             </div>
-            <span className="glass-pill px-3 py-1 text-[10px] font-['JetBrains_Mono'] font-bold text-[var(--alert-nominal)] border-[var(--alert-nominal)]/40 bg-[var(--alert-nominal)]/10">
-              96.4% COMPLIANT
+            <span
+              className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold border ${
+                isLightMode
+                  ? "bg-[#059669]/15 border-[#059669]/40 text-[#059669]"
+                  : "bg-[#00ff66]/15 border-[#00ff66]/40 text-[#00ff66]"
+              }`}
+            >
+              96.4% AUDITED
             </span>
           </div>
 
-          <div className="flex items-center justify-center p-2">
-            <svg width="220" height="220" viewBox="0 0 220 220">
-              {/* Concentric Guide Circles */}
+          <div className="flex items-center justify-center py-1">
+            <svg width="220" height="210" viewBox="0 0 220 210">
+              {/* Concentric Pentagons */}
               {[0.25, 0.5, 0.75, 1.0].map((level) => (
                 <circle
                   key={level}
                   cx="110"
-                  cy="110"
+                  cy="105"
                   r={80 * level}
                   fill="none"
-                  stroke="rgba(255,255,255,0.12)"
+                  stroke={isLightMode ? "rgba(28, 28, 28, 0.12)" : "rgba(0, 240, 255, 0.12)"}
                   strokeWidth="0.8"
                   strokeDasharray="3 3"
                 />
@@ -324,34 +483,41 @@ export default function OverviewConsole() {
                 <line
                   key={idx}
                   x1="110"
-                  y1="110"
+                  y1="105"
                   x2={110 + 80 * Math.cos(p.angle)}
-                  y2={110 + 80 * Math.sin(p.angle)}
-                  stroke="rgba(255,255,255,0.12)"
-                  strokeWidth="0.8"
+                  y2={105 + 80 * Math.sin(p.angle)}
+                  stroke={isLightMode ? "rgba(28, 28, 28, 0.15)" : "rgba(0, 240, 255, 0.15)"}
+                  strokeWidth="1"
                 />
               ))}
 
-              {/* Radar Filled Polygon */}
+              {/* Filled Polygon */}
               <polygon
-                points={radarPolygonPath}
-                fill="var(--brand-cyan)"
-                fillOpacity="0.25"
-                stroke="var(--brand-cyan)"
+                points={radarPoints.map((p) => `${p.x},${p.y}`).join(" ")}
+                fill={isLightMode ? "rgba(2, 132, 199, 0.18)" : "rgba(0, 240, 255, 0.22)"}
+                stroke={isLightMode ? "#0284c7" : "#00f0ff"}
                 strokeWidth="2"
               />
 
-              {/* Radar Data Nodes */}
+              {/* Nodes */}
               {radarPoints.map((p, idx) => (
                 <g key={idx}>
-                  <circle cx={p.x} cy={p.y} r="4.5" fill="var(--brand-primary)" stroke="#F8FAFC" strokeWidth="1.5" />
+                  <circle
+                    cx={p.x}
+                    cy={p.y}
+                    r="4"
+                    fill={isLightMode ? "#059669" : "#00ff66"}
+                    stroke={isLightMode ? "#1c1c1c" : "#ffffff"}
+                    strokeWidth="1"
+                  />
                   <text
                     x={110 + 96 * Math.cos(p.angle)}
-                    y={110 + 96 * Math.sin(p.angle) + 4}
-                    fill="var(--text-secondary)"
+                    y={105 + 96 * Math.sin(p.angle) + 4}
+                    fill={isLightMode ? "#1c1c1c" : "#64748b"}
                     fontSize="9"
-                    fontFamily="monospace"
+                    fontFamily="JetBrains Mono"
                     textAnchor="middle"
+                    fontWeight="bold"
                   >
                     {p.label}
                   </text>
@@ -360,56 +526,73 @@ export default function OverviewConsole() {
             </svg>
           </div>
 
-          <div className="grid grid-cols-2 gap-2.5 text-[10px] font-['JetBrains_Mono'] text-[var(--text-secondary)]">
-            <div className="flex items-center justify-between p-2.5 rounded-xl glass-inset border border-white/10">
-              <span>SC (Comms):</span>
-              <span className="text-[var(--alert-nominal)] font-bold">98%</span>
+          <div
+            className={`grid grid-cols-2 gap-2 text-[10px] font-mono pt-2 border-t ${
+              isLightMode ? "border-[#daddd8]" : "border-[#162536]"
+            }`}
+          >
+            <div
+              className={`flex items-center justify-between p-2 rounded border ${
+                isLightMode ? "bg-[#ecebe4] border-[#daddd8]" : "bg-[#070d14] border-[#162536]"
+              }`}
+            >
+              <span className={isLightMode ? "text-[#525252]" : "text-[#64748b]"}>SC (Comms):</span>
+              <span className={isLightMode ? "text-[#059669] font-bold" : "text-[#00ff66] font-bold"}>98%</span>
             </div>
-            <div className="flex items-center justify-between p-2.5 rounded-xl glass-inset border border-white/10">
-              <span>SI (Integrity):</span>
-              <span className="text-[var(--alert-nominal)] font-bold">95%</span>
+            <div
+              className={`flex items-center justify-between p-2 rounded border ${
+                isLightMode ? "bg-[#ecebe4] border-[#daddd8]" : "bg-[#070d14] border-[#162536]"
+              }`}
+            >
+              <span className={isLightMode ? "text-[#525252]" : "text-[#64748b]"}>SI (Integrity):</span>
+              <span className={isLightMode ? "text-[#059669] font-bold" : "text-[#00ff66] font-bold"}>95%</span>
             </div>
-            <div className="flex items-center justify-between p-2.5 rounded-xl glass-inset border border-white/10">
-              <span>AU (Audit AU-9):</span>
-              <span className="text-[var(--alert-nominal)] font-bold">100%</span>
+            <div
+              className={`flex items-center justify-between p-2 rounded border ${
+                isLightMode ? "bg-[#ecebe4] border-[#daddd8]" : "bg-[#070d14] border-[#162536]"
+              }`}
+            >
+              <span className={isLightMode ? "text-[#525252]" : "text-[#64748b]"}>AU (Audit AU-9):</span>
+              <span className={isLightMode ? "text-[#059669] font-bold" : "text-[#00ff66] font-bold"}>100%</span>
             </div>
-            <div className="flex items-center justify-between p-2.5 rounded-xl glass-inset border border-white/10">
-              <span>IA (Auth):</span>
-              <span className="text-[var(--alert-nominal)] font-bold">92%</span>
+            <div
+              className={`flex items-center justify-between p-2 rounded border ${
+                isLightMode ? "bg-[#ecebe4] border-[#daddd8]" : "bg-[#070d14] border-[#162536]"
+              }`}
+            >
+              <span className={isLightMode ? "text-[#525252]" : "text-[#64748b]"}>IA (Auth):</span>
+              <span className={isLightMode ? "text-[#059669] font-bold" : "text-[#00ff66] font-bold"}>92%</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* 3. BOTTOM SECTION: REAL-TIME INCIDENT STREAM (HIGH DENSITY TABLE) */}
-      <div className="cyber-card glass-panel-deep relative overflow-hidden p-6 space-y-4">
-        <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[var(--brand-primary)]/60 to-transparent pointer-events-none" />
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-3">
+      {/* 4. REAL-TIME INCIDENT INGESTION STREAM TABLE */}
+      <div className="hud-box p-4 rounded space-y-3">
+        <span className="hud-corner-tr">┐</span>
+        <span className="hud-corner-bl">└</span>
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#162536] pb-2 font-mono">
           <div className="flex items-center gap-2">
-            <Activity className="w-4 h-4 text-[var(--brand-primary)]" />
-            <h3 className="font-['Orbitron'] font-bold text-xs uppercase text-[var(--text-primary)]">
-              Real-Time High-Density Incident Ingestion Stream
+            <span className="w-1.5 h-3.5 bg-[#00f0ff] glow-cyan" />
+            <h3 className="font-['Orbitron'] font-bold text-xs uppercase text-white tracking-wide">
+              REAL-TIME HIGH-DENSITY INCIDENT INGESTION STREAM
             </h3>
           </div>
 
           <div className="flex items-center gap-2">
-            {/* LIVE PACKET SNIFFER QUICK LAUNCHER (UPGRADE 3) */}
             <button
               type="button"
               onClick={openPacketSniffer}
-              aria-label="Launch Live Hardware Packet Sniffer Drawer"
-              className="glass-pill cursor-pointer flex items-center gap-1.5 px-3 py-1.5 bg-[var(--brand-cyan)]/15 border border-[var(--brand-cyan)]/50 text-[var(--brand-cyan)] hover:bg-[var(--brand-cyan)]/25 text-[10px] font-['Orbitron'] font-bold uppercase transition-all shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-cyan)]"
+              className="flex items-center gap-1.5 px-3 py-1 rounded bg-[#00f0ff]/15 border border-[#00f0ff]/50 text-[#00f0ff] hover:bg-[#00f0ff]/25 text-[10px] font-bold tracking-wider uppercase transition-all cursor-pointer"
             >
               <Radio className="w-3.5 h-3.5 animate-pulse" />
               <span>PACKET SNIFFER</span>
             </button>
 
-            {/* SOAR PLAYBOOKS QUICK LAUNCHER (UPGRADE 2) */}
             <button
               type="button"
               onClick={() => setActiveConsole("remediation")}
-              aria-label="Open SOAR Playbook Builder"
-              className="glass-pill cursor-pointer flex items-center gap-1.5 px-3 py-1.5 bg-[var(--alert-nominal)]/15 border border-[var(--alert-nominal)]/50 text-[var(--alert-nominal)] hover:bg-[var(--alert-nominal)]/25 text-[10px] font-['Orbitron'] font-bold uppercase transition-all shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--alert-nominal)]"
+              className="flex items-center gap-1.5 px-3 py-1 rounded bg-[#00ff66]/15 border border-[#00ff66]/50 text-[#00ff66] hover:bg-[#00ff66]/25 text-[10px] font-bold tracking-wider uppercase transition-all cursor-pointer"
             >
               <Workflow className="w-3.5 h-3.5" />
               <span>SOAR PLAYBOOKS</span>
@@ -417,87 +600,128 @@ export default function OverviewConsole() {
           </div>
         </div>
 
-        <div className="glass-inset rounded-2xl border border-white/10 overflow-hidden shadow-[inset_0_2px_25px_rgba(0,0,0,0.7)]">
-          <div className="overflow-x-auto max-h-[320px]">
-            <table className="w-full text-left text-xs font-['JetBrains_Mono'] border-collapse">
-              <thead>
-                <tr className="bg-black/50 border-b border-white/10 text-[var(--text-secondary)] text-[10px] uppercase">
-                  <th scope="col" className="py-2.5 px-3">Timestamp</th>
-                  <th scope="col" className="py-2.5 px-3">Incident ID</th>
-                  <th scope="col" className="py-2.5 px-3">Domain</th>
-                  <th scope="col" className="py-2.5 px-3">Source IP / PID</th>
-                  <th scope="col" className="py-2.5 px-3">Class & Severity</th>
-                  <th scope="col" className="py-2.5 px-3">Tau Score</th>
-                  <th scope="col" className="py-2.5 px-3">Autonomous Action</th>
-                  <th scope="col" className="py-2.5 px-3">NIST Control</th>
-                  <th scope="col" className="py-2.5 px-3">Forensic Action</th>
+        <div
+          className={`overflow-x-auto max-h-[320px] rounded border transition-colors ${
+            isLightMode ? "bg-[#fafaff] border-[#daddd8]" : "bg-[#03070c] border-[#162536]"
+          }`}
+        >
+          <table className="w-full text-left text-xs font-mono border-collapse">
+            <thead>
+              <tr
+                className={`border-b text-[10px] uppercase font-bold transition-colors ${
+                  isLightMode
+                    ? "bg-[#ecebe4] border-[#daddd8] text-[#1c1c1c]"
+                    : "bg-[#070d14] border-[#162536] text-[#64748b]"
+                }`}
+              >
+                <th scope="col" className="py-2.5 px-3">Timestamp</th>
+                <th scope="col" className="py-2.5 px-3">Incident ID</th>
+                <th scope="col" className="py-2.5 px-3">Domain</th>
+                <th scope="col" className="py-2.5 px-3">Source IP / PID</th>
+                <th scope="col" className="py-2.5 px-3">Class &amp; Severity</th>
+                <th scope="col" className="py-2.5 px-3">Tau Score</th>
+                <th scope="col" className="py-2.5 px-3">Autonomous Action</th>
+                <th scope="col" className="py-2.5 px-3">NIST Control</th>
+                <th scope="col" className="py-2.5 px-3 text-right">Forensic Action</th>
+              </tr>
+            </thead>
+            <tbody className={isLightMode ? "divide-y divide-[#daddd8]" : "divide-y divide-[#162536]/50"}>
+              {events.length === 0 ? (
+                <tr>
+                  <td colSpan={9} className="py-8 text-center text-[#64748b] italic">
+                    Listening for telemetry stream... (Start stream in header or use Mock mode)
+                  </td>
                 </tr>
-              </thead>
-              <tbody className="divide-y divide-white/5">
-                {events.length === 0 ? (
-                  <tr>
-                    <td colSpan={9} className="py-8 text-center text-[var(--text-muted)] italic">
-                      Listening for telemetry stream... (Press Play in Telemetry Controls or start Mock Mode)
-                    </td>
-                  </tr>
-                ) : (
-                  events.map((evt) => {
-                    const isCrit = evt.isAnomaly || evt.anomalyProbability > 0.85;
-                    const isWarn = evt.anomalyProbability >= 0.60 && !isCrit;
+              ) : (
+                events.map((evt) => {
+                  const isCrit = evt.isAnomaly || evt.anomalyProbability > 0.85;
+                  const isWarn = evt.anomalyProbability >= 0.60 && !isCrit;
 
-                    const badgeBg = isCrit
-                      ? "bg-[var(--alert-critical)]/15 text-[var(--alert-critical)] border-[var(--alert-critical)]/40 shadow-[0_0_10px_rgba(239,68,68,0.2)]"
-                      : isWarn
-                      ? "bg-[var(--alert-warning)]/15 text-[var(--alert-warning)] border-[var(--alert-warning)]/40 shadow-[0_0_10px_rgba(245,158,11,0.2)]"
-                      : "bg-[var(--alert-nominal)]/15 text-[var(--alert-nominal)] border-[var(--alert-nominal)]/40";
+                  const badgeStyle = isCrit
+                    ? "bg-[#ff2a5f]/20 text-[#ff2a5f] border-[#ff2a5f]/40 shadow-[0_0_8px_rgba(255,42,95,0.3)]"
+                    : isWarn
+                    ? "bg-[#ffb700]/20 text-[#ffb700] border-[#ffb700]/40"
+                    : "bg-[#00ff66]/15 text-[#00ff66] border-[#00ff66]/30";
 
-                    return (
-                      <tr key={evt.id} className="hover:bg-white/[0.04] transition-colors">
-                        <td className="py-2 px-3 text-[var(--text-muted)] text-[11px]">
-                          {new Date(evt.timestamp).toLocaleTimeString()}
-                        </td>
-                        <td className="py-2 px-3 text-[var(--text-primary)] font-bold text-[11px]">
-                          {evt.id}
-                        </td>
-                        <td className="py-2 px-3 text-[var(--brand-cyan)] text-[11px]">
-                          {evt.domain}
-                        </td>
-                        <td className="py-2 px-3 text-[var(--text-primary)] text-[11px]">
-                          {evt.sourceIp} {evt.processId ? `(PID: ${evt.processId})` : ""}
-                        </td>
-                        <td className="py-2 px-3">
-                          <span className={`px-2.5 py-0.5 rounded-full text-[9px] font-bold border uppercase backdrop-blur-md ${badgeBg}`}>
-                            {evt.predictedClass} {isCrit ? "CRITICAL" : isWarn ? "WARNING" : "NORMAL"}
-                          </span>
-                        </td>
-                        <td className="py-2 px-3 font-bold text-[11px]" style={{ color: isCrit ? "var(--alert-critical)" : isWarn ? "var(--alert-warning)" : "var(--alert-nominal)" }}>
+                  return (
+                    <tr
+                      key={evt.id}
+                      className={`transition-colors ${
+                        isLightMode ? "hover:bg-[#ecebe4]/80" : "hover:bg-[#00f0ff]/5"
+                      }`}
+                    >
+                      <td
+                        className={`py-2 px-3 text-[11px] whitespace-nowrap ${
+                          isLightMode ? "text-[#525252]" : "text-[#64748b]"
+                        }`}
+                      >
+                        {new Date(evt.timestamp).toLocaleTimeString()}
+                      </td>
+                      <td
+                        className={`py-2 px-3 font-bold text-[11px] whitespace-nowrap ${
+                          isLightMode ? "text-[#1c1c1c]" : "text-white"
+                        }`}
+                      >
+                        {evt.id}
+                      </td>
+                      <td
+                        className={`py-2 px-3 text-[11px] whitespace-nowrap font-bold ${
+                          isLightMode ? "text-[#0284c7]" : "text-[#00f0ff]"
+                        }`}
+                      >
+                        {evt.domain}
+                      </td>
+                      <td
+                        className={`py-2 px-3 text-[11px] whitespace-nowrap ${
+                          isLightMode ? "text-[#1c1c1c]" : "text-[#dee3eb]"
+                        }`}
+                      >
+                        {evt.sourceIp} {evt.processId ? `(PID: ${evt.processId})` : ""}
+                      </td>
+                      <td className="py-2 px-3 whitespace-nowrap">
+                        <span className={`px-2 py-0.5 rounded text-[9px] font-bold border uppercase ${badgeStyle}`}>
+                          {evt.predictedClass} {isCrit ? "CRITICAL" : isWarn ? "WARNING" : "NORMAL"}
+                        </span>
+                      </td>
+                      <td className="py-2 px-3 font-bold text-[11px] whitespace-nowrap">
+                        <span style={{ color: isCrit ? "#ff2a5f" : isWarn ? "#ffb700" : "#00ff66" }}>
                           τ = {evt.anomalyProbability.toFixed(3)}
-                        </td>
-                        <td className="py-2 px-3 text-[11px] text-[var(--text-secondary)] font-mono">
-                          {evt.remediationAction}
-                        </td>
-                        <td className="py-2 px-3 text-[11px] text-[var(--brand-primary)]">
-                          {evt.compliance?.nistControlId || "AU-9"}
-                        </td>
-                        <td className="py-2 px-3">
-                          {/* AGENTIC SOC FORENSIC BUTTON (UPGRADE 4) */}
-                          <button
-                            type="button"
-                            onClick={() => openAgenticSoc(evt)}
-                            aria-label={`Analyze incident ${evt.id} with Agentic SOC`}
-                            className="glass-pill cursor-pointer flex items-center gap-1 px-2.5 py-1 bg-[var(--brand-primary)]/15 border border-[var(--brand-primary)]/40 text-[var(--brand-primary)] hover:bg-[var(--brand-primary)]/25 text-[10px] font-['Orbitron'] font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] active:scale-95"
-                          >
-                            <BrainCircuit className="w-3 h-3" />
-                            <span>ANALYZE</span>
-                          </button>
-                        </td>
-                      </tr>
-                    );
-                  })
-                )}
-              </tbody>
-            </table>
-          </div>
+                        </span>
+                      </td>
+                      <td
+                        className={`py-2 px-3 text-[11px] font-mono whitespace-nowrap ${
+                          isLightMode ? "text-[#525252]" : "text-[#64748b]"
+                        }`}
+                      >
+                        {evt.remediationAction}
+                      </td>
+                      <td
+                        className={`py-2 px-3 text-[11px] whitespace-nowrap font-bold ${
+                          isLightMode ? "text-[#0284c7]" : "text-[#00f0ff]"
+                        }`}
+                      >
+                        {evt.compliance?.nistControlId || "AU-9"}
+                      </td>
+                      <td className="py-2 px-3 text-right whitespace-nowrap">
+                        <button
+                          type="button"
+                          onClick={() => openAgenticSoc(evt)}
+                          aria-label={`Analyze incident ${evt.id} with Agentic SOC`}
+                          className={`px-2.5 py-1 rounded border font-bold text-[10px] tracking-wider transition-all cursor-pointer ${
+                            isLightMode
+                              ? "border-[#daddd8] bg-[#ecebe4] hover:bg-[#fafaff] hover:border-[#0284c7] text-[#1c1c1c]"
+                              : "border-[#162536] bg-[#070d14] hover:border-[#00f0ff] text-[#dee3eb] hover:text-[#00f0ff]"
+                          }`}
+                        >
+                          ANALYZE
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

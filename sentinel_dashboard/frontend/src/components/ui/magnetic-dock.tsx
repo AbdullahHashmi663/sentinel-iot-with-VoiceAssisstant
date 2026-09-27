@@ -223,41 +223,70 @@ function DockItem({
         )}
       </AnimatePresence>
 
-      {/* Explanatory Tooltip Above Icon */}
+      {/* Explanatory Tooltip Above / Aside Icon */}
       <AnimatePresence initial={false}>
         {showLabel && (
           <motion.div
             aria-hidden="true"
-            initial={reducedMotion ? false : { opacity: 0, y: 8, scale: 0.92 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={reducedMotion ? { opacity: 0 } : { opacity: 0, y: 8, scale: 0.92 }}
+            initial={
+              reducedMotion
+                ? false
+                : isVertical
+                ? { opacity: 0, x: -10, scale: 0.92 }
+                : { opacity: 0, y: 10, scale: 0.92 }
+            }
+            animate={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+            exit={
+              reducedMotion
+                ? { opacity: 0 }
+                : isVertical
+                ? { opacity: 0, x: -10, scale: 0.92 }
+                : { opacity: 0, y: 10, scale: 0.92 }
+            }
             transition={{ duration: 0.15, ease: "easeOut" }}
+            style={{
+              borderColor: itemColor ? `${itemColor}60` : undefined,
+              boxShadow: itemColor
+                ? `0 14px 36px rgba(0,0,0,0.92), 0 0 24px ${itemColor}40`
+                : undefined,
+            }}
             className={cn(
-              "absolute -top-12 left-1/2 -translate-x-1/2",
-              "px-3 py-1.5 rounded-lg",
-              "bg-[#070D17]/95 backdrop-blur-md",
+              "px-3.5 py-2 rounded-xl",
+              "bg-[#070D17]/95 backdrop-blur-2xl",
               "text-white whitespace-nowrap",
-              "border border-[var(--border-color)] shadow-[0_8px_24px_rgba(0,0,0,0.7)]",
-              "pointer-events-none z-50 flex flex-col items-center gap-0.5"
+              "border border-white/20 shadow-[0_12px_36px_rgba(0,0,0,0.9)]",
+              "pointer-events-none z-[100] flex flex-col gap-0.5",
+              isVertical
+                ? "absolute left-full top-1/2 -translate-y-1/2 ml-4 items-start"
+                : "absolute bottom-[calc(100%+16px)] left-1/2 -translate-x-1/2 items-center"
             )}
           >
             <div className="font-['Orbitron'] font-bold text-xs tracking-wider text-[var(--accent-primary)] flex items-center gap-1.5">
-              <span>{item.label}</span>
+              <span style={{ color: itemColor }}>{item.label}</span>
               {item.isActive && (
                 <span className="w-1.5 h-1.5 rounded-full bg-[var(--alert-nominal)] animate-pulse" />
               )}
             </div>
             {item.description && (
-              <div className="font-['Space_Grotesk'] text-[10px] text-[var(--text-secondary)] font-medium max-w-[260px] text-center">
+              <div
+                className={cn(
+                  "font-['Space_Grotesk'] text-[10px] text-[var(--text-secondary)] font-medium max-w-[280px]",
+                  isVertical ? "text-left" : "text-center"
+                )}
+              >
                 {item.description}
               </div>
             )}
             {/* Tooltip Arrow */}
             <div
+              style={{
+                borderColor: itemColor ? `${itemColor}60` : undefined,
+              }}
               className={cn(
-                "absolute left-1/2 -translate-x-1/2 -bottom-1",
-                "w-2 h-2 rotate-45",
-                "bg-[#070D17] border-r border-b border-[var(--border-color)]"
+                "w-2.5 h-2.5 rotate-45 bg-[#070D17]",
+                isVertical
+                  ? "absolute -left-1.5 top-1/2 -translate-y-1/2 border-l border-b border-white/20"
+                  : "absolute left-1/2 -translate-x-1/2 -bottom-1.5 border-r border-b border-white/20"
               )}
             />
           </motion.div>
@@ -300,20 +329,20 @@ export function MagneticDock({
     cyber: cn(
       "bg-[var(--bg-canvas)]/80 border border-white/20",
       "backdrop-blur-3xl backdrop-saturate-200 shadow-[0_24px_60px_rgba(0,0,0,0.85)]",
-      "shadow-[inset_0_1px_2px_rgba(255,255,255,0.25)] relative overflow-hidden"
+      "shadow-[inset_0_1px_2px_rgba(255,255,255,0.25)] relative overflow-visible"
     ),
     glass: cn(
       "bg-white/10 dark:bg-neutral-900/80",
       "backdrop-blur-2xl backdrop-saturate-180",
       "border border-white/20 dark:border-neutral-700",
-      "shadow-2xl shadow-black/40"
+      "shadow-2xl shadow-black/40 overflow-visible"
     ),
     solid: cn(
       "bg-[var(--bg-card)]",
       "border border-[var(--border-color)]",
-      "shadow-2xl shadow-black/50"
+      "shadow-2xl shadow-black/50 overflow-visible"
     ),
-    transparent: "bg-transparent border-0 shadow-none",
+    transparent: "bg-transparent border-0 shadow-none overflow-visible",
   };
 
   const positionStyles = {
@@ -330,7 +359,7 @@ export function MagneticDock({
       onMouseMove={reducedMotion ? undefined : handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "inline-flex items-end gap-2.5 px-4 py-2.5 rounded-3xl relative overflow-hidden",
+        "inline-flex items-end gap-2.5 px-4 py-2.5 rounded-3xl relative overflow-visible",
         variantStyles[variant],
         positionStyles[position],
         className
@@ -340,7 +369,7 @@ export function MagneticDock({
       transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
       {/* Top Specular Light Beam on Dock */}
-      <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none rounded-t-3xl" />
       {items.map((item) => (
         <DockItem
           key={item.id}

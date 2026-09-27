@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "inverse-surface": "#e0e3e8", "outline-variant": "#3b4b3a", "surface-container-high": "#262a2f", "on-error-container": "#ffdad6", "on-primary-fixed": "#002107", "surface": "#101418", "on-secondary-fixed": "#001f24", "secondary-fixed-dim": "#00daf3", "secondary-container": "#00e3fd", "on-secondary": "#00363d", "surface-container": "#1c2024", "on-surface-variant": "#b9ccb5", "surface-container-low": "#181c20", "on-tertiary-fixed": "#2a1700", "on-primary-container": "#007128", "error-container": "#93000a", "tertiary": "#fff9f6", "primary-fixed": "#6bff83", "on-secondary-container": "#00616d", "surface-tint": "#00e55b", "tertiary-fixed-dim": "#ffb95f", "on-tertiary-container": "#895600", "on-primary-fixed-variant": "#00531b", "inverse-primary": "#006e27", "secondary": "#bdf4ff", "on-background": "#e0e3e8", "inverse-on-surface": "#2d3135", "on-secondary-fixed-variant": "#004f58", "on-error": "#690005", "primary-container": "#00ff66", "surface-container-highest": "#31353a", "surface-container-lowest": "#0a0f13", "background": "#101418", "secondary-fixed": "#9cf0ff", "on-tertiary-fixed-variant": "#653e00", "error": "#ffb4ab", "on-surface": "#e0e3e8", "on-tertiary": "#472a00", "surface-variant": "#31353a", "outline": "#849581", "on-primary": "#003911", "tertiary-container": "#ffd7aa", "tertiary-fixed": "#ffddb8", "primary-fixed-dim": "#00e55b", "primary": "#edffe8", "surface-dim": "#101418", "surface-bright": "#353a3e" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-xl": "2rem", "space-xs": "0.25rem", "space-sm": "0.5rem", "gutter": "0.75rem", "space-lg": "1.25rem", "margin-desktop": "1.5rem", "space-md": "0.75rem", "gutter-desktop": "1rem", "margin": "1rem" }, "fontFamily": { "label-sm": ["JetBrains Mono"], "headline-xl": ["Space Grotesk"], "label-lg": ["JetBrains Mono"], "headline-md": ["Space Grotesk"], "headline-lg": ["Space Grotesk"], "label-md": ["JetBrains Mono"], "telemetry-metric": ["JetBrains Mono"], "body-md": ["Space Grotesk"], "body-lg": ["Space Grotesk"], "headline-xl-mobile": ["Space Grotesk"], "body-sm": ["Space Grotesk"], "telemetry-metric-sm": ["JetBrains Mono"] }, "fontSize": { "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "500" }], "headline-xl": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-lg": ["13px", { "lineHeight": "18px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600" }], "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-md": ["11px", { "lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "500" }], "telemetry-metric": ["24px", { "lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-md": ["13px", { "lineHeight": "18px", "fontWeight": "400" }], "body-lg": ["15px", { "lineHeight": "22px", "fontWeight": "400" }], "headline-xl-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "body-sm": ["11px", { "lineHeight": "16px", "fontWeight": "400" }], "telemetry-metric-sm": ["16px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "600" }] } } } };</script></head><body class="bg-background font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/95 backdrop-blur-md"><div class="w-full px-margin-desktop h-16 flex items-center justify-between gap-gutter-desktop"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm"><div class="w-2 h-2 rounded bg-primary-container animate-pulse"></div><span class="font-label-lg text-label-lg tracking-widest text-primary uppercase">SENTINEL-IoT</span><span class="font-label-sm text-label-sm px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface-variant font-mono">v2.4-OP</span></div><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low"><span class="font-label-sm text-label-sm text-on-surface-variant">DOMAIN:</span><select class="bg-transparent font-label-sm text-label-sm text-secondary focus:outline-none cursor-pointer"><option class="bg-surface-container-lowest text-on-surface">ICS/SCADA CORE (0x7F)</option><option class="bg-surface-container-lowest text-on-surface">TURBINE CELL A4</option><option class="bg-surface-container-lowest text-on-surface">SUBSTATION NORTH-EP</option></select></div></div><div class="hidden lg:flex items-center gap-space-md bg-surface-container-low px-space-md py-1.5 rounded"><div class="flex items-center gap-space-xs"><span class="font-label-sm text-label-sm text-on-surface-variant">LATENCY</span><span class="font-telemetry-metric-sm text-telemetry-metric-sm text-primary-fixed-dim">21.5ms</span></div><div class="w-px h-3 bg-surface-container-highest"></div><div class="flex items-center gap-space-xs"><span class="w-1.5 h-1.5 rounded-full bg-secondary-fixed-dim animate-ping"></span><span class="font-label-sm text-label-sm text-secondary-fixed-dim">LIVE_WS</span></div><div class="w-px h-3 bg-surface-container-highest"></div><div class="flex items-center gap-space-xs"><span class="font-label-sm text-label-sm text-on-surface-variant">THROUGHPUT</span><span class="font-telemetry-metric-sm text-telemetry-metric-sm text-on-surface">2,841,920 EVT</span></div><div class="w-px h-3 bg-surface-container-highest"></div><div class="flex items-center gap-space-xs"><span class="font-label-sm text-label-sm text-on-surface-variant">UTC</span><span class="font-label-sm text-label-sm text-on-surface font-mono">14:28:02.19Z</span></div></div><div class="flex items-center gap-space-sm"><button class="flex items-center gap-space-xs px-space-sm py-1.5 rounded bg-error-container text-on-error-container font-label-sm text-label-sm tracking-wider uppercase hover:bg-error hover:text-on-error transition-colors" type="button"><span class="material-symbols-outlined text-[14px]">gpp_maybe</span><span>EMERGENCY LOCKDOWN</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><aside class="fixed left-0 top-16 bottom-16 w-64 bg-surface-container-lowest/90 backdrop-blur-md z-40 flex flex-col justify-between py-space-md"><div class="flex flex-col gap-space-md"><div class="px-space-md"><div class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Playbook Studio Node</div><div class="font-label-lg text-label-lg text-primary-fixed">ORCHESTRATOR-01</div></div><nav class="flex flex-col gap-1 px-space-sm" data-active-classes="bg-primary-container text-on-primary-container font-bold"><a aria-current="page" class="flex items-center justify-between px-space-md py-2 rounded transition-all bg-primary-container text-on-primary-container font-bold" data-path="playbooks" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[16px]">terminal</span>PLAYBOOKS</span><span class="font-label-sm text-label-sm px-1 rounded bg-surface-container-highest text-secondary">12</span></a><a class="flex items-center justify-between px-space-md py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" data-path="execute-pcb" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[16px]">memory</span>EXECUTE PCB</span><span class="w-2 h-2 rounded-full bg-primary-container"></span></a><a class="flex items-center justify-between px-space-md py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" data-path="sniffer" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[16px]">wifi_tethering</span>SNIFFER</span><span class="font-label-sm text-label-sm text-on-surface-variant">ACTIVE</span></a><a class="flex items-center justify-between px-space-md py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" data-path="agentic-soc" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[16px]">smart_toy</span>AGENTIC SOC</span><span class="font-label-sm text-label-sm text-primary-fixed">AI-ARMED</span></a><a class="flex items-center justify-between px-space-md py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" data-path="xai-engine" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[16px]">psychology</span>XAI ENGINE</span></a><a class="flex items-center justify-between px-space-md py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-label-md text-label-md" data-path="threat-lab" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[16px]">biotech</span>THREAT LAB</span></a></nav></div><div class="px-space-md flex flex-col gap-space-xs"><div class="bg-surface-container-low p-space-sm rounded"><div class="flex items-center justify-between"><span class="font-label-sm text-label-sm text-outline">DEFCON STATUS</span><span class="font-label-sm text-label-sm text-error font-bold">STAGE-3</span></div><div class="w-full bg-surface-container-highest h-1 rounded mt-1 overflow-hidden"><div class="bg-error h-full w-3/5"></div></div></div></div></aside><div class="pl-64"><main class="relative pt-16 pb-16 w-full min-h-screen bg-surface"><div class="flex flex-col w-full">
+<!-- Top Control Ribbon & Command Bar -->
+<section class="w-full bg-surface-container-lowest px-margin-desktop py-space-sm shadow-md">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-sm">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-outline tracking-wider">
+<span>ORCHESTRATION STUDIO</span>
+<span>/</span>
+<span class="text-secondary-fixed">SOAR-ICS v2.4</span>
+<span>/</span>
+<span class="text-primary-container">CORE-RING0-INTERLOCK</span>
+</div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">PB-MODBUS-FC16-EXCURSION-04</h1>
+<span class="font-label-sm text-label-sm px-space-xs py-0.5 rounded bg-primary-container/10 text-primary-container uppercase font-mono">Line-Rate eBPF Drop + Cgroup Freeze + Air-Gap Dual Interlock</span>
+</div>
+<div class="flex items-center gap-space-xs flex-wrap mt-1">
+<div class="flex items-center gap-1 px-1.5 py-0.5 rounded bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+<span>CANARY RUNTIME: <strong class="text-primary">ACTIVE</strong></span>
+</div>
+<div class="flex items-center gap-1 px-1.5 py-0.5 rounded bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[13px] text-secondary">verified</span>
+<span>DRY-RUN: <strong class="text-secondary">100% PASS</strong></span>
+</div>
+<div class="flex items-center gap-1 px-1.5 py-0.5 rounded bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[13px] text-tertiary-fixed-dim">lock_clock</span>
+<span>IEC 62443-4-2 SR 3.1: <strong class="text-tertiary-fixed-dim">ENFORCED</strong></span>
+</div>
+<div class="flex items-center gap-1 px-1.5 py-0.5 rounded bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[13px] text-outline">memory</span>
+<span>COMPILER: <strong class="text-on-surface">LLVM/Clang eBPF Target BPF</strong></span>
+</div>
+</div>
+</div>
+<!-- Action Cluster -->
+<div class="flex items-center gap-space-xs flex-wrap">
+<button class="flex items-center gap-space-xs px-space-sm py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[15px] text-secondary">science</span>
+<span>Simulate (Dry-Run)</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-sm py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[15px] text-tertiary-fixed">vpn_key</span>
+<span>Compile &amp; Sign</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-1.5 rounded bg-primary-container text-on-primary-container font-label-md text-label-md font-bold tracking-wide transition-all shadow-xl hover:brightness-110" type="button">
+<span class="material-symbols-outlined text-[16px]">bolt</span>
+<span>DEPLOY TO RING0</span>
+</button>
+<button class="p-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface shadow-sm" title="Export Manifest" type="button">
+<span class="material-symbols-outlined text-[18px]">file_download</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Main Three-Column Studio Workspace -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-sm p-space-sm lg:p-margin-desktop w-full">
+<!-- LEFT PANEL: Playbook Catalog & Trigger Palette (3 Cols) -->
+<aside class="xl:col-span-3 flex flex-col gap-space-sm min-w-0">
+<!-- Catalog Box -->
+<div class="bg-surface-container-lowest p-space-sm rounded shadow-md flex flex-col gap-space-xs">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[16px]">folder_special</span>
+<span class="font-label-md text-label-md text-primary uppercase font-bold tracking-wider">Playbook Inventory</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline">14 TOTAL</span>
+</div>
+<!-- Search Bar -->
+<div class="relative w-full">
+<span class="material-symbols-outlined text-[14px] text-outline absolute left-2 top-2.5">search</span>
+<input class="w-full bg-surface-container-low text-on-surface font-label-sm text-label-sm pl-7 pr-space-xs py-1.5 rounded focus:outline-none focus:bg-surface-container-high transition-colors placeholder:text-outline-variant" placeholder="FILTER SIGNATURE / PROTOCOL..." type="text"/>
+</div>
+<!-- Filter Pills -->
+<div class="flex items-center gap-1 overflow-x-auto py-1">
+<button class="px-2 py-0.5 rounded bg-surface-container-highest text-primary font-label-sm text-label-sm whitespace-nowrap">All (14)</button>
+<button class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm whitespace-nowrap">ICS Protocol (6)</button>
+<button class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm whitespace-nowrap">Kernel eBPF (4)</button>
+<button class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm whitespace-nowrap">PLC/SCADA (3)</button>
+<button class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm whitespace-nowrap">Air-Gap (2)</button>
+</div>
+<!-- Playbook List -->
+<div class="flex flex-col gap-1 mt-1">
+<!-- Active Card -->
+<div class="p-space-xs rounded bg-surface-container-high shadow-sm cursor-pointer relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary-container"></div>
+<div class="pl-1.5">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-primary-container font-mono font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-ping"></span>
+                  [ACTIVE - RING0]
+                </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">MTTR: 0.082ms</span>
+</div>
+<div class="font-headline-md text-headline-md text-primary mt-0.5 truncate">PB-MODBUS-FC16-EXCURSION-04</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">Line-Rate XDP Drop + cgroup freeze + relay interlock</p>
+<div class="flex items-center gap-space-xs mt-1.5">
+<span class="font-label-sm text-label-sm px-1 rounded bg-surface-container text-secondary font-mono">3 STAGES</span>
+<span class="font-label-sm text-label-sm px-1 rounded bg-surface-container text-outline font-mono">TPM 2.0 PCR-7</span>
+<span class="font-label-sm text-label-sm px-1 rounded bg-surface-container text-primary-container font-mono">XDP_PASS: 0</span>
+</div>
+</div>
+</div>
+<!-- Standby 1 -->
+<div class="p-space-xs rounded bg-surface-container hover:bg-surface-container-high transition-all cursor-pointer">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline font-mono">[STANDBY - ARMED]</span>
+<span class="font-label-sm text-label-sm text-outline">MTTR: 0.110ms</span>
+</div>
+<div class="font-headline-md text-headline-md text-on-surface mt-0.5 truncate">PB-DNP3-OUTSTATION-FLOOD-01</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">Rate-limit XDP, token bucket 500 pkts/s per ingress</p>
+<div class="flex items-center gap-space-xs mt-1">
+<span class="font-label-sm text-label-sm px-1 rounded bg-surface-container-low text-on-surface-variant font-mono">KERNEL HOOK</span>
+<span class="font-label-sm text-label-sm px-1 rounded bg-surface-container-low text-outline font-mono">AF_XDP</span>
+</div>
+</div>
+<!-- Standby 2 -->
+<div class="p-space-xs rounded bg-surface-container hover:bg-surface-container-high transition-all cursor-pointer">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline font-mono">[STANDBY - VERIFIED]</span>
+<span class="font-label-sm text-label-sm text-outline">MTTR: 1.450ms</span>
+</div>
+<div class="font-headline-md text-headline-md text-on-surface mt-0.5 truncate">PB-S7COMM-LADDER-INJECT-08</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">Memory integrity hash check, PLC CPU stop trigger</p>
+<div class="flex items-center gap-space-xs mt-1">
+<span class="font-label-sm text-label-sm px-1 rounded bg-surface-container-low text-on-surface-variant font-mono">SIMATIC S7-1500</span>
+<span class="font-label-sm text-label-sm px-1 rounded bg-surface-container-low text-error font-mono">DESTRUCTIVE</span>
+</div>
+</div>
+<!-- Standby 3 -->
+<div class="p-space-xs rounded bg-surface-container hover:bg-surface-container-high transition-all cursor-pointer">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline font-mono">[STANDBY - ARMED]</span>
+<span class="font-label-sm text-label-sm text-outline">MTTR: 0.340ms</span>
+</div>
+<div class="font-headline-md text-headline-md text-on-surface mt-0.5 truncate">PB-BACNET-DEVICE-SPOOF-02</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">MAC/IP strict binding clamp, ARP poison zero-latency drop</p>
+<div class="flex items-center gap-space-xs mt-1">
+<span class="font-label-sm text-label-sm px-1 rounded bg-surface-container-low text-on-surface-variant font-mono">BUILDING_BUS</span>
+<span class="font-label-sm text-label-sm px-1 rounded bg-surface-container-low text-secondary font-mono">TC_INGRESS</span>
+</div>
+</div>
+<!-- Testing -->
+<div class="p-space-xs rounded bg-surface-container hover:bg-surface-container-high transition-all cursor-pointer">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-tertiary-fixed-dim font-mono">[TESTING / CANARY]</span>
+<span class="font-label-sm text-label-sm text-outline">MTTR: 4.800ms</span>
+</div>
+<div class="font-headline-md text-headline-md text-on-surface mt-0.5 truncate">PB-ZERO-TRUST-CONFORMER-07</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">Attention entropy &gt; 1.25 nats triggers quarantine</p>
+<div class="flex items-center gap-space-xs mt-1">
+<span class="font-label-sm text-label-sm px-1 rounded bg-surface-container-low text-tertiary-fixed font-mono">NEURAL_POLICY</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Add Step Node Palette -->
+<div class="bg-surface-container-lowest p-space-sm rounded shadow-md flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-primary uppercase font-bold tracking-wider">Step Node Palette</span>
+<span class="font-label-sm text-label-sm text-outline">DRAG TO CANVAS</span>
+</div>
+<div class="grid grid-cols-2 gap-1.5 mt-1">
+<button class="flex flex-col items-start p-2 rounded bg-surface-container hover:bg-surface-container-high transition-all text-left group" type="button">
+<div class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-[16px]">sensors</span>
+<span class="font-label-sm text-label-sm font-bold uppercase">Ingest Trigger</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 text-[10px]">Suricata / Kafka Event</span>
+</button>
+<button class="flex flex-col items-start p-2 rounded bg-surface-container hover:bg-surface-container-high transition-all text-left group" type="button">
+<div class="flex items-center gap-1 text-primary-container">
+<span class="material-symbols-outlined text-[16px]">filter_alt</span>
+<span class="font-label-sm text-label-sm font-bold uppercase">eBPF Filter</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 text-[10px]">XDP / TC Kernel Drop</span>
+</button>
+<button class="flex flex-col items-start p-2 rounded bg-surface-container hover:bg-surface-container-high transition-all text-left group" type="button">
+<div class="flex items-center gap-1 text-tertiary-fixed-dim">
+<span class="material-symbols-outlined text-[16px]">pause_circle</span>
+<span class="font-label-sm text-label-sm font-bold uppercase">Cgroup Freeze</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 text-[10px]">Process SIGSTOP Lock</span>
+</button>
+<button class="flex flex-col items-start p-2 rounded bg-surface-container hover:bg-surface-container-high transition-all text-left group" type="button">
+<div class="flex items-center gap-1 text-secondary-fixed">
+<span class="material-symbols-outlined text-[16px]">terminal</span>
+<span class="font-label-sm text-label-sm font-bold uppercase">Agent Task</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 text-[10px]">Wazuh RPC Probe</span>
+</button>
+<button class="flex flex-col items-start p-2 rounded bg-surface-container hover:bg-surface-container-high transition-all text-left group" type="button">
+<div class="flex items-center gap-1 text-error">
+<span class="material-symbols-outlined text-[16px]">power_off</span>
+<span class="font-label-sm text-label-sm font-bold uppercase">Hardware Relay</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 text-[10px]">Four-Eyes Air-Gap</span>
+</button>
+<button class="flex flex-col items-start p-2 rounded bg-surface-container hover:bg-surface-container-high transition-all text-left group" type="button">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+<span class="font-label-sm text-label-sm font-bold uppercase">Merkle Audit</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 text-[10px]">TPM 2.0 PCR Signature</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- CENTER PANEL: Visual Directed Acyclic Graph (DAG) Execution Flow (5 Cols) -->
+<main class="xl:col-span-5 flex flex-col gap-space-sm min-w-0">
+<!-- Canvas HUD Header -->
+<div class="bg-surface-container-lowest p-space-sm rounded shadow-md flex items-center justify-between flex-wrap gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-container text-[18px]">account_tree</span>
+<div>
+<div class="font-label-sm text-label-sm text-outline tracking-wider uppercase">EXECUTION PIPELINE</div>
+<div class="font-headline-md text-headline-md text-primary">Directed Acyclic Graph (DAG)</div>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container text-primary-container font-mono">0 ERRORS</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container text-secondary font-mono">CYCLE-FREE</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-mono">SNAP 16px</span>
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface"><span class="material-symbols-outlined text-[16px]">fit_screen</span></button>
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface"><span class="material-symbols-outlined text-[16px]">zoom_in</span></button>
+</div>
+</div>
+<!-- Graph Canvas -->
+<div class="relative w-full bg-surface-container-lowest p-space-md rounded shadow-md flex flex-col gap-space-md overflow-hidden">
+<!-- Background Tactical Grid Lines (SVG) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none opacity-20" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="24" id="tacticalGrid" patternunits="userSpaceOnUse" width="24">
+<path class="text-outline-variant" d="M 24 0 L 0 0 0 24" fill="none" stroke="currentColor" stroke-width="0.5"></path>
+</pattern>
+</defs>
+<rect fill="url(#tacticalGrid)" height="100%" width="100%"></rect>
+</svg>
+<!-- NODE 1: Ingest Trigger -->
+<div class="relative z-10 w-full p-space-sm rounded bg-surface-container shadow-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="px-1 py-0.5 rounded bg-secondary/10 text-secondary font-label-sm text-label-sm font-mono uppercase font-bold">NODE 01</span>
+<span class="font-label-sm text-label-sm text-outline">INGEST TRIGGER</span>
+</div>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-primary-container/20 text-primary-container font-mono font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+              RESOLVED (0.00ms)
+            </span>
+</div>
+<div class="font-headline-md text-headline-md text-primary mt-1">Modbus FC16 Anomaly Detected</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Source: <code class="text-secondary font-mono">Conformer Deep Model (τ ≥ 0.850)</code> OR <code class="text-secondary font-mono">Suricata Alert #20491</code>
+</div>
+<div class="mt-2 flex items-center justify-between font-label-sm text-label-sm pt-2 bg-surface-container-low px-2 py-1 rounded">
+<span class="text-outline">REGISTER EXCURSION: 40001 &gt; 9,800 RPM</span>
+<span class="text-primary-container font-mono">BURST: 38 PKTS</span>
+</div>
+</div>
+<!-- Flow Bus Splitter -->
+<div class="relative flex items-center justify-center -my-2 z-10">
+<div class="h-6 w-0.5 bg-primary-container shadow-lg shadow-primary-container/50"></div>
+<span class="absolute font-label-sm text-label-sm text-primary-container bg-surface px-1 py-0.2 rounded font-mono">PARALLEL FORK</span>
+</div>
+<!-- NODE 2 & 3: Parallel Branches (Ring0 + Host Cgroup) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-sm relative z-10">
+<!-- NODE 2: eBPF Fast Path -->
+<div class="p-space-sm rounded bg-surface-container shadow-md relative overflow-hidden">
+<div class="absolute top-0 right-0 w-12 h-12 bg-primary-container/5 rounded-bl-full pointer-events-none"></div>
+<div class="flex items-center justify-between">
+<span class="px-1 py-0.5 rounded bg-primary-container/10 text-primary-container font-label-sm text-label-sm font-mono uppercase font-bold">NODE 02 [RING0]</span>
+<span class="font-label-sm text-label-sm text-primary-container font-mono font-bold">0.082ms</span>
+</div>
+<div class="font-headline-md text-headline-md text-primary mt-1 text-[15px]">eBPF XDP Line Drop</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 text-[11px]">Hardware-assisted NIC drop via AF_XDP hook</p>
+<div class="mt-2 bg-surface-container-low p-1.5 rounded font-label-sm text-label-sm text-on-surface font-mono">
+<div>IFACE: eth0 [100GbE]</div>
+<div class="text-primary-container">SRC: 192.168.100.45</div>
+<div class="text-outline">ACTION: XDP_DROP</div>
+</div>
+<div class="mt-2 flex items-center gap-1 font-label-sm text-label-sm text-primary-container font-bold">
+<span class="material-symbols-outlined text-[14px]">done_all</span>
+<span>ENFORCED IN HARDWARE</span>
+</div>
+</div>
+<!-- NODE 3: Cgroup Process Freeze -->
+<div class="p-space-sm rounded bg-surface-container shadow-md">
+<div class="flex items-center justify-between">
+<span class="px-1 py-0.5 rounded bg-tertiary-fixed-dim/20 text-tertiary-fixed-dim font-label-sm text-label-sm font-mono uppercase font-bold">NODE 03 [HOST]</span>
+<span class="font-label-sm text-label-sm text-tertiary-fixed font-mono font-bold">2.15ms</span>
+</div>
+<div class="font-headline-md text-headline-md text-primary mt-1 text-[15px]">cgroup-v2 Freeze</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 text-[11px]">Quarantine corrupted daemon thread</p>
+<div class="mt-2 bg-surface-container-low p-1.5 rounded font-label-sm text-label-sm text-on-surface font-mono">
+<div>PID: 49102 [modbus_srv]</div>
+<div class="text-tertiary-fixed-dim">SIGNAL: SIGSTOP</div>
+<div class="text-outline">CPU QUOTA: 0%</div>
+</div>
+<div class="mt-2 flex items-center gap-1 font-label-sm text-label-sm text-primary-container font-bold">
+<span class="material-symbols-outlined text-[14px]">done_all</span>
+<span>STATE: FROZEN</span>
+</div>
+</div>
+</div>
+<!-- Flow Bus Combiner -->
+<div class="relative flex items-center justify-center -my-2 z-10">
+<div class="h-6 w-0.5 bg-secondary-fixed shadow-lg shadow-secondary/50"></div>
+<span class="absolute font-label-sm text-label-sm text-secondary bg-surface px-1 py-0.2 rounded font-mono">CONVERGE</span>
+</div>
+<!-- NODE 4: Decision Gate & Physical Envelope -->
+<div class="relative z-10 w-full p-space-sm rounded bg-surface-container shadow-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="px-1 py-0.5 rounded bg-secondary/20 text-secondary font-label-sm text-label-sm font-mono uppercase font-bold">NODE 04 [SAFETY GATE]</span>
+<span class="font-label-sm text-label-sm text-outline">PHYSICAL ENVELOPE</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary-container font-mono font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+              CRITERIA SATISFIED
+            </span>
+</div>
+<div class="font-headline-md text-headline-md text-primary mt-1">Operational Boundary Verification</div>
+<div class="grid grid-cols-2 gap-2 mt-2">
+<div class="bg-surface-container-low p-2 rounded">
+<div class="font-label-sm text-label-sm text-outline">PLANT SAFETY MARGIN</div>
+<div class="font-telemetry-metric-sm text-telemetry-metric-sm text-primary-container font-mono">92.4% <span class="text-label-sm text-outline font-normal">(&gt; 85% THRESH)</span></div>
+</div>
+<div class="bg-surface-container-low p-2 rounded">
+<div class="font-label-sm text-label-sm text-outline">PRESSURE Δ LIMIT</div>
+<div class="font-telemetry-metric-sm text-telemetry-metric-sm text-secondary font-mono">118 kPa <span class="text-label-sm text-outline font-normal">(&lt; 200 kPa MAX)</span></div>
+</div>
+</div>
+</div>
+<!-- Connection Vector -->
+<div class="relative flex items-center justify-center -my-2 z-10">
+<div class="h-6 w-0.5 bg-error animate-pulse shadow-lg shadow-error/50"></div>
+</div>
+<!-- NODE 5: Hardware Air-Gap Relay (Active Waiting) -->
+<div class="relative z-10 w-full p-space-sm rounded bg-surface-container shadow-xl">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="px-1 py-0.5 rounded bg-error/20 text-error font-label-sm text-label-sm font-mono uppercase font-bold">NODE 05 [HARDWARE AIR-GAP]</span>
+<span class="font-label-sm text-label-sm text-outline">PHYSICAL RELAY #3</span>
+</div>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-error/20 text-error font-mono font-bold animate-pulse flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+              AWAITING DUAL-SIGNATURE
+            </span>
+</div>
+<div class="font-headline-md text-headline-md text-error mt-1">Dual-Custody Physical Relay Trip</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">De-energize PLC output actuator to establish cold galvanically isolated air-gap</p>
+<div class="mt-2.5 flex items-center gap-2">
+<button class="px-space-sm py-1.5 rounded bg-error text-on-error font-label-sm text-label-sm font-bold uppercase tracking-wider flex items-center gap-1 hover:brightness-110 shadow-lg" type="button">
+<span class="material-symbols-outlined text-[15px]">key</span>
+<span>Sign Interlock (SecOps)</span>
+</button>
+<span class="font-label-sm text-label-sm text-outline">Requires 2nd Safety Key from Plant Floor</span>
+</div>
+</div>
+<!-- Connection Vector -->
+<div class="relative flex items-center justify-center -my-2 z-10">
+<div class="h-6 w-0.5 bg-outline opacity-40"></div>
+</div>
+<!-- NODE 6: TPM 2.0 PCR-7 & Merkle Anchor -->
+<div class="relative z-10 w-full p-space-sm rounded bg-surface-container/70 shadow-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="px-1 py-0.5 rounded bg-surface-container-highest text-outline font-label-sm text-label-sm font-mono uppercase">NODE 06 [AUDIT]</span>
+<span class="font-label-sm text-label-sm text-outline">IMMUTABLE ANCHOR</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline font-mono uppercase">QUEUED</span>
+</div>
+<div class="font-headline-md text-headline-md text-on-surface-variant mt-1">TPM 2.0 PCR-7 Attestation &amp; Merkle Commit</div>
+<div class="font-body-sm text-body-sm text-outline mt-0.5">Hardware root of trust block commitment: SHA-256 state seal</div>
+</div>
+</div>
+</main>
+<!-- RIGHT PANEL: Bytecode Dissection & Safety Policies (4 Cols) -->
+<aside class="xl:col-span-4 flex flex-col gap-space-sm min-w-0">
+<!-- Dual Tabs Container -->
+<div class="bg-surface-container-lowest p-space-sm rounded shadow-md flex flex-col gap-space-sm">
+<!-- Tab Selector Header -->
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-1">
+<button class="px-2.5 py-1 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">code</span>
+<span>C / eBPF Dissection</span>
+</button>
+<button class="px-2.5 py-1 rounded bg-surface-container text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">policy</span>
+<span>Safety Policies</span>
+</button>
+</div>
+<span class="font-label-sm text-label-sm text-outline font-mono">TARGET: X86_64</span>
+</div>
+<!-- Code Dissection Area -->
+<div class="bg-surface-container-low p-space-sm rounded font-mono text-label-sm text-label-sm flex flex-col gap-2 relative overflow-hidden">
+<div class="flex items-center justify-between text-outline text-[10px] pb-1">
+<span>xdp_drop_modbus_excursion.c</span>
+<span class="text-primary-container">LLVM-BPF OK</span>
+</div>
+<pre class="text-on-surface text-[11px] leading-[17px] overflow-x-auto whitespace-pre font-mono selection:bg-primary-container selection:text-on-primary-container"><code><span class="text-secondary-fixed">SEC</span>(<span class="text-tertiary-fixed">"xdp"</span>)
+<span class="text-primary-container">int</span> <span class="text-secondary">xdp_drop_modbus_excursion</span>(<span class="text-primary-container">struct</span> xdp_md *ctx) {
+    <span class="text-primary-container">void</span> *data = (<span class="text-primary-container">void</span> *)(<span class="text-primary-container">long</span>)ctx-&gt;data;
+    <span class="text-primary-container">void</span> *data_end = (<span class="text-primary-container">void</span> *)(<span class="text-primary-container">long</span>)ctx-&gt;data_end;
+    <span class="text-primary-container">struct</span> ethhdr *eth = data;
+    
+    <span class="text-outline">// Sanity &amp; boundary check for packet size</span>
+    <span class="text-secondary-fixed">if</span> ((<span class="text-primary-container">void</span> *)(eth + <span class="text-tertiary-fixed">1</span>) &gt; data_end) 
+        <span class="text-secondary-fixed">return</span> XDP_PASS;
+    <span class="text-secondary-fixed">if</span> (eth-&gt;h_proto != bpf_htons(ETH_P_IP)) 
+        <span class="text-secondary-fixed">return</span> XDP_PASS;
+
+    <span class="text-primary-container">struct</span> iphdr *ip = data + <span class="text-secondary-fixed">sizeof</span>(*eth);
+    <span class="text-secondary-fixed">if</span> ((<span class="text-primary-container">void</span> *)(ip + <span class="text-tertiary-fixed">1</span>) &gt; data_end) 
+        <span class="text-secondary-fixed">return</span> XDP_PASS;
+
+    <span class="text-outline">// Blacklisted ICS Ingress (192.168.100.45)</span>
+    <span class="text-secondary-fixed">if</span> (ip-&gt;saddr == bpf_htonl(<span class="text-tertiary-fixed">0xC0A8642D</span>)) {
+        bpf_trace_printk(<span class="text-tertiary-fixed">"[XDP_DROP] Banned ICS Ingress\n"</span>);
+        <span class="text-secondary-fixed">return</span> <span class="text-error font-bold">XDP_DROP</span>;
+    }
+    <span class="text-secondary-fixed">return</span> <span class="text-primary-container">XDP_PASS</span>;
+}</code></pre>
+<!-- Compiler & Bytecode Stats Card -->
+<div class="grid grid-cols-2 gap-2 pt-2 bg-surface-container-high/40 p-2 rounded">
+<div>
+<div class="text-[10px] text-outline uppercase font-mono">Instruction Count</div>
+<div class="font-telemetry-metric-sm text-telemetry-metric-sm text-primary font-mono">48 INSN</div>
+</div>
+<div>
+<div class="text-[10px] text-outline uppercase font-mono">Verifier Logs</div>
+<div class="font-telemetry-metric-sm text-telemetry-metric-sm text-primary-container font-mono">0 ERRORS</div>
+</div>
+<div>
+<div class="text-[10px] text-outline uppercase font-mono">BPF Map Type</div>
+<div class="font-label-sm text-label-sm text-secondary font-mono truncate">LPM_TRIE (65K)</div>
+</div>
+<div>
+<div class="text-[10px] text-outline uppercase font-mono">JIT Compiled Target</div>
+<div class="font-label-sm text-label-sm text-on-surface font-mono">x86_64 native</div>
+</div>
+</div>
+</div>
+<!-- Four-Eyes Interlock Safety Constraints Panel -->
+<div class="flex flex-col gap-space-xs mt-1">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-primary uppercase font-bold tracking-wider">Four-Eyes Interlock Constraints</span>
+<span class="font-label-sm text-label-sm text-error font-mono">M-OF-N: 2/2</span>
+</div>
+<!-- Custody Table -->
+<div class="bg-surface-container rounded p-space-xs flex flex-col gap-1.5 shadow-sm">
+<!-- Officer 1 -->
+<div class="flex items-center justify-between p-1.5 rounded bg-surface-container-low">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary-container text-[16px]">verified</span>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface font-bold">SecOps Admin (Officer 1)</div>
+<div class="font-label-sm text-label-sm text-outline font-mono">ID: #99214 // TOKEN SIGNED</div>
+</div>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-primary-container/20 text-primary-container font-label-sm text-label-sm font-mono font-bold">AUTH OK</span>
+</div>
+<!-- Officer 2 -->
+<div class="flex items-center justify-between p-1.5 rounded bg-surface-container-low">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-error text-[16px] animate-pulse">lock</span>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface font-bold">Plant Safety Engineer (Officer 2)</div>
+<div class="font-label-sm text-label-sm text-outline font-mono">Hardware FIDO2 Key Pending</div>
+</div>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-error/20 text-error font-label-sm text-label-sm font-mono font-bold">WAITING</span>
+</div>
+<!-- Hardware State Specs -->
+<div class="p-2 rounded bg-surface-container-high/40 flex flex-col gap-1 text-[11px] font-mono">
+<div class="flex items-center justify-between">
+<span class="text-outline">Fail-Safe Topology:</span>
+<span class="text-on-surface font-bold">Normally Open (NO) De-energize</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-outline">Max Outage Window:</span>
+<span class="text-secondary font-bold">450ms (No Hydraulic Hammer)</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-outline">Relay Trip Protocol:</span>
+<span class="text-primary-container font-bold">Modbus Coil #0003 Direct</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Simulation Trace Output Feed -->
+<div class="p-space-xs rounded bg-surface-container-low flex flex-col gap-1 font-mono text-[10px]">
+<div class="flex items-center justify-between text-outline">
+<span>LIVE KERNEL TRACE (RING BUFFER)</span>
+<span class="text-secondary-fixed-dim">POLLING 10ms</span>
+</div>
+<div class="text-on-surface-variant font-mono space-y-0.5">
+<div><span class="text-outline">[14:28:02.102]</span> <span class="text-primary-container">&lt;kernel&gt;</span> loaded prog 'xdp_drop_modbus_excursion' id 412</div>
+<div><span class="text-outline">[14:28:02.105]</span> <span class="text-secondary">&lt;ring0&gt;</span> xdp attached to eth0 in driver mode</div>
+<div><span class="text-outline">[14:28:02.189]</span> <span class="text-error">&lt;xdp_drop&gt;</span> match src:192.168.100.45 -&gt; dropped 184000 pkts/s</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</div></main></div><footer class="fixed bottom-0 left-0 right-0 h-16 z-50 bg-surface-container-lowest/95 backdrop-blur-md flex items-center justify-between px-margin-desktop"><div class="hidden md:flex items-center gap-space-sm"><span class="w-2 h-2 rounded-full bg-primary-container"></span><span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">TACTICAL AIR-GAP: SYNCHRONIZED</span></div><nav class="flex items-center gap-space-xs overflow-x-auto py-1" data-active-classes="bg-secondary-container text-on-secondary-container font-bold rounded"><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap uppercase" data-path="overview" href="#">OVERVIEW</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap uppercase" data-path="threat-lab" href="#">THREAT LAB</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap uppercase" data-path="xai-engine" href="#">XAI ENGINE</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap uppercase" data-path="adversarial" href="#">ADVERSARIAL</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap uppercase" data-path="remediation" href="#">REMEDIATION</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap uppercase" data-path="compliance" href="#">COMPLIANCE</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap uppercase" data-path="execute-pcb" href="#">EXECUTE PCB</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap uppercase" data-path="sniffer" href="#">SNIFFER</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap uppercase" data-path="agentic-soc" href="#">AGENTIC SOC</a><a aria-current="page" class="px-space-sm py-1.5 transition-colors whitespace-nowrap uppercase bg-secondary-container text-on-secondary-container font-bold rounded" data-path="playbooks" href="#">PLAYBOOKS</a></nav><div class="flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface-variant"><span class="material-symbols-outlined text-[16px] text-secondary-fixed-dim">security</span><span class="font-mono">OBSIDIAN HUD</span></div></footer></body></html>

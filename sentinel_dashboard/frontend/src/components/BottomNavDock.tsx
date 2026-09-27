@@ -1,3 +1,8 @@
+// ==============================================================================
+// SENTINEL-IOT: BOTTOM TACTICAL NAVIGATION DOCK (RESTORED MAGNETIC DOCK HUD)
+// Version 2.4 - Enterprise Production Edition - FYP-II
+// ==============================================================================
+
 "use client";
 
 import React from "react";
@@ -13,9 +18,6 @@ import {
   ShieldAlert,
   ShieldCheck,
   FileCheck,
-  Cpu,
-  Eye,
-  Radio,
 } from "lucide-react";
 import { useTelemetryStore } from "@/store/useTelemetryStore";
 import { ConsoleType } from "@/types/sentinel";
@@ -32,19 +34,13 @@ export default function BottomNavDock({ onOpenResearch }: BottomNavDockProps) {
     setActiveConsole,
     activeRules,
     latestEvent,
-    openPacketSniffer,
   } = useTelemetryStore();
 
-  const handleNavigate = (consoleId: ConsoleType | "research") => {
-    if (consoleId === "research") {
-      onOpenResearch?.();
-      return;
-    }
-
+  const handleNavigate = (consoleId: ConsoleType) => {
     setActiveConsole(consoleId);
 
-    // If currently on standalone /execute page and selecting another console, return to /
-    if (pathname === "/execute" && consoleId !== "execute") {
+    // If currently on standalone /execute, /voice, or /audit page, return to /
+    if (pathname === "/execute" || pathname === "/voice" || pathname === "/audit") {
       router.push("/");
     }
   };
@@ -107,33 +103,6 @@ export default function BottomNavDock({ onOpenResearch }: BottomNavDockProps) {
       color: "#a855f7",
       isActive: pathname === "/" && activeConsole === "compliance",
       onClick: () => handleNavigate("compliance"),
-    },
-    {
-      id: "execute",
-      label: "Circuit PCB Architecture",
-      description: "Interactive Hardware IC Topology: Multi-Domain Sensors → Dual-Head Conformer",
-      icon: <Cpu className="w-full h-full" />,
-      color: "#00f3ff",
-      isActive: (pathname === "/" && activeConsole === "execute") || pathname === "/execute",
-      onClick: () => handleNavigate("execute"),
-    },
-    {
-      id: "sniffer",
-      label: "Live Packet Sniffer",
-      description: "Wireshark-Grade Layer 2–7 Protocol Dissector & Raw Hex/ASCII Stream",
-      icon: <Radio className="w-full h-full" />,
-      color: "#00f3ff",
-      isActive: false,
-      onClick: () => openPacketSniffer(),
-    },
-    {
-      id: "research",
-      label: "Research Gallery",
-      description: "11 Empirical Validation Figures, Confusion Matrices & Statistical Proofs",
-      icon: <Eye className="w-full h-full" />,
-      color: "#38bdf8",
-      isActive: false,
-      onClick: () => handleNavigate("research"),
     },
   ];
 

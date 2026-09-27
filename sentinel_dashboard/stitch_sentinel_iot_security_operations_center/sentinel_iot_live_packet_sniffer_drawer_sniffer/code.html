@@ -1,0 +1,456 @@
+<!DOCTYPE html><html class="dark" lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"on-primary":"#003911","outline-variant":"#3b4b3a","primary":"#edffe8","surface-container":"#1c2024","on-background":"#e0e3e8","surface-bright":"#353a3e","secondary-fixed":"#9cf0ff","surface-container-high":"#262a2f","on-tertiary-container":"#895600","on-primary-fixed":"#002107","on-secondary-fixed":"#001f24","secondary-fixed-dim":"#00daf3","on-tertiary-fixed":"#2a1700","inverse-primary":"#006e27","tertiary-container":"#ffd7aa","primary-fixed-dim":"#00e55b","inverse-surface":"#e0e3e8","on-tertiary-fixed-variant":"#653e00","on-surface":"#e0e3e8","on-secondary-container":"#00616d","secondary-container":"#00e3fd","on-secondary":"#00363d","on-error":"#690005","tertiary":"#fff9f6","primary-fixed":"#6bff83","on-surface-variant":"#b9ccb5","surface-container-highest":"#31353a","outline":"#849581","on-error-container":"#ffdad6","surface":"#101418","on-primary-fixed-variant":"#00531b","on-tertiary":"#472a00","surface-dim":"#101418","surface-container-lowest":"#0a0f13","surface-tint":"#00e55b","on-primary-container":"#007128","surface-container-low":"#181c20","primary-container":"#00ff66","error-container":"#93000a","inverse-on-surface":"#2d3135","tertiary-fixed-dim":"#ffb95f","surface-variant":"#31353a","secondary":"#bdf4ff","background":"#101418","error":"#ffb4ab","tertiary-fixed":"#ffddb8","on-secondary-fixed-variant":"#004f58"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"margin-desktop":"1.5rem","space-lg":"1.25rem","space-md":"0.75rem","gutter":"0.75rem","space-sm":"0.5rem","space-xs":"0.25rem","margin":"1rem","gutter-desktop":"1rem","space-xl":"2rem"},"fontFamily":{"headline-xl":["Space Grotesk"],"headline-xl-mobile":["Space Grotesk"],"headline-md":["Space Grotesk"],"body-lg":["Space Grotesk"],"headline-lg":["Space Grotesk"],"label-sm":["JetBrains Mono"],"body-md":["Space Grotesk"],"telemetry-metric-sm":["JetBrains Mono"],"body-sm":["Space Grotesk"],"label-md":["JetBrains Mono"],"label-lg":["JetBrains Mono"],"telemetry-metric":["JetBrains Mono"]},"fontSize":{"headline-xl":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-xl-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-md":["18px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"600"}],"body-lg":["15px",{"lineHeight":"22px","fontWeight":"400"}],"headline-lg":["22px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-sm":["10px",{"lineHeight":"14px","letterSpacing":"0.08em","fontWeight":"500"}],"body-md":["13px",{"lineHeight":"18px","fontWeight":"400"}],"telemetry-metric-sm":["16px",{"lineHeight":"20px","letterSpacing":"0em","fontWeight":"600"}],"body-sm":["11px",{"lineHeight":"16px","fontWeight":"400"}],"label-md":["11px",{"lineHeight":"16px","letterSpacing":"0.06em","fontWeight":"500"}],"label-lg":["13px",{"lineHeight":"18px","letterSpacing":"0.04em","fontWeight":"600"}],"telemetry-metric":["24px",{"lineHeight":"28px","letterSpacing":"-0.02em","fontWeight":"700"}]}}}}</script></head><body class="bg-surface-container-lowest font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/90 backdrop-blur-md"><div class="h-16 px-gutter-desktop flex items-center justify-between bg-surface-container-low/60 shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded bg-primary-container/20 flex items-center justify-center"><span class="material-symbols-outlined text-primary-container text-[20px]">security</span></div><div class="flex flex-col"><span class="font-headline-md text-headline-md tracking-tight text-primary leading-none">SENTINEL-IoT</span><span class="font-label-sm text-label-sm text-secondary tracking-widest">TACTICAL SOC // ICS DEFENSE</span></div></div><div class="flex items-center gap-space-xs px-space-sm py-0.5 rounded bg-surface-container-highest"><span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-sm text-label-sm text-primary-container">FYP-II v2.4 OPERATIONAL</span></div><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container"><span class="font-label-sm text-label-sm text-on-surface-variant">LATENCY:</span><span class="font-telemetry-metric-sm text-telemetry-metric-sm text-secondary-fixed">21.5 ms</span><span class="w-2 h-2 rounded-full bg-secondary-fixed-dim animate-ping"></span></div></div><div class="flex items-center gap-space-md"><div class="hidden lg:flex items-center p-0.5 rounded bg-surface-container-highest"><button class="px-space-sm py-1 rounded bg-surface-container font-label-sm text-label-sm text-primary-container" type="button">LIVE WS (FastAPI)</button><button class="px-space-sm py-1 rounded font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface" type="button">OFFLINE MOCK</button></div><div class="hidden md:flex items-center gap-space-md px-space-md py-1 rounded bg-surface-container-high"><div class="flex flex-col text-right"><span class="font-label-sm text-label-sm text-on-surface-variant">UTC MASTER</span><span class="font-label-md text-label-md text-primary font-mono">14:22:09.412</span></div><div class="w-px h-6 bg-surface-bright"></div><div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface-variant">THROUGHPUT</span><span class="font-telemetry-metric-sm text-telemetry-metric-sm text-secondary font-mono">2,841,920 EVT</span></div></div><div class="flex items-center gap-space-sm"><button class="hidden sm:flex items-center gap-space-xs px-space-sm py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm" type="button"><span class="material-symbols-outlined text-[16px]">palette</span><span class="">Obsidian HUD</span></button><button class="hidden sm:flex items-center gap-space-xs px-space-sm py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm" type="button"><span class="material-symbols-outlined text-[16px]">science</span><span class="">Research Gallery</span></button><button class="flex items-center gap-space-xs px-space-md py-1.5 rounded bg-error-container text-on-error-container hover:bg-error hover:text-on-error font-label-sm text-label-sm font-bold shadow-[0_0_15px_rgba(239,68,68,0.35)] transition-all" type="button"><span class="material-symbols-outlined text-[16px]">lock</span><span class="">EMERGENCY LOCKDOWN</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div><div class="h-10 px-gutter-desktop flex items-center justify-between bg-surface-container-lowest/95 shadow-[0_1px_4px_rgba(0,0,0,0.5)]"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase">DOMAIN:</span><select class="bg-surface-container-high text-secondary font-label-sm text-label-sm px-space-sm py-1 rounded focus:outline-none"><option>Modbus Industrial PLC (ToN_IoT #04)</option><option>Network Core Telemetry (ToN_IoT #01)</option><option>SCADA Thermostat Rig (ToN_IoT #07)</option><option>Smart Grid Energy Meter (ToN_IoT #11)</option><option>ICS Robotic Actuator (ToN_IoT #09)</option><option>Smart Fridge Environment (ToN_IoT #03)</option><option>Gas Level Sensing Array (ToN_IoT #12)</option></select></div><div class="hidden md:flex items-center gap-1"><button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface" type="button"><span class="material-symbols-outlined text-[16px]">play_arrow</span></button><button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface" type="button"><span class="material-symbols-outlined text-[16px]">pause</span></button><button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface" type="button"><span class="material-symbols-outlined text-[16px]">skip_next</span></button><div class="flex items-center bg-surface-container px-space-xs py-0.5 rounded ml-1"><span class="font-label-sm text-label-sm text-primary font-mono">1.0x</span></div></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs"><span class="font-label-sm text-label-sm text-on-surface-variant">TENSOR:</span><span class="font-label-sm text-label-sm text-primary-container font-mono bg-surface-container px-space-xs py-0.5 rounded">[B, 10, D] READY</span></div><div class="hidden lg:flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-primary-fixed-dim"></span><span class="font-label-sm text-label-sm text-on-surface-variant">SHM: SYNCHRONIZED</span></div></div></div></header><main class="w-full pt-26 pb-28 min-h-screen bg-surface-container-lowest px-gutter-desktop"><div class="flex flex-col w-full relative min-h-[calc(100vh-6.5rem)]">
+<!-- DIMMED BACKGROUND: Tactical Executive SOC Overview Layer -->
+<div class="w-full grid grid-cols-12 gap-space-md opacity-25 filter blur-[2px] pointer-events-none select-none">
+<!-- Row 1: Global Health & Telemetry Metrics -->
+<div class="col-span-12 lg:col-span-3 bg-surface-container p-space-md rounded-lg shadow-md flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span class="">SUB-SYSTEM: TON_IOT_04</span>
+<span class="text-primary-container">HEALTH NOMINAL</span>
+</div>
+<div class="font-telemetry-metric text-telemetry-metric text-primary">99.84%</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">eBPF XDP Line Protection active across 4 nodes</div>
+<div class="w-full h-8 flex items-end gap-1 mt-space-xs">
+<div class="bg-primary-container h-3 w-full rounded-xs"></div>
+<div class="bg-primary-container h-5 w-full rounded-xs"></div>
+<div class="bg-primary-container h-4 w-full rounded-xs"></div>
+<div class="bg-primary-container h-6 w-full rounded-xs"></div>
+<div class="bg-primary-container h-7 w-full rounded-xs"></div>
+<div class="bg-primary-container h-5 w-full rounded-xs"></div>
+<div class="bg-primary-container h-8 w-full rounded-xs"></div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-3 bg-surface-container p-space-md rounded-lg shadow-md flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span class="">ANOMALY DETECTOR</span>
+<span class="text-secondary-fixed">INFERENCE: 0.8ms</span>
+</div>
+<div class="font-telemetry-metric text-telemetry-metric text-secondary-fixed">0.038 <span class="font-body-sm text-body-sm text-on-surface-variant">AVG τ</span></div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Conformer Attention v4.2 Evaluated</div>
+<div class="w-full h-8 flex items-end gap-1 mt-space-xs">
+<div class="bg-secondary-fixed h-2 w-full rounded-xs"></div>
+<div class="bg-secondary-fixed h-3 w-full rounded-xs"></div>
+<div class="bg-secondary-fixed h-4 w-full rounded-xs"></div>
+<div class="bg-secondary-fixed h-2 w-full rounded-xs"></div>
+<div class="bg-secondary-fixed h-5 w-full rounded-xs"></div>
+<div class="bg-secondary-fixed h-3 w-full rounded-xs"></div>
+<div class="bg-secondary-fixed h-2 w-full rounded-xs"></div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-3 bg-surface-container p-space-md rounded-lg shadow-md flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span class="">INGEST RATE</span>
+<span class="text-primary-container">100.0 GbE</span>
+</div>
+<div class="font-telemetry-metric text-telemetry-metric text-on-surface font-mono">14,820 <span class="font-body-sm text-body-sm text-on-surface-variant">PKT/S</span></div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Zero-Copy Kernel Bypass Enabled</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full mt-space-sm overflow-hidden">
+<div class="bg-primary-container h-full w-[65%]"></div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-3 bg-surface-container p-space-md rounded-lg shadow-md flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span class="">THREAT CONTAINMENT</span>
+<span class="text-error">ACTIVE ISOLATION</span>
+</div>
+<div class="font-telemetry-metric text-telemetry-metric text-error font-mono">1 CRIT</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Modbus Payload Signature Mitigated</div>
+<div class="flex items-center gap-space-xs text-error font-label-sm text-label-sm mt-space-xs">
+<span class="material-symbols-outlined text-[14px]">shield_lock</span>
+<span class="">PLC 10.0.4.12 HOLD_REG PROTECTED</span>
+</div>
+</div>
+<!-- Row 2: Background Topology Map Simulation -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container p-space-md rounded-lg shadow-md flex flex-col gap-space-md h-80">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface">DISTRIBUTED SCADA TOPOLOGY MAP</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">PROMISCUOUS eth0: 192.168.100.0/24 ↔ 10.0.4.0/24</span>
+</div>
+<div class="flex-1 rounded bg-surface-container-low flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 flex items-center justify-center opacity-30">
+<svg class="w-full h-full text-secondary-fixed" xmlns="http://www.w3.org/2000/svg">
+<circle cx="15%" cy="30%" fill="currentColor" r="6"></circle>
+<circle cx="45%" cy="50%" fill="currentColor" r="8"></circle>
+<circle cx="75%" cy="35%" fill="currentColor" r="6"></circle>
+<circle cx="85%" cy="75%" fill="#ffb4ab" r="6"></circle>
+<line stroke="currentColor" stroke-dasharray="3 3" x1="15%" x2="45%" y1="30%" y2="50%"></line>
+<line stroke="currentColor" x1="45%" x2="75%" y1="50%" y2="35%"></line>
+<line stroke="#ffb4ab" stroke-width="2" x1="45%" x2="85%" y1="50%" y2="75%"></line>
+</svg>
+</div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4 bg-surface-container p-space-md rounded-lg shadow-md flex flex-col gap-space-sm h-80">
+<span class="font-label-md text-label-md text-on-surface">INCIDENT QUEUE</span>
+<div class="space-y-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<div class="p-space-xs bg-surface-container-high rounded text-error">INC#9041: Modbus Write Out-of-Bounds</div>
+<div class="p-space-xs bg-surface-container-high rounded">INC#9040: DNP3 Polling Excursion</div>
+<div class="p-space-xs bg-surface-container-high rounded">INC#9039: BACnet Node Discovery Flooding</div>
+</div>
+</div>
+</div>
+<!-- BACKDROP OVERLAY -->
+<div class="fixed inset-0 bg-surface-container-lowest/80 backdrop-blur-[6px] z-40 transition-opacity"></div>
+<!-- SLIDE-OUT FORENSIC DRAWER PANEL: Live Packet Sniffer // eth0 AF_XDP Line-Rate Dissector -->
+<aside class="fixed top-16 bottom-0 right-0 z-40 w-full xl:w-[72%] lg:w-[82%] bg-surface-container-lowest shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-right duration-200"><div class="bg-error-container text-on-error-container px-gutter-desktop py-1 flex items-center justify-between border-l-2 border-primary-container font-mono text-[11px] shadow-md"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[15px] text-primary-container animate-pulse">verified_user</span><span class="font-bold text-primary">CRITICAL CONTAINMENT:</span><span class="text-error font-bold">192.168.100.45 BANNED VIA KERNEL eBPF XDP</span><span class="text-on-surface-variant">(MTTR: 0.082ms)</span></div><div class="flex items-center gap-space-xs text-[10px] text-secondary-fixed"><span class="material-symbols-outlined text-[13px]">lock</span><span class="">SHA-256 ANCHORED TO TPM 2.0</span><span class="px-1 rounded bg-primary-container text-on-primary-container font-bold uppercase ml-1">ENFORCED</span></div></div>
+<!-- DRAWER HEADER: Status, RingBuffer, Actions -->
+<div class="bg-surface-container-low px-gutter-desktop py-space-sm flex flex-wrap items-center justify-between gap-space-sm shadow-md">
+<!-- Title & Interface Mode -->
+<div class="flex items-center gap-space-md">
+<div class="w-8 h-8 rounded bg-secondary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary-container text-[20px]">troubleshoot</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<h2 class="font-headline-md text-headline-md tracking-tight text-primary leading-none">SENTINEL-IoT LIVE PACKET SNIFFER</h2>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high font-label-sm text-label-sm text-secondary font-mono">[PROMISCUOUS: eth0]</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">AF_XDP Zero-Copy Ingest • Real-time eBPF Dissector • AI Scoring Engine</span>
+</div>
+</div>
+<!-- Ring Buffer & Hardware Telemetry -->
+<div class="flex items-center gap-space-lg">
+<!-- Capture Telemetry Chip -->
+<div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-high shadow-inner">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-ping"></span>
+<span class="font-label-sm text-label-sm text-primary-container font-mono uppercase tracking-wider">CAPTURING</span>
+<span class="text-on-surface-variant text-label-sm">•</span>
+<span class="font-label-sm text-label-sm text-on-surface font-mono">14,820 PKTS/S</span>
+<span class="text-on-surface-variant text-label-sm">•</span>
+<span class="font-label-sm text-label-sm text-secondary-fixed font-mono">0% LOSS</span>
+</div>
+<!-- Buffer Capacity Progress -->
+<div class="hidden sm:flex flex-col gap-0.5 w-44">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant">RINGBUFFER:</span>
+<span class="text-on-surface font-mono">48.2 / 256 MB</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary-fixed h-full w-[18.8%] rounded-full"></div>
+</div>
+</div>
+<!-- Capture Controls -->
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm flex items-center gap-1 shadow-sm transition-colors" title="Pause Stream Acquisition" type="button">
+<span class="material-symbols-outlined text-[15px]">pause_circle</span>
+<span class="hidden md:inline">Pause Capture</span>
+</button>
+<button class="px-space-sm py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm flex items-center gap-1 shadow-sm transition-colors" title="Flush RingBuffer Memory" type="button">
+<span class="material-symbols-outlined text-[15px]">delete_sweep</span>
+<span class="hidden md:inline">Clear Buffer</span>
+</button>
+<button class="px-space-sm py-1.5 rounded bg-secondary-container text-on-secondary-container hover:bg-secondary font-label-sm text-label-sm font-semibold flex items-center gap-1 shadow-sm transition-colors" title="Download Standard Wireshark PCAP" type="button">
+<span class="material-symbols-outlined text-[15px]">download</span>
+<span class="">Export PCAP</span>
+</button>
+<button class="w-7 h-7 ml-space-xs rounded bg-surface-container-highest hover:bg-error-container text-on-surface hover:text-on-error flex items-center justify-center transition-colors" title="Close Sniffer Overlay" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- FILTER & BPF QUERY TOOLBAR -->
+<div class="bg-surface-container px-gutter-desktop py-space-xs flex flex-col gap-space-xs shadow-sm">
+<div class="flex flex-wrap items-center gap-space-sm">
+<!-- BPF Expression Input Bar -->
+<div class="flex-1 min-w-[280px] flex items-center gap-space-xs bg-surface-container-lowest px-space-sm py-1 rounded">
+<span class="font-label-sm text-label-sm text-secondary-fixed font-bold uppercase tracking-wider">BPF:</span>
+<div class="flex-1 font-label-md text-label-md flex items-center overflow-x-auto whitespace-nowrap">
+<span class="text-secondary-fixed">tcp port </span><span class="text-primary-container font-bold">502</span>
+<span class="text-on-surface-variant">&nbsp;or udp port&nbsp;</span>
+<span class="text-primary-container font-bold">47808</span>
+<span class="text-on-surface-variant">&nbsp;or ether proto&nbsp;</span>
+<span class="text-tertiary-fixed font-mono">0x88ba</span>
+</div>
+<button class="text-primary-container hover:text-primary transition-colors flex items-center" title="Apply Filter" type="button">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</button>
+</div>
+<!-- Hex / ASCII Payload Search Input -->
+<div class="w-64 flex items-center gap-space-xs bg-surface-container-lowest px-space-sm py-1 rounded">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">search</span>
+<input class="bg-transparent font-label-sm text-label-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none w-full" placeholder="HEX/ASCII Match (e.g. 0x10, Reg)" type="text" value="0x10 0x00 0x2b">
+<span class="font-label-sm text-label-sm text-on-surface-variant">3 found</span>
+</div>
+</div>
+<!-- Quick Preset Protocol Badges -->
+<div class="flex items-center gap-space-xs overflow-x-auto py-0.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase mr-1">PRESETS:</span>
+<button class="px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm" type="button">ALL (RAW)</button>
+<button class="px-space-xs py-0.5 rounded bg-primary-container text-on-primary-container font-bold font-label-sm text-label-sm shadow-xs flex items-center gap-1" type="button">
+<span class="w-1.5 h-1.5 rounded-full bg-on-primary-container"></span>
+          MODBUS/TCP (502)
+        </button>
+<button class="px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm" type="button">OPC-UA (4840)</button>
+<button class="px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm" type="button">DNP3 (20000)</button>
+<button class="px-space-xs py-0.5 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold flex items-center gap-1 shadow-[0_0_10px_rgba(0,255,102,0.35)]" type="button"><span class="material-symbols-outlined text-[12px]">shield_lock</span><span class="">eBPF XDP DROP (1 ENFORCED)</span></button>
+<button class="px-space-xs py-0.5 rounded bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[12px]">security</span>
+          eBPF XDP DROP (1)
+        </button>
+</div>
+</div>
+<!-- 3-PANE INDUSTRIAL PROTOCOL DISSECTOR (WIRESHARK GRADE) -->
+<div class="flex-1 flex flex-col min-h-0 divide-y divide-surface-container-high">
+<!-- PANE 1: LIVE PACKET STREAM TABLE (Top 40%) -->
+<div class="h-[38%] min-h-[140px] flex flex-col bg-surface-container-lowest overflow-hidden">
+<!-- Table Header Ribbon -->
+<div class="bg-surface-container-low px-gutter-desktop py-1 grid grid-cols-12 gap-space-xs font-label-sm text-label-sm text-on-surface-variant uppercase select-none">
+<div class="col-span-1">No.</div>
+<div class="col-span-2">Time (UTC μs)</div>
+<div class="col-span-2">Source IP:Port</div>
+<div class="col-span-2">Destination IP:Port</div>
+<div class="col-span-1">Protocol</div>
+<div class="col-span-1 text-right">Len</div>
+<div class="col-span-2">Info / Operational Summary</div>
+<div class="col-span-1 text-right">Anomaly τ</div>
+</div>
+<!-- Table Stream Rows -->
+<div class="flex-1 overflow-y-auto font-label-sm text-label-sm divide-y divide-surface-container-high/40">
+<!-- Packet #48912: CRITICAL ANOMALY ROW (SELECTED) -->
+<div class="bg-error-container/25 text-error px-gutter-desktop py-1.5 grid grid-cols-12 gap-space-xs items-center cursor-pointer font-mono font-medium shadow-inner">
+<div class="col-span-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-error">priority_high</span>
+<span class="">48912</span>
+</div>
+<div class="col-span-2 text-on-surface font-mono">14:22:09.412891</div>
+<div class="col-span-2 text-secondary-fixed">192.168.100.45:502</div>
+<div class="col-span-2 text-on-surface">10.0.4.12:502</div>
+<div class="col-span-1 font-bold text-tertiary-fixed">Modbus/TCP</div>
+<div class="col-span-1 text-right text-on-surface-variant">78</div>
+<div class="col-span-2 truncate text-on-surface" title="FC16 Write Multiple Registers (Reg 0x002B, Count 12)">
+              FC16 Write Multiple (Reg:0x002B, Len:12)
+            </div>
+<div class="col-span-1 flex items-center justify-end gap-1"><span class="px-1 py-0.2 rounded bg-error text-on-error font-bold text-[10px] shadow-sm">DROPPED &amp; BANNED</span></div>
+</div>
+<!-- Packet #48911: OPC-UA Nominal -->
+<div class="px-gutter-desktop py-1 grid grid-cols-12 gap-space-xs items-center hover:bg-surface-container transition-colors cursor-pointer text-on-surface font-mono">
+<div class="col-span-1 text-on-surface-variant">48911</div>
+<div class="col-span-2 text-on-surface-variant">14:22:09.410214</div>
+<div class="col-span-2 text-on-surface">10.0.4.101:4840</div>
+<div class="col-span-2 text-on-surface">10.0.4.12:4840</div>
+<div class="col-span-1 text-secondary-fixed">OPC-UA</div>
+<div class="col-span-1 text-right text-on-surface-variant">142</div>
+<div class="col-span-2 truncate text-on-surface-variant" title="ReadRequest (NodeId: ns=2;s=Device_Speed)">
+              ReadRequest [NodeId: ns=2;s=Speed]
+            </div>
+<div class="col-span-1 flex items-center justify-end">
+<span class="text-primary-container text-[10px]">τ=0.041 PASS</span>
+</div>
+</div>
+<!-- Packet #48910: DNP3 Nominal -->
+<div class="px-gutter-desktop py-1 grid grid-cols-12 gap-space-xs items-center bg-surface-container-low/30 hover:bg-surface-container transition-colors cursor-pointer text-on-surface font-mono">
+<div class="col-span-1 text-on-surface-variant">48910</div>
+<div class="col-span-2 text-on-surface-variant">14:22:09.408712</div>
+<div class="col-span-2 text-on-surface">192.168.100.88:20000</div>
+<div class="col-span-2 text-on-surface">10.0.4.12:20000</div>
+<div class="col-span-1 text-secondary-fixed-dim">DNP3</div>
+<div class="col-span-1 text-right text-on-surface-variant">94</div>
+<div class="col-span-2 truncate text-on-surface-variant" title="Direct Operate - Analog Output Block">
+              Direct Operate: Analog Out Setpoint
+            </div>
+<div class="col-span-1 flex items-center justify-end">
+<span class="text-primary-container text-[10px]">τ=0.112 PASS</span>
+</div>
+</div>
+<!-- Packet #48909: Modbus Rate-Limited -->
+<div class="px-gutter-desktop py-1 grid grid-cols-12 gap-space-xs items-center hover:bg-surface-container transition-colors cursor-pointer text-on-surface font-mono">
+<div class="col-span-1 text-on-surface-variant">48909</div>
+<div class="col-span-2 text-on-surface-variant">14:22:09.406120</div>
+<div class="col-span-2 text-on-surface">192.168.100.45:502</div>
+<div class="col-span-2 text-on-surface">10.0.4.12:502</div>
+<div class="col-span-1 text-tertiary-fixed">Modbus/TCP</div>
+<div class="col-span-1 text-right text-on-surface-variant">64</div>
+<div class="col-span-2 truncate text-on-surface-variant" title="FC03 Read Holding Registers (Reg 0x0001)">
+              FC03 Read Holding Regs (Addr:0x0001)
+            </div>
+<div class="col-span-1 flex items-center justify-end">
+<span class="text-tertiary-fixed-dim text-[10px]">τ=0.761 LIMIT</span>
+</div>
+</div>
+<!-- Packet #48908: BACnet Broadcast -->
+<div class="px-gutter-desktop py-1 grid grid-cols-12 gap-space-xs items-center bg-surface-container-low/30 hover:bg-surface-container transition-colors cursor-pointer text-on-surface font-mono">
+<div class="col-span-1 text-on-surface-variant">48908</div>
+<div class="col-span-2 text-on-surface-variant">14:22:09.401823</div>
+<div class="col-span-2 text-on-surface">10.0.4.55:47808</div>
+<div class="col-span-2 text-on-surface">10.0.4.255:47808</div>
+<div class="col-span-1 text-secondary-container">BACnet/IP</div>
+<div class="col-span-1 text-right text-on-surface-variant">62</div>
+<div class="col-span-2 truncate text-on-surface-variant" title="Who-Is Unconstrained Broadcast">
+              Who-Is Unconstrained Broadcast
+            </div>
+<div class="col-span-1 flex items-center justify-end">
+<span class="text-primary-container text-[10px]">τ=0.015 PASS</span>
+</div>
+</div>
+</div>
+</div>
+<!-- PANE 2: HIERARCHICAL PROTOCOL TREE DISSECTION (Middle 35%) -->
+<div class="h-[34%] min-h-[140px] flex flex-col bg-surface-container-low overflow-hidden">
+<div class="bg-surface-container px-gutter-desktop py-1 flex items-center justify-between font-label-sm text-label-sm">
+<div class="flex items-center gap-space-xs text-on-surface">
+<span class="material-symbols-outlined text-[15px] text-secondary-fixed">account_tree</span>
+<span class="font-bold">DISSECTION TREE: PACKET #48912</span>
+<span class="px-space-xs py-0.2 rounded bg-error-container text-on-error font-mono text-[10px]">THREAT CLASSIFICATION: ATTACK_MODBUS_EXCURSION</span>
+</div>
+<span class="text-on-surface-variant font-mono">78 BYTES ON WIRE</span>
+</div>
+<div class="flex-1 overflow-y-auto px-gutter-desktop py-space-xs space-y-1 font-label-sm text-label-sm text-on-surface select-text">
+<!-- Collapsed Layers -->
+<div class="flex items-center gap-space-xs text-on-surface-variant hover:text-on-surface cursor-pointer py-0.5">
+<span class="material-symbols-outlined text-[14px]">arrow_right</span>
+<span class="font-mono">Frame 48912: 78 bytes on wire (624 bits), 78 bytes captured on eth0</span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant hover:text-on-surface cursor-pointer py-0.5">
+<span class="material-symbols-outlined text-[14px]">arrow_right</span>
+<span class="font-mono">Ethernet II, Src: 00:1a:2b:3c:4d:5e, Dst: 00:0c:29:88:99:aa</span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant hover:text-on-surface cursor-pointer py-0.5">
+<span class="material-symbols-outlined text-[14px]">arrow_right</span>
+<span class="font-mono">Internet Protocol Version 4, Src: 192.168.100.45, Dst: 10.0.4.12, TTL: 64, Protocol: TCP</span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant hover:text-on-surface cursor-pointer py-0.5">
+<span class="material-symbols-outlined text-[14px]">arrow_right</span>
+<span class="font-mono">Transmission Control Protocol, Src Port: 502, Dst Port: 502, Seq: 1, Ack: 1, Flags: [PSH, ACK]</span>
+</div>
+<!-- Expanded Industrial SCADA Layer -->
+<div class="pt-0.5">
+<div class="flex items-center gap-space-xs text-primary font-bold cursor-pointer bg-surface-container py-0.5 px-space-xs rounded">
+<span class="material-symbols-outlined text-[14px] text-primary-container">arrow_drop_down</span>
+<span class="">Modbus / TCP (Industrial Automation SCADA Protocol)</span>
+</div>
+<!-- Expanded Modbus Attributes -->
+<div class="ml-space-md pl-space-sm border-l-2 border-primary-container/40 space-y-0.5 py-1 font-mono text-on-surface text-[11px]">
+<div class="text-on-surface-variant">Transaction Identifier: <span class="text-on-surface">0x1f42 (8002)</span></div>
+<div class="text-on-surface-variant">Protocol Identifier: <span class="text-on-surface">0 (Modbus protocol)</span></div>
+<div class="text-on-surface-variant">Length: <span class="text-on-surface">13 bytes</span></div>
+<div class="text-on-surface-variant">Unit Identifier: <span class="text-on-surface">1 (Main Hydraulic Sub-Controller)</span></div>
+<div class="text-on-surface-variant bg-error-container/20 p-space-xs rounded">
+<div class="text-error font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">warning</span>
+                  Function Code: 16 (Write Multiple Registers - 0x10)
+                </div>
+<div class="ml-space-sm text-on-surface">Reference Address: <span class="text-secondary-fixed">0x002b</span> (Actuator Setpoint Target)</div>
+<div class="ml-space-sm text-on-surface">Word Count: <span class="text-on-surface font-semibold">0x0006</span> (6 words / 12 registers)</div>
+<div class="ml-space-sm text-on-surface">Byte Count: <span class="text-on-surface font-semibold">12</span></div>
+<div class="ml-space-sm text-error">Data Payload: <span class="font-bold">44 7a 00 00 7f ff 00 00 80 00 00 00</span> [CRITICAL: ACTUATOR HYDRAULIC OVER-PRESSURE THRESHOLD]</div>
+</div>
+<!-- AI XAI Attribution Callout -->
+<div class="p-space-xs bg-surface-container-highest rounded text-on-surface-variant flex items-center justify-between">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary-fixed">psychology</span>
+<span class="text-secondary-fixed font-bold">XAI Conformer Attribution:</span>
+<span class="">Triggered Features: <span class="text-error font-bold">modbus_fc_code (0.942)</span> + <span class="text-tertiary-fixed font-bold">sub_reg_delta_0x002B (0.887)</span></span>
+</div>
+<span class="text-primary-container font-bold text-[10px]">DECISION: eBPF KERNEL DROP</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- PANE 3: DUAL RAW HEX DUMP & ASCII DECODER (Bottom 28%) -->
+<div class="h-[28%] min-h-[120px] flex flex-col bg-surface-container-lowest overflow-hidden">
+<div class="bg-surface-container px-gutter-desktop py-1 flex items-center justify-between font-label-sm text-label-sm">
+<div class="flex items-center gap-space-sm">
+<span class="font-bold text-on-surface">RAW HEX / ASCII INSPECTION (78 BYTES)</span>
+<span class="text-on-surface-variant">Active selection: </span>
+<span class="bg-error-container text-on-error px-1 py-0.2 rounded font-mono text-[10px]">Offset 0x0036 : 0x10 0x00 0x2b 0x00 0x06 (Modbus Write FC16)</span>
+</div>
+<div class="flex items-center gap-space-xs font-mono text-[10px] text-on-surface-variant">
+<span class="">HEX VIEW: 16-BYTE ALIGNED</span>
+</div>
+</div>
+<!-- Split Terminal Hex & ASCII Render -->
+<div class="flex-1 overflow-y-auto px-gutter-desktop py-space-xs font-mono text-[11px] leading-tight select-text bg-surface-container-lowest">
+<div class="grid grid-cols-12 gap-space-md text-on-surface-variant">
+<!-- Line 0000 -->
+<div class="col-span-12 flex items-center font-mono">
+<span class="w-16 text-outline">0000</span>
+<div class="flex-1 flex gap-2">
+<span class="text-on-surface">00 1a 2b 3c 4d 5e 00 0c</span>
+<span class="text-on-surface">29 88 99 aa 08 00 45 00</span>
+</div>
+<span class="w-48 text-on-surface tracking-wider pl-space-md border-l border-surface-container-high font-mono">..+&lt;M^.. ).....E.</span>
+</div>
+<!-- Line 0010 -->
+<div class="col-span-12 flex items-center font-mono">
+<span class="w-16 text-outline">0010</span>
+<div class="flex-1 flex gap-2">
+<span class="text-on-surface">00 4e 9a 12 40 00 40 06</span>
+<span class="text-on-surface">3c 1a c0 a8 64 2d 0a 00</span>
+</div>
+<span class="w-48 text-on-surface tracking-wider pl-space-md border-l border-surface-container-high font-mono">.N..@.@. &lt;...d-..</span>
+</div>
+<!-- Line 0020 -->
+<div class="col-span-12 flex items-center font-mono">
+<span class="w-16 text-outline">0020</span>
+<div class="flex-1 flex gap-2">
+<span class="text-on-surface">04 0c 01 f6 01 f6 1a 42</span>
+<span class="text-on-surface">58 09 00 00 00 00 80 18</span>
+</div>
+<span class="w-48 text-on-surface tracking-wider pl-space-md border-l border-surface-container-high font-mono">.......B X.......</span>
+</div>
+<!-- Line 0030: Payload Target (Highlighted Malicious FC16 Instruction) -->
+<div class="col-span-12 flex items-center font-mono bg-error-container/15 py-0.5 rounded">
+<span class="w-16 text-error font-bold">0030</span>
+<div class="flex-1 flex gap-2">
+<span class="text-on-surface">01 f5 7e 8a 00 00 1f 42</span>
+<span class="">
+<span class="text-on-surface">00 00 00 0d 01 </span>
+<!-- Neon Highlight for FC16 + Register 0x002B + Count -->
+<span class="bg-error text-on-error font-bold px-0.5 rounded-xs">10 00 2b</span>
+</span>
+</div>
+<span class="w-48 text-on-surface tracking-wider pl-space-md border-l border-surface-container-high font-mono">..~....B .....<span class="text-error font-bold">.+</span></span>
+</div>
+<!-- Line 0040: Malicious Payload Injection -->
+<div class="col-span-12 flex items-center font-mono bg-error-container/10 py-0.5 rounded">
+<span class="w-16 text-error">0040</span>
+<div class="flex-1 flex gap-2">
+<span class="bg-primary-container text-on-primary-container font-bold px-0.5 rounded-xs">00 06 0c</span>
+<span class="text-error font-bold">44 7a 00 00 7f ff 00 00</span>
+<span class="text-error font-bold">80 00 00 00</span>
+</div>
+<span class="w-48 text-error font-bold tracking-wider pl-space-md border-l border-surface-container-high font-mono">...<span class="text-error">Dz..... ....</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- DRAWER FOOTER: Quick Mitigation & Socket Terminal -->
+<div class="bg-surface-container-low px-gutter-desktop py-space-xs flex flex-wrap items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<div class="flex items-center gap-space-md font-mono"><span class="flex items-center gap-1 text-primary-container font-bold"><span class="material-symbols-outlined text-[14px]">verified</span><span class="">eBPF XDP DROP RULE #741 COMMITTED &amp; LOCKED</span></span><span class="text-on-surface-variant">•</span><span class="text-secondary-fixed">HARDWARE NIC OFFLOAD ACTIVE</span><span class="text-on-surface-variant">•</span><span class="text-primary font-bold">0 PKTS LEAKED</span></div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold flex items-center gap-1 shadow-[0_0_15px_rgba(0,255,102,0.4)] cursor-default" type="button"><span class="material-symbols-outlined text-[14px]">lock</span><span class="">✓ eBPF XDP HARDWARE DROP ACTIVE // IP 192.168.100.45 BANNED (RING0 RULE #741)</span></button>
+<button class="px-space-sm py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm" type="button">
+          PIVOT TO ADVERSARIAL MATRIX
+        </button>
+</div>
+</div>
+</aside>
+<!-- INTERACTIVE CLIENT TOGGLE SCRIPT -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Find sniffer button and wire up close functionality for realistic HUD micro-interactions
+      const closeButtons = document.querySelectorAll('button[title="Close Sniffer Overlay"]');
+      const drawer = document.querySelector('aside');
+      const backdrop = document.querySelector('.fixed.inset-0.bg-surface-container-lowest\\/80');
+
+      closeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (drawer && backdrop) {
+            drawer.classList.add('translate-x-full');
+            backdrop.classList.add('opacity-0');
+            setTimeout(() => {
+              drawer.style.display = 'none';
+              backdrop.style.display = 'none';
+            }, 200);
+          }
+        });
+      });
+    });
+  </script>
+</div></main><div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[96%] max-w-6xl"><div class="bg-surface-container-low/90 backdrop-blur-xl rounded-xl p-space-xs shadow-[0_0_25px_rgba(0,0,0,0.7)] flex flex-wrap items-center justify-between gap-space-sm"><nav class="flex items-center gap-1 overflow-x-auto py-1" data-active-classes="bg-primary-container text-on-primary-container font-bold rounded"><a class="px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface whitespace-nowrap transition-colors" data-path="overview" href="#">OVERVIEW</a><a class="px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface whitespace-nowrap transition-colors" data-path="threat-lab" href="#">THREAT LAB</a><a class="px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface whitespace-nowrap transition-colors" data-path="xai-engine" href="#">XAI ENGINE</a><a class="px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface whitespace-nowrap transition-colors" data-path="adversarial" href="#">ADVERSARIAL</a><a class="px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface whitespace-nowrap transition-colors" data-path="remediation" href="#">REMEDIATION</a><a class="px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface whitespace-nowrap transition-colors" data-path="compliance" href="#">COMPLIANCE</a></nav><div class="flex items-center gap-space-xs"><a class="px-space-sm py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-secondary-fixed font-label-sm text-label-sm whitespace-nowrap" data-path="execute" href="#">Execute PCB</a><a class="px-space-sm py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-primary font-label-sm text-label-sm whitespace-nowrap" data-path="live-sniffer" href="#">Sniffer</a><a class="px-space-sm py-1.5 rounded bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary font-label-sm text-label-sm font-bold whitespace-nowrap shadow-[0_0_10px_rgba(0,227,253,0.25)]" data-path="agentic-soc" href="#">Agentic SOC</a></div></div></div>
+
+</body></html>

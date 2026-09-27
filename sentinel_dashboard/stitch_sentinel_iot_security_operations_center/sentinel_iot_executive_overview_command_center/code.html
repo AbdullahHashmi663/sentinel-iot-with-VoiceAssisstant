@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"on-primary":"#003911","outline-variant":"#3b4b3a","primary":"#edffe8","surface-container":"#1c2024","on-background":"#e0e3e8","surface-bright":"#353a3e","secondary-fixed":"#9cf0ff","surface-container-high":"#262a2f","on-tertiary-container":"#895600","on-primary-fixed":"#002107","on-secondary-fixed":"#001f24","secondary-fixed-dim":"#00daf3","on-tertiary-fixed":"#2a1700","inverse-primary":"#006e27","tertiary-container":"#ffd7aa","primary-fixed-dim":"#00e55b","inverse-surface":"#e0e3e8","on-tertiary-fixed-variant":"#653e00","on-surface":"#e0e3e8","on-secondary-container":"#00616d","secondary-container":"#00e3fd","on-secondary":"#00363d","on-error":"#690005","tertiary":"#fff9f6","primary-fixed":"#6bff83","on-surface-variant":"#b9ccb5","surface-container-highest":"#31353a","outline":"#849581","on-error-container":"#ffdad6","surface":"#101418","on-primary-fixed-variant":"#00531b","on-tertiary":"#472a00","surface-dim":"#101418","surface-container-lowest":"#0a0f13","surface-tint":"#00e55b","on-primary-container":"#007128","surface-container-low":"#181c20","primary-container":"#00ff66","error-container":"#93000a","inverse-on-surface":"#2d3135","tertiary-fixed-dim":"#ffb95f","surface-variant":"#31353a","secondary":"#bdf4ff","background":"#101418","error":"#ffb4ab","tertiary-fixed":"#ffddb8","on-secondary-fixed-variant":"#004f58"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"margin-desktop":"1.5rem","space-lg":"1.25rem","space-md":"0.75rem","gutter":"0.75rem","space-sm":"0.5rem","space-xs":"0.25rem","margin":"1rem","gutter-desktop":"1rem","space-xl":"2rem"},"fontFamily":{"headline-xl":["Space Grotesk"],"headline-xl-mobile":["Space Grotesk"],"headline-md":["Space Grotesk"],"body-lg":["Space Grotesk"],"headline-lg":["Space Grotesk"],"label-sm":["JetBrains Mono"],"body-md":["Space Grotesk"],"telemetry-metric-sm":["JetBrains Mono"],"body-sm":["Space Grotesk"],"label-md":["JetBrains Mono"],"label-lg":["JetBrains Mono"],"telemetry-metric":["JetBrains Mono"]},"fontSize":{"headline-xl":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-xl-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-md":["18px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"600"}],"body-lg":["15px",{"lineHeight":"22px","fontWeight":"400"}],"headline-lg":["22px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-sm":["10px",{"lineHeight":"14px","letterSpacing":"0.08em","fontWeight":"500"}],"body-md":["13px",{"lineHeight":"18px","fontWeight":"400"}],"telemetry-metric-sm":["16px",{"lineHeight":"20px","letterSpacing":"0em","fontWeight":"600"}],"body-sm":["11px",{"lineHeight":"16px","fontWeight":"400"}],"label-md":["11px",{"lineHeight":"16px","letterSpacing":"0.06em","fontWeight":"500"}],"label-lg":["13px",{"lineHeight":"18px","letterSpacing":"0.04em","fontWeight":"600"}],"telemetry-metric":["24px",{"lineHeight":"28px","letterSpacing":"-0.02em","fontWeight":"700"}]}}}}</script></head><body class="bg-surface-container-lowest font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/90 backdrop-blur-md"><div class="h-16 px-gutter-desktop flex items-center justify-between bg-surface-container-low/60 shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded bg-primary-container/20 flex items-center justify-center"><span class="material-symbols-outlined text-primary-container text-[20px]">security</span></div><div class="flex flex-col"><span class="font-headline-md text-headline-md tracking-tight text-primary leading-none">SENTINEL-IoT</span><span class="font-label-sm text-label-sm text-secondary tracking-widest">TACTICAL SOC // ICS DEFENSE</span></div></div><div class="flex items-center gap-space-xs px-space-sm py-0.5 rounded bg-surface-container-highest"><span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-sm text-label-sm text-primary-container">FYP-II v2.4 OPERATIONAL</span></div><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container"><span class="font-label-sm text-label-sm text-on-surface-variant">LATENCY:</span><span class="font-telemetry-metric-sm text-telemetry-metric-sm text-secondary-fixed">21.5 ms</span><span class="w-2 h-2 rounded-full bg-secondary-fixed-dim animate-ping"></span></div></div><div class="flex items-center gap-space-md"><div class="hidden lg:flex items-center p-0.5 rounded bg-surface-container-highest"><button class="px-space-sm py-1 rounded bg-surface-container font-label-sm text-label-sm text-primary-container" type="button">LIVE WS (FastAPI)</button><button class="px-space-sm py-1 rounded font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface" type="button">OFFLINE MOCK</button></div><div class="hidden md:flex items-center gap-space-md px-space-md py-1 rounded bg-surface-container-high"><div class="flex flex-col text-right"><span class="font-label-sm text-label-sm text-on-surface-variant">UTC MASTER</span><span class="font-label-md text-label-md text-primary font-mono">14:22:09.412</span></div><div class="w-px h-6 bg-surface-bright"></div><div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface-variant">THROUGHPUT</span><span class="font-telemetry-metric-sm text-telemetry-metric-sm text-secondary font-mono">2,841,920 EVT</span></div></div><div class="flex items-center gap-space-sm"><button class="hidden sm:flex items-center gap-space-xs px-space-sm py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm" type="button"><span class="material-symbols-outlined text-[16px]">palette</span><span>Obsidian HUD</span></button><button class="hidden sm:flex items-center gap-space-xs px-space-sm py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm" type="button"><span class="material-symbols-outlined text-[16px]">science</span><span>Research Gallery</span></button><button class="flex items-center gap-space-xs px-space-md py-1.5 rounded bg-error-container text-on-error-container hover:bg-error hover:text-on-error font-label-sm text-label-sm font-bold shadow-[0_0_15px_rgba(239,68,68,0.35)] transition-all" type="button"><span class="material-symbols-outlined text-[16px]">lock</span><span>EMERGENCY LOCKDOWN</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div><div class="h-10 px-gutter-desktop flex items-center justify-between bg-surface-container-lowest/95 shadow-[0_1px_4px_rgba(0,0,0,0.5)]"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase">DOMAIN:</span><select class="bg-surface-container-high text-secondary font-label-sm text-label-sm px-space-sm py-1 rounded focus:outline-none"><option>Modbus Industrial PLC (ToN_IoT #04)</option><option>Network Core Telemetry (ToN_IoT #01)</option><option>SCADA Thermostat Rig (ToN_IoT #07)</option><option>Smart Grid Energy Meter (ToN_IoT #11)</option><option>ICS Robotic Actuator (ToN_IoT #09)</option><option>Smart Fridge Environment (ToN_IoT #03)</option><option>Gas Level Sensing Array (ToN_IoT #12)</option></select></div><div class="hidden md:flex items-center gap-1"><button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface" type="button"><span class="material-symbols-outlined text-[16px]">play_arrow</span></button><button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface" type="button"><span class="material-symbols-outlined text-[16px]">pause</span></button><button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface" type="button"><span class="material-symbols-outlined text-[16px]">skip_next</span></button><div class="flex items-center bg-surface-container px-space-xs py-0.5 rounded ml-1"><span class="font-label-sm text-label-sm text-primary font-mono">1.0x</span></div></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs"><span class="font-label-sm text-label-sm text-on-surface-variant">TENSOR:</span><span class="font-label-sm text-label-sm text-primary-container font-mono bg-surface-container px-space-xs py-0.5 rounded">[B, 10, D] READY</span></div><div class="hidden lg:flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-primary-fixed-dim"></span><span class="font-label-sm text-label-sm text-on-surface-variant">SHM: SYNCHRONIZED</span></div></div></div></header><main class="w-full pt-26 pb-28 min-h-screen bg-surface-container-lowest px-gutter-desktop"><div class="flex flex-col w-full gap-space-md">
+<!-- METADATA SUB-BAR -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm bg-surface-container px-space-md py-space-xs rounded">
+<div class="flex items-center gap-space-md flex-wrap">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-ping"></span>
+<span class="font-label-sm text-label-sm text-primary-container tracking-wider">DEFCON 4 // ACTIVE SYNCHRONY</span>
+</div>
+<span class="text-outline-variant font-label-sm text-label-sm">/</span>
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface-variant">
+<span>SECTOR:</span>
+<span class="text-secondary font-mono">DISTRIBUTED SCADA CELL #7</span>
+</div>
+<span class="text-outline-variant font-label-sm text-label-sm">/</span>
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface-variant">
+<span>SHM PIPELINE:</span>
+<span class="text-primary-container font-mono">ring_buffer_0: OK (0.00% drop)</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm font-label-sm text-label-sm">
+<span class="text-on-surface-variant">INFERENCE ENGINE:</span>
+<span class="bg-surface-container-high px-space-xs py-0.5 rounded text-secondary-fixed font-mono font-bold">XGB+LSTM ENSEMBLE [FP16]</span>
+</div>
+</div>
+<!-- TOP KPI TELEMETRY RIBBON -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-space-sm">
+<!-- Card 1: Protected Nodes -->
+<div class="bg-surface-container-low p-space-md rounded flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Protected IoT/OT Nodes</span>
+<span class="material-symbols-outlined text-primary-container text-[18px]">hub</span>
+</div>
+<div class="mt-space-sm flex items-baseline justify-between">
+<div class="font-telemetry-metric text-telemetry-metric text-primary">13/13</div>
+<span class="font-label-sm text-label-sm text-primary-container bg-primary-container/10 px-space-xs py-0.5 rounded">ONLINE</span>
+</div>
+<div class="mt-space-xs flex items-center gap-1.5 pt-space-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container shadow-[0_0_6px_currentColor]"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container shadow-[0_0_6px_currentColor]"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container shadow-[0_0_6px_currentColor]"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container shadow-[0_0_6px_currentColor]"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container shadow-[0_0_6px_currentColor]"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container shadow-[0_0_6px_currentColor]"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container shadow-[0_0_6px_currentColor]"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container shadow-[0_0_6px_currentColor]"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container shadow-[0_0_6px_currentColor]"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container shadow-[0_0_6px_currentColor]"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container shadow-[0_0_6px_currentColor]"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container shadow-[0_0_6px_currentColor]"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container shadow-[0_0_6px_currentColor]"></span>
+</div>
+</div>
+<!-- Card 2: Ingestion Velocity -->
+<div class="bg-surface-container-low p-space-md rounded flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Ingestion Velocity</span>
+<span class="material-symbols-outlined text-secondary-container text-[18px]">speed</span>
+</div>
+<div class="mt-space-sm flex items-baseline justify-between">
+<div class="font-telemetry-metric text-telemetry-metric text-secondary">2,450</div>
+<span class="font-label-sm text-label-sm text-secondary-fixed">EVT/S</span>
+</div>
+<div class="mt-space-xs h-6 w-full flex items-center">
+<svg class="w-full h-full text-secondary-container" fill="none" preserveaspectratio="none" viewbox="0 0 160 28">
+<path d="M0,18 L15,14 L30,22 L45,10 L60,16 L75,6 L90,19 L105,12 L120,24 L135,8 L150,15 L160,11" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+<path d="M0,18 L15,14 L30,22 L45,10 L60,16 L75,6 L90,19 L105,12 L120,24 L135,8 L150,15 L160,11 L160,28 L0,28 Z" fill="currentColor" fill-opacity="0.12"></path>
+</svg>
+</div>
+</div>
+<!-- Card 3: Threats Contained -->
+<div class="bg-surface-container-low p-space-md rounded flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Threats Contained</span>
+<span class="material-symbols-outlined text-primary-container text-[18px]">shield</span>
+</div>
+<div class="mt-space-sm flex items-baseline justify-between">
+<div class="font-telemetry-metric text-telemetry-metric text-primary">142</div>
+<span class="font-label-sm text-label-sm text-primary-container bg-primary-container/10 px-space-xs py-0.5 rounded">CONTAINED</span>
+</div>
+<div class="mt-space-xs flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>AUTONOMOUS MTTR</span>
+<span class="text-secondary font-mono font-semibold">21.5 ms avg</span>
+</div>
+</div>
+<!-- Card 4: NIST CSF 2.0 Score -->
+<div class="bg-surface-container-low p-space-md rounded flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">NIST CSF 2.0 Posture</span>
+<span class="material-symbols-outlined text-primary-container text-[18px]">verified_user</span>
+</div>
+<div class="mt-space-sm flex items-baseline justify-between">
+<div class="font-telemetry-metric text-telemetry-metric text-primary">98.4%</div>
+<span class="font-label-sm text-label-sm text-primary-container bg-primary-container/10 px-space-xs py-0.5 rounded">TIER 4 ADAPTIVE</span>
+</div>
+<div class="mt-space-xs w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden">
+<div class="bg-primary-container h-full rounded-full shadow-[0_0_8px_rgba(0,255,102,0.8)]" style="width: 98.4%"></div>
+</div>
+</div>
+<!-- Card 5: Active Adversary Status -->
+<div class="bg-surface-container-low p-space-md rounded flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Adversary Status</span>
+<span class="material-symbols-outlined text-error text-[18px]">warning</span>
+</div>
+<div class="mt-space-sm flex items-baseline justify-between">
+<div class="font-headline-md text-headline-md text-error tracking-tight">CONTAINED</div>
+<span class="font-label-sm text-label-sm text-on-error bg-error-container px-space-xs py-0.5 rounded animate-pulse">L7 TRIPPED</span>
+</div>
+<div class="mt-space-xs flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant">BARRIER:</span>
+<span class="text-error font-mono font-semibold">iptables DROP (T0855)</span>
+</div>
+</div>
+</div>
+<!-- MAIN DUAL-ZONE TACTICAL GRID -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-md items-start">
+<!-- LEFT ZONE: LATERAL BLAST RADIUS & PROVENANCE TOPOLOGY (7 COLUMNS) -->
+<div class="xl:col-span-7 bg-surface-container-low p-space-lg rounded shadow-md flex flex-col gap-space-md">
+<!-- Section Header -->
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-sm">
+<div class="w-2.5 h-2.5 rounded-sm bg-secondary-container shadow-[0_0_8px_currentColor]"></div>
+<span class="font-headline-md text-headline-md text-primary">LATERAL BLAST RADIUS &amp; ATTACK PROVENANCE</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm px-space-xs py-0.5 rounded bg-surface-container-highest text-secondary font-mono">REALTIME SYNCHRONIZED</span>
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-[16px]">refresh</span>
+</button>
+</div>
+</div>
+<!-- Provenance Topology Canvas (Inline Dynamic SVG) -->
+<div class="w-full bg-surface-container-lowest rounded p-space-md relative overflow-hidden">
+<div class="absolute top-2 left-2 flex items-center gap-space-xs pointer-events-none">
+<span class="font-label-sm text-label-sm text-outline-variant font-mono">TOPOLOGY // SCADA SUB-RING 04B</span>
+</div>
+<svg class="w-full h-auto text-on-surface" fill="none" viewbox="0 0 760 380">
+<!-- Background Grid Lines -->
+<defs>
+<pattern height="30" id="grid-tactical" patternunits="userSpaceOnUse" width="30">
+<path d="M 30 0 L 0 0 0 30" fill="none" stroke="currentColor" stroke-opacity="0.04" stroke-width="1"></path>
+</pattern>
+<lineargradient id="grad-drop" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#93000a" stop-opacity="0.6"></stop>
+<stop offset="100%" stop-color="#ef4444" stop-opacity="0.2"></stop>
+</lineargradient>
+<lineargradient id="grad-secure" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#00ff66" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#00e55b" stop-opacity="0.05"></stop>
+</lineargradient>
+<filter height="140%" id="glow-crimson" width="140%" x="-20%" y="-20%">
+<fegaussianblur result="blur" stddeviation="4"></fegaussianblur>
+<fecomposite in="SourceGraphic" in2="blur" operator="over"></fecomposite>
+</filter>
+<filter height="140%" id="glow-emerald" width="140%" x="-20%" y="-20%">
+<fegaussianblur result="blur" stddeviation="4"></fegaussianblur>
+<fecomposite in="SourceGraphic" in2="blur" operator="over"></fecomposite>
+</filter>
+</defs>
+<rect fill="url(#grid-tactical)" height="100%" width="100%"></rect>
+<!-- Network Flow Connectors -->
+<!-- Attacker to Gateway Barrier -->
+<path class="animate-pulse" d="M 120 180 L 260 180" stroke="#ef4444" stroke-dasharray="4 3" stroke-width="2.5"></path>
+<!-- Firewall Barrier to Sandboxed OS Host -->
+<path d="M 310 180 L 460 180" stroke="#849581" stroke-opacity="0.4" stroke-width="1.5"></path>
+<!-- Sandboxed Host to Physical SCADA/PLC Coil -->
+<path d="M 520 180 L 630 180" stroke="#00ff66" stroke-width="2"></path>
+<!-- Cross-Branch: SCADA Sensor Cluster -->
+<path d="M 490 220 L 490 290 L 630 290" stroke="#00e3fd" stroke-dasharray="3 3" stroke-opacity="0.6" stroke-width="1.5"></path>
+<path d="M 490 140 L 490 70 L 630 70" stroke="#00e3fd" stroke-dasharray="3 3" stroke-opacity="0.6" stroke-width="1.5"></path>
+<!-- 1. Adversary Node (Crimson Pulse) -->
+<g transform="translate(100, 180)">
+<circle fill="#93000a" fill-opacity="0.15" r="42"></circle>
+<circle fill="#181c20" filter="url(#glow-crimson)" r="30" stroke="#ef4444" stroke-width="2"></circle>
+<text fill="#ffb4ab" font-family="JetBrains Mono" font-size="9" font-weight="700" text-anchor="middle" y="-6">INTRUDER</text>
+<text fill="#e0e3e8" font-family="Space Grotesk" font-size="10" font-weight="600" text-anchor="middle" y="8">192.168.100.45</text>
+<text fill="#ef4444" font-family="JetBrains Mono" font-size="7.5" text-anchor="middle" y="20">[Modbus Exploit]</text>
+<!-- Origin badge -->
+<rect fill="#262a2f" height="16" rx="2" width="84" x="-42" y="40"></rect>
+<text fill="#b9ccb5" font-family="JetBrains Mono" font-size="8" text-anchor="middle" x="0" y="52">ATTACK ORIGIN</text>
+</g>
+<!-- Intercept Indicator (Signal drop) -->
+<g transform="translate(200, 160)">
+<circle fill="#262a2f" r="10" stroke="#ef4444" stroke-width="1"></circle>
+<text fill="#ef4444" font-family="JetBrains Mono" font-size="11" font-weight="bold" text-anchor="middle" y="4">✕</text>
+</g>
+<!-- 2. Firewall Perimeter: iptables DROP (Red Barrier Shield) -->
+<g transform="translate(285, 180)">
+<rect fill="url(#grad-drop)" filter="url(#glow-crimson)" height="170" rx="4" stroke="#ef4444" stroke-width="2" width="48" x="-24" y="-85"></rect>
+<text fill="#ef4444" font-family="JetBrains Mono" font-size="9" font-weight="700" text-anchor="middle" x="0" y="-95">BARRIER: DROPPED</text>
+<text fill="#ffdad6" font-family="JetBrains Mono" font-size="10" font-weight="700" letter-spacing="2" text-anchor="middle" transform="rotate(-90)" x="0" y="4">iptables --DROP</text>
+<!-- Shield icon plate -->
+<circle cx="0" cy="50" fill="#181c20" r="10" stroke="#ef4444" stroke-width="1.5"></circle>
+<text fill="#ef4444" font-family="JetBrains Mono" font-size="10" text-anchor="middle" x="0" y="54">🛡</text>
+</g>
+<!-- 3. Sandboxed Host Isolation (PID 4921) -->
+<g transform="translate(490, 180)">
+<rect fill="#1c2024" height="72" rx="4" stroke="#00daf3" stroke-width="1.5" width="96" x="-48" y="-36"></rect>
+<rect fill="#262a2f" height="16" width="96" x="-48" y="-36"></rect>
+<text fill="#9cf0ff" font-family="JetBrains Mono" font-size="8" font-weight="700" text-anchor="middle" x="0" y="-24">HOST OS ISOLATION</text>
+<text fill="#e0e3e8" font-family="Space Grotesk" font-size="11" font-weight="600" text-anchor="middle" x="0" y="-2">PID 4921</text>
+<text fill="#00daf3" font-family="JetBrains Mono" font-size="8.5" text-anchor="middle" x="0" y="14">cgroup / seccomp</text>
+<rect fill="#00363d" height="10" rx="1" width="70" x="-35" y="22"></rect>
+<text fill="#9cf0ff" font-family="JetBrains Mono" font-size="7" text-anchor="middle" x="0" y="30">CONTAINED 0ms</text>
+</g>
+<!-- 4. Physical SCADA / PLC Safety Boundary (PLC-Coil-04 SECURED) -->
+<g transform="translate(680, 180)">
+<circle fill="#003911" fill-opacity="0.3" r="44"></circle>
+<circle fill="#181c20" filter="url(#glow-emerald)" r="36" stroke="#00ff66" stroke-width="2"></circle>
+<text fill="#6bff83" font-family="JetBrains Mono" font-size="9" font-weight="700" text-anchor="middle" y="-10">ICS CORE</text>
+<text fill="#edffe8" font-family="Space Grotesk" font-size="10" font-weight="700" text-anchor="middle" y="5">PLC-Coil-04</text>
+<text fill="#00ff66" font-family="JetBrains Mono" font-size="8" text-anchor="middle" y="18">SECURED 100%</text>
+<rect fill="#003911" height="16" rx="2" width="88" x="-44" y="44"></rect>
+<text fill="#6bff83" font-family="JetBrains Mono" font-size="8" text-anchor="middle" x="0" y="56">SAFETY ACTIVE</text>
+</g>
+<!-- Upper Satellite Node: Telemetry Core -->
+<g transform="translate(680, 70)">
+<rect fill="#1c2024" height="36" rx="3" stroke="#849581" stroke-width="1" width="84" x="-42" y="-18"></rect>
+<text fill="#e0e3e8" font-family="Space Grotesk" font-size="9.5" font-weight="600" text-anchor="middle" y="-2">RTU Sub-Unit A</text>
+<text fill="#00ff66" font-family="JetBrains Mono" font-size="8" text-anchor="middle" y="11">PULSE: NOMINAL</text>
+</g>
+<!-- Lower Satellite Node: Actuator Array -->
+<g transform="translate(680, 290)">
+<rect fill="#1c2024" height="36" rx="3" stroke="#849581" stroke-width="1" width="84" x="-42" y="-18"></rect>
+<text fill="#e0e3e8" font-family="Space Grotesk" font-size="9.5" font-weight="600" text-anchor="middle" y="-2">Valve Actuator #2</text>
+<text fill="#00ff66" font-family="JetBrains Mono" font-size="8" text-anchor="middle" y="11">INTERLOCK ENGAGED</text>
+</g>
+</svg>
+<!-- Inline Blast Radius Indicators Footer -->
+<div class="mt-space-sm pt-space-xs grid grid-cols-3 gap-space-xs bg-surface-container-high p-space-sm rounded">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">AIR-GAP BREACH RISK:</span>
+<span class="font-telemetry-metric-sm text-telemetry-metric-sm text-primary-container">0.000% NULL</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">ISOLATION LATENCY:</span>
+<span class="font-telemetry-metric-sm text-telemetry-metric-sm text-secondary">0.082 ms [eBPF]</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">ACTIVE ATTACK VECTOR:</span>
+<span class="font-telemetry-metric-sm text-telemetry-metric-sm text-error">Modbus FC=0x05 / T0855</span>
+</div>
+</div>
+</div>
+<!-- Live Packet Telemetry Probe Stream -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">LIVE KERNEL FILTER INGRESS TRACE</span>
+<div class="font-mono font-label-sm text-label-sm bg-surface-container-lowest p-space-sm rounded space-y-1 overflow-x-auto text-on-surface-variant">
+<div class="flex items-center gap-space-sm">
+<span class="text-secondary font-bold">14:22:09.390</span>
+<span class="text-error bg-error-container/20 px-1 rounded">BPF_PROBE_DROP</span>
+<span class="text-on-surface font-semibold">SRC=192.168.100.45:502 DST=10.0.4.12:502 PROTO=TCP LEN=64</span>
+<span class="text-primary-container">REASON=SIG_ANOMALY_MODBUS_OUT_OF_BOUNDS_WRITE</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="text-secondary font-bold">14:22:09.398</span>
+<span class="text-primary-container bg-primary-container/20 px-1 rounded">CGROUP_FREEZE</span>
+<span class="text-on-surface font-semibold">PID=4921 /modbus_poller.elf state=FROZEN</span>
+<span class="text-on-surface-variant">MEM_SAVED=48.2MB</span>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT ZONE: RADAR CHART & HIGH DENSITY STREAM (5 COLUMNS) -->
+<div class="xl:col-span-5 flex flex-col gap-space-md">
+<!-- RIGHT TOP ZONE: NIST SP 800-53 RADAR POSTURE -->
+<div class="bg-surface-container-low p-space-md rounded shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">radar</span>
+<span class="font-headline-md text-headline-md text-primary">NIST SP 800-53 POSTURE</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary-container bg-primary-container/10 px-space-xs py-0.5 rounded">98.4% HARDENED</span>
+</div>
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md bg-surface-container-lowest p-space-md rounded">
+<!-- Pentagon Radar Plot SVG -->
+<div class="relative w-48 h-48 shrink-0 flex items-center justify-center">
+<svg class="w-full h-full" fill="none" viewbox="0 0 200 200">
+<!-- Grid Webs -->
+<!-- 100% boundary -->
+<polygon fill="none" points="100,20 176,75 147,165 53,165 24,75" stroke="#31353a" stroke-width="1"></polygon>
+<!-- 75% boundary -->
+<polygon fill="none" points="100,40 157,81 135,149 65,149 43,81" stroke="#31353a" stroke-dasharray="2 2" stroke-width="0.8"></polygon>
+<!-- 50% boundary -->
+<polygon fill="none" points="100,60 138,88 123,132 77,132 62,88" stroke="#31353a" stroke-dasharray="2 2" stroke-width="0.8"></polygon>
+<!-- Spokes -->
+<line stroke="#31353a" stroke-width="1" x1="100" x2="100" y1="100" y2="20"></line>
+<line stroke="#31353a" stroke-width="1" x1="100" x2="176" y1="100" y2="75"></line>
+<line stroke="#31353a" stroke-width="1" x1="100" x2="147" y1="100" y2="165"></line>
+<line stroke="#31353a" stroke-width="1" x1="100" x2="53" y1="100" y2="165"></line>
+<line stroke="#31353a" stroke-width="1" x1="100" x2="24" y1="100" y2="75"></line>
+<!-- Data Envelope: 96-99% coverage -->
+<!-- SC-5: 98% (y=21.6), SI-3: 99% (175,76), AU-9: 96% (145,162), IA-5: 99% (54,164), RA-3: 97% (26,76) -->
+<polygon fill="#00ff66" fill-opacity="0.18" points="100,22 174,76 145,162 55,164 26,76" stroke="#00ff66" stroke-width="2"></polygon>
+<!-- Points -->
+<circle cx="100" cy="22" fill="#00ff66" r="3"></circle>
+<circle cx="174" cy="76" fill="#00ff66" r="3"></circle>
+<circle cx="145" cy="162" fill="#00ff66" r="3"></circle>
+<circle cx="55" cy="164" fill="#00ff66" r="3"></circle>
+<circle cx="26" cy="76" fill="#00ff66" r="3"></circle>
+</svg>
+</div>
+<!-- Radar Spokes Legend & Values -->
+<div class="flex flex-col gap-1.5 w-full">
+<div class="flex items-center justify-between font-label-sm text-label-sm bg-surface-container px-space-xs py-1 rounded">
+<span class="text-on-surface-variant font-mono">SC-5 (Comm/DoS)</span>
+<span class="text-primary-container font-bold font-mono">98.2%</span>
+</div>
+<div class="flex items-center justify-between font-label-sm text-label-sm bg-surface-container px-space-xs py-1 rounded">
+<span class="text-on-surface-variant font-mono">SI-3 (Malicious Code)</span>
+<span class="text-primary-container font-bold font-mono">99.1%</span>
+</div>
+<div class="flex items-center justify-between font-label-sm text-label-sm bg-surface-container px-space-xs py-1 rounded">
+<span class="text-on-surface-variant font-mono">AU-9 (Crypto Audit)</span>
+<span class="text-primary-container font-bold font-mono">96.8%</span>
+</div>
+<div class="flex items-center justify-between font-label-sm text-label-sm bg-surface-container px-space-xs py-1 rounded">
+<span class="text-on-surface-variant font-mono">IA-5 (Authenticator)</span>
+<span class="text-primary-container font-bold font-mono">99.4%</span>
+</div>
+<div class="flex items-center justify-between font-label-sm text-label-sm bg-surface-container px-space-xs py-1 rounded">
+<span class="text-on-surface-variant font-mono">RA-3 (Risk Assess)</span>
+<span class="text-primary-container font-bold font-mono">97.5%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT BOTTOM ZONE: INCIDENT STREAM TABLE -->
+<div class="bg-surface-container-low p-space-md rounded shadow-md flex flex-col gap-space-sm flex-1">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-error text-[20px]">bolt</span>
+<span class="font-headline-md text-headline-md text-primary">REAL-TIME FORENSIC INCIDENT STREAM</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">4 DETECTIONS / 60s</span>
+</div>
+<!-- Table Stream -->
+<div class="overflow-x-auto bg-surface-container-lowest rounded">
+<table class="w-full text-left font-label-sm text-label-sm">
+<thead>
+<tr class="bg-surface-container-highest text-on-surface-variant uppercase font-mono">
+<th class="py-2 px-space-xs">UTC</th>
+<th class="py-2 px-space-xs">NODE</th>
+<th class="py-2 px-space-xs">ANOMALY τ</th>
+<th class="py-2 px-space-xs">ATTACK CLASS</th>
+<th class="py-2 px-space-xs">STATUS</th>
+<th class="py-2 px-space-xs text-right">ACTION</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-transparent font-mono">
+<!-- Incident 1 -->
+<tr class="hover:bg-surface-container transition-colors bg-surface-container-lowest/60">
+<td class="py-2 px-space-xs text-secondary whitespace-nowrap">14:22:08.4</td>
+<td class="py-2 px-space-xs text-on-surface font-semibold whitespace-nowrap">Modbus_RTU_#4</td>
+<td class="py-2 px-space-xs whitespace-nowrap">
+<span class="px-1.5 py-0.5 rounded bg-error-container text-on-error font-bold">τ = 0.942</span>
+</td>
+<td class="py-2 px-space-xs text-primary font-medium whitespace-nowrap">Injection / T0855</td>
+<td class="py-2 px-space-xs whitespace-nowrap">
+<span class="text-primary-container bg-primary-container/10 px-1 py-0.5 rounded">AUTO-QUARANTINED 18ms</span>
+</td>
+<td class="py-2 px-space-xs text-right whitespace-nowrap">
+<button class="px-2 py-1 rounded bg-secondary-container text-on-secondary-container hover:bg-secondary font-bold text-label-sm transition-all shadow-[0_0_8px_rgba(0,227,253,0.3)]" type="button">
+                    ANALYZE
+                  </button>
+</td>
+</tr>
+<!-- Incident 2 -->
+<tr class="hover:bg-surface-container transition-colors bg-surface-container/20">
+<td class="py-2 px-space-xs text-secondary whitespace-nowrap">14:21:49.2</td>
+<td class="py-2 px-space-xs text-on-surface font-semibold whitespace-nowrap">Net_Core_Switch</td>
+<td class="py-2 px-space-xs whitespace-nowrap">
+<span class="px-1.5 py-0.5 rounded bg-tertiary-container text-on-tertiary-container font-bold">τ = 0.761</span>
+</td>
+<td class="py-2 px-space-xs text-on-surface whitespace-nowrap">SYN Flood / T0814</td>
+<td class="py-2 px-space-xs whitespace-nowrap">
+<span class="text-primary-container bg-primary-container/10 px-1 py-0.5 rounded">FILTERED 12ms</span>
+</td>
+<td class="py-2 px-space-xs text-right whitespace-nowrap">
+<button class="px-2 py-1 rounded bg-surface-container-high hover:bg-surface-container text-on-surface font-bold text-label-sm transition-all" type="button">
+                    ANALYZE
+                  </button>
+</td>
+</tr>
+<!-- Incident 3 -->
+<tr class="hover:bg-surface-container transition-colors bg-surface-container-lowest/60">
+<td class="py-2 px-space-xs text-secondary whitespace-nowrap">14:20:11.8</td>
+<td class="py-2 px-space-xs text-on-surface font-semibold whitespace-nowrap">Thermostat_Rig</td>
+<td class="py-2 px-space-xs whitespace-nowrap">
+<span class="px-1.5 py-0.5 rounded bg-tertiary-container text-on-tertiary-container font-bold">τ = 0.690</span>
+</td>
+<td class="py-2 px-space-xs text-on-surface whitespace-nowrap">Out-of-Bound Setpoint</td>
+<td class="py-2 px-space-xs whitespace-nowrap">
+<span class="text-primary-container bg-primary-container/10 px-1 py-0.5 rounded">SUPPRESSED 24ms</span>
+</td>
+<td class="py-2 px-space-xs text-right whitespace-nowrap">
+<button class="px-2 py-1 rounded bg-surface-container-high hover:bg-surface-container text-on-surface font-bold text-label-sm transition-all" type="button">
+                    ANALYZE
+                  </button>
+</td>
+</tr>
+<!-- Incident 4 -->
+<tr class="hover:bg-surface-container transition-colors bg-surface-container/20">
+<td class="py-2 px-space-xs text-secondary whitespace-nowrap">14:18:55.0</td>
+<td class="py-2 px-space-xs text-on-surface font-semibold whitespace-nowrap">Gas_Sensing_Arr</td>
+<td class="py-2 px-space-xs whitespace-nowrap">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-bold">τ = 0.312</span>
+</td>
+<td class="py-2 px-space-xs text-on-surface whitespace-nowrap">Jitter Fluctuations</td>
+<td class="py-2 px-space-xs whitespace-nowrap">
+<span class="text-on-surface-variant">NOMINAL RECOVERY</span>
+</td>
+<td class="py-2 px-space-xs text-right whitespace-nowrap">
+<button class="px-2 py-1 rounded bg-surface-container-high hover:bg-surface-container text-on-surface-variant font-bold text-label-sm transition-all" type="button">
+                    INSPECT
+                  </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<!-- FLOATING VOICE COPILOT WIDGET (M.E.R.E.O.L.E.O.N.A.) -->
+<div class="fixed top-28 right-6 z-40 max-w-sm pointer-events-auto">
+<div class="bg-surface-container-low/95 backdrop-blur-md rounded-xl p-space-sm shadow-[0_0_20px_rgba(0,255,102,0.15)] flex items-center gap-space-sm">
+<div class="relative w-10 h-10 shrink-0 flex items-center justify-center">
+<!-- Rotating HUD Ring -->
+<svg class="absolute inset-0 w-full h-full animate-spin text-primary-container" style="animation-duration: 9s;" viewbox="0 0 40 40">
+<circle cx="20" cy="20" fill="none" r="17" stroke="currentColor" stroke-dasharray="16 8" stroke-width="1.5"></circle>
+</svg>
+<div class="w-7 h-7 rounded-full bg-primary-container/20 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[16px]">smart_toy</span>
+</div>
+<span class="absolute top-0 right-0 w-2 h-2 rounded-full bg-primary-container shadow-[0_0_6px_currentColor]"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-md text-body-sm text-primary font-bold">M.E.R.E.O.L.E.O.N.A.</span>
+<span class="font-label-sm text-label-sm text-secondary-fixed bg-surface-container px-1 py-0.2 rounded font-mono">AI COPILOT</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">
+          Monitoring tensor stream. Zero drift detected.
+        </p>
+</div>
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface shrink-0 ml-auto" type="button">
+<span class="material-symbols-outlined text-[16px]">mic</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  // Dynamic Real-time HUD Micro-interactions
+  (function initTacticalConsole() {
+    const tableRows = document.querySelectorAll('tbody tr');
+    tableRows.forEach(row => {
+      row.addEventListener('click', () => {
+        tableRows.forEach(r => r.classList.remove('bg-primary-container/10'));
+        row.classList.add('bg-primary-container/10');
+      });
+    });
+  })();
+</script></main><div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[96%] max-w-6xl"><div class="bg-surface-container-low/90 backdrop-blur-xl rounded-xl p-space-xs shadow-[0_0_25px_rgba(0,0,0,0.7)] flex flex-wrap items-center justify-between gap-space-sm"><nav class="flex items-center gap-1 overflow-x-auto py-1" data-active-classes="bg-primary-container text-on-primary-container font-bold rounded"><a aria-current="page" class="px-space-md py-1.5 whitespace-nowrap transition-colors bg-primary-container text-on-primary-container font-bold rounded" data-path="overview" href="#">OVERVIEW</a><a class="px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface whitespace-nowrap transition-colors" data-path="threat-lab" href="#">THREAT LAB</a><a class="px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface whitespace-nowrap transition-colors" data-path="xai-engine" href="#">XAI ENGINE</a><a class="px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface whitespace-nowrap transition-colors" data-path="adversarial" href="#">ADVERSARIAL</a><a class="px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface whitespace-nowrap transition-colors" data-path="remediation" href="#">REMEDIATION</a><a class="px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface whitespace-nowrap transition-colors" data-path="compliance" href="#">COMPLIANCE</a></nav><div class="flex items-center gap-space-xs"><a class="px-space-sm py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-secondary-fixed font-label-sm text-label-sm whitespace-nowrap" data-path="execute" href="#">Execute PCB</a><a class="px-space-sm py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-primary font-label-sm text-label-sm whitespace-nowrap" data-path="live-sniffer" href="#">Sniffer</a><a class="px-space-sm py-1.5 rounded bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary font-label-sm text-label-sm font-bold whitespace-nowrap shadow-[0_0_10px_rgba(0,227,253,0.25)]" data-path="agentic-soc" href="#">Agentic SOC</a></div></div></div></body></html>

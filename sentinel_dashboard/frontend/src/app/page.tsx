@@ -7,12 +7,13 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Header from "@/components/Header";
-import VoiceCopilot from "@/components/VoiceCopilot";
+import VoiceAssistantConsole from "@/components/consoles/VoiceAssistantConsole";
 import TelemetryControls from "@/components/TelemetryControls";
 import AttackSimulator from "@/components/AttackSimulator";
 import HostMonitorHUD from "@/components/HostMonitorHUD";
 import ResearchModal from "@/components/ResearchModal";
 import BottomNavDock from "@/components/BottomNavDock";
+import LeftSidebarNav from "@/components/LeftSidebarNav";
 import LivePacketSnifferDrawer from "@/components/LivePacketSnifferDrawer";
 import AgenticSocAnalystModal from "@/components/AgenticSocAnalystModal";
 import SOARPlaybookBuilder from "@/components/SOARPlaybookBuilder";
@@ -24,6 +25,8 @@ import XaiConsole from "@/components/consoles/XaiConsole";
 import AdversarialConsole from "@/components/consoles/AdversarialConsole";
 import RemediationConsole from "@/components/consoles/RemediationConsole";
 import ComplianceConsole from "@/components/consoles/ComplianceConsole";
+import CryptographicAuditBundleConsole from "@/components/consoles/CryptographicAuditBundleConsole";
+import CryptographicAuditReportModal from "@/components/modals/CryptographicAuditReportModal";
 
 // Circuit Board Component for Embedded PCB Execution
 import { CircuitBoard, CircuitNode, CircuitConnection } from "@/components/ui/circuit-board";
@@ -49,11 +52,12 @@ const WS_URL = "ws://127.0.0.1:8000/ws/telemetry";
 const BACKEND_HTTP = "http://127.0.0.1:8000";
 
 export default function MasterDashboardPage() {
-  const [theme, setTheme] = useState<string>("cyberpunk");
   const [isResearchOpen, setIsResearchOpen] = useState<boolean>(false);
 
   // Zustand Global Store State
   const {
+    theme,
+    setTheme,
     activeConsole,
     activeDomain,
     setActiveDomain,
@@ -72,6 +76,18 @@ export default function MasterDashboardPage() {
     isSoarBuilderOpen,
     closeSoarBuilder
   } = useTelemetryStore();
+
+  useEffect(() => {
+    const saved = localStorage.getItem("sentinel_theme");
+    if (saved) {
+      setTheme(saved);
+      document.documentElement.setAttribute("data-theme", saved);
+      if (saved === "alabaster" || saved === "arctic" || saved === "light") {
+        document.documentElement.classList.add("light");
+        document.documentElement.classList.remove("dark");
+      }
+    }
+  }, [setTheme]);
 
   const socketRef = useRef<WebSocket | null>(null);
   const reconnectTimeoutRef = useRef<any>(null);
@@ -239,15 +255,13 @@ export default function MasterDashboardPage() {
       />
 
       {/* 2. MAIN VIEW CONTAINER (SPACIOUS SCI-FI FUI LAYOUT) */}
-      <main className="max-w-[1920px] w-full mx-auto px-4 sm:px-6 lg:px-8 space-y-6 md:space-y-8">
+      <main className="max-w-[1920px] w-full mx-auto px-4 sm:px-6 lg:px-8 pt-4 space-y-6 md:space-y-8">
         
-        {/* AUTONOMOUS CONTINUOUS VOICE COPILOT (SECTION 9) */}
-        <VoiceCopilot />
-
         {/* TELEMETRY TRANSPORT & BUFFER HUD */}
         <TelemetryControls />
 
         {/* ACTIVE CONSOLE ROUTING */}
+        {activeConsole === "voice" && <VoiceAssistantConsole />}
         {activeConsole === "overview" && <OverviewConsole />}
         
         {activeConsole === "threat_lab" && (
@@ -269,31 +283,35 @@ export default function MasterDashboardPage() {
         )}
 
         {activeConsole === "compliance" && <ComplianceConsole />}
+        {activeConsole === "audit" && <CryptographicAuditBundleConsole />}
 
         {/* CIRCUIT BOARD FULL SYSTEM ARCHITECTURE TOPOLOGY */}
         {activeConsole === "execute" && (
-          <div className="cyber-card p-5 space-y-3">
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border-color)] pb-3">
+          <div className="hud-box bg-[#0b131e] rounded-xl border border-[#00f0ff]/30 p-5 space-y-3 shadow-[0_0_30px_rgba(0,240,255,0.08)] relative">
+            <div className="hud-corner-tr" />
+            <div className="hud-corner-bl" />
+
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#162536] pb-3">
               <div>
-                <h3 className="font-['Orbitron'] font-bold text-sm text-[var(--text-primary)]">
+                <h3 className="font-['Orbitron'] font-bold text-sm text-[#dbfcff]">
                   FULL-SYSTEM PCB TRACE & NEURAL HARDWARE TOPOLOGY
                 </h3>
-                <p className="text-xs text-[var(--text-secondary)] font-['Space_Grotesk']">
+                <p className="text-xs text-[#64748b] font-mono mt-0.5">
                   Interactive Circuit Board: Ingestion Sensors → Conformer Core → Dual Heads → Wazuh Active Response
                 </p>
               </div>
-              <div className="text-xs font-['JetBrains_Mono'] text-[var(--brand-cyan)]">
-                Selected Node: {selectedCircuitNode.toUpperCase()}
+              <div className="text-xs font-mono text-[#00f0ff] bg-[#070d14] px-2.5 py-1 rounded border border-[#162536]">
+                Selected Node: <strong className="text-[#00ff66]">{selectedCircuitNode.toUpperCase()}</strong>
               </div>
             </div>
 
             {/* RESPONSIVE CIRCUIT BOARD CANVAS CONTAINER (100% SPREAD) */}
-            <div className="w-full overflow-x-auto pb-3 pt-1">
+            <div className="w-full overflow-x-auto pb-3 pt-1 bg-[#02060b] rounded-lg border border-[#0d2238]">
               <div className="w-full">
                 <CircuitBoard
                   nodes={circuitNodes.map((n) => ({
                     ...n,
-                    color: selectedCircuitNode === n.id ? "var(--accent-primary)" : n.color
+                    color: selectedCircuitNode === n.id ? "#00f0ff" : n.color
                   }))}
                   connections={circuitConnections}
                   width={1260}
@@ -307,12 +325,12 @@ export default function MasterDashboardPage() {
               </div>
             </div>
 
-            <div className="flex items-center justify-between text-xs font-['JetBrains_Mono'] text-[var(--text-muted)] px-3 pt-2 border-t border-[var(--border-color)]/40">
-              <span>[STAGE 1: MULTI-DOMAIN TELEMETRY]</span>
-              <span>[STAGE 2: PREPROCESSING & SLIDING BUFFER]</span>
-              <span>[STAGE 3: CONFORMER CORE & SALIENCY XAI]</span>
-              <span>[STAGE 4: DUAL INFERENCE HEADS]</span>
-              <span>[STAGE 5: AUTONOMOUS ACTIVE MITIGATION & GRC]</span>
+            <div className="flex items-center justify-between text-[10px] font-mono text-[#64748b] px-3 pt-2 border-t border-[#162536]">
+              <span className="text-[#00ff66]">[STAGE 1: MULTI-DOMAIN TELEMETRY]</span>
+              <span className="text-[#00f0ff]">[STAGE 2: PREPROCESSING & SLIDING BUFFER]</span>
+              <span className="text-[#ffb700]">[STAGE 3: CONFORMER CORE & SALIENCY XAI]</span>
+              <span className="text-[#ff2a5f]">[STAGE 4: DUAL INFERENCE HEADS]</span>
+              <span className="text-[#00ff66]">[STAGE 5: AUTONOMOUS ACTIVE MITIGATION & GRC]</span>
             </div>
           </div>
         )}
@@ -342,6 +360,12 @@ export default function MasterDashboardPage() {
       {isSoarBuilderOpen && (
         <SOARPlaybookBuilder isModal={true} onClose={closeSoarBuilder} />
       )}
+
+      {/* CRYPTOGRAPHIC VERIFICATION EXTERNAL AUDIT MODAL */}
+      <CryptographicAuditReportModal />
+
+      {/* LEFT COMPACT TACTICAL RAIL: ALL EXTRA OPTIONS */}
+      <LeftSidebarNav onOpenResearch={() => setIsResearchOpen(true)} />
 
       {/* BOTTOM SHIFTED DOCK: MAGNETIC DOCK NAVIGATION */}
       <BottomNavDock onOpenResearch={() => setIsResearchOpen(true)} />

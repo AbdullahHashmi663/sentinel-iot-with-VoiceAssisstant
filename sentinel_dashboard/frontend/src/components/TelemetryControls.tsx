@@ -68,6 +68,7 @@ export default function TelemetryControls(props: TelemetryControlsProps) {
   const speed = props.speed !== undefined ? props.speed : localSpeed;
   const onSpeedChange = props.onSpeedChange || setLocalSpeed;
   const bufferedSteps = props.bufferedSteps !== undefined ? props.bufferedSteps : 10;
+  const isLightMode = store.theme === "alabaster" || store.theme === "arctic" || store.theme === "light";
 
   const currentDomainMeta = domains[activeDomain] || { num_features: 17, num_classes: 10 };
 
@@ -120,7 +121,11 @@ export default function TelemetryControls(props: TelemetryControlsProps) {
             {Object.keys(domains).map((d) => {
               const meta = domains[d] || { num_features: 10, num_classes: 5 };
               return (
-                <option key={d} value={d} className="bg-[#070D17] text-white">
+                <option
+                  key={d}
+                  value={d}
+                  className={isLightMode ? "bg-[#fafaff] text-[#1c1c1c]" : "bg-[#070D17] text-white"}
+                >
                   {d} — ({meta.num_features} feats, {meta.num_classes} classes)
                 </option>
               );
@@ -201,6 +206,8 @@ export default function TelemetryControls(props: TelemetryControlsProps) {
                     ? isLatest
                       ? "bg-[var(--accent-primary)] shadow-[0_0_14px_var(--accent-primary)] scale-y-125 border border-white/60"
                       : "bg-[var(--accent-primary)]/80 shadow-[0_0_8px_var(--accent-primary)] border border-white/20"
+                    : isLightMode
+                    ? "bg-[#daddd8] border border-[#c5c8c2]"
                     : "bg-white/5 border border-white/10"
                 }`}
                 title={`Buffer Slot ${i + 1}/10: ${isFilled ? "Active" : "Empty"}`}

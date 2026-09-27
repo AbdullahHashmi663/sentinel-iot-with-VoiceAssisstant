@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"on-primary":"#003911","outline-variant":"#3b4b3a","primary":"#edffe8","surface-container":"#1c2024","on-background":"#e0e3e8","surface-bright":"#353a3e","secondary-fixed":"#9cf0ff","surface-container-high":"#262a2f","on-tertiary-container":"#895600","on-primary-fixed":"#002107","on-secondary-fixed":"#001f24","secondary-fixed-dim":"#00daf3","on-tertiary-fixed":"#2a1700","inverse-primary":"#006e27","tertiary-container":"#ffd7aa","primary-fixed-dim":"#00e55b","inverse-surface":"#e0e3e8","on-tertiary-fixed-variant":"#653e00","on-surface":"#e0e3e8","on-secondary-container":"#00616d","secondary-container":"#00e3fd","on-secondary":"#00363d","on-error":"#690005","tertiary":"#fff9f6","primary-fixed":"#6bff83","on-surface-variant":"#b9ccb5","surface-container-highest":"#31353a","outline":"#849581","on-error-container":"#ffdad6","surface":"#101418","on-primary-fixed-variant":"#00531b","on-tertiary":"#472a00","surface-dim":"#101418","surface-container-lowest":"#0a0f13","surface-tint":"#00e55b","on-primary-container":"#007128","surface-container-low":"#181c20","primary-container":"#00ff66","error-container":"#93000a","inverse-on-surface":"#2d3135","tertiary-fixed-dim":"#ffb95f","surface-variant":"#31353a","secondary":"#bdf4ff","background":"#101418","error":"#ffb4ab","tertiary-fixed":"#ffddb8","on-secondary-fixed-variant":"#004f58"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"margin-desktop":"1.5rem","space-lg":"1.25rem","space-md":"0.75rem","gutter":"0.75rem","space-sm":"0.5rem","space-xs":"0.25rem","margin":"1rem","gutter-desktop":"1rem","space-xl":"2rem"},"fontFamily":{"headline-xl":["Space Grotesk"],"headline-xl-mobile":["Space Grotesk"],"headline-md":["Space Grotesk"],"body-lg":["Space Grotesk"],"headline-lg":["Space Grotesk"],"label-sm":["JetBrains Mono"],"body-md":["Space Grotesk"],"telemetry-metric-sm":["JetBrains Mono"],"body-sm":["Space Grotesk"],"label-md":["JetBrains Mono"],"label-lg":["JetBrains Mono"],"telemetry-metric":["JetBrains Mono"]},"fontSize":{"headline-xl":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-xl-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-md":["18px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"600"}],"body-lg":["15px",{"lineHeight":"22px","fontWeight":"400"}],"headline-lg":["22px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-sm":["10px",{"lineHeight":"14px","letterSpacing":"0.08em","fontWeight":"500"}],"body-md":["13px",{"lineHeight":"18px","fontWeight":"400"}],"telemetry-metric-sm":["16px",{"lineHeight":"20px","letterSpacing":"0em","fontWeight":"600"}],"body-sm":["11px",{"lineHeight":"16px","fontWeight":"400"}],"label-md":["11px",{"lineHeight":"16px","letterSpacing":"0.06em","fontWeight":"500"}],"label-lg":["13px",{"lineHeight":"18px","letterSpacing":"0.04em","fontWeight":"600"}],"telemetry-metric":["24px",{"lineHeight":"28px","letterSpacing":"-0.02em","fontWeight":"700"}]}}}}</script></head><body class="bg-surface-container-lowest font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/90 backdrop-blur-md"><div class="h-16 px-gutter-desktop flex items-center justify-between bg-surface-container-low/60 shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded bg-primary-container/20 flex items-center justify-center"><span class="material-symbols-outlined text-primary-container text-[20px]">security</span></div><div class="flex flex-col"><span class="font-headline-md text-headline-md tracking-tight text-primary leading-none">SENTINEL-IoT</span><span class="font-label-sm text-label-sm text-secondary tracking-widest">TACTICAL SOC // ICS DEFENSE</span></div></div><div class="flex items-center gap-space-xs px-space-sm py-0.5 rounded bg-surface-container-highest"><span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-sm text-label-sm text-primary-container">FYP-II v2.4 OPERATIONAL</span></div><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container"><span class="font-label-sm text-label-sm text-on-surface-variant">LATENCY:</span><span class="font-telemetry-metric-sm text-telemetry-metric-sm text-secondary-fixed">21.5 ms</span><span class="w-2 h-2 rounded-full bg-secondary-fixed-dim animate-ping"></span></div></div><div class="flex items-center gap-space-md"><div class="hidden lg:flex items-center p-0.5 rounded bg-surface-container-highest"><button class="px-space-sm py-1 rounded bg-surface-container font-label-sm text-label-sm text-primary-container" type="button">LIVE WS (FastAPI)</button><button class="px-space-sm py-1 rounded font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface" type="button">OFFLINE MOCK</button></div><div class="hidden md:flex items-center gap-space-md px-space-md py-1 rounded bg-surface-container-high"><div class="flex flex-col text-right"><span class="font-label-sm text-label-sm text-on-surface-variant">UTC MASTER</span><span class="font-label-md text-label-md text-primary font-mono">14:22:09.412</span></div><div class="w-px h-6 bg-surface-bright"></div><div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface-variant">THROUGHPUT</span><span class="font-telemetry-metric-sm text-telemetry-metric-sm text-secondary font-mono">2,841,920 EVT</span></div></div><div class="flex items-center gap-space-sm"><button class="hidden sm:flex items-center gap-space-xs px-space-sm py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm" type="button"><span class="material-symbols-outlined text-[16px]">palette</span><span>Obsidian HUD</span></button><button class="hidden sm:flex items-center gap-space-xs px-space-sm py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm" type="button"><span class="material-symbols-outlined text-[16px]">science</span><span>Research Gallery</span></button><button class="flex items-center gap-space-xs px-space-md py-1.5 rounded bg-error-container text-on-error-container hover:bg-error hover:text-on-error font-label-sm text-label-sm font-bold shadow-[0_0_15px_rgba(239,68,68,0.35)] transition-all" type="button"><span class="material-symbols-outlined text-[16px]">lock</span><span>EMERGENCY LOCKDOWN</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div><div class="h-10 px-gutter-desktop flex items-center justify-between bg-surface-container-lowest/95 shadow-[0_1px_4px_rgba(0,0,0,0.5)]"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase">DOMAIN:</span><select class="bg-surface-container-high text-secondary font-label-sm text-label-sm px-space-sm py-1 rounded focus:outline-none"><option>Modbus Industrial PLC (ToN_IoT #04)</option><option>Network Core Telemetry (ToN_IoT #01)</option><option>SCADA Thermostat Rig (ToN_IoT #07)</option><option>Smart Grid Energy Meter (ToN_IoT #11)</option><option>ICS Robotic Actuator (ToN_IoT #09)</option><option>Smart Fridge Environment (ToN_IoT #03)</option><option>Gas Level Sensing Array (ToN_IoT #12)</option></select></div><div class="hidden md:flex items-center gap-1"><button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface" type="button"><span class="material-symbols-outlined text-[16px]">play_arrow</span></button><button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface" type="button"><span class="material-symbols-outlined text-[16px]">pause</span></button><button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface" type="button"><span class="material-symbols-outlined text-[16px]">skip_next</span></button><div class="flex items-center bg-surface-container px-space-xs py-0.5 rounded ml-1"><span class="font-label-sm text-label-sm text-primary font-mono">1.0x</span></div></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs"><span class="font-label-sm text-label-sm text-on-surface-variant">TENSOR:</span><span class="font-label-sm text-label-sm text-primary-container font-mono bg-surface-container px-space-xs py-0.5 rounded">[B, 10, D] READY</span></div><div class="hidden lg:flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-primary-fixed-dim"></span><span class="font-label-sm text-label-sm text-on-surface-variant">SHM: SYNCHRONIZED</span></div></div></div></header><main class="w-full pt-26 pb-28 min-h-screen bg-surface-container-lowest px-gutter-desktop"><div class="flex flex-col w-full space-y-space-md">
+<!-- TOP SECTION: Threat Level Banner & Control Strip -->
+<div class="w-full bg-surface-container-low rounded-lg p-space-md shadow-xl relative overflow-hidden">
+<div class="absolute -right-16 -top-16 w-64 h-64 bg-primary-container/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -left-16 -bottom-16 w-64 h-64 bg-secondary-container/5 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Status Strip -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pb-space-sm mb-space-sm">
+<div class="flex flex-wrap items-center gap-space-sm">
+<div class="flex items-center gap-space-xs px-space-sm py-1 bg-surface-container-highest rounded">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-primary-container uppercase tracking-wider">STRESS-LAB ENGINE: ONLINE</span>
+</div>
+<div class="flex items-center gap-space-xs px-space-sm py-1 bg-surface-container rounded">
+<span class="font-label-sm text-label-sm text-on-surface-variant">TARGET:</span>
+<span class="font-label-sm text-label-sm text-secondary font-mono">GOOGLE CONFORMER DUAL-CORE</span>
+</div>
+<div class="flex items-center gap-space-xs px-space-sm py-1 bg-surface-container rounded">
+<span class="font-label-sm text-label-sm text-on-surface-variant">PURIFICATION:</span>
+<span class="font-label-sm text-label-sm text-primary-fixed font-mono">ACTIVE (DAE+SMOOTH)</span>
+</div>
+<div class="flex items-center gap-space-xs px-space-sm py-1 bg-surface-container-high rounded">
+<span class="font-label-sm text-label-sm text-on-surface-variant">VECTOR:</span>
+<span class="font-label-sm text-label-sm text-error font-mono font-bold">PGD-20 ℝ<sub>∞</sub></span>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant">LIVE SNR:</span>
+<span class="font-telemetry-metric-sm text-telemetry-metric-sm text-secondary-fixed font-mono" id="snrVal">32.4 dB</span>
+</div>
+<div class="w-px h-4 bg-surface-bright"></div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant">LATENT RECON LOSS:</span>
+<span class="font-telemetry-metric-sm text-telemetry-metric-sm text-primary-container font-mono" id="reconLossVal">0.0018</span>
+</div>
+</div>
+</div>
+<!-- Interactive Perturbation Budget & Attack Pipeline HUD -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md items-center pt-space-xs">
+<!-- Perturbation Slider Widget -->
+<div class="lg:col-span-4 bg-surface-container p-space-sm rounded flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">ε PERTURBATION BUDGET [L<sub>∞</sub>]</span>
+<span class="font-telemetry-metric text-telemetry-metric text-primary-container font-mono" id="epsDisplay">ε = 0.08</span>
+</div>
+<div class="relative w-full my-space-xs">
+<input class="w-full h-1.5 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary-container" id="epsSlider" max="0.15" min="0.01" step="0.005" type="range" value="0.08"/>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span class="text-primary-container">Subtle (0.01)</span>
+<span class="text-tertiary-fixed-dim">Perceptible (0.08)</span>
+<span class="text-error">Catastrophic (0.15)</span>
+</div>
+</div>
+<!-- Attack Algorithm Selector Buttons -->
+<div class="lg:col-span-5 flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">ADVERSARIAL ATTACK GENERATOR</span>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-xs" id="algoBtnGroup">
+<button class="algo-btn px-space-xs py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm transition-colors text-center" data-algo="fgsm" type="button">
+            1-Step FGSM
+          </button>
+<button class="algo-btn px-space-xs py-1.5 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold transition-colors text-center shadow-[0_0_12px_rgba(0,255,102,0.3)]" data-algo="pgd20" type="button">
+            PGD-20 (L<sub>∞</sub>)
+          </button>
+<button class="algo-btn px-space-xs py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm transition-colors text-center" data-algo="cw" type="button">
+            Carlini-Wagner L<sub>2</sub>
+</button>
+<button class="algo-btn px-space-xs py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm transition-colors text-center" data-algo="uap" type="button">
+            Universal UAP
+          </button>
+</div>
+</div>
+<!-- Defense Purification Toggles -->
+<div class="lg:col-span-3 flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">PURIFICATION SUBSYSTEMS</span>
+<div class="flex flex-col gap-1">
+<label class="flex items-center justify-between p-1 px-space-sm bg-surface-container rounded cursor-pointer hover:bg-surface-container-high">
+<span class="font-label-sm text-label-sm text-on-surface">Gaussian Smoothing (σ=0.05)</span>
+<input checked="" class="w-3.5 h-3.5 accent-primary-container cursor-pointer" type="checkbox"/>
+</label>
+<label class="flex items-center justify-between p-1 px-space-sm bg-surface-container rounded cursor-pointer hover:bg-surface-container-high">
+<span class="font-label-sm text-label-sm text-on-surface">DAE Pre-filter (Denoising AE)</span>
+<input checked="" class="w-3.5 h-3.5 accent-secondary-container cursor-pointer" type="checkbox"/>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- MAIN 2-COLUMN GRID -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-md">
+<!-- LEFT COLUMN: Model Resilience Benchmark & Perturbation Waveform Inspection (7 cols) -->
+<div class="xl:col-span-7 flex flex-col space-y-space-md">
+<!-- Card A: MODEL RESILIENCE BENCHMARK -->
+<div class="bg-surface-container-low rounded-lg p-space-md shadow-xl flex flex-col">
+<div class="flex items-center justify-between pb-space-sm mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-container text-[20px]">shield_with_heart</span>
+<h2 class="font-headline-md text-headline-md text-primary">MODEL RESILIENCE UNDER ADVERSARIAL EVASION ATTACK</h2>
+</div>
+<span class="font-label-sm text-label-sm text-secondary-fixed bg-surface-container px-space-xs py-0.5 rounded font-mono">ε = 0.08 EVAL MANIFOLD</span>
+</div>
+<!-- Comparative Benchmark Table -->
+<div class="overflow-x-auto w-full mb-space-md">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm uppercase">
+<th class="py-2 px-space-sm">Architecture / Target</th>
+<th class="py-2 px-space-sm font-mono">Clean Acc</th>
+<th class="py-2 px-space-sm font-mono">Robust Acc (ε=0.08)</th>
+<th class="py-2 px-space-sm font-mono">Degradation</th>
+<th class="py-2 px-space-sm text-right">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-high/40 font-body-md text-body-md">
+<!-- Conformer Dual-Core -->
+<tr class="bg-surface-container-lowest/60 hover:bg-surface-container-high/40 transition-colors">
+<td class="py-2.5 px-space-sm flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-headline-md text-headline-md text-primary">Google Conformer (Dual-Core)</span>
+<span class="font-label-sm text-label-sm text-primary-fixed bg-primary-container/10 px-1 rounded">Our Model</span>
+</td>
+<td class="py-2.5 px-space-sm font-telemetry-metric-sm text-telemetry-metric-sm text-on-surface font-mono">99.4%</td>
+<td class="py-2.5 px-space-sm font-telemetry-metric-sm text-telemetry-metric-sm text-primary-container font-mono font-bold" id="confRobustAcc">98.2%</td>
+<td class="py-2.5 px-space-sm font-label-md text-label-md text-primary font-mono" id="confDegrad">-1.2%</td>
+<td class="py-2.5 px-space-sm text-right">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-on-primary-container bg-primary-container px-space-xs py-0.5 rounded font-bold">
+                    RESILIENT ✔
+                  </span>
+</td>
+</tr>
+<!-- Baseline 1D-CNN -->
+<tr class="bg-surface-container-low/40 hover:bg-surface-container-high/40 transition-colors">
+<td class="py-2.5 px-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="font-body-md text-body-md text-on-surface">Standard 1D-CNN Baseline</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">Conv4-GAP</span>
+</div>
+</td>
+<td class="py-2.5 px-space-sm font-telemetry-metric-sm text-telemetry-metric-sm text-on-surface-variant font-mono">96.1%</td>
+<td class="py-2.5 px-space-sm font-telemetry-metric-sm text-telemetry-metric-sm text-error font-mono font-bold" id="cnnRobustAcc">40.5%</td>
+<td class="py-2.5 px-space-sm font-label-md text-label-md text-error font-mono" id="cnnDegrad">-55.6%</td>
+<td class="py-2.5 px-space-sm text-right">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-on-error-container bg-error-container px-space-xs py-0.5 rounded font-bold">
+                    COLLAPSED ✘
+                  </span>
+</td>
+</tr>
+<!-- Deep BiLSTM -->
+<tr class="bg-surface-container-lowest/60 hover:bg-surface-container-high/40 transition-colors">
+<td class="py-2.5 px-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="font-body-md text-body-md text-on-surface">Deep BiLSTM Recurrent</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">128-Cell</span>
+</div>
+</td>
+<td class="py-2.5 px-space-sm font-telemetry-metric-sm text-telemetry-metric-sm text-on-surface-variant font-mono">95.4%</td>
+<td class="py-2.5 px-space-sm font-telemetry-metric-sm text-telemetry-metric-sm text-error font-mono font-bold" id="lstmRobustAcc">46.0%</td>
+<td class="py-2.5 px-space-sm font-label-md text-label-md text-error font-mono" id="lstmDegrad">-49.4%</td>
+<td class="py-2.5 px-space-sm text-right">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-on-error-container bg-error-container px-space-xs py-0.5 rounded font-bold">
+                    COLLAPSED ✘
+                  </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Diverging Delta Robustness SVG Chart -->
+<div class="bg-surface-container-lowest p-space-sm rounded flex flex-col">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">ACCURACY TRAJECTORY VS. PERTURBATION BUDGET ε ∈ [0.01, 0.15]</span>
+<div class="flex items-center gap-space-sm font-label-sm text-label-sm">
+<span class="flex items-center gap-1 text-primary-container"><span class="w-3 h-0.5 bg-primary-container inline-block"></span> Conformer</span>
+<span class="flex items-center gap-1 text-error"><span class="w-3 h-0.5 bg-error inline-block"></span> 1D-CNN</span>
+<span class="flex items-center gap-1 text-tertiary-fixed-dim"><span class="w-3 h-0.5 bg-tertiary-fixed-dim inline-block"></span> BiLSTM</span>
+</div>
+</div>
+<!-- SVG Line Chart with Grid & Shaded Envelope -->
+<div class="w-full h-44 relative">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 600 160">
+<defs>
+<lineargradient id="confGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#00ff66" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#00ff66" stop-opacity="0.0"></stop>
+</lineargradient>
+<lineargradient id="attackGlow" x1="0" x2="1" y1="0" y2="0">
+<stop offset="0%" stop-color="#00ff66" stop-opacity="0.8"></stop>
+<stop offset="50%" stop-color="#ffb95f" stop-opacity="0.8"></stop>
+<stop offset="100%" stop-color="#ffb4ab" stop-opacity="0.8"></stop>
+</lineargradient>
+</defs>
+<!-- Subtle Grid Lines -->
+<line stroke="#262a2f" stroke-dasharray="2,2" stroke-width="1" x1="40" x2="580" y1="20" y2="20"></line>
+<line stroke="#262a2f" stroke-dasharray="2,2" stroke-width="1" x1="40" x2="580" y1="55" y2="55"></line>
+<line stroke="#262a2f" stroke-dasharray="2,2" stroke-width="1" x1="40" x2="580" y1="90" y2="90"></line>
+<line stroke="#262a2f" stroke-dasharray="2,2" stroke-width="1" x1="40" x2="580" y1="125" y2="125"></line>
+<!-- Y Axis labels -->
+<text fill="#849581" font-family="JetBrains Mono" font-size="9" text-anchor="end" x="35" y="24">100%</text>
+<text fill="#849581" font-family="JetBrains Mono" font-size="9" text-anchor="end" x="35" y="59">75%</text>
+<text fill="#849581" font-family="JetBrains Mono" font-size="9" text-anchor="end" x="35" y="94">50%</text>
+<text fill="#849581" font-family="JetBrains Mono" font-size="9" text-anchor="end" x="35" y="129">25%</text>
+<!-- X Axis Labels -->
+<text fill="#849581" font-family="JetBrains Mono" font-size="9" x="40" y="148">ε=0.01</text>
+<text fill="#849581" font-family="JetBrains Mono" font-size="9" x="175" y="148">ε=0.04</text>
+<text fill="#849581" font-family="JetBrains Mono" font-size="9" x="310" y="148">ε=0.08</text>
+<text fill="#849581" font-family="JetBrains Mono" font-size="9" x="445" y="148">ε=0.12</text>
+<text fill="#849581" font-family="JetBrains Mono" font-size="9" x="560" y="148">ε=0.15</text>
+<!-- Conformer Fill Area -->
+<polygon fill="url(#confGradient)" points="40,21 175,23 310,25 445,29 580,34 580,135 40,135"></polygon>
+<!-- Conformer Curve (Resilient, flat) -->
+<path d="M 40,21 Q 200,24 310,25 T 580,34" fill="none" stroke="#00ff66" stroke-width="2.5"></path>
+<!-- Points -->
+<circle cx="40" cy="21" fill="#00ff66" r="3"></circle>
+<circle class="animate-ping" cx="310" cy="25" fill="#00ff66" opacity="0.4" r="4"></circle>
+<circle cx="310" cy="25" fill="#00ff66" r="3"></circle>
+<circle cx="580" cy="34" fill="#00ff66" r="3"></circle>
+<!-- 1D-CNN Curve (Sharp collapse) -->
+<path d="M 40,26 Q 160,35 310,95 T 580,130" fill="none" stroke="#ffb4ab" stroke-dasharray="4,2" stroke-width="2"></path>
+<circle cx="310" cy="95" fill="#ffb4ab" r="3"></circle>
+<!-- BiLSTM Curve (Collapse) -->
+<path d="M 40,28 Q 170,42 310,88 T 580,122" fill="none" stroke="#ffb95f" stroke-width="1.8"></path>
+<circle cx="310" cy="88" fill="#ffb95f" r="3"></circle>
+<!-- Active Cursor Line for Current eps = 0.08 (X=310) -->
+<line id="cursorLine" stroke="#00daf3" stroke-dasharray="2,2" stroke-width="1.5" x1="310" x2="310" y1="15" y2="135"></line>
+<rect fill="#001f24" height="14" rx="2" width="80" x="270" y="4"></rect>
+<text fill="#00daf3" font-family="JetBrains Mono" font-size="9" font-weight="600" text-anchor="middle" x="310" y="14">ACTIVE ε=0.08</text>
+</svg>
+</div>
+</div>
+</div>
+<!-- Card B: PERTURBATION WAVEFORM DECONVOLUTION -->
+<div class="bg-surface-container-low rounded-lg p-space-md shadow-xl flex flex-col">
+<div class="flex flex-wrap items-center justify-between pb-space-sm mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">graphic_eq</span>
+<h2 class="font-headline-md text-headline-md text-primary">ADVERSARIAL PERTURBATION WAVEFORM DECONVOLUTION</h2>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm text-secondary font-mono bg-surface-container px-space-xs py-0.5 rounded">PLC_MODBUS_REG_0x002B</span>
+</div>
+</div>
+<!-- Telemetry Badges Strip -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-xs mb-space-sm">
+<div class="bg-surface-container px-space-sm py-1.5 rounded flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">L<sub>∞</sub> NORM:</span>
+<span class="font-telemetry-metric-sm text-telemetry-metric-sm text-secondary font-mono" id="linfNorm">0.0782</span>
+</div>
+<div class="bg-surface-container px-space-sm py-1.5 rounded flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">STRUCTURAL SIM (SSIM):</span>
+<span class="font-telemetry-metric-sm text-telemetry-metric-sm text-primary-container font-mono">0.941</span>
+</div>
+<div class="bg-surface-container px-space-sm py-1.5 rounded flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">ROBUSTNESS CERT:</span>
+<span class="font-telemetry-metric-sm text-telemetry-metric-sm text-secondary-fixed font-mono">R<sub>ε</sub> = 0.092</span>
+</div>
+</div>
+<!-- Waveform Decomposition Chart -->
+<div class="bg-surface-container-lowest p-space-sm rounded flex flex-col">
+<div class="flex flex-wrap items-center justify-between mb-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">SENSOR SIGNAL VOLTAGE vs. SYNTHESIZED PERTURBATION [t ∈ 0..250ms]</span>
+<div class="flex items-center gap-space-sm font-label-sm text-label-sm">
+<span class="flex items-center gap-1 text-secondary-fixed"><span class="w-3 h-0.5 bg-secondary-fixed inline-block"></span> x (Clean Sensor)</span>
+<span class="flex items-center gap-1 text-error"><span class="w-3 h-0.5 bg-error inline-block"></span> η (Noise Mask)</span>
+<span class="flex items-center gap-1 text-tertiary-fixed-dim"><span class="w-3 h-0.5 bg-tertiary-fixed-dim inline-block"></span> x + η (Adversarial)</span>
+</div>
+</div>
+<div class="w-full h-48 relative">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 640 180">
+<!-- Grid Matrix -->
+<line stroke="#1c2024" stroke-width="1" x1="30" x2="620" y1="30" y2="30"></line>
+<line stroke="#262a2f" stroke-dasharray="2,2" stroke-width="1" x1="30" x2="620" y1="90" y2="90"></line>
+<line stroke="#1c2024" stroke-width="1" x1="30" x2="620" y1="150" y2="150"></line>
+<!-- Y Axis labels -->
+<text fill="#849581" font-family="JetBrains Mono" font-size="8" text-anchor="end" x="25" y="34">+5.0V</text>
+<text fill="#849581" font-family="JetBrains Mono" font-size="8" text-anchor="end" x="25" y="94">0.0V</text>
+<text fill="#849581" font-family="JetBrains Mono" font-size="8" text-anchor="end" x="25" y="154">-5.0V</text>
+<!-- Waveform 1: Clean Input (Cyan smooth sinusoidal ICS wave) -->
+<path d="M 30,90 C 60,30 90,30 120,90 C 150,150 180,150 210,90 C 240,30 270,30 300,90 C 330,150 360,150 390,90 C 420,30 450,30 480,90 C 510,150 540,150 570,90 C 595,45 610,60 620,90" fill="none" stroke="#9cf0ff" stroke-width="2"></path>
+<!-- Waveform 2: Perturbation Noise Mask eta (Red dashed high frequency pulses) -->
+<path d="M 30,90 L 50,82 L 70,98 L 90,84 L 110,96 L 130,80 L 150,102 L 170,85 L 190,95 L 210,81 L 230,99 L 250,83 L 270,97 L 290,79 L 310,103 L 330,84 L 350,96 L 370,82 L 390,98 L 410,80 L 430,101 L 450,84 L 470,97 L 490,82 L 510,99 L 530,80 L 550,102 L 570,85 L 590,96 L 620,90" fill="none" id="noiseWave" opacity="0.85" stroke="#ffb4ab" stroke-dasharray="3,3" stroke-width="1.2"></path>
+<!-- Waveform 3: Synthesized Signal x + eta (Orange stepped adversarial perturbed signal) -->
+<path d="M 30,90 C 60,26 90,34 120,86 C 150,156 180,144 210,93 C 240,24 270,36 300,85 C 330,155 360,146 390,92 C 420,25 450,35 480,87 C 510,154 540,145 570,93 C 595,40 610,65 620,90" fill="none" id="advWave" stroke="#ffb95f" stroke-width="1.8"></path>
+<!-- Highlighting injection packet zone -->
+<rect fill="#93000a" fill-opacity="0.08" height="130" rx="4" width="130" x="280" y="25"></rect>
+<text fill="#ffb4ab" font-family="JetBrains Mono" font-size="8" font-weight="600" text-anchor="middle" x="345" y="38">[EVASION INJECTION WINDOW #2]</text>
+</svg>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: Statistical Drift & OOD Monitors + Activation Log (5 cols) -->
+<div class="xl:col-span-5 flex flex-col space-y-space-md">
+<!-- Card A: KOLMOGOROV-SMIRNOV (KS) TWO-SAMPLE TEST -->
+<div class="bg-surface-container-low rounded-lg p-space-md shadow-xl flex flex-col">
+<div class="flex items-center justify-between pb-space-sm mb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary-container text-[20px]">analytics</span>
+<h2 class="font-headline-md text-headline-md text-primary">KOLMOGOROV-SMIRNOV DRIFT TEST</h2>
+</div>
+<span class="font-label-sm text-label-sm text-primary-container bg-surface-container px-space-xs py-0.5 rounded font-mono font-bold">ACCEPT H₀ (STABLE)</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">
+          Non-parametric two-sample divergence test verifying whether streaming telemetry manifold follows the certified training distribution (H₀: P<sub>test</sub> = P<sub>train</sub>).
+        </p>
+<!-- KS Metrics Readout -->
+<div class="grid grid-cols-2 gap-space-xs mb-space-sm">
+<div class="bg-surface-container p-space-sm rounded">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">p-VALUE (p &gt; 0.05 ACCEPT)</span>
+<div class="flex items-baseline gap-space-xs mt-0.5">
+<span class="font-telemetry-metric text-telemetry-metric text-primary-container font-mono">0.184</span>
+<span class="font-label-sm text-label-sm text-primary-fixed font-mono">α = 0.05</span>
+</div>
+</div>
+<div class="bg-surface-container p-space-sm rounded">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">KS STATISTIC (D<sub>stat</sub> ≤ D<sub>crit</sub>)</span>
+<div class="flex items-baseline gap-space-xs mt-0.5">
+<span class="font-telemetry-metric text-telemetry-metric text-secondary-fixed font-mono">0.0412</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">D<sub>α</sub>: 0.0620</span>
+</div>
+</div>
+</div>
+<!-- ECDF Plot (Empirical Cumulative Distribution Function) -->
+<div class="bg-surface-container-lowest p-space-sm rounded">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">ECDF CONVERGENCE: P<sub>train</sub>(x) vs. P<sub>stream</sub>(x)</span>
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm">
+<span class="text-secondary font-mono">D<sub>max</sub> = 0.0412</span>
+</div>
+</div>
+<div class="w-full h-32 relative">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 380 120">
+<!-- Grid -->
+<line stroke="#1c2024" stroke-width="1" x1="25" x2="365" y1="20" y2="20"></line>
+<line stroke="#262a2f" stroke-dasharray="2,2" stroke-width="1" x1="25" x2="365" y1="60" y2="60"></line>
+<line stroke="#1c2024" stroke-width="1" x1="25" x2="365" y1="100" y2="100"></line>
+<text fill="#849581" font-family="JetBrains Mono" font-size="8" text-anchor="end" x="20" y="24">1.0</text>
+<text fill="#849581" font-family="JetBrains Mono" font-size="8" text-anchor="end" x="20" y="64">0.5</text>
+<text fill="#849581" font-family="JetBrains Mono" font-size="8" text-anchor="end" x="20" y="104">0.0</text>
+<!-- ECDF Train Curve (Cyan smooth sigmoidal step) -->
+<path d="M 25,100 C 100,100 150,85 190,60 C 230,35 280,20 365,20" fill="none" stroke="#00daf3" stroke-width="2"></path>
+<!-- ECDF Stream Curve (Green closely tracking) -->
+<path d="M 25,100 C 105,98 155,80 195,57 C 235,33 285,20 365,20" fill="none" stroke="#00ff66" stroke-dasharray="3,2" stroke-width="1.8"></path>
+<!-- Max Divergence Bar -->
+<line stroke="#ffdad6" stroke-width="2" x1="192" x2="192" y1="57" y2="65"></line>
+<circle cx="192" cy="57" fill="#ffb4ab" r="2.5"></circle>
+<circle cx="192" cy="65" fill="#ffb4ab" r="2.5"></circle>
+<text fill="#ffdad6" font-family="JetBrains Mono" font-size="8" x="202" y="64">D = 0.0412</text>
+</svg>
+</div>
+</div>
+</div>
+<!-- Card B: POPULATION STABILITY INDEX (PSI) TRACKER -->
+<div class="bg-surface-container-low rounded-lg p-space-md shadow-xl flex flex-col">
+<div class="flex items-center justify-between pb-space-sm mb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-container text-[20px]">stacked_bar_chart</span>
+<h2 class="font-headline-md text-headline-md text-primary">POPULATION STABILITY INDEX (PSI)</h2>
+</div>
+<span class="font-label-sm text-label-sm text-primary-container bg-primary-container/10 px-space-xs py-0.5 rounded font-mono font-bold">
+            LOW / IN-DISTRIBUTION
+          </span>
+</div>
+<!-- Gauge + Overall Summary -->
+<div class="flex items-center justify-between bg-surface-container p-space-sm rounded mb-space-sm">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">COMPOSITE STREAM PSI</span>
+<div class="flex items-baseline gap-space-xs mt-0.5">
+<span class="font-telemetry-metric text-telemetry-metric text-primary-container font-mono font-bold">0.048</span>
+<span class="font-label-sm text-label-sm text-primary-fixed font-mono">&lt; 0.10 SAFE BOUND</span>
+</div>
+</div>
+<!-- Compact Meter -->
+<div class="w-36 flex flex-col gap-1">
+<div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>0.0</span>
+<span>0.10</span>
+<span>0.25+</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden flex">
+<div class="h-full bg-primary-container rounded-full" style="width: 24%"></div>
+</div>
+<span class="font-label-sm text-label-sm text-primary-container text-right font-mono">NOMINAL RIGIDITY</span>
+</div>
+</div>
+<!-- Feature-level PSI Breakdown -->
+<div class="flex flex-col space-y-1.5 font-label-sm text-label-sm">
+<div class="flex items-center justify-between bg-surface-container px-space-sm py-1.5 rounded">
+<span class="text-on-surface font-mono">Register 0x002B (Motor RPM)</span>
+<div class="flex items-center gap-space-sm">
+<span class="font-mono text-primary-container">PSI = 0.032</span>
+<span class="text-primary-fixed bg-surface-container-high px-1 rounded">Stable</span>
+</div>
+</div>
+<div class="flex items-center justify-between bg-surface-container px-space-sm py-1.5 rounded">
+<span class="text-on-surface font-mono">Packet Interval (Δt)</span>
+<div class="flex items-center gap-space-sm">
+<span class="font-mono text-tertiary-fixed-dim">PSI = 0.081</span>
+<span class="text-tertiary-fixed-dim bg-surface-container-high px-1 rounded">Mild Fluctuation</span>
+</div>
+</div>
+<div class="flex items-center justify-between bg-surface-container px-space-sm py-1.5 rounded">
+<span class="text-on-surface font-mono">Telemetry Flow Rate</span>
+<div class="flex items-center gap-space-sm">
+<span class="font-mono text-primary-container">PSI = 0.019</span>
+<span class="text-primary-fixed bg-surface-container-high px-1 rounded">Stable</span>
+</div>
+</div>
+<div class="flex items-center justify-between bg-surface-container px-space-sm py-1.5 rounded">
+<span class="text-on-surface font-mono">Payload Byte Length</span>
+<div class="flex items-center gap-space-sm">
+<span class="font-mono text-primary-container">PSI = 0.024</span>
+<span class="text-primary-fixed bg-surface-container-high px-1 rounded">Stable</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card C: MANIFOLD DEFENSE ACTIVATION LOG -->
+<div class="bg-surface-container-low rounded-lg p-space-md shadow-xl flex flex-col flex-1">
+<div class="flex items-center justify-between pb-space-xs mb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-container text-[20px]">terminal</span>
+<h2 class="font-headline-md text-headline-md text-primary">MANIFOLD DEFENSE LOG</h2>
+</div>
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-primary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+<span>DAE-STREAM-0</span>
+</div>
+</div>
+<div class="flex-1 bg-surface-container-lowest p-space-sm rounded font-label-sm text-label-sm flex flex-col space-y-2 overflow-y-auto max-h-48 text-on-surface font-mono">
+<div class="flex items-start gap-space-xs">
+<span class="text-on-surface-variant whitespace-nowrap">[14:22:15.102]</span>
+<span class="text-secondary"><span class="text-error font-bold">PGD-20</span> perturbation projected on Modbus frame. Autoencoder attenuation: <span class="text-primary-container">-18.2 dB</span>.</span>
+</div>
+<div class="flex items-start gap-space-xs">
+<span class="text-on-surface-variant whitespace-nowrap">[14:22:14.890]</span>
+<span class="text-primary"><span class="text-secondary-fixed">DAE</span> reconstructed clean feature vector. Conformer Sigmoid τ restored from <span class="text-error">0.421</span> back to <span class="text-primary-container font-bold">0.912</span>.</span>
+</div>
+<div class="flex items-start gap-space-xs">
+<span class="text-on-surface-variant whitespace-nowrap">[14:22:13.200]</span>
+<span class="text-on-surface-variant">KS drift check executed on sliding window 1,024 samples: <span class="text-primary-container font-bold">PASS (p=0.184)</span>.</span>
+</div>
+<div class="flex items-start gap-space-xs">
+<span class="text-on-surface-variant whitespace-nowrap">[14:22:11.954]</span>
+<span class="text-secondary">Randomized Gaussian Smoothing added σ=0.05 isotropic noise to input manifold.</span>
+</div>
+<div class="flex items-start gap-space-xs">
+<span class="text-on-surface-variant whitespace-nowrap">[14:22:10.040]</span>
+<span class="text-on-surface-variant">Certified radius R<sub>ε</sub> maintained above threshold ε=0.08.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Inline Interactive Script for Lab Dynamics -->
+<script>
+  (function initAdversarialStressLab() {
+    // 1. Sync Bottom Nav Active State for 'ADVERSARIAL'
+    try {
+      const navLinks = document.querySelectorAll('div.fixed.bottom-4 nav a');
+      navLinks.forEach(link => {
+        if (link.getAttribute('data-path') === 'adversarial') {
+          link.classList.remove('text-on-surface-variant', 'hover:bg-surface-container-high');
+          link.classList.add('bg-primary-container', 'text-on-primary-container', 'font-bold', 'shadow-[0_0_15px_rgba(0,255,102,0.4)]');
+        }
+      });
+    } catch (e) {
+      console.warn('Navigation dock sync failed:', e);
+    }
+
+    // 2. Interactive Slider Budget Logic
+    const epsSlider = document.getElementById('epsSlider');
+    const epsDisplay = document.getElementById('epsDisplay');
+    const cursorLine = document.getElementById('cursorLine');
+    const linfNorm = document.getElementById('linfNorm');
+    const confAcc = document.getElementById('confRobustAcc');
+    const cnnAcc = document.getElementById('cnnRobustAcc');
+    const lstmAcc = document.getElementById('lstmRobustAcc');
+    const confDegrad = document.getElementById('confDegrad');
+    const cnnDegrad = document.getElementById('cnnDegrad');
+    const lstmDegrad = document.getElementById('lstmDegrad');
+    const snrVal = document.getElementById('snrVal');
+
+    if (epsSlider) {
+      epsSlider.addEventListener('input', function(e) {
+        const val = parseFloat(e.target.value);
+        if (epsDisplay) epsDisplay.textContent = `\u03b5 = ${val.toFixed(3)}`;
+        if (linfNorm) linfNorm.textContent = (val * 0.978).toFixed(4);
+
+        // Dynamically move chart cursor (range 0.01 - 0.15 corresponds to X 40 -> 580)
+        if (cursorLine) {
+          const ratio = (val - 0.01) / (0.15 - 0.01);
+          const newX = 40 + ratio * 540;
+          cursorLine.setAttribute('x1', newX);
+          cursorLine.setAttribute('x2', newX);
+        }
+
+        // Calculate dynamic degraded accuracies
+        const confVal = (99.4 - (val * 15)).toFixed(1);
+        const cnnVal = Math.max(12.0, (96.1 - (val * 700))).toFixed(1);
+        const lstmVal = Math.max(15.0, (95.4 - (val * 620))).toFixed(1);
+
+        if (confAcc) confAcc.textContent = `${confVal}%`;
+        if (cnnAcc) cnnAcc.textContent = `${cnnVal}%`;
+        if (lstmAcc) lstmAcc.textContent = `${lstmVal}%`;
+
+        if (confDegrad) confDegrad.textContent = `-${(99.4 - parseFloat(confVal)).toFixed(1)}%`;
+        if (cnnDegrad) cnnDegrad.textContent = `-${(96.1 - parseFloat(cnnVal)).toFixed(1)}%`;
+        if (lstmDegrad) lstmDegrad.textContent = `-${(95.4 - parseFloat(lstmVal)).toFixed(1)}%`;
+
+        if (snrVal) {
+          const newSnr = (38.0 - (val * 70)).toFixed(1);
+          snrVal.textContent = `${newSnr} dB`;
+        }
+      });
+    }
+
+    // 3. Attack Algorithm Selector Highlighting
+    const algoButtons = document.querySelectorAll('.algo-btn');
+    algoButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        algoButtons.forEach(b => {
+          b.classList.remove('bg-primary-container', 'text-on-primary-container', 'font-bold', 'shadow-[0_0_12px_rgba(0,255,102,0.3)]');
+          b.classList.add('bg-surface-container', 'text-on-surface-variant');
+        });
+        this.classList.remove('bg-surface-container', 'text-on-surface-variant');
+        this.classList.add('bg-primary-container', 'text-on-primary-container', 'font-bold', 'shadow-[0_0_12px_rgba(0,255,102,0.3)]');
+      });
+    });
+  })();
+</script></main><div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[96%] max-w-6xl"><div class="bg-surface-container-low/90 backdrop-blur-xl rounded-xl p-space-xs shadow-[0_0_25px_rgba(0,0,0,0.7)] flex flex-wrap items-center justify-between gap-space-sm"><nav class="flex items-center gap-1 overflow-x-auto py-1" data-active-classes="bg-primary-container text-on-primary-container font-bold rounded"><a class="px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface whitespace-nowrap transition-colors" data-path="overview" href="#">OVERVIEW</a><a class="px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface whitespace-nowrap transition-colors" data-path="threat-lab" href="#">THREAT LAB</a><a class="px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface whitespace-nowrap transition-colors" data-path="xai-engine" href="#">XAI ENGINE</a><a class="px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface whitespace-nowrap transition-colors" data-path="adversarial" href="#">ADVERSARIAL</a><a class="px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface whitespace-nowrap transition-colors" data-path="remediation" href="#">REMEDIATION</a><a class="px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface whitespace-nowrap transition-colors" data-path="compliance" href="#">COMPLIANCE</a></nav><div class="flex items-center gap-space-xs"><a class="px-space-sm py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-secondary-fixed font-label-sm text-label-sm whitespace-nowrap" data-path="execute" href="#">Execute PCB</a><a class="px-space-sm py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-primary font-label-sm text-label-sm whitespace-nowrap" data-path="live-sniffer" href="#">Sniffer</a><a class="px-space-sm py-1.5 rounded bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary font-label-sm text-label-sm font-bold whitespace-nowrap shadow-[0_0_10px_rgba(0,227,253,0.25)]" data-path="agentic-soc" href="#">Agentic SOC</a></div></div></div></body></html>

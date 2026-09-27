@@ -163,25 +163,34 @@
   --font-mono: 'JetBrains Mono', monospace;
 }
 
-/* 7. Arctic Frost (Quantum Clean Light) */
-[data-theme="arctic"] {
-  --bg-primary: #f0f4f9;
-  --bg-surface: #ffffff;
-  --bg-card: rgba(255, 255, 255, 0.92);
-  --bg-card-hover: rgba(241, 245, 249, 1);
-  --border-color: rgba(13, 110, 253, 0.25);
-  --border-glow: 0 0 14px rgba(13, 110, 253, 0.18);
-  --text-primary: #0a192f;
-  --text-secondary: #334155;
-  --text-muted: #64748b;
-  --accent-primary: #0d6efd;
-  --accent-secondary: #00b4d8;
-  --accent-tertiary: #0284c7;
-  --accent-glow: rgba(13, 110, 253, 0.25);
-  --alert-critical: #ef4444;
-  --alert-warning: #f59e0b;
-  --alert-nominal: #10b981;
-  --terminal-bg: #0f172a;
+/* 7. Alabaster Platinum Light (Clean Enterprise Light Theme)
+   Palette: Carbon Black (#1c1c1c), Alabaster Grey (#daddd8), Soft Linen (#ecebe4), Platinum (#eef0f2), Ghost White (#fafaff) */
+[data-theme="alabaster"],
+[data-theme="arctic"],
+[data-theme="light"],
+html.light {
+  --bg-primary: #fafaff; /* Ghost White */
+  --bg-canvas: #fafaff;  /* Ghost White */
+  --bg-surface: #eef0f2; /* Platinum */
+  --bg-surface-elevated: #ecebe4; /* Soft Linen */
+  --bg-card: rgba(238, 240, 242, 0.94); /* Platinum */
+  --bg-card-hover: #ecebe4; /* Soft Linen */
+  --border-subtle: #daddd8; /* Alabaster Grey */
+  --border-color: #daddd8; /* Alabaster Grey */
+  --border-glow: 0 0 14px rgba(28, 28, 28, 0.08);
+  --text-primary: #1c1c1c; /* Carbon Black */
+  --text-secondary: #404040;
+  --text-muted: #737373;
+  --brand-primary: #0284c7;
+  --brand-cyan: #0284c7;
+  --accent-primary: #0284c7;
+  --accent-secondary: #059669;
+  --accent-tertiary: #d97706;
+  --accent-glow: rgba(2, 132, 199, 0.25);
+  --alert-critical: #dc2626;
+  --alert-warning: #d97706;
+  --alert-nominal: #059669;
+  --terminal-bg: #1c1c1c;
   --font-hud: 'Space Grotesk', sans-serif;
   --font-subhead: 'Inter', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -225,6 +234,78 @@ body {
   margin: 0;
   padding: 0;
   transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* Japanese Katakana Cyber Background Pattern */
+.jp-matrix {
+  background-color: #05050a;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+  grid-auto-rows: 40px;
+  min-width: 100vw;
+  min-height: 100vh;
+  font-size: 32px;
+  font-family: "Courier New", Courier, monospace;
+  justify-content: center;
+  align-content: center;
+  transition: background-color 0.35s ease;
+}
+
+.jp-matrix > span {
+  text-align: center;
+  user-select: none;
+  line-height: 1;
+}
+
+/* Dark Mode Glyphs */
+.jp-matrix > span.c-blue {
+  color: rgba(0, 150, 255, 0.4);
+  text-shadow: 0 0 5px rgba(0, 150, 255, 0.45);
+}
+
+.jp-matrix > span.c-white {
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.85);
+}
+
+.jp-matrix > span.c-green {
+  color: #00ff66;
+  text-shadow: 0 0 8px rgba(0, 255, 102, 0.75);
+}
+
+/* Light Mode Glyphs (Alabaster Platinum Theme) */
+html.light .jp-matrix,
+[data-theme="alabaster"] .jp-matrix,
+[data-theme="arctic"] .jp-matrix,
+[data-theme="light"] .jp-matrix {
+  background-color: #fafaff !important; /* Ghost White */
+}
+
+html.light .jp-matrix > span.c-blue,
+[data-theme="alabaster"] .jp-matrix > span.c-blue,
+[data-theme="arctic"] .jp-matrix > span.c-blue,
+[data-theme="light"] .jp-matrix > span.c-blue {
+  color: rgba(2, 132, 199, 0.28) !important; /* 70% Light Cyber Blue */
+  text-shadow: 0 0 2px rgba(2, 132, 199, 0.15) !important;
+}
+
+html.light .jp-matrix > span.c-white,
+[data-theme="alabaster"] .jp-matrix > span.c-white,
+[data-theme="arctic"] .jp-matrix > span.c-white,
+[data-theme="light"] .jp-matrix > span.c-white {
+  color: rgba(28, 28, 28, 0.32) !important; /* 20% Soft Carbon Black */
+  text-shadow: none !important;
+}
+
+html.light .jp-matrix > span.c-green,
+[data-theme="alabaster"] .jp-matrix > span.c-green,
+[data-theme="arctic"] .jp-matrix > span.c-green,
+[data-theme="light"] .jp-matrix > span.c-green {
+  color: rgba(5, 150, 105, 0.32) !important; /* 10% Soft Emerald Green */
+  text-shadow: 0 0 2px rgba(5, 150, 105, 0.15) !important;
 }
 
 /* Background Cyber Grid */
@@ -404,16 +485,597 @@ body {
 
 /* Custom Scrollbars */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg-primary);
+  background: #03070c;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--border-color);
+  background: #162536;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-primary);
+  background: #00f0ff;
+}
+
+/* --------------------------------------------------------------------------
+   STITCH FUTURISTIC HUD DESIGN SYSTEM TOKENS & UTILITIES
+   -------------------------------------------------------------------------- */
+
+.hud-bg-grid {
+  background-color: #03070c;
+  background-image: 
+    linear-gradient(to right, rgba(0, 240, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 240, 255, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.hud-scanline {
+  background: linear-gradient(180deg, transparent 50%, rgba(0, 240, 255, 0.015) 51%);
+  background-size: 100% 4px;
+  pointer-events: none;
+}
+
+/* Sci-Fi Chamfered HUD Panel */
+.hud-panel {
+  position: relative;
+  background: linear-gradient(145deg, rgba(8, 17, 26, 0.94) 0%, rgba(4, 9, 15, 0.98) 100%);
+  border: 1px solid rgba(0, 240, 255, 0.22);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.06), inset 0 0 15px rgba(0, 240, 255, 0.02);
+  clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));
+}
+.hud-panel-emerald {
+  border-color: rgba(0, 255, 102, 0.28);
+  box-shadow: 0 0 20px rgba(0, 255, 102, 0.08), inset 0 0 15px rgba(0, 255, 102, 0.02);
+}
+.hud-panel-crimson {
+  border-color: rgba(255, 42, 95, 0.35);
+  box-shadow: 0 0 20px rgba(255, 42, 95, 0.12), inset 0 0 15px rgba(255, 42, 95, 0.03);
+}
+
+/* ==============================================================================
+   COMPREHENSIVE ALABASTER PLATINUM ENTERPRISE LIGHT THEME ENGINE
+   Colors:
+     Ghost White:    #fafaff (Base canvas, backgrounds)
+     Platinum:       #eef0f2 (Panels, cards, elevated surfaces)
+     Soft Linen:     #ecebe4 (Sunken insets, button hovers, row hovers)
+     Alabaster Grey: #daddd8 (Dividers, borders, subtle outlines)
+     Carbon Black:   #1c1c1c (Headings, primary typography, active labels)
+   ============================================================================== */
+
+/* Base & Typography */
+html.light,
+html.light body,
+[data-theme="alabaster"],
+[data-theme="alabaster"] body,
+[data-theme="arctic"] body,
+[data-theme="light"] body {
+  background-color: #fafaff !important;
+  color: #1c1c1c !important;
+}
+
+/* Background Grids & Scans */
+html.light .hud-bg-grid,
+[data-theme="alabaster"] .hud-bg-grid,
+[data-theme="arctic"] .hud-bg-grid,
+[data-theme="light"] .hud-bg-grid {
+  background-color: #fafaff !important;
+  background-image: 
+    linear-gradient(to right, rgba(28, 28, 28, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(28, 28, 28, 0.04) 1px, transparent 1px) !important;
+}
+
+html.light .cyber-grid-bg,
+[data-theme="alabaster"] .cyber-grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(28, 28, 28, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(28, 28, 28, 0.035) 1px, transparent 1px) !important;
+}
+
+/* Dark Background Utilities Overrides (using substring matching) */
+html.light [class*="bg-[#03070c]"],
+[data-theme="alabaster"] [class*="bg-[#03070c]"],
+html.light [class*="bg-[#02060b]"],
+[data-theme="alabaster"] [class*="bg-[#02060b]"],
+html.light [class*="bg-[#03070d]"],
+[data-theme="alabaster"] [class*="bg-[#03070d]"],
+html.light [class*="bg-[#030910]"],
+[data-theme="alabaster"] [class*="bg-[#030910]"],
+html.light [class*="bg-[#030911]"],
+[data-theme="alabaster"] [class*="bg-[#030911]"] {
+  background-color: #fafaff !important;
+}
+
+html.light [class*="bg-[#070d14]"],
+[data-theme="alabaster"] [class*="bg-[#070d14]"],
+html.light [class*="bg-[#070D17]"],
+[data-theme="alabaster"] [class*="bg-[#070D17]"],
+html.light [class*="bg-[#070d17]"],
+[data-theme="alabaster"] [class*="bg-[#070d17]"],
+html.light [class*="bg-[#05080e]"],
+[data-theme="alabaster"] [class*="bg-[#05080e]"],
+html.light [class*="bg-[#050910]"],
+[data-theme="alabaster"] [class*="bg-[#050910]"],
+html.light [class*="bg-[#08111a]"],
+[data-theme="alabaster"] [class*="bg-[#08111a]"],
+html.light [class*="bg-[#060d16]"],
+[data-theme="alabaster"] [class*="bg-[#060d16]"],
+html.light [class*="bg-[#060e18]"],
+[data-theme="alabaster"] [class*="bg-[#060e18]"],
+html.light [class*="bg-[#050f1a]"],
+[data-theme="alabaster"] [class*="bg-[#050f1a]"],
+html.light [class*="bg-[#090f14]"],
+[data-theme="alabaster"] [class*="bg-[#090f14]"],
+html.light [class*="bg-[#0b0f19]"],
+[data-theme="alabaster"] [class*="bg-[#0b0f19]"],
+html.light [class*="bg-[#0e141a]"],
+[data-theme="alabaster"] [class*="bg-[#0e141a]"] {
+  background-color: #eef0f2 !important;
+}
+
+html.light [class*="bg-[#0b131e]"],
+[data-theme="alabaster"] [class*="bg-[#0b131e]"],
+html.light [class*="bg-[#0a101d]"],
+[data-theme="alabaster"] [class*="bg-[#0a101d]"],
+html.light [class*="bg-[#07131e]"],
+[data-theme="alabaster"] [class*="bg-[#07131e]"],
+html.light [class*="bg-[#061423]"],
+[data-theme="alabaster"] [class*="bg-[#061423]"],
+html.light [class*="bg-[#091522]"],
+[data-theme="alabaster"] [class*="bg-[#091522]"],
+html.light [class*="bg-[#1a0810]"],
+[data-theme="alabaster"] [class*="bg-[#1a0810]"],
+html.light [class*="bg-[#16170d]"],
+[data-theme="alabaster"] [class*="bg-[#16170d]"],
+html.light [class*="bg-[#161c22]"],
+[data-theme="alabaster"] [class*="bg-[#161c22]"],
+html.light [class*="bg-[#162536]"],
+[data-theme="alabaster"] [class*="bg-[#162536]"],
+html.light [class*="bg-[#252b31]"],
+[data-theme="alabaster"] [class*="bg-[#252b31]"] {
+  background-color: #ecebe4 !important;
+}
+
+html.light [class*="bg-[#04080c]"],
+[data-theme="alabaster"] [class*="bg-[#04080c]"] {
+  background-color: #eef0f2 !important;
+}
+
+html.light [class*="bg-black/60"],
+html.light [class*="bg-black/70"],
+html.light [class*="bg-black/80"],
+html.light [class*="bg-black/90"],
+[data-theme="alabaster"] [class*="bg-black/60"],
+[data-theme="alabaster"] [class*="bg-black/70"],
+[data-theme="alabaster"] [class*="bg-black/80"],
+[data-theme="alabaster"] [class*="bg-black/90"] {
+  background-color: rgba(238, 240, 242, 0.95) !important;
+}
+
+/* Border Utilities Overrides */
+html.light [class*="border-[#162536]"],
+[data-theme="alabaster"] [class*="border-[#162536]"],
+html.light [class*="border-[#0d2238]"],
+[data-theme="alabaster"] [class*="border-[#0d2238]"],
+html.light [class*="border-[#11273f]"],
+[data-theme="alabaster"] [class*="border-[#11273f]"],
+html.light [class*="border-[#12283e]"],
+[data-theme="alabaster"] [class*="border-[#12283e]"],
+html.light [class*="border-[#14283c]"],
+[data-theme="alabaster"] [class*="border-[#14283c]"],
+html.light [class*="border-[#162e47]"],
+[data-theme="alabaster"] [class*="border-[#162e47]"],
+html.light [class*="border-[#16334f]"],
+[data-theme="alabaster"] [class*="border-[#16334f]"],
+html.light [class*="border-[#1c3652]"],
+[data-theme="alabaster"] [class*="border-[#1c3652]"],
+html.light [class*="border-[#1f2937]"],
+[data-theme="alabaster"] [class*="border-[#1f2937]"],
+html.light [class*="border-white/10"],
+html.light [class*="border-white/15"],
+html.light [class*="border-white/20"],
+[data-theme="alabaster"] [class*="border-white/10"],
+[data-theme="alabaster"] [class*="border-white/15"],
+[data-theme="alabaster"] [class*="border-white/20"] {
+  border-color: #daddd8 !important;
+}
+
+html.light [class*="divide-[#162536]"] > * + *,
+[data-theme="alabaster"] [class*="divide-[#162536]"] > * + * {
+  border-color: #daddd8 !important;
+}
+
+/* Card & HUD Containers */
+html.light .hud-panel,
+[data-theme="alabaster"] .hud-panel,
+[data-theme="arctic"] .hud-panel,
+[data-theme="light"] .hud-panel {
+  background: linear-gradient(145deg, rgba(238, 240, 242, 0.98) 0%, rgba(236, 235, 228, 0.98) 100%) !important;
+  border-color: #daddd8 !important;
+  box-shadow: 0 4px 20px rgba(28, 28, 28, 0.06), inset 0 0 15px rgba(218, 221, 216, 0.3) !important;
+  color: #1c1c1c !important;
+}
+
+html.light .hud-box,
+[data-theme="alabaster"] .hud-box,
+[data-theme="arctic"] .hud-box,
+[data-theme="light"] .hud-box {
+  background: linear-gradient(145deg, rgba(238, 240, 242, 0.98) 0%, rgba(236, 235, 228, 0.98) 100%) !important;
+  border-color: #daddd8 !important;
+  box-shadow: 0 2px 10px rgba(28, 28, 28, 0.04) !important;
+  color: #1c1c1c !important;
+}
+
+html.light .hud-box::before,
+html.light .hud-box::after,
+html.light .hud-corner-tr,
+html.light .hud-corner-bl,
+[data-theme="alabaster"] .hud-box::before,
+[data-theme="alabaster"] .hud-box::after,
+[data-theme="alabaster"] .hud-corner-tr,
+[data-theme="alabaster"] .hud-corner-bl {
+  color: #0284c7 !important;
+  opacity: 0.6;
+}
+
+html.light .cyber-card,
+[data-theme="alabaster"] .cyber-card,
+[data-theme="arctic"] .cyber-card,
+[data-theme="light"] .cyber-card {
+  background: #eef0f2 !important;
+  border-color: #daddd8 !important;
+  box-shadow: 0 8px 24px rgba(28, 28, 28, 0.06) !important;
+  color: #1c1c1c !important;
+}
+
+html.light .glass-panel-deep,
+[data-theme="alabaster"] .glass-panel-deep,
+[data-theme="arctic"] .glass-panel-deep,
+[data-theme="light"] .glass-panel-deep {
+  background: linear-gradient(145deg, #eef0f2 0%, #ecebe4 100%) !important;
+  border-color: #daddd8 !important;
+  box-shadow: 0 10px 30px rgba(28, 28, 28, 0.07) !important;
+  color: #1c1c1c !important;
+}
+
+html.light .glass-inset,
+[data-theme="alabaster"] .glass-inset,
+[data-theme="arctic"] .glass-inset,
+[data-theme="light"] .glass-inset {
+  background: rgba(236, 235, 228, 0.8) !important;
+  border-color: #daddd8 !important;
+  box-shadow: inset 0 2px 6px rgba(28, 28, 28, 0.05) !important;
+  color: #1c1c1c !important;
+}
+
+html.light .glass-pill,
+[data-theme="alabaster"] .glass-pill {
+  background: rgba(236, 235, 228, 0.9) !important;
+  border-color: #daddd8 !important;
+  color: #1c1c1c !important;
+}
+
+/* Header & Ribbons */
+html.light header,
+[data-theme="alabaster"] header,
+[data-theme="arctic"] header,
+[data-theme="light"] header {
+  background-color: rgba(250, 250, 255, 0.96) !important;
+  border-color: #daddd8 !important;
+  color: #1c1c1c !important;
+  box-shadow: 0 4px 20px rgba(28, 28, 28, 0.05) !important;
+}
+
+html.light header > div,
+[data-theme="alabaster"] header > div {
+  border-color: #daddd8 !important;
+}
+
+html.light header select,
+[data-theme="alabaster"] header select,
+html.light select,
+[data-theme="alabaster"] select {
+  background-color: #fafaff !important;
+  border-color: #daddd8 !important;
+  color: #1c1c1c !important;
+}
+
+html.light select option,
+[data-theme="alabaster"] select option {
+  background-color: #fafaff !important;
+  color: #1c1c1c !important;
+}
+
+/* Tables across all consoles */
+html.light table,
+[data-theme="alabaster"] table {
+  background-color: #fafaff !important;
+  color: #1c1c1c !important;
+}
+
+html.light thead,
+[data-theme="alabaster"] thead,
+html.light thead tr,
+[data-theme="alabaster"] thead tr,
+html.light th,
+[data-theme="alabaster"] th {
+  background-color: #ecebe4 !important;
+  color: #1c1c1c !important;
+  border-color: #daddd8 !important;
+}
+
+html.light tbody tr,
+[data-theme="alabaster"] tbody tr {
+  background-color: #fafaff;
+  border-color: #daddd8 !important;
+}
+
+html.light tbody tr:nth-child(even),
+[data-theme="alabaster"] tbody tr:nth-child(even) {
+  background-color: #f7f7fa;
+}
+
+html.light tbody tr:hover,
+[data-theme="alabaster"] tbody tr:hover {
+  background-color: #ecebe4 !important;
+}
+
+html.light td,
+[data-theme="alabaster"] td {
+  border-color: #daddd8 !important;
+  color: #1c1c1c !important;
+}
+
+/* Navigation Dock & Tabs */
+html.light [role="tablist"],
+[data-theme="alabaster"] [role="tablist"] {
+  background: rgba(238, 240, 242, 0.95) !important;
+  border-color: #daddd8 !important;
+  box-shadow: 0 16px 40px rgba(28, 28, 28, 0.12), inset 0 1px 2px rgba(255, 255, 255, 0.8) !important;
+}
+
+html.light [role="tab"] > div,
+[data-theme="alabaster"] [role="tab"] > div {
+  background: linear-gradient(180deg, #ffffff 0%, #ecebe4 100%) !important;
+  border-color: #daddd8 !important;
+  box-shadow: 0 4px 12px rgba(28, 28, 28, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+}
+
+html.light [role="tab"][aria-selected="true"] > div,
+[data-theme="alabaster"] [role="tab"][aria-selected="true"] > div {
+  background: linear-gradient(180deg, #ffffff 0%, #eef0f2 100%) !important;
+  border-color: #0284c7 !important;
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+
+/* General Typography in Light Mode */
+html.light h1, html.light h2, html.light h3, html.light h4, html.light h5, html.light h6,
+[data-theme="alabaster"] h1, [data-theme="alabaster"] h2, [data-theme="alabaster"] h3,
+[data-theme="alabaster"] h4, [data-theme="alabaster"] h5, [data-theme="alabaster"] h6 {
+  color: #1c1c1c !important;
+}
+
+html.light [class*="text-[#dee3eb]"],
+[data-theme="alabaster"] [class*="text-[#dee3eb]"],
+html.light [class*="text-[#e2e8f0]"],
+[data-theme="alabaster"] [class*="text-[#e2e8f0]"] {
+  color: #1c1c1c !important;
+}
+
+html.light [class*="text-[#64748b]"],
+[data-theme="alabaster"] [class*="text-[#64748b]"],
+html.light [class*="text-[#94a3b8]"],
+[data-theme="alabaster"] [class*="text-[#94a3b8]"] {
+  color: #525252 !important;
+}
+
+/* Convert text-white to carbon black when not on brightly colored action pills */
+html.light .hud-box .text-white,
+[data-theme="alabaster"] .hud-box .text-white,
+html.light table .text-white,
+[data-theme="alabaster"] table .text-white,
+html.light .cyber-card .text-white,
+[data-theme="alabaster"] .cyber-card .text-white {
+  color: #1c1c1c !important;
+}
+
+/* Additional Light Text Overrides */
+html.light [class*="text-[#dbfcff]"],
+[data-theme="alabaster"] [class*="text-[#dbfcff]"],
+html.light [class*="text-[#b9cacb]"],
+[data-theme="alabaster"] [class*="text-[#b9cacb]"] {
+  color: #1c1c1c !important;
+}
+
+/* Transform blinding neon cyan and green to high-contrast enterprise tones in Light Mode */
+html.light [class*="text-[#00f0ff]"],
+[data-theme="alabaster"] [class*="text-[#00f0ff]"] {
+  color: #0284c7 !important;
+}
+
+html.light [class*="text-[#00ff66]"],
+[data-theme="alabaster"] [class*="text-[#00ff66]"],
+html.light [class*="text-[#00e55b]"],
+[data-theme="alabaster"] [class*="text-[#00e55b]"] {
+  color: #059669 !important;
+}
+
+/* Neutralize neon glows in Light Mode */
+html.light .text-glow-cyan,
+html.light .text-glow-emerald,
+html.light .text-glow-crimson,
+html.light .text-glow-amber,
+[data-theme="alabaster"] .text-glow-cyan,
+[data-theme="alabaster"] .text-glow-emerald,
+[data-theme="alabaster"] .text-glow-crimson,
+[data-theme="alabaster"] .text-glow-amber {
+  text-shadow: none !important;
+}
+
+html.light .glow-cyan,
+html.light .glow-emerald,
+html.light .glow-crimson,
+[data-theme="alabaster"] .glow-cyan,
+[data-theme="alabaster"] .glow-emerald,
+[data-theme="alabaster"] .glow-crimson {
+  box-shadow: none !important;
+}
+
+/* SVG Gauges and Circular Indicators in Light Mode */
+html.light svg circle[stroke="#162536"],
+[data-theme="alabaster"] svg circle[stroke="#162536"],
+html.light svg circle[stroke="#0e1824"],
+[data-theme="alabaster"] svg circle[stroke="#0e1824"] {
+  stroke: #daddd8 !important;
+}
+
+html.light svg circle[stroke="#00f0ff"],
+[data-theme="alabaster"] svg circle[stroke="#00f0ff"] {
+  stroke: #0284c7 !important;
+}
+
+html.light svg path[stroke="#162536"],
+[data-theme="alabaster"] svg path[stroke="#162536"] {
+  stroke: #daddd8 !important;
+}
+
+html.light svg path[stroke="#00f0ff"],
+[data-theme="alabaster"] svg path[stroke="#00f0ff"] {
+  stroke: #0284c7 !important;
+}
+
+/* Modals & Drawers */
+html.light [role="dialog"],
+[data-theme="alabaster"] [role="dialog"],
+html.light .fixed.inset-0 > div,
+[data-theme="alabaster"] .fixed.inset-0 > div {
+  background-color: #fafaff !important;
+  border-color: #daddd8 !important;
+  color: #1c1c1c !important;
+}
+
+/* Scrollbars in Light Mode */
+html.light ::-webkit-scrollbar-track,
+[data-theme="alabaster"] ::-webkit-scrollbar-track {
+  background: #fafaff !important;
+}
+
+html.light ::-webkit-scrollbar-thumb,
+[data-theme="alabaster"] ::-webkit-scrollbar-thumb {
+  background: #daddd8 !important;
+}
+
+html.light ::-webkit-scrollbar-thumb:hover,
+[data-theme="alabaster"] ::-webkit-scrollbar-thumb:hover {
+  background: #0284c7 !important;
+}
+
+
+
+/* HUD Box with Corner Tech Brackets */
+.hud-box {
+  position: relative;
+  background: linear-gradient(145deg, rgba(7, 13, 20, 0.95) 0%, rgba(3, 7, 12, 0.98) 100%);
+  border: 1px solid #162536;
+}
+.hud-box::before {
+  content: "┌";
+  position: absolute;
+  top: -2px;
+  left: 2px;
+  color: #00f0ff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  line-height: 1;
+  opacity: 0.9;
+  pointer-events: none;
+}
+.hud-box::after {
+  content: "┘";
+  position: absolute;
+  bottom: -2px;
+  right: 2px;
+  color: #00f0ff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  line-height: 1;
+  opacity: 0.9;
+  pointer-events: none;
+}
+.hud-corner-tr {
+  position: absolute;
+  top: -2px;
+  right: 2px;
+  color: #00f0ff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  line-height: 1;
+  opacity: 0.9;
+  pointer-events: none;
+}
+.hud-corner-bl {
+  position: absolute;
+  bottom: -2px;
+  left: 2px;
+  color: #00f0ff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  line-height: 1;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* Reticle Bracket Markers */
+.reticle-corner {
+  position: relative;
+}
+.reticle-corner::before,
+.reticle-corner::after {
+  content: '';
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  pointer-events: none;
+  z-index: 10;
+}
+.reticle-corner::before {
+  top: 2px;
+  left: 2px;
+  border-top: 1.5px solid #00f0ff;
+  border-left: 1.5px solid #00f0ff;
+}
+.reticle-corner::after {
+  bottom: 2px;
+  right: 2px;
+  border-bottom: 1.5px solid #00f0ff;
+  border-right: 1.5px solid #00f0ff;
+}
+
+/* Neon Glow Utilities */
+.text-glow-cyan {
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.7), 0 0 16px rgba(0, 240, 255, 0.35);
+}
+.text-glow-emerald {
+  text-shadow: 0 0 8px rgba(0, 255, 102, 0.75), 0 0 16px rgba(0, 255, 102, 0.35);
+}
+.text-glow-crimson {
+  text-shadow: 0 0 8px rgba(255, 42, 95, 0.8), 0 0 18px rgba(255, 42, 95, 0.4);
+}
+.text-glow-amber {
+  text-shadow: 0 0 8px rgba(255, 183, 0, 0.75);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.28);
+}
+.glow-emerald {
+  box-shadow: 0 0 16px rgba(0, 255, 102, 0.28);
+}
+.glow-crimson {
+  box-shadow: 0 0 18px rgba(255, 42, 95, 0.38);
+}
+
+.clip-chamfer {
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
 }

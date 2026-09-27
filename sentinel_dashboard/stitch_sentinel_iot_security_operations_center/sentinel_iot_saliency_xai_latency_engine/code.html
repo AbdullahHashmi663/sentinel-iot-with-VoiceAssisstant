@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"on-primary":"#003911","outline-variant":"#3b4b3a","primary":"#edffe8","surface-container":"#1c2024","on-background":"#e0e3e8","surface-bright":"#353a3e","secondary-fixed":"#9cf0ff","surface-container-high":"#262a2f","on-tertiary-container":"#895600","on-primary-fixed":"#002107","on-secondary-fixed":"#001f24","secondary-fixed-dim":"#00daf3","on-tertiary-fixed":"#2a1700","inverse-primary":"#006e27","tertiary-container":"#ffd7aa","primary-fixed-dim":"#00e55b","inverse-surface":"#e0e3e8","on-tertiary-fixed-variant":"#653e00","on-surface":"#e0e3e8","on-secondary-container":"#00616d","secondary-container":"#00e3fd","on-secondary":"#00363d","on-error":"#690005","tertiary":"#fff9f6","primary-fixed":"#6bff83","on-surface-variant":"#b9ccb5","surface-container-highest":"#31353a","outline":"#849581","on-error-container":"#ffdad6","surface":"#101418","on-primary-fixed-variant":"#00531b","on-tertiary":"#472a00","surface-dim":"#101418","surface-container-lowest":"#0a0f13","surface-tint":"#00e55b","on-primary-container":"#007128","surface-container-low":"#181c20","primary-container":"#00ff66","error-container":"#93000a","inverse-on-surface":"#2d3135","tertiary-fixed-dim":"#ffb95f","surface-variant":"#31353a","secondary":"#bdf4ff","background":"#101418","error":"#ffb4ab","tertiary-fixed":"#ffddb8","on-secondary-fixed-variant":"#004f58"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"margin-desktop":"1.5rem","space-lg":"1.25rem","space-md":"0.75rem","gutter":"0.75rem","space-sm":"0.5rem","space-xs":"0.25rem","margin":"1rem","gutter-desktop":"1rem","space-xl":"2rem"},"fontFamily":{"headline-xl":["Space Grotesk"],"headline-xl-mobile":["Space Grotesk"],"headline-md":["Space Grotesk"],"body-lg":["Space Grotesk"],"headline-lg":["Space Grotesk"],"label-sm":["JetBrains Mono"],"body-md":["Space Grotesk"],"telemetry-metric-sm":["JetBrains Mono"],"body-sm":["Space Grotesk"],"label-md":["JetBrains Mono"],"label-lg":["JetBrains Mono"],"telemetry-metric":["JetBrains Mono"]},"fontSize":{"headline-xl":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-xl-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-md":["18px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"600"}],"body-lg":["15px",{"lineHeight":"22px","fontWeight":"400"}],"headline-lg":["22px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-sm":["10px",{"lineHeight":"14px","letterSpacing":"0.08em","fontWeight":"500"}],"body-md":["13px",{"lineHeight":"18px","fontWeight":"400"}],"telemetry-metric-sm":["16px",{"lineHeight":"20px","letterSpacing":"0em","fontWeight":"600"}],"body-sm":["11px",{"lineHeight":"16px","fontWeight":"400"}],"label-md":["11px",{"lineHeight":"16px","letterSpacing":"0.06em","fontWeight":"500"}],"label-lg":["13px",{"lineHeight":"18px","letterSpacing":"0.04em","fontWeight":"600"}],"telemetry-metric":["24px",{"lineHeight":"28px","letterSpacing":"-0.02em","fontWeight":"700"}]}}}}</script></head><body class="bg-surface-container-lowest font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/90 backdrop-blur-md"><div class="h-16 px-gutter-desktop flex items-center justify-between bg-surface-container-low/60 shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded bg-primary-container/20 flex items-center justify-center"><span class="material-symbols-outlined text-primary-container text-[20px]">security</span></div><div class="flex flex-col"><span class="font-headline-md text-headline-md tracking-tight text-primary leading-none">SENTINEL-IoT</span><span class="font-label-sm text-label-sm text-secondary tracking-widest">TACTICAL SOC // ICS DEFENSE</span></div></div><div class="flex items-center gap-space-xs px-space-sm py-0.5 rounded bg-surface-container-highest"><span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-sm text-label-sm text-primary-container">FYP-II v2.4 OPERATIONAL</span></div><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container"><span class="font-label-sm text-label-sm text-on-surface-variant">LATENCY:</span><span class="font-telemetry-metric-sm text-telemetry-metric-sm text-secondary-fixed">21.5 ms</span><span class="w-2 h-2 rounded-full bg-secondary-fixed-dim animate-ping"></span></div></div><div class="flex items-center gap-space-md"><div class="hidden lg:flex items-center p-0.5 rounded bg-surface-container-highest"><button class="px-space-sm py-1 rounded bg-surface-container font-label-sm text-label-sm text-primary-container" type="button">LIVE WS (FastAPI)</button><button class="px-space-sm py-1 rounded font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface" type="button">OFFLINE MOCK</button></div><div class="hidden md:flex items-center gap-space-md px-space-md py-1 rounded bg-surface-container-high"><div class="flex flex-col text-right"><span class="font-label-sm text-label-sm text-on-surface-variant">UTC MASTER</span><span class="font-label-md text-label-md text-primary font-mono">14:22:09.412</span></div><div class="w-px h-6 bg-surface-bright"></div><div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface-variant">THROUGHPUT</span><span class="font-telemetry-metric-sm text-telemetry-metric-sm text-secondary font-mono">2,841,920 EVT</span></div></div><div class="flex items-center gap-space-sm"><button class="hidden sm:flex items-center gap-space-xs px-space-sm py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm" type="button"><span class="material-symbols-outlined text-[16px]">palette</span><span>Obsidian HUD</span></button><button class="hidden sm:flex items-center gap-space-xs px-space-sm py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm" type="button"><span class="material-symbols-outlined text-[16px]">science</span><span>Research Gallery</span></button><button class="flex items-center gap-space-xs px-space-md py-1.5 rounded bg-error-container text-on-error-container hover:bg-error hover:text-on-error font-label-sm text-label-sm font-bold shadow-[0_0_15px_rgba(239,68,68,0.35)] transition-all" type="button"><span class="material-symbols-outlined text-[16px]">lock</span><span>EMERGENCY LOCKDOWN</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div><div class="h-10 px-gutter-desktop flex items-center justify-between bg-surface-container-lowest/95 shadow-[0_1px_4px_rgba(0,0,0,0.5)]"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase">DOMAIN:</span><select class="bg-surface-container-high text-secondary font-label-sm text-label-sm px-space-sm py-1 rounded focus:outline-none"><option>Modbus Industrial PLC (ToN_IoT #04)</option><option>Network Core Telemetry (ToN_IoT #01)</option><option>SCADA Thermostat Rig (ToN_IoT #07)</option><option>Smart Grid Energy Meter (ToN_IoT #11)</option><option>ICS Robotic Actuator (ToN_IoT #09)</option><option>Smart Fridge Environment (ToN_IoT #03)</option><option>Gas Level Sensing Array (ToN_IoT #12)</option></select></div><div class="hidden md:flex items-center gap-1"><button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface" type="button"><span class="material-symbols-outlined text-[16px]">play_arrow</span></button><button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface" type="button"><span class="material-symbols-outlined text-[16px]">pause</span></button><button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface" type="button"><span class="material-symbols-outlined text-[16px]">skip_next</span></button><div class="flex items-center bg-surface-container px-space-xs py-0.5 rounded ml-1"><span class="font-label-sm text-label-sm text-primary font-mono">1.0x</span></div></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs"><span class="font-label-sm text-label-sm text-on-surface-variant">TENSOR:</span><span class="font-label-sm text-label-sm text-primary-container font-mono bg-surface-container px-space-xs py-0.5 rounded">[B, 10, D] READY</span></div><div class="hidden lg:flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-primary-fixed-dim"></span><span class="font-label-sm text-label-sm text-on-surface-variant">SHM: SYNCHRONIZED</span></div></div></div></header><main class="w-full pt-26 pb-28 min-h-screen bg-surface-container-lowest px-gutter-desktop"><div class="flex flex-col w-full space-y-space-md">
+<!-- TOP HERO BANNER: BENCHMARK STATUS & SUB-MILLISECOND VALIDATION -->
+<div class="w-full bg-surface-container-low rounded-xl p-space-md shadow-xl relative overflow-hidden">
+<div class="absolute -right-16 -top-16 w-80 h-80 rounded-full bg-primary-container/5 blur-3xl pointer-events-none"></div>
+<div class="absolute left-1/3 -bottom-20 w-64 h-64 rounded-full bg-secondary-container/5 blur-3xl pointer-events-none"></div>
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md relative z-10">
+<!-- Primary Core Metric Readout -->
+<div class="flex items-center gap-space-lg">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-ping"></span>
+<span class="font-label-sm text-label-sm text-primary-container uppercase tracking-widest">REAL-TIME INFERENCE KERNEL</span>
+</div>
+<div class="flex items-baseline gap-space-xs mt-0.5">
+<span class="font-telemetry-metric text-telemetry-metric text-primary-container font-mono drop-shadow-[0_0_12px_rgba(0,255,102,0.4)]">0.78</span>
+<span class="font-telemetry-metric-sm text-telemetry-metric-sm text-primary font-mono">ms</span>
+<span class="ml-space-sm px-space-xs py-0.5 rounded bg-primary-container/10 text-primary font-label-sm text-label-sm font-bold">
+              99.97% FASTER THAN KERNEL SHAP
+            </span>
+</div>
+</div>
+<div class="hidden sm:block w-px h-10 bg-surface-bright/40"></div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">ICS SLA CERTIFICATION</span>
+<div class="flex items-center gap-space-xs mt-1">
+<span class="material-symbols-outlined text-primary-container text-[18px]">verified</span>
+<span class="font-label-md text-label-md text-primary font-mono">HARD-REALTIME &lt;1.0ms VERIFIED</span>
+</div>
+</div>
+</div>
+<!-- Algorithmic Signature Ribbon -->
+<div class="flex flex-wrap items-center gap-space-xs bg-surface-container-lowest/80 p-space-xs rounded-lg">
+<div class="px-space-sm py-1 rounded bg-surface-container-high flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant">ALGO:</span>
+<span class="font-label-sm text-label-sm text-secondary-fixed font-mono font-bold">FIRST-ORDER BACKPROP (∇_x ŷ_bin)</span>
+</div>
+<div class="px-space-sm py-1 rounded bg-surface-container flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant">JACOBIAN:</span>
+<span class="font-label-sm text-label-sm text-primary font-mono">∂Y/∂X_latent [1x10x64]</span>
+</div>
+<div class="px-space-sm py-1 rounded bg-surface-container flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant">DEVICE:</span>
+<span class="font-label-sm text-label-sm text-secondary font-mono">CUDA_STREAMS[#0]</span>
+</div>
+</div>
+</div>
+<!-- Micro Secondary KPI Badges Array -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-space-sm mt-space-md pt-space-sm">
+<div class="flex flex-col bg-surface-container p-space-sm rounded">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">ATTRIBUTION SPARSITY</span>
+<span class="material-symbols-outlined text-secondary text-[14px]">grain</span>
+</div>
+<div class="flex items-baseline justify-between mt-1">
+<span class="font-telemetry-metric-sm text-telemetry-metric-sm text-secondary-fixed font-mono">84.2%</span>
+<span class="font-label-sm text-label-sm text-primary-container font-mono">L0 REGULARIZED</span>
+</div>
+</div>
+<div class="flex flex-col bg-surface-container p-space-sm rounded">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">FAITHFULNESS SCORE</span>
+<span class="material-symbols-outlined text-primary text-[14px]">model_training</span>
+</div>
+<div class="flex items-baseline justify-between mt-1">
+<span class="font-telemetry-metric-sm text-telemetry-metric-sm text-primary font-mono">r = 0.964</span>
+<span class="font-label-sm text-label-sm text-primary-fixed-dim font-mono">PEARSON ±0.002</span>
+</div>
+</div>
+<div class="flex flex-col bg-surface-container p-space-sm rounded">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">ATTENTION ENTROPY</span>
+<span class="material-symbols-outlined text-tertiary-fixed text-[14px]">air</span>
+</div>
+<div class="flex items-baseline justify-between mt-1">
+<span class="font-telemetry-metric-sm text-telemetry-metric-sm text-tertiary-fixed font-mono">1.42 nats</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">HEAD 4/8 ACTIVE</span>
+</div>
+</div>
+<div class="flex flex-col bg-surface-container p-space-sm rounded">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">BASELINE DRIFT DELTA</span>
+<span class="material-symbols-outlined text-secondary text-[14px]">tune</span>
+</div>
+<div class="flex items-baseline justify-between mt-1">
+<span class="font-telemetry-metric-sm text-telemetry-metric-sm text-secondary-fixed-dim font-mono">Δ = 0.0031</span>
+<span class="font-label-sm text-label-sm text-primary-container font-mono">NOMINAL STABLE</span>
+</div>
+</div>
+</div>
+</div>
+<!-- MAIN 2-COLUMN TACTICAL HUD GRID -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-md">
+<!-- LEFT COLUMN: GRADIENT SALIENCY ATTRIBUTION & TENSOR DECOMPOSITION (7 COLS) -->
+<div class="xl:col-span-7 flex flex-col space-y-space-md">
+<!-- Top Card: Feature Saliency Ranking -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col">
+<!-- Header & Inspection Selector Bar -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm pb-space-sm">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-container text-[18px]">query_stats</span>
+<h2 class="font-headline-md text-headline-md text-primary tracking-tight">GRADIENT SALIENCY ATTRIBUTION MAP</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant font-mono mt-0.5">
+              [∇_x ŷ_bin ⊗ (x - x_baseline)] // Conformer Latent Layer Projection
+            </p>
+</div>
+<!-- XAI Calculation Mode Switcher -->
+<div class="flex items-center p-0.5 rounded bg-surface-container-highest">
+<button class="px-space-xs py-1 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold shadow-sm transition-all" id="btn-input-grad" onclick="switchXAIMode('input_grad')" type="button">
+              Input × Grad
+            </button>
+<button class="px-space-xs py-1 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all" id="btn-integ-grad" onclick="switchXAIMode('integ_grad')" type="button">
+              IntGrad (m=50)
+            </button>
+<button class="px-space-xs py-1 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all" id="btn-smooth-grad" onclick="switchXAIMode('smooth_grad')" type="button">
+              SmoothGrad
+            </button>
+<button class="px-space-xs py-1 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all" id="btn-attn-grad" onclick="switchXAIMode('attn_grad')" type="button">
+              Attn Map
+            </button>
+</div>
+</div>
+<!-- Explanatory Context Pill -->
+<div class="mt-space-xs bg-surface-container-lowest/70 p-space-xs rounded flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">ANOMALY DETECTED:</span>
+<span class="font-label-sm text-label-sm text-error font-mono font-bold">ATTACK VECTOR [MODBUS_REPLAY_INJECTION #0981]</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary-container font-mono">LOSS GRADIENT MAGNITUDE: 4.881e-02</span>
+</div>
+<!-- Normalized Feature Ranking Bar List -->
+<div class="mt-space-md space-y-space-xs" id="feature-saliency-container">
+<!-- 1. modbus_fc_code (Critical) -->
+<div class="bg-surface-container rounded p-space-sm hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between text-label-sm font-mono mb-1">
+<div class="flex items-center gap-space-xs">
+<span class="text-error font-bold">#01</span>
+<span class="text-on-surface font-semibold">modbus_fc_code</span>
+<span class="text-on-surface-variant">[0x10 / FC16 Write Multiple]</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="text-error font-bold tracking-wider">[CRITICAL ATTRIBUTION]</span>
+<span class="text-primary font-bold">0.942</span>
+</div>
+</div>
+<div class="w-full h-2 rounded bg-surface-container-lowest overflow-hidden flex">
+<div class="h-full bg-error rounded shadow-[0_0_12px_rgba(239,68,68,0.8)] transition-all duration-500" style="width: 94.2%"></div>
+</div>
+<div class="flex items-center justify-between mt-1 text-label-sm font-mono text-on-surface-variant">
+<span>GRADIENT δ: +0.8872</span>
+<span>HEURISTIC: UNAUTHORIZED SETPOINT OVERRIDE</span>
+</div>
+</div>
+<!-- 2. sub_reg_delta_0x002B (High Risk) -->
+<div class="bg-surface-container rounded p-space-sm hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between text-label-sm font-mono mb-1">
+<div class="flex items-center gap-space-xs">
+<span class="text-tertiary-fixed-dim font-bold">#02</span>
+<span class="text-on-surface font-semibold">sub_reg_delta_0x002B</span>
+<span class="text-on-surface-variant">[Actuator Target Pressure]</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="text-tertiary-fixed-dim font-bold tracking-wider">[HIGH RISK EXCURSION]</span>
+<span class="text-primary font-bold">0.887</span>
+</div>
+</div>
+<div class="w-full h-2 rounded bg-surface-container-lowest overflow-hidden flex">
+<div class="h-full bg-tertiary-fixed-dim rounded shadow-[0_0_8px_rgba(255,185,95,0.6)] transition-all duration-500" style="width: 88.7%"></div>
+</div>
+<div class="flex items-center justify-between mt-1 text-label-sm font-mono text-on-surface-variant">
+<span>GRADIENT δ: +0.7619</span>
+<span>THRESHOLD: 4,800 kPa LIMIT VIOLATION</span>
+</div>
+</div>
+<!-- 3. packet_interarrival_jitter (Elevated) -->
+<div class="bg-surface-container rounded p-space-sm hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between text-label-sm font-mono mb-1">
+<div class="flex items-center gap-space-xs">
+<span class="text-tertiary font-bold">#03</span>
+<span class="text-on-surface font-semibold">packet_interarrival_jitter</span>
+<span class="text-on-surface-variant">[0.042 ms σ]</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="text-tertiary-container font-bold tracking-wider text-on-surface-variant">[ELEVATED PERIODICITY]</span>
+<span class="text-primary font-bold">0.761</span>
+</div>
+</div>
+<div class="w-full h-2 rounded bg-surface-container-lowest overflow-hidden flex">
+<div class="h-full bg-secondary-fixed-dim rounded shadow-[0_0_8px_rgba(0,218,243,0.5)] transition-all duration-500" style="width: 76.1%"></div>
+</div>
+<div class="flex items-center justify-between mt-1 text-label-sm font-mono text-on-surface-variant">
+<span>GRADIENT δ: +0.5910</span>
+<span>SYNCHRONIC BURST PATTERN DETECTED</span>
+</div>
+</div>
+<!-- 4. tcp_window_size_abnormal (Elevated) -->
+<div class="bg-surface-container rounded p-space-sm hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between text-label-sm font-mono mb-1">
+<div class="flex items-center gap-space-xs">
+<span class="text-on-surface-variant font-bold">#04</span>
+<span class="text-on-surface font-semibold">tcp_window_size_abnormal</span>
+<span class="text-on-surface-variant">[Zero-window Probe]</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="text-secondary font-bold tracking-wider">[ELEVATED]</span>
+<span class="text-primary font-bold">0.624</span>
+</div>
+</div>
+<div class="w-full h-2 rounded bg-surface-container-lowest overflow-hidden flex">
+<div class="h-full bg-secondary rounded transition-all duration-500" style="width: 62.4%"></div>
+</div>
+<div class="flex items-center justify-between mt-1 text-label-sm font-mono text-on-surface-variant">
+<span>GRADIENT δ: +0.4328</span>
+<span>BUFFER STARVATION PROBING</span>
+</div>
+</div>
+<!-- 5. coil_discreet_status_bit3 (Moderate) -->
+<div class="bg-surface-container rounded p-space-sm hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between text-label-sm font-mono mb-1">
+<div class="flex items-center gap-space-xs">
+<span class="text-on-surface-variant font-bold">#05</span>
+<span class="text-on-surface font-semibold">coil_discreet_status_bit3</span>
+<span class="text-on-surface-variant">[Safety Interlock Bypass]</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="text-on-surface-variant">[MODERATE]</span>
+<span class="text-primary font-bold">0.412</span>
+</div>
+</div>
+<div class="w-full h-1.5 rounded bg-surface-container-lowest overflow-hidden flex">
+<div class="h-full bg-secondary-fixed rounded transition-all duration-500" style="width: 41.2%"></div>
+</div>
+<div class="flex items-center justify-between mt-1 text-label-sm font-mono text-on-surface-variant">
+<span>GRADIENT δ: +0.2814</span>
+<span>INTERLOCK VALVE PULSE</span>
+</div>
+</div>
+<!-- Collapsible Minor Attributions (6, 7, 8) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-xs pt-space-xs">
+<div class="bg-surface-container-highest/60 p-space-xs rounded">
+<div class="flex justify-between font-label-sm text-label-sm font-mono text-on-surface-variant">
+<span>#06 crc16_valid</span>
+<span class="text-primary-container">0.185</span>
+</div>
+<div class="w-full h-1 rounded bg-surface-container-lowest mt-1">
+<div class="h-full bg-primary-fixed-dim rounded" style="width: 18.5%"></div>
+</div>
+</div>
+<div class="bg-surface-container-highest/60 p-space-xs rounded">
+<div class="flex justify-between font-label-sm text-label-sm font-mono text-on-surface-variant">
+<span>#07 flow_byte_rate</span>
+<span class="text-primary-container">0.091</span>
+</div>
+<div class="w-full h-1 rounded bg-surface-container-lowest mt-1">
+<div class="h-full bg-outline rounded" style="width: 9.1%"></div>
+</div>
+</div>
+<div class="bg-surface-container-highest/60 p-space-xs rounded">
+<div class="flex justify-between font-label-sm text-label-sm font-mono text-on-surface-variant">
+<span>#08 mac_oui_vendor</span>
+<span class="text-primary-container">0.012</span>
+</div>
+<div class="w-full h-1 rounded bg-surface-container-lowest mt-1">
+<div class="h-full bg-outline-variant rounded" style="width: 1.2%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Card: Raw Tensor Gradient Slice Matrix Visualizer -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary-container text-[18px]">grid_4x4</span>
+<span class="font-headline-md text-headline-md text-primary tracking-tight">RAW TEMPORAL SALIENCY MATRIX</span>
+</div>
+<div class="flex items-center gap-space-sm font-label-sm text-label-sm font-mono text-on-surface-variant">
+<span>TENSOR: [10 Timesteps × 8 Features]</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container text-primary-container">FP16 DENSE</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">
+          Dynamic gradient heat slice across sequential Modbus frames (T-9 to T-0 current packet):
+        </p>
+<!-- Dynamic Heat Matrix (10 timesteps x 8 features) -->
+<div class="overflow-x-auto bg-surface-container-lowest p-space-sm rounded-lg">
+<div class="min-w-[540px] flex flex-col space-y-1">
+<!-- Matrix Header: Feature Labels -->
+<div class="grid grid-cols-9 gap-1 font-label-sm text-label-sm font-mono text-on-surface-variant text-center pb-1">
+<div class="text-left pl-1">FRAME</div>
+<div title="modbus_fc">F1:fc</div>
+<div title="reg_delta">F2:Δp</div>
+<div title="jitter">F3:jit</div>
+<div title="tcp_win">F4:win</div>
+<div title="coil_b3">F5:coil</div>
+<div title="crc">F6:crc</div>
+<div title="rate">F7:rate</div>
+<div title="oui">F8:oui</div>
+</div>
+<!-- Row T-9 -->
+<div class="grid grid-cols-9 gap-1 text-center font-mono font-label-sm text-label-sm items-center">
+<span class="text-left pl-1 text-on-surface-variant">T-9</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.02</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.01</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.04</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.01</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.00</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.02</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.01</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.00</span>
+</div>
+<!-- Row T-8 -->
+<div class="grid grid-cols-9 gap-1 text-center font-mono font-label-sm text-label-sm items-center">
+<span class="text-left pl-1 text-on-surface-variant">T-8</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.02</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.03</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.05</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.02</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.01</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.01</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.02</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.00</span>
+</div>
+<!-- Row T-5 (Onset of perturbation) -->
+<div class="grid grid-cols-9 gap-1 text-center font-mono font-label-sm text-label-sm items-center">
+<span class="text-left pl-1 text-on-surface-variant">T-5</span>
+<span class="h-6 rounded flex items-center justify-center bg-secondary-fixed/20 text-secondary-fixed">.21</span>
+<span class="h-6 rounded flex items-center justify-center bg-secondary-fixed/30 text-secondary-fixed">.38</span>
+<span class="h-6 rounded flex items-center justify-center bg-secondary-fixed/30 text-secondary-fixed">.42</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.09</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.03</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.02</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.03</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.00</span>
+</div>
+<!-- Row T-2 (Escalation) -->
+<div class="grid grid-cols-9 gap-1 text-center font-mono font-label-sm text-label-sm items-center">
+<span class="text-left pl-1 text-on-surface-variant">T-2</span>
+<span class="h-6 rounded flex items-center justify-center bg-tertiary-fixed-dim/40 text-tertiary-fixed-dim font-bold">.72</span>
+<span class="h-6 rounded flex items-center justify-center bg-tertiary-fixed-dim/40 text-tertiary-fixed-dim font-bold">.69</span>
+<span class="h-6 rounded flex items-center justify-center bg-secondary-fixed/40 text-secondary font-bold">.64</span>
+<span class="h-6 rounded flex items-center justify-center bg-secondary-fixed/20 text-secondary">.31</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.11</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.04</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.05</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.01</span>
+</div>
+<!-- Row T-0 (Current Anomaly Spike - Max Intensity) -->
+<div class="grid grid-cols-9 gap-1 text-center font-mono font-label-sm text-label-sm items-center bg-surface-container-high/40 p-0.5 rounded">
+<span class="text-left pl-1 text-error font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-pulse"></span>
+                T-0
+              </span>
+<span class="h-6 rounded flex items-center justify-center bg-error text-on-error font-bold shadow-[0_0_10px_rgba(239,68,68,0.9)]">.94</span>
+<span class="h-6 rounded flex items-center justify-center bg-error-container text-primary font-bold shadow-[0_0_8px_rgba(147,0,10,0.8)]">.89</span>
+<span class="h-6 rounded flex items-center justify-center bg-tertiary-fixed-dim/50 text-tertiary-fixed font-bold">.76</span>
+<span class="h-6 rounded flex items-center justify-center bg-secondary-fixed-dim/40 text-secondary-fixed font-bold">.62</span>
+<span class="h-6 rounded flex items-center justify-center bg-secondary/30 text-secondary font-bold">.41</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.18</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.09</span>
+<span class="h-6 rounded flex items-center justify-center bg-surface-container text-on-surface-variant">.01</span>
+</div>
+</div>
+</div>
+<!-- Matrix Legend Footer -->
+<div class="flex items-center justify-between mt-space-sm pt-space-xs font-label-sm text-label-sm font-mono text-on-surface-variant">
+<div class="flex items-center gap-space-sm">
+<span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded bg-surface-container"></span> Nominal &lt;0.10</span>
+<span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded bg-secondary-fixed/40"></span> Mod &gt;0.30</span>
+<span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded bg-tertiary-fixed-dim/50"></span> High &gt;0.60</span>
+<span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded bg-error"></span> Critical &gt;0.90</span>
+</div>
+<span class="text-primary-container">KERNEL: eBPF RINGBUF DUMP</span>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: SPEEDUP BENCHMARKS & LATENCY WATERFALL (5 COLS) -->
+<div class="xl:col-span-5 flex flex-col space-y-space-md">
+<!-- Card A: Comparative Explainability Benchmark (SLA <= 5.0 ms) -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-container text-[18px]">speed</span>
+<h2 class="font-headline-md text-headline-md text-primary tracking-tight">XAI LATENCY BENCHMARK</h2>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-primary-container/10 text-primary font-label-sm text-label-sm font-bold">
+            SLA: ≤ 5.0 ms
+          </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">
+          Evaluation on 10,000 SCADA Modbus packets across standard ICS anomaly explanation frameworks:
+        </p>
+<!-- Benchmark Bars -->
+<div class="space-y-space-md font-mono">
+<!-- Bar 1: Sentinel Conformer Saliency (0.78 ms - PASSED) -->
+<div class="space-y-1">
+<div class="flex items-center justify-between text-label-sm">
+<span class="text-primary-container font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-primary-container text-[14px]">check_circle</span>
+                SENTINEL CONFORMER SALIENCY
+              </span>
+<span class="text-primary-container font-bold">0.78 ms</span>
+</div>
+<div class="w-full h-3 rounded bg-surface-container-lowest overflow-hidden flex">
+<div class="h-full bg-primary-container rounded shadow-[0_0_15px_rgba(0,255,102,0.9)]" style="width: 2.5%"></div>
+</div>
+<div class="flex justify-between text-label-sm text-primary-container">
+<span>PASSED • HARD REAL-TIME COMPLIANT</span>
+<span>1.0x (BASELINE SPEED)</span>
+</div>
+</div>
+<!-- Bar 2: Integrated Gradients (38.4 ms - FAILED) -->
+<div class="space-y-1">
+<div class="flex items-center justify-between text-label-sm">
+<span class="text-on-surface font-semibold">Integrated Gradients (50 steps)</span>
+<span class="text-tertiary-fixed font-bold">38.40 ms</span>
+</div>
+<div class="w-full h-2.5 rounded bg-surface-container-lowest overflow-hidden flex">
+<div class="h-full bg-tertiary-fixed-dim rounded" style="width: 18%"></div>
+</div>
+<div class="flex justify-between text-label-sm text-on-surface-variant">
+<span class="text-error">EXCEEDS 5.0ms ICS DEADLINE</span>
+<span>49.2× SLOWER</span>
+</div>
+</div>
+<!-- Bar 3: LIME (1,840.0 ms - FAILED) -->
+<div class="space-y-1">
+<div class="flex items-center justify-between text-label-sm">
+<span class="text-on-surface-variant">LIME (Local Interpretable)</span>
+<span class="text-error font-bold">1,840.00 ms</span>
+</div>
+<div class="w-full h-2 rounded bg-surface-container-lowest overflow-hidden flex">
+<div class="h-full bg-error-container rounded" style="width: 65%"></div>
+</div>
+<div class="flex justify-between text-label-sm text-on-surface-variant">
+<span class="text-error">LATENCY REJECTED</span>
+<span>2,358× SLOWER</span>
+</div>
+</div>
+<!-- Bar 4: Kernel SHAP (3,120.0 ms - FAILED) -->
+<div class="space-y-1">
+<div class="flex items-center justify-between text-label-sm">
+<span class="text-on-surface-variant">Kernel SHAP (1000 evals)</span>
+<span class="text-error font-bold">3,120.00 ms</span>
+</div>
+<div class="w-full h-2 rounded bg-surface-container-lowest overflow-hidden flex">
+<div class="h-full bg-error rounded shadow-[0_0_10px_rgba(239,68,68,0.5)]" style="width: 100%"></div>
+</div>
+<div class="flex justify-between text-label-sm text-on-surface-variant">
+<span class="text-error font-bold">CRITICAL DEFENSE FAILURE</span>
+<span>4,000× SLOWER</span>
+</div>
+</div>
+</div>
+<!-- Diagnostic Field Note -->
+<div class="mt-space-md p-space-sm rounded bg-error-container/20 text-on-surface flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-error text-[18px] shrink-0 mt-0.5">warning</span>
+<div class="font-body-sm text-body-sm">
+<span class="font-bold text-error">Vulnerability Disclosure:</span> 
+            Kernel SHAP introduces 3.12s queuing latency. At 5,000 pkts/sec PLC rate, over 
+            <span class="font-mono text-primary font-bold">15,600 unmitigated packets</span> 
+            cross the network boundary before explainability can trigger a cgroup firewall drop.
+          </div>
+</div>
+</div>
+<!-- Card B: 21.5 ms Sub-Cycle Latency Decomposition Waterfall -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col flex-1">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[18px]">waterfall_chart</span>
+<h2 class="font-headline-md text-headline-md text-primary tracking-tight">SUB-CYCLE MTTR WATERFALL</h2>
+</div>
+<span class="font-telemetry-metric-sm text-telemetry-metric-sm text-secondary-fixed font-mono font-bold">
+            21.50 ms TOTAL
+          </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">
+          End-to-end execution breakdown from raw eBPF socket arrival to kernel iptables enforcement:
+        </p>
+<!-- Waterfall Steps Stack -->
+<div class="space-y-space-sm font-mono">
+<!-- Step 1: eBPF Ingestion -->
+<div class="bg-surface-container p-space-sm rounded flex flex-col">
+<div class="flex items-center justify-between text-label-sm">
+<span class="text-on-surface flex items-center gap-1">
+<span class="text-on-surface-variant">#1</span> eBPF XDP Ingestion &amp; RingBuf Copy
+              </span>
+<span class="text-secondary font-bold">3.80 ms</span>
+</div>
+<div class="w-full h-2 rounded bg-surface-container-lowest mt-1.5 overflow-hidden flex">
+<div class="h-full bg-secondary-fixed-dim rounded" style="width: 17.6%"></div>
+</div>
+<div class="flex justify-between text-label-sm text-on-surface-variant mt-1">
+<span>AF_XDP zero-copy socket</span>
+<span>17.6% of budget</span>
+</div>
+</div>
+<!-- Step 2: Google Conformer Inference (Cyan Highlight) -->
+<div class="bg-surface-container p-space-sm rounded flex flex-col">
+<div class="flex items-center justify-between text-label-sm">
+<span class="text-secondary-fixed flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+                #2 Conformer Model Forward Pass
+              </span>
+<span class="text-secondary-container font-bold">0.78 ms</span>
+</div>
+<div class="w-full h-2 rounded bg-surface-container-lowest mt-1.5 overflow-hidden flex">
+<div class="h-full bg-secondary-container rounded shadow-[0_0_8px_rgba(0,227,253,0.8)]" style="width: 3.6%"></div>
+</div>
+<div class="flex justify-between text-label-sm text-secondary-fixed mt-1">
+<span>TensorRT FP16 compiled kernel</span>
+<span>3.6% of budget</span>
+</div>
+</div>
+<!-- Step 3: Gradient Saliency Backprop (Emerald Highlight) -->
+<div class="bg-surface-container p-space-sm rounded flex flex-col">
+<div class="flex items-center justify-between text-label-sm">
+<span class="text-primary-container flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined text-[14px]">insights</span>
+                #3 Saliency Engine Backprop
+              </span>
+<span class="text-primary-container font-bold">0.65 ms</span>
+</div>
+<div class="w-full h-2 rounded bg-surface-container-lowest mt-1.5 overflow-hidden flex">
+<div class="h-full bg-primary-container rounded shadow-[0_0_8px_rgba(0,255,102,0.8)]" style="width: 3.0%"></div>
+</div>
+<div class="flex justify-between text-label-sm text-primary-container mt-1">
+<span>Jacobian-Vector product (∇_x ŷ)</span>
+<span>3.0% of budget</span>
+</div>
+</div>
+<!-- Step 4: Active Enforcement -->
+<div class="bg-surface-container p-space-sm rounded flex flex-col">
+<div class="flex items-center justify-between text-label-sm">
+<span class="text-on-surface flex items-center gap-1">
+<span class="text-on-surface-variant">#4</span> iptables / cgroup Packet Drop
+              </span>
+<span class="text-tertiary-fixed font-bold">16.27 ms</span>
+</div>
+<div class="w-full h-2 rounded bg-surface-container-lowest mt-1.5 overflow-hidden flex">
+<div class="h-full bg-outline rounded" style="width: 75.8%"></div>
+</div>
+<div class="flex justify-between text-label-sm text-on-surface-variant mt-1">
+<span>Netfilter bridge quarantine sync</span>
+<span>75.8% of budget</span>
+</div>
+</div>
+</div>
+<!-- MTTR Summary Bar with Physical Cycle Indicator -->
+<div class="mt-space-md p-space-sm rounded bg-surface-container flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-container text-[18px]">verified_user</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-primary-container font-mono font-bold">AIR-GAP DEFENSE SUCCESS</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Physical coil cycle time: 50.0 ms | Safe margin: 28.5 ms</span>
+</div>
+</div>
+<button class="px-space-sm py-1 rounded bg-secondary-container text-on-secondary-container hover:bg-secondary font-label-sm text-label-sm font-bold shadow-sm transition-colors" onclick="triggerProfileExport()" type="button">
+            EXPORT TRACE
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- INTERACTIVE CLIENT JAVASCRIPT LOGIC -->
+<script>
+    // Highlight Active Dock Item in Global Shell
+    document.addEventListener("DOMContentLoaded", function() {
+      try {
+        const navLinks = document.querySelectorAll('nav a[data-path]');
+        navLinks.forEach(link => {
+          if (link.getAttribute('data-path') === 'xai-engine') {
+            link.className = "px-space-md py-1.5 rounded font-label-md text-label-md bg-primary-container text-on-primary-container font-bold whitespace-nowrap shadow-[0_0_15px_rgba(0,255,102,0.4)] transition-all";
+          } else {
+            link.className = "px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface whitespace-nowrap transition-colors";
+          }
+        });
+      } catch (e) {
+        console.error("Shell navigation binding error:", e);
+      }
+    });
+
+    // Toggle XAI Calculation Modes dynamically
+    function switchXAIMode(mode) {
+      const buttons = ['btn-input-grad', 'btn-integ-grad', 'btn-smooth-grad', 'btn-attn-grad'];
+      buttons.forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) {
+          btn.className = "px-space-xs py-1 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all";
+        }
+      });
+
+      const currentBtn = document.getElementById('btn-' + mode.replace('_', '-'));
+      if (currentBtn) {
+        currentBtn.className = "px-space-xs py-1 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold shadow-sm transition-all";
+      }
+    }
+
+    // Interactive trace profile exporter
+    function triggerProfileExport() {
+      const toast = document.createElement('div');
+      toast.className = "fixed top-20 right-8 z-50 bg-primary-container text-on-primary-container font-mono font-label-sm text-label-sm px-space-md py-space-sm rounded shadow-[0_0_20px_rgba(0,255,102,0.6)] flex items-center gap-space-xs";
+      toast.innerHTML = '<span class="material-symbols-outlined text-[16px]">download_done</span><span>PERFETTO TRACE STREAM COMPILED: /tmp/sentinel_xai_trace_0.78ms.pb</span>';
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 3200);
+    }
+  </script>
+</div></main><div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[96%] max-w-6xl"><div class="bg-surface-container-low/90 backdrop-blur-xl rounded-xl p-space-xs shadow-[0_0_25px_rgba(0,0,0,0.7)] flex flex-wrap items-center justify-between gap-space-sm"><nav class="flex items-center gap-1 overflow-x-auto py-1" data-active-classes="bg-primary-container text-on-primary-container font-bold rounded"><a class="px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface whitespace-nowrap transition-colors" data-path="overview" href="#">OVERVIEW</a><a class="px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface whitespace-nowrap transition-colors" data-path="threat-lab" href="#">THREAT LAB</a><a class="px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface whitespace-nowrap transition-colors" data-path="xai-engine" href="#">XAI ENGINE</a><a class="px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface whitespace-nowrap transition-colors" data-path="adversarial" href="#">ADVERSARIAL</a><a class="px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface whitespace-nowrap transition-colors" data-path="remediation" href="#">REMEDIATION</a><a class="px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface whitespace-nowrap transition-colors" data-path="compliance" href="#">COMPLIANCE</a></nav><div class="flex items-center gap-space-xs"><a class="px-space-sm py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-secondary-fixed font-label-sm text-label-sm whitespace-nowrap" data-path="execute" href="#">Execute PCB</a><a class="px-space-sm py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-primary font-label-sm text-label-sm whitespace-nowrap" data-path="live-sniffer" href="#">Sniffer</a><a class="px-space-sm py-1.5 rounded bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary font-label-sm text-label-sm font-bold whitespace-nowrap shadow-[0_0_10px_rgba(0,227,253,0.25)]" data-path="agentic-soc" href="#">Agentic SOC</a></div></div></div></body></html>

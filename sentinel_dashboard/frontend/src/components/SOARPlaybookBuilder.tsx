@@ -1,527 +1,792 @@
 // ==============================================================================
-// SENTINEL-IOT: VISUAL SOAR WORKFLOW PLAYBOOK BUILDER (IDEA 2)
-// Autonomous Graph Engine: Trigger -> Saliency Filter -> Mitigation -> Compliance
-// Version 2.4 - Enterprise Production Edition - FYP-II
+// SOAR PLAYBOOK BUILDER & ORCHESTRATION STUDIO (CONSOLE COMPONENT / MODAL)
+// Stitch Incident Playbook Editor & Orchestration Studio Futuristic HUD
+// Autonomous DAG Execution Flow: Trigger -> eBPF Drop -> Cgroup -> Hardware Interlock -> TPM Audit
 // ==============================================================================
 
 "use client";
 
-import React, { useState, useEffect } from "react";
-import {
-  Workflow,
-  Play,
-  RotateCcw,
-  CheckCircle2,
-  AlertTriangle,
-  Layers,
-  ShieldAlert,
-  ShieldCheck,
-  FileCheck,
-  Zap,
-  ArrowRight,
-  Terminal,
-  Settings,
-  Sparkles,
-  Download,
-  Copy,
-  Check,
-  X
-} from "lucide-react";
+import React, { useState } from "react";
 import { useTelemetryStore } from "@/store/useTelemetryStore";
 
-interface PlaybookNode {
-  id: string;
-  type: "trigger" | "filter" | "mitigation" | "compliance";
-  title: string;
-  subtitle: string;
-  detail: string;
-  status: "idle" | "evaluating" | "passed" | "failed";
+interface SOARPlaybookBuilderProps {
+  isModal?: boolean;
+  onClose?: () => void;
 }
 
-interface PlaybookDef {
+interface PlaybookMeta {
   id: string;
   name: string;
+  category: "ICS" | "eBPF" | "SCADA" | "Air-Gap";
   description: string;
   targetIp: string;
-  nodes: PlaybookNode[];
-  merkleHash: string;
+  mttr: string;
+  status: "ACTIVE - RING0" | "STANDBY - ARMED" | "STANDBY - VERIFIED" | "TESTING";
+  stages: number;
 }
 
-const DEFAULT_PLAYBOOKS: PlaybookDef[] = [
+const PLAYBOOK_INVENTORY: PlaybookMeta[] = [
   {
-    id: "playbook-01",
-    name: "Zero-Day Industrial Modbus Quarantine",
-    description: "Detects unauthorized coil write bursts, correlates temporal gradient attribution, and freezes Modbus loop.",
+    id: "PB-MODBUS-FC16-EXCURSION-04",
+    name: "Modbus FC16 Actuator Excursion",
+    category: "ICS",
+    description: "Line-Rate XDP Drop + cgroup freeze + relay interlock",
     targetIp: "192.168.100.45",
-    merkleHash: "7f01a9b4c12d8e33fbc8294a0058b76c",
-    nodes: [
-      {
-        id: "trig-1",
-        type: "trigger",
-        title: "Conformer Anomaly Trigger",
-        subtitle: "Dual-Head Anomaly Scoring",
-        detail: "Anomaly Probability τ > 0.85 & Domain == 'IoT_Modbus'",
-        status: "idle"
-      },
-      {
-        id: "filt-1",
-        type: "filter",
-        title: "Saliency Gradient Filter",
-        subtitle: "First-Order Attribution Check",
-        detail: "FC_Code == 'Write_Multiple_Coils' & Saliency Entropy > 0.75",
-        status: "idle"
-      },
-      {
-        id: "mit-1",
-        type: "mitigation",
-        title: "Active Modbus Isolation",
-        subtitle: "Wazuh Agent Containment",
-        detail: "iptables -A FORWARD -s 192.168.100.45 -p tcp --dport 502 -j DROP",
-        status: "idle"
-      },
-      {
-        id: "comp-1",
-        type: "compliance",
-        title: "GRC AU-9 Cryptographic Seal",
-        subtitle: "NIST SP 800-53 / ISO 27001",
-        detail: "NIST SC-5 & ISO A.12.1.3 Ledger Entry with SHA-256 Merkle Receipt",
-        status: "idle"
-      }
-    ]
+    mttr: "0.082ms",
+    status: "ACTIVE - RING0",
+    stages: 6
   },
   {
-    id: "playbook-02",
-    name: "Host Ransomware High-IO Outbreak Kill",
-    description: "Identifies rapid file encryption patterns via temporal process metrics and terminates rogue process trees.",
-    targetIp: "192.168.100.18",
-    merkleHash: "3a88c42b910e527d44fe11a77d903e12",
-    nodes: [
-      {
-        id: "trig-2",
-        type: "trigger",
-        title: "Process IO Surge Trigger",
-        subtitle: "Host Telemetry Anomaly",
-        detail: "Attack Class == 'ransomware' & IO_Write_Bytes > 500 KB/s",
-        status: "idle"
-      },
-      {
-        id: "filt-2",
-        type: "filter",
-        title: "Binary Whitelist Check",
-        subtitle: "Integrity & Signature Cross-Check",
-        detail: "Process binary not in OS_ALLOWLIST & Active Threads > 15",
-        status: "idle"
-      },
-      {
-        id: "mit-2",
-        type: "mitigation",
-        title: "SIGKILL Process Tree",
-        subtitle: "Direct OS Kernel Signal",
-        detail: "taskkill /F /PID 4120 && vssadmin create shadow /for=C:",
-        status: "idle"
-      },
-      {
-        id: "comp-2",
-        type: "compliance",
-        title: "NIST SI-3 Malware Audit",
-        subtitle: "Cryptographic Evidence Ledger",
-        detail: "NIST SI-3 & ISO A.12.6.1 Forensic Snapshot anchored in Vault",
-        status: "idle"
-      }
-    ]
+    id: "PB-DNP3-OUTSTATION-FLOOD-01",
+    name: "DNP3 Outstation Flood Mitigation",
+    category: "ICS",
+    description: "Rate-limit XDP, token bucket 500 pkts/s per ingress",
+    targetIp: "192.168.100.22",
+    mttr: "0.110ms",
+    status: "STANDBY - ARMED",
+    stages: 4
   },
   {
-    id: "playbook-03",
-    name: "Distributed SYN Flood Rate-Limiting",
-    description: "Evaluates ingress packet flow anomalies and triggers edge BGP rate-limiting within sub-second thresholds.",
-    targetIp: "10.0.0.88",
-    merkleHash: "e5d023bf9761a29810ef3379ac540b09",
-    nodes: [
-      {
-        id: "trig-3",
-        type: "trigger",
-        title: "Network SYN Ingress Spike",
-        subtitle: "Conformer Sequence Model",
-        detail: "Conformer τ > 0.90 & SYN_Packets_Sec > 5000/s",
-        status: "idle"
-      },
-      {
-        id: "filt-3",
-        type: "filter",
-        title: "Source IP Dispersion Test",
-        subtitle: "Multi-Source Clustering",
-        detail: "Unique Source IPs > 20 within 10-step buffer",
-        status: "idle"
-      },
-      {
-        id: "mit-3",
-        type: "mitigation",
-        title: "Edge Ingress BGP Rate-Limit",
-        subtitle: "Hardware Switch Containment",
-        detail: "tc qdisc add dev eth0 root tbf rate 25mbit burst 10kb latency 20ms",
-        status: "idle"
-      },
-      {
-        id: "comp-3",
-        type: "compliance",
-        title: "NIST SC-5 DoS Compliance",
-        subtitle: "Audit Trail Merkle Block",
-        detail: "NIST SC-5 Denial-of-Service Protection SLA Verification",
-        status: "idle"
-      }
-    ]
+    id: "PB-S7COMM-LADDER-INJECT-08",
+    name: "Simatic S7Comm Ladder Injection",
+    category: "SCADA",
+    description: "Memory integrity hash check, PLC CPU stop trigger",
+    targetIp: "10.0.4.15",
+    mttr: "1.450ms",
+    status: "STANDBY - VERIFIED",
+    stages: 5
+  },
+  {
+    id: "PB-BACNET-DEVICE-SPOOF-02",
+    name: "BACnet Building Bus Spoof Guard",
+    category: "ICS",
+    description: "MAC/IP strict binding clamp, ARP poison zero-latency drop",
+    targetIp: "192.168.20.88",
+    mttr: "0.340ms",
+    status: "STANDBY - ARMED",
+    stages: 4
+  },
+  {
+    id: "PB-ZERO-TRUST-CONFORMER-07",
+    name: "Attention Entropy Quarantine",
+    category: "eBPF",
+    description: "Attention entropy > 1.25 nats triggers neural quarantine",
+    targetIp: "172.16.50.12",
+    mttr: "4.800ms",
+    status: "TESTING",
+    stages: 4
   }
 ];
 
-export default function SOARPlaybookBuilder({ isModal = false, onClose }: { isModal?: boolean; onClose?: () => void }) {
-  const [selectedPlaybookIndex, setSelectedPlaybookIndex] = useState<number>(0);
-  const [playbooks, setPlaybooks] = useState<PlaybookDef[]>(DEFAULT_PLAYBOOKS);
-  const [isExecuting, setIsExecuting] = useState<boolean>(false);
-  const [currentStepIndex, setCurrentStepIndex] = useState<number>(-1);
-  const [executionLogs, setExecutionLogs] = useState<string[]>([]);
-  const [executionResult, setExecutionResult] = useState<any | null>(null);
-  const [copiedReceipt, setCopiedReceipt] = useState<boolean>(false);
-  const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
+export default function SOARPlaybookBuilder({ isModal = false, onClose }: SOARPlaybookBuilderProps) {
+  const [selectedPlaybookId, setSelectedPlaybookId] = useState<string>("PB-MODBUS-FC16-EXCURSION-04");
+  const [filterCategory, setFilterCategory] = useState<string>("ALL");
+  const [searchFilter, setSearchFilter] = useState<string>("");
+  const [rightTab, setRightTab] = useState<"ebpf" | "safety">("ebpf");
+  const [isSimulating, setIsSimulating] = useState<boolean>(false);
+  const [simulationStep, setSimulationStep] = useState<number>(-1);
+  const [officerSigned, setOfficerSigned] = useState<boolean>(false);
+  const [traceLogs, setTraceLogs] = useState<string[]>([
+    "[14:28:02.102] <kernel> loaded prog 'xdp_drop_modbus_excursion' id 412",
+    "[14:28:02.105] <ring0> xdp attached to eth0 in driver mode",
+    "[14:28:02.189] <xdp_drop> match src:192.168.100.45 -> dropped 184000 pkts/s"
+  ]);
 
-  const activePlaybook = playbooks[selectedPlaybookIndex];
+  const activePlaybook =
+    PLAYBOOK_INVENTORY.find((p) => p.id === selectedPlaybookId) || PLAYBOOK_INVENTORY[0];
 
-  const handleSimulateExecution = async () => {
-    if (isExecuting) return;
-    setIsExecuting(true);
-    setCurrentStepIndex(0);
-    setExecutionResult(null);
-    setExecutionLogs([
-      `[SOAR Engine] Starting autonomous execution for '${activePlaybook.name}'...`,
-      `[Target] Node IP: ${activePlaybook.targetIp}`
+  const filteredPlaybooks = PLAYBOOK_INVENTORY.filter((pb) => {
+    const matchesCat =
+      filterCategory === "ALL" ||
+      pb.category.toUpperCase() === filterCategory.toUpperCase();
+    const matchesSearch =
+      !searchFilter ||
+      pb.id.toLowerCase().includes(searchFilter.toLowerCase()) ||
+      pb.name.toLowerCase().includes(searchFilter.toLowerCase()) ||
+      pb.description.toLowerCase().includes(searchFilter.toLowerCase());
+    return matchesCat && matchesSearch;
+  });
+
+  const runSimulation = async () => {
+    if (isSimulating) return;
+    setIsSimulating(true);
+    setSimulationStep(1);
+
+    const steps = [
+      { step: 1, log: `[${new Date().toISOString().slice(11, 23)}] <trigger> Conformer τ=0.942 > 0.850 exceeded on ${activePlaybook.targetIp}` },
+      { step: 2, log: `[${new Date().toISOString().slice(11, 23)}] <ring0> XDP_DROP filter hook installed on eth0 (latency: 0.082ms)` },
+      { step: 3, log: `[${new Date().toISOString().slice(11, 23)}] <cgroup-v2> SIGSTOP sent to target PID 49102 [CPU quota: 0%]` },
+      { step: 4, log: `[${new Date().toISOString().slice(11, 23)}] <safety-gate> IEC 62443 physical pressure boundary confirmed within safety limit` },
+      { step: 5, log: `[${new Date().toISOString().slice(11, 23)}] <hardware-interlock> Relay trip pending dual-signature quorum` },
+      { step: 6, log: `[${new Date().toISOString().slice(11, 23)}] <audit> TPM 2.0 PCR-7 seal signed: Merkle Block #1048576 committed` }
+    ];
+
+    for (let i = 0; i < steps.length; i++) {
+      setSimulationStep(steps[i].step);
+      setTraceLogs((prev) => [steps[i].log, ...prev.slice(0, 10)]);
+      await new Promise((r) => setTimeout(r, 600));
+    }
+
+    setIsSimulating(false);
+  };
+
+  const handleSignInterlock = () => {
+    setOfficerSigned(true);
+    setTraceLogs((prev) => [
+      `[${new Date().toISOString().slice(11, 23)}] <fido2> Plant Safety Engineer signed via YubiKey token. Air-gap confirmed!`,
+      ...prev.slice(0, 10)
     ]);
-
-    // Step-by-step sequential node animation
-    for (let i = 0; i < activePlaybook.nodes.length; i++) {
-      setCurrentStepIndex(i);
-      const node = activePlaybook.nodes[i];
-      setExecutionLogs((prev) => [
-        ...prev,
-        `[STAGE ${i + 1}] Evaluating ${node.title} -> ${node.detail}...`
-      ]);
-
-      await new Promise((r) => setTimeout(r, 650));
-
-      setExecutionLogs((prev) => [
-        ...prev,
-        `[STAGE ${i + 1}] SUCCESS: ${node.title} passed condition check.`
-      ]);
-    }
-
-    try {
-      const res = await fetch("http://127.0.0.1:8000/api/soar/execute", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          playbook_id: activePlaybook.id,
-          target_ip: activePlaybook.targetIp
-        })
-      });
-      if (res.ok) {
-        const data = await res.json();
-        setExecutionResult(data);
-        setExecutionLogs((prev) => [
-          ...prev,
-          `[SOAR Engine] Mitigation completed in ${data.execution_time_ms} ms.`,
-          `[GRC Vault] Cryptographic Proof: ${data.merkle_receipt}`,
-          `[Audit] ${data.audit_proof}`
-        ]);
-      } else {
-        throw new Error("Backend response non-200");
-      }
-    } catch {
-      // Local fallback simulation if backend offline
-      setExecutionResult({
-        status: "EXECUTED",
-        playbook_id: activePlaybook.id,
-        playbook_name: activePlaybook.name,
-        target: activePlaybook.targetIp,
-        execution_time_ms: 18.4,
-        mitigation_action: activePlaybook.nodes[2].detail,
-        merkle_receipt: activePlaybook.merkleHash,
-        audit_proof: `AU-9 Verified at ${new Date().toISOString()}`
-      });
-      setExecutionLogs((prev) => [
-        ...prev,
-        `[SOAR Engine] Simulated execution completed in 18.4 ms.`,
-        `[GRC Vault] Cryptographic Proof: ${activePlaybook.merkleHash}`,
-        `[Audit] AU-9 Verified at ${new Date().toISOString()}`
-      ]);
-    }
-
-    setIsExecuting(false);
-    setCurrentStepIndex(-1);
   };
 
-  const handleCopyReceipt = () => {
-    if (!executionResult) return;
-    navigator.clipboard.writeText(executionResult.merkle_receipt);
-    setCopiedReceipt(true);
-    setTimeout(() => setCopiedReceipt(false), 2000);
-  };
+  return (
+    <div className="flex flex-col w-full bg-[#070d14] text-[#dee3eb] border border-[#00f0ff]/30 rounded shadow-[0_0_30px_rgba(0,0,0,0.8)] overflow-hidden">
+      {/* 1. TOP CONTROL RIBBON & COMMAND BAR */}
+      <section className="w-full bg-[#0b131e] px-4 py-3 border-b border-[#162536] relative">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+          <div className="flex flex-col gap-1">
+            <div className="flex items-center gap-2 font-mono text-[10px] text-[#64748b] tracking-wider flex-wrap">
+              <span>ORCHESTRATION STUDIO</span>
+              <span>//</span>
+              <span className="text-[#00f0ff]">SOAR-ICS v2.4</span>
+              <span>//</span>
+              <span className="text-[#00ff66] font-bold">CORE-RING0-INTERLOCK</span>
+              <span className="text-[#64748b]">[TARGET_ID: 0x7F41]</span>
+              <span className="text-[#00f0ff] font-bold">TARGET IP: {activePlaybook.targetIp}</span>
+            </div>
 
-  const getNodeColor = (type: PlaybookNode["type"]) => {
-    switch (type) {
-      case "trigger":
-        return {
-          border: "border-[var(--brand-cyan)]",
-          glow: "shadow-[0_0_15px_rgba(0,243,255,0.3)]",
-          badgeBg: "bg-[var(--brand-cyan)]/15 text-[var(--brand-cyan)]",
-          icon: <Zap className="w-4 h-4 text-[var(--brand-cyan)]" />
-        };
-      case "filter":
-        return {
-          border: "border-[var(--alert-warning)]",
-          glow: "shadow-[0_0_15px_rgba(252,238,10,0.3)]",
-          badgeBg: "bg-[var(--alert-warning)]/15 text-[var(--alert-warning)]",
-          icon: <ShieldAlert className="w-4 h-4 text-[var(--alert-warning)]" />
-        };
-      case "mitigation":
-        return {
-          border: "border-[var(--alert-nominal)]",
-          glow: "shadow-[0_0_15px_rgba(0,255,102,0.3)]",
-          badgeBg: "bg-[var(--alert-nominal)]/15 text-[var(--alert-nominal)]",
-          icon: <ShieldCheck className="w-4 h-4 text-[var(--alert-nominal)]" />
-        };
-      case "compliance":
-        return {
-          border: "border-[#a855f7]",
-          glow: "shadow-[0_0_15px_rgba(168,85,247,0.3)]",
-          badgeBg: "bg-[#a855f7]/15 text-[#a855f7]",
-          icon: <FileCheck className="w-4 h-4 text-[#a855f7]" />
-        };
-    }
-  };
+            <div className="flex items-center gap-2 flex-wrap">
+              <h1 className="font-['Orbitron'] text-base md:text-lg text-[#00ff66] tracking-tight font-bold m-0 leading-tight">
+                {activePlaybook.id}
+              </h1>
+              <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-[#00ff66]/10 border border-[#00ff66]/30 text-[#00ff66] uppercase shadow-sm">
+                Line-Rate eBPF Drop + Cgroup Freeze + Air-Gap Dual Interlock
+              </span>
+            </div>
 
-  const content = (
-    <div className="space-y-4">
-      {/* 1. TOP CONTROL BAR */}
-      <div className="cyber-card p-4 space-y-4">
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border-color)] pb-3">
-          <div className="flex items-center gap-2.5">
-            <Workflow className="w-5 h-5 text-[var(--brand-cyan)]" />
-            <div>
-              <h3 className="font-['Orbitron'] font-bold text-sm text-[var(--text-primary)]">
-                VISUAL SOAR WORKFLOW PLAYBOOK BUILDER
-              </h3>
-              <p className="text-xs text-[var(--text-secondary)] font-['Space_Grotesk']">
-                Closed-Loop Automated Incident Response Chains (Trigger $\to$ Saliency Filter $\to$ Active Response $\to$ GRC Merkle Proof)
-              </p>
+            <div className="flex items-center gap-2 flex-wrap mt-0.5">
+              <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-[#070d14] border border-[#162536] text-[10px] font-mono text-[#dee3eb]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#00ff66] animate-pulse"></span>
+                <span>CANARY RUNTIME: <strong className="text-[#00ff66]">ACTIVE</strong></span>
+              </div>
+              <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-[#070d14] border border-[#162536] text-[10px] font-mono text-[#dee3eb]">
+                <span className="material-symbols-outlined text-[13px] text-[#00f0ff]">verified</span>
+                <span>DRY-RUN: <strong className="text-[#00f0ff]">100% PASS</strong></span>
+              </div>
+              <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-[#070d14] border border-[#162536] text-[10px] font-mono text-[#dee3eb]">
+                <span className="material-symbols-outlined text-[13px] text-[#ffb700]">lock_clock</span>
+                <span>IEC 62443-4-2 SR 3.1: <strong className="text-[#ffb700]">ENFORCED</strong></span>
+              </div>
+              <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-[#070d14] border border-[#162536] text-[10px] font-mono text-[#64748b]">
+                <span className="material-symbols-outlined text-[13px]">memory</span>
+                <span>COMPILER: <strong className="text-[#dee3eb]">LLVM/Clang eBPF Target BPF (JIT)</strong></span>
+              </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            {isModal && onClose && (
-              <button
-                type="button"
-                onClick={onClose}
-                aria-label="Close Playbook Builder"
-                className="cursor-pointer p-1.5 rounded-lg bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-white border border-[var(--border-color)] transition-colors"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            )}
-
-            {/* SIMULATION TRIGGER BUTTON */}
+          <div className="flex items-center gap-2 shrink-0 flex-wrap">
             <button
-              type="button"
-              onClick={handleSimulateExecution}
-              disabled={isExecuting}
-              aria-label="Simulate Playbook Execution"
-              className={`cursor-pointer flex items-center gap-2 px-4 py-2 rounded-lg font-['Orbitron'] font-bold text-xs uppercase transition-all shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--alert-nominal)] active:scale-[0.98] ${
-                isExecuting
-                  ? "bg-[var(--alert-warning)] text-black animate-pulse shadow-[0_0_20px_var(--alert-warning)]"
-                  : "bg-[var(--alert-nominal)] text-black hover:bg-[var(--alert-nominal)]/90 shadow-[0_0_16px_rgba(0,255,102,0.4)]"
+              onClick={runSimulation}
+              disabled={isSimulating}
+              className={`px-3 py-1.5 rounded font-mono text-xs font-bold flex items-center gap-1.5 border transition-all shadow-md ${
+                isSimulating
+                  ? "bg-[#ffb700]/20 text-[#ffb700] border-[#ffb700]/40 animate-pulse"
+                  : "bg-[#070d14] hover:bg-[#162536] text-[#00f0ff] border-[#00f0ff]/40"
               }`}
             >
-              <Play className="w-4 h-4 fill-current" />
-              <span>{isExecuting ? "SIMULATING PIPELINE..." : "RUN PLAYBOOK SIMULATION"}</span>
+              <span className="material-symbols-outlined text-[15px] text-[#00f0ff]">science</span>
+              <span>{isSimulating ? `Executing Stage ${simulationStep}...` : "Simulate (Dry-Run)"}</span>
             </button>
+
+            <button
+              onClick={handleSignInterlock}
+              disabled={officerSigned}
+              className={`px-3 py-1.5 rounded font-mono text-xs font-bold flex items-center gap-1.5 border transition-all ${
+                officerSigned
+                  ? "bg-[#00ff66]/10 text-[#00ff66] border-[#00ff66]/30 cursor-default"
+                  : "bg-[#070d14] hover:bg-[#162536] text-[#ffb700] border-[#ffb700]/40"
+              }`}
+            >
+              <span className="material-symbols-outlined text-[15px]">vpn_key</span>
+              <span>{officerSigned ? "Interlock Signed" : "Compile & Sign"}</span>
+            </button>
+
+            <button
+              onClick={runSimulation}
+              className="px-3.5 py-1.5 rounded bg-[#00ff66] hover:bg-[#6bff83] text-[#003911] font-mono text-xs font-bold tracking-wide flex items-center gap-1.5 shadow-[0_0_16px_rgba(0,255,102,0.4)] transition-all active:scale-95"
+            >
+              <span className="material-symbols-outlined text-[16px]">bolt</span>
+              <span>DEPLOY TO RING0</span>
+            </button>
+
+            {isModal && onClose && (
+              <button
+                onClick={onClose}
+                className="p-1.5 rounded bg-[#070d14] hover:bg-[#162536] text-[#64748b] hover:text-[#dee3eb] border border-[#162536]"
+                title="Close SOAR Studio"
+              >
+                <span className="material-symbols-outlined text-[18px]">close</span>
+              </button>
+            )}
           </div>
         </div>
+      </section>
 
-        {/* PLAYBOOK TABS & TARGET SELECTOR */}
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[11px] font-['JetBrains_Mono'] text-[var(--text-secondary)] uppercase">
-              ACTIVE PLAYBOOK:
-            </span>
-            <div className="inline-flex rounded-lg bg-[var(--bg-surface)] p-1 border border-[var(--border-color)]">
-              {playbooks.map((pb, idx) => (
+      {/* 2. MAIN THREE-COLUMN STUDIO WORKSPACE (3 / 5 / 4) */}
+      <div className="grid grid-cols-1 xl:grid-cols-12 gap-3 p-3">
+        {/* LEFT PANEL: Playbook Catalog & Trigger Palette (3 Cols) */}
+        <aside className="xl:col-span-3 flex flex-col gap-3 min-w-0">
+          {/* Catalog Box */}
+          <div className="hud-box bg-[#0b131e] p-3 rounded border border-[#162536] flex flex-col gap-2">
+            <div className="flex items-center justify-between pb-1 border-b border-[#162536]">
+              <div className="flex items-center gap-1.5">
+                <span className="material-symbols-outlined text-[#00f0ff] text-[16px]">folder_special</span>
+                <span className="font-['Orbitron'] text-xs text-[#00ff66] uppercase font-bold tracking-wider">
+                  Playbook Inventory
+                </span>
+              </div>
+              <span className="font-mono text-[10px] text-[#64748b]">{PLAYBOOK_INVENTORY.length} TOTAL</span>
+            </div>
+
+            {/* Search Bar */}
+            <div className="relative w-full">
+              <span className="material-symbols-outlined text-[14px] text-[#64748b] absolute left-2 top-2">search</span>
+              <input
+                type="text"
+                value={searchFilter}
+                onChange={(e) => setSearchFilter(e.target.value)}
+                placeholder="FILTER SIGNATURE / PROTOCOL..."
+                className="w-full bg-[#070d14] text-[#dee3eb] font-mono text-[10px] pl-7 pr-2 py-1.5 rounded border border-[#162536] focus:outline-none focus:border-[#00f0ff] placeholder:text-[#64748b]"
+              />
+            </div>
+
+            {/* Filter Pills */}
+            <div className="flex items-center gap-1 overflow-x-auto py-0.5">
+              {(["ALL", "ICS", "eBPF", "SCADA", "Air-Gap"] as const).map((cat) => (
                 <button
-                  key={pb.id}
-                  onClick={() => setSelectedPlaybookIndex(idx)}
-                  className={`cursor-pointer px-3 py-1 text-xs font-['Orbitron'] font-bold rounded transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-cyan)] ${
-                    selectedPlaybookIndex === idx
-                      ? "bg-[var(--brand-cyan)] text-black shadow-md"
-                      : "text-[var(--text-secondary)] hover:text-white"
+                  key={cat}
+                  onClick={() => setFilterCategory(cat)}
+                  className={`px-2 py-0.5 rounded font-mono text-[9px] whitespace-nowrap transition-colors ${
+                    filterCategory === cat
+                      ? "bg-[#00f0ff]/20 text-[#00f0ff] border border-[#00f0ff]/40 font-bold"
+                      : "bg-[#070d14] text-[#64748b] hover:text-[#dee3eb] border border-[#162536]"
                   }`}
                 >
-                  {pb.name.split(" ")[0]} ({pb.id})
+                  {cat}
                 </button>
               ))}
             </div>
+
+            {/* Playbook List */}
+            <div className="flex flex-col gap-1.5 mt-1 max-h-[340px] overflow-y-auto pr-1">
+              {filteredPlaybooks.map((pb) => {
+                const isSelected = pb.id === selectedPlaybookId;
+                return (
+                  <div
+                    key={pb.id}
+                    onClick={() => setSelectedPlaybookId(pb.id)}
+                    className={`p-2 rounded cursor-pointer transition-all border relative overflow-hidden ${
+                      isSelected
+                        ? "bg-[#070d14] border-[#00ff66] shadow-[0_0_12px_rgba(0,255,102,0.15)]"
+                        : "bg-[#070d14]/70 border-[#162536] hover:bg-[#162536]/40"
+                    }`}
+                  >
+                    {isSelected && <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#00ff66]"></div>}
+                    <div className="pl-1">
+                      <div className="flex items-center justify-between">
+                        <span
+                          className={`font-mono text-[9px] font-bold flex items-center gap-1 ${
+                            isSelected ? "text-[#00ff66]" : "text-[#64748b]"
+                          }`}
+                        >
+                          {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-[#00ff66] animate-ping"></span>}
+                          [{pb.status}]
+                        </span>
+                        <span className="font-mono text-[9px] text-[#64748b]">MTTR: {pb.mttr}</span>
+                      </div>
+                      <div className="font-mono text-xs text-[#dee3eb] font-bold mt-0.5 truncate">
+                        {pb.id}
+                      </div>
+                      <p className="font-['Space_Grotesk'] text-[10px] text-[#64748b] line-clamp-1 mt-0.5">
+                        {pb.description}
+                      </p>
+                      <div className="flex items-center gap-1 mt-1 text-[9px] font-mono">
+                        <span className="px-1 rounded bg-[#0b131e] text-[#00f0ff] border border-[#00f0ff]/20">
+                          {pb.stages} STAGES
+                        </span>
+                        <span className="px-1 rounded bg-[#0b131e] text-[#64748b] border border-[#162536]">
+                          TPM 2.0 PCR-7
+                        </span>
+                        <span className="px-1 rounded bg-[#0b131e] text-[#00ff66] border border-[#00ff66]/20">
+                          {pb.targetIp}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
-          <div className="flex items-center gap-2 text-xs font-['JetBrains_Mono'] text-[var(--text-secondary)]">
-            <span>Target Node:</span>
-            <span className="px-2 py-0.5 rounded bg-[var(--bg-canvas)] border border-[var(--border-color)] text-[var(--brand-cyan)] font-bold">
-              {activePlaybook.targetIp}
-            </span>
+          {/* Quick Add Step Node Palette */}
+          <div className="hud-box bg-[#0b131e] p-3 rounded border border-[#162536] flex flex-col gap-2">
+            <div className="flex items-center justify-between pb-1 border-b border-[#162536]">
+              <span className="font-['Orbitron'] text-xs text-[#00ff66] uppercase font-bold tracking-wider">
+                Step Node Palette
+              </span>
+              <span className="font-mono text-[9px] text-[#64748b]">DRAG TO CANVAS</span>
+            </div>
+            <div className="grid grid-cols-2 gap-1.5">
+              <div className="p-2 rounded bg-[#070d14] border border-[#162536] text-left">
+                <div className="flex items-center gap-1 text-[#00f0ff]">
+                  <span className="material-symbols-outlined text-[15px]">sensors</span>
+                  <span className="font-mono text-[10px] font-bold uppercase">Ingest Trigger</span>
+                </div>
+                <span className="font-mono text-[#64748b] text-[9px] block mt-0.5">Suricata / Kafka</span>
+              </div>
+              <div className="p-2 rounded bg-[#070d14] border border-[#162536] text-left">
+                <div className="flex items-center gap-1 text-[#00ff66]">
+                  <span className="material-symbols-outlined text-[15px]">filter_alt</span>
+                  <span className="font-mono text-[10px] font-bold uppercase">eBPF Filter</span>
+                </div>
+                <span className="font-mono text-[#64748b] text-[9px] block mt-0.5">XDP / TC Kernel Drop</span>
+              </div>
+              <div className="p-2 rounded bg-[#070d14] border border-[#162536] text-left">
+                <div className="flex items-center gap-1 text-[#ffb700]">
+                  <span className="material-symbols-outlined text-[15px]">pause_circle</span>
+                  <span className="font-mono text-[10px] font-bold uppercase">Cgroup Freeze</span>
+                </div>
+                <span className="font-mono text-[#64748b] text-[9px] block mt-0.5">Process SIGSTOP Lock</span>
+              </div>
+              <div className="p-2 rounded bg-[#070d14] border border-[#162536] text-left">
+                <div className="flex items-center gap-1 text-[#00f0ff]">
+                  <span className="material-symbols-outlined text-[15px]">terminal</span>
+                  <span className="font-mono text-[10px] font-bold uppercase">Agent Task</span>
+                </div>
+                <span className="font-mono text-[#64748b] text-[9px] block mt-0.5">Wazuh RPC Probe</span>
+              </div>
+              <div className="p-2 rounded bg-[#070d14] border border-[#162536] text-left">
+                <div className="flex items-center gap-1 text-[#ff2a5f]">
+                  <span className="material-symbols-outlined text-[15px]">power_off</span>
+                  <span className="font-mono text-[10px] font-bold uppercase">Hardware Relay</span>
+                </div>
+                <span className="font-mono text-[#64748b] text-[9px] block mt-0.5">Four-Eyes Air-Gap</span>
+              </div>
+              <div className="p-2 rounded bg-[#070d14] border border-[#162536] text-left">
+                <div className="flex items-center gap-1 text-[#00ff66]">
+                  <span className="material-symbols-outlined text-[15px]">verified_user</span>
+                  <span className="font-mono text-[10px] font-bold uppercase">Merkle Audit</span>
+                </div>
+                <span className="font-mono text-[#64748b] text-[9px] block mt-0.5">TPM 2.0 PCR Signature</span>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </aside>
 
-      {/* 2. VISUAL FLOW GRAPH CANVAS (4 CONNECTED STAGES) */}
-      <div className="cyber-card p-5 space-y-4">
-        <div className="flex items-center justify-between border-b border-[var(--border-color)] pb-2.5">
-          <div className="flex items-center gap-2">
-            <Layers className="w-4 h-4 text-[var(--brand-cyan)]" />
-            <h4 className="font-['Orbitron'] font-bold text-xs uppercase text-[var(--text-primary)]">
-              {activePlaybook.name} - Autonomous Node Graph
-            </h4>
+        {/* CENTER PANEL: Visual Directed Acyclic Graph (DAG) Execution Flow (5 Cols) */}
+        <main className="xl:col-span-5 flex flex-col gap-3 min-w-0">
+          <div className="bg-[#0b131e] p-2.5 rounded border border-[#00f0ff]/30 shadow-md flex items-center justify-between flex-wrap gap-2 relative">
+            <div className="flex items-center gap-2">
+              <span className="material-symbols-outlined text-[#00ff66] text-[18px]">account_tree</span>
+              <div>
+                <div className="font-mono text-[9px] text-[#64748b] tracking-wider uppercase">
+                  EXECUTION PIPELINE // HARDWARE GRAPH
+                </div>
+                <div className="font-['Orbitron'] text-xs text-[#00ff66] font-bold">
+                  Directed Acyclic Graph (DAG)
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-1 font-mono text-[10px]">
+              <span className="px-1.5 py-0.5 rounded bg-[#00ff66]/10 border border-[#00ff66]/30 text-[#00ff66] font-bold">
+                0 ERRORS
+              </span>
+              <span className="px-1.5 py-0.5 rounded bg-[#00f0ff]/10 border border-[#00f0ff]/30 text-[#00f0ff] font-bold">
+                CYCLE-FREE
+              </span>
+              <span className="px-1.5 py-0.5 rounded bg-[#070d14] text-[#64748b]">
+                SNAP 16px
+              </span>
+            </div>
           </div>
-          <span className="text-[10px] font-['JetBrains_Mono'] text-[var(--text-muted)]">
-            Click any node to inspect parameters • Automated MTTR &lt; 25 ms
-          </span>
-        </div>
 
-        {/* 4 STAGE NODE PIPELINE */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
-          {activePlaybook.nodes.map((node, idx) => {
-            const style = getNodeColor(node.type);
-            const isCurrentlyActive = currentStepIndex === idx;
-            const isPast = currentStepIndex > idx || (executionResult && !isExecuting);
-            const isSelected = selectedNodeId === node.id;
+          {/* Visual DAG Canvas */}
+          <div className="relative w-full bg-[#070d14] p-3 rounded border border-[#162536] flex flex-col gap-3 overflow-hidden shadow-inner">
+            <div className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(#00f0ff_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
-            return (
-              <div key={node.id} className="relative flex flex-col">
-                <button
-                  type="button"
-                  onClick={() => setSelectedNodeId(node.id === selectedNodeId ? null : node.id)}
-                  className={`cursor-pointer w-full text-left p-4 rounded-xl border-2 transition-all relative flex flex-col justify-between h-full bg-[var(--bg-surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-cyan)] ${
-                    isCurrentlyActive
-                      ? `${style.border} ${style.glow} scale-[1.03] bg-[var(--bg-surface-elevated)] ring-2 ring-[var(--brand-cyan)]`
-                      : isPast
-                      ? "border-[var(--alert-nominal)]/70 shadow-[0_0_10px_rgba(0,255,102,0.2)]"
-                      : isSelected
-                      ? `${style.border} bg-[var(--bg-surface-elevated)]`
-                      : "border-[var(--border-color)] hover:border-[var(--text-secondary)]"
+            {/* NODE 01: Ingest Trigger */}
+            <div
+              className={`relative z-10 w-full p-2.5 rounded bg-[#0b131e] border-l-2 shadow-md transition-all ${
+                simulationStep === 1
+                  ? "border-[#00ff66] ring-1 ring-[#00ff66] shadow-[0_0_15px_rgba(0,255,102,0.3)]"
+                  : "border-[#00ff66]/60"
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  <span className="px-1.5 py-0.2 rounded bg-[#00ff66]/20 text-[#00ff66] font-mono text-[9px] uppercase font-bold border border-[#00ff66]/30">
+                    NODE 01
+                  </span>
+                  <span className="font-mono text-[10px] text-[#64748b]">INGEST TRIGGER // ANOMALY EVENT</span>
+                </div>
+                <span className="font-mono text-[10px] px-1.5 py-0.2 rounded bg-[#00ff66]/20 text-[#00ff66] font-bold flex items-center gap-1 border border-[#00ff66]/40">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#00ff66] animate-ping"></span>
+                  RESOLVED (0.00ms)
+                </span>
+              </div>
+              <div className="font-mono text-xs text-[#dbfcff] font-bold mt-1">Modbus FC16 Anomaly Detected</div>
+              <div className="font-mono text-[10px] text-[#64748b] mt-0.5">
+                Source: <code className="text-[#00f0ff]">Conformer Deep Model (τ ≥ 0.850)</code> OR <code className="text-[#00f0ff]">Suricata Alert #20491</code>
+              </div>
+              <div className="mt-1.5 flex items-center justify-between font-mono text-[9px] pt-1 bg-[#070d14] px-2 py-1 rounded border border-[#162536]">
+                <span className="text-[#64748b]">REGISTER EXCURSION: 40001 &gt; 9,800 RPM</span>
+                <span className="text-[#00ff66] font-bold">BURST: 38 PKTS</span>
+              </div>
+            </div>
+
+            {/* Parallel Fork */}
+            <div className="relative flex items-center justify-center -my-1.5 z-10">
+              <div className="h-6 w-0.5 bg-[#00ff66] shadow-[0_0_8px_#00ff66]"></div>
+              <span className="absolute font-mono text-[9px] text-[#00ff66] bg-[#070d14] px-2 py-0.2 rounded border border-[#00ff66]/40">
+                PARALLEL FORK [2 CHANNELS]
+              </span>
+            </div>
+
+            {/* PARALLEL ROW: NODE 02 & NODE 03 */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 relative z-10">
+              {/* NODE 02: eBPF XDP Drop */}
+              <div
+                className={`p-2.5 rounded bg-[#0b131e] shadow-md border transition-all ${
+                  simulationStep === 2
+                    ? "border-[#00ff66] ring-1 ring-[#00ff66] shadow-[0_0_15px_rgba(0,255,102,0.3)]"
+                    : "border-[#00ff66]/40"
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="px-1.5 py-0.2 rounded bg-[#00ff66]/10 text-[#00ff66] font-mono text-[9px] uppercase font-bold border border-[#00ff66]/30">
+                    NODE 02 [RING0]
+                  </span>
+                  <span className="font-mono text-[10px] text-[#00ff66] font-bold">0.082ms</span>
+                </div>
+                <div className="font-mono text-xs text-[#dbfcff] font-bold mt-1">eBPF XDP Line Drop</div>
+                <p className="font-['Space_Grotesk'] text-[10px] text-[#64748b] mt-0.5">NIC hardware drop via AF_XDP hook</p>
+                <div className="mt-1.5 bg-[#070d14] p-1.5 rounded font-mono text-[9px] text-[#dee3eb] border border-[#162536] space-y-0.5">
+                  <div>IFACE: eth0 [100GbE]</div>
+                  <div className="text-[#00ff66] font-bold">SRC: {activePlaybook.targetIp}</div>
+                  <div className="text-[#ff2a5f]">ACTION: XDP_DROP</div>
+                </div>
+                <div className="mt-1.5 flex items-center gap-1 font-mono text-[9px] text-[#00ff66] font-bold">
+                  <span className="material-symbols-outlined text-[13px]">done_all</span>
+                  <span>ENFORCED IN HARDWARE</span>
+                </div>
+              </div>
+
+              {/* NODE 03: cgroup-v2 Freeze */}
+              <div
+                className={`p-2.5 rounded bg-[#0b131e] shadow-md border transition-all ${
+                  simulationStep === 3
+                    ? "border-[#ffb700] ring-1 ring-[#ffb700] shadow-[0_0_15px_rgba(255,183,0,0.3)]"
+                    : "border-[#ffb700]/40"
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="px-1.5 py-0.2 rounded bg-[#ffb700]/20 text-[#ffb700] font-mono text-[9px] uppercase font-bold border border-[#ffb700]/30">
+                    NODE 03 [HOST]
+                  </span>
+                  <span className="font-mono text-[10px] text-[#ffb700] font-bold">2.15ms</span>
+                </div>
+                <div className="font-mono text-xs text-[#dbfcff] font-bold mt-1">cgroup-v2 Freeze</div>
+                <p className="font-['Space_Grotesk'] text-[10px] text-[#64748b] mt-0.5">Quarantine corrupted daemon thread</p>
+                <div className="mt-1.5 bg-[#070d14] p-1.5 rounded font-mono text-[9px] text-[#dee3eb] border border-[#162536] space-y-0.5">
+                  <div>PID: 49102 [modbus_srv]</div>
+                  <div className="text-[#ffb700] font-bold">SIGNAL: SIGSTOP</div>
+                  <div className="text-[#64748b]">CPU QUOTA: 0%</div>
+                </div>
+                <div className="mt-1.5 flex items-center gap-1 font-mono text-[9px] text-[#00ff66] font-bold">
+                  <span className="material-symbols-outlined text-[13px]">done_all</span>
+                  <span>STATE: FROZEN</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Converge */}
+            <div className="relative flex items-center justify-center -my-1.5 z-10">
+              <div className="h-6 w-0.5 bg-[#00f0ff] shadow-[0_0_8px_#00f0ff]"></div>
+              <span className="absolute font-mono text-[9px] text-[#00f0ff] bg-[#070d14] px-2 py-0.2 rounded border border-[#00f0ff]/40">
+                CONVERGE
+              </span>
+            </div>
+
+            {/* NODE 04: Safety Gate */}
+            <div
+              className={`relative z-10 w-full p-2.5 rounded bg-[#0b131e] border-l-2 border-[#00f0ff] shadow-md transition-all ${
+                simulationStep === 4 ? "ring-1 ring-[#00f0ff] shadow-[0_0_15px_rgba(0,240,255,0.3)]" : ""
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  <span className="px-1.5 py-0.2 rounded bg-[#00f0ff]/20 text-[#00f0ff] font-mono text-[9px] uppercase font-bold border border-[#00f0ff]/30">
+                    NODE 04 [SAFETY GATE]
+                  </span>
+                  <span className="font-mono text-[10px] text-[#64748b]">PHYSICAL ENVELOPE</span>
+                </div>
+                <span className="font-mono text-[10px] text-[#00ff66] font-bold flex items-center gap-1">
+                  <span className="material-symbols-outlined text-[13px]">check_circle</span>
+                  CRITERIA SATISFIED
+                </span>
+              </div>
+              <div className="font-mono text-xs text-[#dbfcff] font-bold mt-1">Operational Boundary Verification</div>
+              <div className="grid grid-cols-2 gap-2 mt-1.5 font-mono text-[9px]">
+                <div className="bg-[#070d14] p-1.5 rounded border border-[#162536]">
+                  <div className="text-[#64748b]">PLANT SAFETY MARGIN</div>
+                  <div className="text-xs text-[#00ff66] font-bold">92.4% <span className="text-[9px] text-[#64748b] font-normal">(&gt; 85% THRESH)</span></div>
+                </div>
+                <div className="bg-[#070d14] p-1.5 rounded border border-[#162536]">
+                  <div className="text-[#64748b]">PRESSURE Δ LIMIT</div>
+                  <div className="text-xs text-[#00f0ff] font-bold">118 kPa <span className="text-[9px] text-[#64748b] font-normal">(&lt; 200 kPa MAX)</span></div>
+                </div>
+              </div>
+            </div>
+
+            {/* Connector */}
+            <div className="relative flex items-center justify-center -my-1.5 z-10">
+              <div className="h-6 w-0.5 bg-[#ff2a5f] shadow-[0_0_8px_#ff2a5f]"></div>
+            </div>
+
+            {/* NODE 05: Hardware Air-Gap Relay */}
+            <div
+              className={`relative z-10 w-full p-2.5 rounded bg-[#0b131e] shadow-xl border-2 transition-all ${
+                officerSigned
+                  ? "border-[#00ff66]/60 shadow-[0_0_15px_rgba(0,255,102,0.2)]"
+                  : "border-[#ff2a5f]/60 shadow-[0_0_15px_rgba(255,42,95,0.2)]"
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  <span className="px-1.5 py-0.2 rounded bg-[#ff2a5f]/20 text-[#ff2a5f] font-mono text-[9px] uppercase font-bold border border-[#ff2a5f]/40">
+                    NODE 05 [HARDWARE AIR-GAP]
+                  </span>
+                  <span className="font-mono text-[10px] text-[#64748b]">PHYSICAL RELAY #3</span>
+                </div>
+                <span
+                  className={`font-mono text-[10px] px-2 py-0.2 rounded font-bold flex items-center gap-1 border ${
+                    officerSigned
+                      ? "bg-[#00ff66]/20 text-[#00ff66] border-[#00ff66]/40"
+                      : "bg-[#ff2a5f]/20 text-[#ff2a5f] border-[#ff2a5f]/40 animate-pulse"
                   }`}
                 >
-                  {/* Top node info */}
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase font-['JetBrains_Mono'] ${style.badgeBg}`}>
-                        STAGE {idx + 1}: {node.type}
-                      </span>
-                      {isCurrentlyActive ? (
-                        <span className="w-2.5 h-2.5 rounded-full bg-[var(--alert-warning)] animate-ping" />
-                      ) : isPast ? (
-                        <CheckCircle2 className="w-4 h-4 text-[var(--alert-nominal)]" />
-                      ) : (
-                        <span className="w-2 h-2 rounded-full bg-[var(--text-muted)]" />
-                      )}
-                    </div>
-
-                    <div className="flex items-center gap-2 pt-1">
-                      {style.icon}
-                      <h5 className="font-['Orbitron'] font-bold text-xs text-[var(--text-primary)] leading-snug">
-                        {node.title}
-                      </h5>
-                    </div>
-
-                    <p className="text-[11px] text-[var(--text-secondary)] font-['Space_Grotesk']">
-                      {node.subtitle}
-                    </p>
-                  </div>
-
-                  {/* Node detail block */}
-                  <div className="mt-3 p-2 rounded bg-[var(--bg-canvas)] border border-[var(--border-color)]/60 text-[10px] font-['JetBrains_Mono'] text-[var(--text-primary)] break-words">
-                    {node.detail}
-                  </div>
-                </button>
-
-                {/* Arrow connector between nodes (hidden on mobile or last node) */}
-                {idx < activePlaybook.nodes.length - 1 && (
-                  <div className="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-10 p-1 rounded-full bg-[var(--bg-canvas)] border border-[var(--border-color)] text-[var(--brand-cyan)] shadow-md">
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* 3. SIMULATION AUDIT CONSOLE & MERKLE RECEIPT */}
-      {executionLogs.length > 0 && (
-        <div className="cyber-card p-4 space-y-3">
-          <div className="flex items-center justify-between border-b border-[var(--border-color)] pb-2">
-            <div className="flex items-center gap-2">
-              <Terminal className="w-4 h-4 text-[var(--brand-cyan)]" />
-              <h4 className="font-['Orbitron'] font-bold text-xs uppercase text-[var(--text-primary)]">
-                SOAR Autonomous Execution Output & Merkle Audit Proof
-              </h4>
-            </div>
-            {executionResult && (
-              <div className="flex items-center gap-2">
-                <span className="text-[10px] font-['JetBrains_Mono'] text-[var(--alert-nominal)] font-bold">
-                  LATENCY: {executionResult.execution_time_ms} ms (Target &lt; 25 ms)
+                  <span className={`w-1.5 h-1.5 rounded-full ${officerSigned ? "bg-[#00ff66]" : "bg-[#ff2a5f]"}`}></span>
+                  {officerSigned ? "INTERLOCK SIGNED" : "AWAITING DUAL-SIGNATURE"}
                 </span>
+              </div>
+              <div className="font-mono text-xs text-[#ff2a5f] font-bold mt-1">Dual-Custody Physical Relay Trip</div>
+              <p className="font-mono text-[10px] text-[#64748b] mt-0.5">
+                De-energize PLC output actuator to establish cold galvanically isolated air-gap
+              </p>
+              <div className="mt-2 flex items-center gap-2 flex-wrap">
                 <button
-                  type="button"
-                  onClick={handleCopyReceipt}
-                  aria-label="Copy Merkle Receipt"
-                  className="cursor-pointer flex items-center gap-1 px-2.5 py-1 rounded bg-[var(--bg-surface)] hover:bg-[var(--bg-surface-elevated)] border border-[var(--border-color)] text-[10px] font-['JetBrains_Mono'] text-[var(--brand-cyan)] transition-colors"
+                  onClick={handleSignInterlock}
+                  disabled={officerSigned}
+                  className={`px-2.5 py-1 rounded font-mono text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 transition-all ${
+                    officerSigned
+                      ? "bg-[#00ff66]/20 text-[#00ff66] border border-[#00ff66]/40 cursor-default"
+                      : "bg-[#ff2a5f] hover:bg-[#ff2a5f]/80 text-[#070d14] shadow-[0_0_12px_rgba(255,42,95,0.4)]"
+                  }`}
                 >
-                  {copiedReceipt ? <Check className="w-3 h-3 text-[var(--alert-nominal)]" /> : <Copy className="w-3 h-3" />}
-                  <span>{copiedReceipt ? "COPIED" : "COPY RECEIPT"}</span>
+                  <span className="material-symbols-outlined text-[13px]">key</span>
+                  <span>{officerSigned ? "Officer Signed" : "Sign Interlock (SecOps)"}</span>
                 </button>
+                <span className="font-mono text-[9px] text-[#64748b]">
+                  {officerSigned ? "Dual-signature quorum reached" : "Requires 2nd Safety Key from Plant Floor"}
+                </span>
+              </div>
+            </div>
+
+            {/* Connector */}
+            <div className="relative flex items-center justify-center -my-1.5 z-10">
+              <div className="h-6 w-0.5 bg-[#64748b] opacity-40"></div>
+            </div>
+
+            {/* NODE 06: Merkle Commit */}
+            <div
+              className={`relative z-10 w-full p-2.5 rounded bg-[#0b131e]/70 shadow-md border transition-all ${
+                simulationStep === 6
+                  ? "border-[#00ff66] ring-1 ring-[#00ff66] shadow-[0_0_15px_rgba(0,255,102,0.3)]"
+                  : "border-[#162536]"
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  <span className="px-1.5 py-0.2 rounded bg-[#070d14] text-[#64748b] font-mono text-[9px] uppercase border border-[#162536]">
+                    NODE 06 [AUDIT]
+                  </span>
+                  <span className="font-mono text-[10px] text-[#64748b]">IMMUTABLE ANCHOR</span>
+                </div>
+                <span className="font-mono text-[10px] text-[#00ff66] font-bold">
+                  {simulationStep === 6 ? "COMMITTED" : "QUEUED"}
+                </span>
+              </div>
+              <div className="font-mono text-xs text-[#dee3eb] mt-1 font-bold">TPM 2.0 PCR-7 Attestation & Merkle Commit</div>
+              <div className="font-mono text-[10px] text-[#64748b] mt-0.5">
+                Hardware root of trust block commitment: SHA-256 state seal
+              </div>
+            </div>
+          </div>
+        </main>
+
+        {/* RIGHT PANEL: Bytecode Dissection & Safety Policies (4 Cols) */}
+        <aside className="xl:col-span-4 flex flex-col gap-3 min-w-0">
+          <div className="hud-box bg-[#0b131e] p-3 rounded border border-[#162536] flex flex-col gap-2.5">
+            {/* Tab Selector */}
+            <div className="flex items-center justify-between pb-1 border-b border-[#162536]">
+              <div className="flex items-center gap-1">
+                <button
+                  onClick={() => setRightTab("ebpf")}
+                  className={`px-2.5 py-1 rounded font-mono text-[10px] font-bold flex items-center gap-1 transition-all ${
+                    rightTab === "ebpf"
+                      ? "bg-[#00ff66] text-[#003911]"
+                      : "bg-[#070d14] text-[#64748b] hover:text-[#dee3eb] border border-[#162536]"
+                  }`}
+                >
+                  <span className="material-symbols-outlined text-[13px]">code</span>
+                  <span>C / eBPF Dissection</span>
+                </button>
+                <button
+                  onClick={() => setRightTab("safety")}
+                  className={`px-2.5 py-1 rounded font-mono text-[10px] font-bold flex items-center gap-1 transition-all ${
+                    rightTab === "safety"
+                      ? "bg-[#00f0ff] text-[#00363d]"
+                      : "bg-[#070d14] text-[#64748b] hover:text-[#dee3eb] border border-[#162536]"
+                  }`}
+                >
+                  <span className="material-symbols-outlined text-[13px]">policy</span>
+                  <span>Safety Policies</span>
+                </button>
+              </div>
+              <span className="font-mono text-[9px] text-[#64748b]">TARGET: X86_64</span>
+            </div>
+
+            {/* Code / Policies View */}
+            {rightTab === "ebpf" ? (
+              <div className="bg-[#070d14] p-2.5 rounded font-mono text-[10px] flex flex-col gap-2 border border-[#162536]">
+                <div className="flex items-center justify-between text-[#64748b] text-[9px] pb-1 border-b border-[#162536]">
+                  <span>xdp_drop_modbus_excursion.c</span>
+                  <span className="text-[#00ff66]">LLVM-BPF OK</span>
+                </div>
+                <pre className="text-[#dee3eb] text-[10px] leading-[15px] overflow-x-auto whitespace-pre font-mono max-h-[170px] overflow-y-auto">
+{`SEC("xdp")
+int xdp_drop_modbus_excursion(struct xdp_md *ctx) {
+    void *data = (void *)(long)ctx->data;
+    void *data_end = (void *)(long)ctx->data_end;
+    struct ethhdr *eth = data;
+    
+    // Boundary check for packet size
+    if ((void *)(eth + 1) > data_end) 
+        return XDP_PASS;
+    if (eth->h_proto != bpf_htons(ETH_P_IP)) 
+        return XDP_PASS;
+
+    struct iphdr *ip = data + sizeof(*eth);
+    if ((void *)(ip + 1) > data_end) 
+        return XDP_PASS;
+
+    // Blacklisted ICS Ingress (192.168.100.45)
+    if (ip->saddr == bpf_htonl(0xC0A8642D)) {
+        bpf_trace_printk("[XDP_DROP] Banned ICS\\n");
+        return XDP_DROP;
+    }
+    return XDP_PASS;
+}`}
+                </pre>
+                {/* Stats */}
+                <div className="grid grid-cols-2 gap-2 pt-1 border-t border-[#162536] text-[9px] font-mono">
+                  <div>
+                    <div className="text-[#64748b] uppercase">Instruction Count</div>
+                    <div className="text-[#00ff66] font-bold">48 INSN</div>
+                  </div>
+                  <div>
+                    <div className="text-[#64748b] uppercase">Verifier Logs</div>
+                    <div className="text-[#00f0ff] font-bold">0 ERRORS</div>
+                  </div>
+                  <div>
+                    <div className="text-[#64748b] uppercase">BPF Map Type</div>
+                    <div className="text-[#dee3eb] truncate">LPM_TRIE (65K)</div>
+                  </div>
+                  <div>
+                    <div className="text-[#64748b] uppercase">JIT Target</div>
+                    <div className="text-[#dee3eb]">x86_64 native</div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="bg-[#070d14] p-2.5 rounded font-mono text-[10px] flex flex-col gap-2 border border-[#162536]">
+                <div className="flex items-center justify-between text-[#64748b] text-[9px] pb-1 border-b border-[#162536]">
+                  <span>Four-Eyes Safety Constraints</span>
+                  <span className="text-[#ff2a5f] font-bold">M-OF-N: 2/2</span>
+                </div>
+                <div className="space-y-1.5">
+                  <div className="p-1.5 rounded bg-[#0b131e] border border-[#162536] flex items-center justify-between">
+                    <div>
+                      <div className="text-[#dee3eb] font-bold">SecOps Admin (Officer 1)</div>
+                      <div className="text-[#64748b] text-[9px]">ID: #99214 // TOKEN SIGNED</div>
+                    </div>
+                    <span className="px-1.5 py-0.2 rounded bg-[#00ff66]/20 text-[#00ff66] font-bold text-[9px]">
+                      AUTH OK
+                    </span>
+                  </div>
+
+                  <div className="p-1.5 rounded bg-[#0b131e] border border-[#162536] flex items-center justify-between">
+                    <div>
+                      <div className="text-[#dee3eb] font-bold">Plant Safety Engineer (Officer 2)</div>
+                      <div className="text-[#64748b] text-[9px]">
+                        {officerSigned ? "Hardware FIDO2 Key Verified" : "Hardware FIDO2 Key Pending"}
+                      </div>
+                    </div>
+                    <span
+                      className={`px-1.5 py-0.2 rounded font-bold text-[9px] ${
+                        officerSigned
+                          ? "bg-[#00ff66]/20 text-[#00ff66]"
+                          : "bg-[#ff2a5f]/20 text-[#ff2a5f] animate-pulse"
+                      }`}
+                    >
+                      {officerSigned ? "VERIFIED" : "WAITING"}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="pt-1.5 border-t border-[#162536] text-[9px] space-y-1">
+                  <div className="flex justify-between">
+                    <span className="text-[#64748b]">Fail-Safe Topology:</span>
+                    <span className="text-[#dee3eb]">Normally Open (NO) De-energize</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-[#64748b]">Max Outage Window:</span>
+                    <span className="text-[#00f0ff]">450ms (No Water Hammer)</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-[#64748b]">Relay Protocol:</span>
+                    <span className="text-[#00ff66]">Modbus Coil #0003 Direct</span>
+                  </div>
+                </div>
               </div>
             )}
-          </div>
 
-          {/* Terminal View */}
-          <div className="p-3 rounded-lg bg-[var(--bg-canvas)] border border-[var(--border-color)] max-h-48 overflow-y-auto font-['JetBrains_Mono'] text-[11px] space-y-1">
-            {executionLogs.map((log, i) => (
-              <div
-                key={i}
-                className={
-                  log.includes("SUCCESS") || log.includes("Cryptographic")
-                    ? "text-[var(--alert-nominal)]"
-                    : log.includes("STAGE")
-                    ? "text-[var(--brand-cyan)]"
-                    : "text-[var(--text-secondary)]"
-                }
-              >
-                {log}
+            {/* Simulation Trace Output Feed */}
+            <div className="p-2.5 rounded bg-[#070d14] border border-[#162536] flex flex-col gap-1 font-mono text-[9px]">
+              <div className="flex items-center justify-between text-[#64748b] pb-1 border-b border-[#162536]">
+                <span>LIVE KERNEL TRACE (RING BUFFER)</span>
+                <span className="text-[#00f0ff]">POLLING 10ms</span>
               </div>
-            ))}
+              <div className="text-[#b9cacb] font-mono space-y-1 max-h-[100px] overflow-y-auto pr-1">
+                {traceLogs.map((log, i) => (
+                  <div key={i} className="truncate">
+                    {log}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      )}
+        </aside>
+      </div>
     </div>
   );
-
-  if (isModal) {
-    return (
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="soar-builder-title"
-        className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto"
-      >
-        <div className="cyber-card w-full max-w-5xl p-6 border-2 border-[var(--brand-cyan)] shadow-[0_0_50px_rgba(0,243,255,0.3)] my-8">
-          {content}
-        </div>
-      </div>
-    );
-  }
-
-  return content;
 }

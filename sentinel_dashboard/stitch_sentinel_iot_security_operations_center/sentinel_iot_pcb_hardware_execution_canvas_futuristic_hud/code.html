@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Orbitron:wght@600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<style>
+@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}
+::-webkit-scrollbar{display:none;}
+@keyframes laserSweep {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { transform: translateY(1000%); opacity: 0; }
+}
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.35; filter: drop-shadow(0 0 4px #00f0ff); }
+  50% { opacity: 0.95; filter: drop-shadow(0 0 12px #00ff66); }
+}
+@keyframes waveFlow {
+  0% { stroke-dashoffset: 200; }
+  100% { stroke-dashoffset: 0; }
+}
+.chamfer-card {
+  clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));
+}
+.chamfer-card-lg {
+  clip-path: polygon(0 14px, 14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px));
+}
+.hud-grid-pattern {
+  background-size: 24px 24px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+}
+.via-grid-pattern {
+  background-size: 48px 48px;
+  background-image: radial-gradient(circle, rgba(0, 255, 102, 0.18) 1.5px, transparent 1.5px);
+}
+</style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "background": "#03070c",
+          "surface-container-lowest": "#020508",
+          "surface-container-low": "#060d15",
+          "surface-container": "#0b1522",
+          "surface-container-high": "#111f30",
+          "surface-container-highest": "#182a40",
+          "surface-bright": "#223854",
+          "on-surface": "#dee3eb",
+          "on-surface-variant": "#7e9bb5",
+          "primary": "#dbfcff",
+          "primary-container": "#00f0ff",
+          "on-primary-container": "#002022",
+          "secondary": "#ebffe6",
+          "secondary-container": "#00ff66",
+          "on-secondary-container": "#002107",
+          "secondary-fixed": "#00daf3",
+          "secondary-fixed-dim": "#00e55b",
+          "tertiary": "#fff4e8",
+          "tertiary-container": "#ffd387",
+          "on-tertiary-container": "#422d00",
+          "tertiary-fixed": "#ffba26",
+          "tertiary-fixed-dim": "#ff9e00",
+          "error": "#ff2a5f",
+          "error-container": "#69001b",
+          "on-error-container": "#ffdad6",
+          "outline": "#23415c",
+          "outline-variant": "#152a3e",
+          "neon-cyan": "#00f0ff",
+          "neon-emerald": "#00ff66",
+          "laser-crimson": "#ff2a5f",
+          "solar-amber": "#ffb700"
+        },
+        fontFamily: {
+          "telemetry-metric": ["JetBrains Mono", "monospace"],
+          "telemetry-metric-sm": ["JetBrains Mono", "monospace"],
+          "headline-xl": ["Space Grotesk", "sans-serif"],
+          "headline-lg": ["Space Grotesk", "sans-serif"],
+          "headline-md": ["Space Grotesk", "sans-serif"],
+          "body-lg": ["Space Grotesk", "sans-serif"],
+          "body-md": ["Space Grotesk", "sans-serif"],
+          "body-sm": ["Space Grotesk", "sans-serif"],
+          "label-lg": ["JetBrains Mono", "monospace"],
+          "label-md": ["JetBrains Mono", "monospace"],
+          "label-sm": ["JetBrains Mono", "monospace"],
+          "cyber": ["Orbitron", "sans-serif"]
+        }
+      }
+    }
+  }
+</script></head><body class="bg-surface-container-lowest font-body-md text-on-surface antialiased selection:bg-neon-cyan selection:text-black min-h-screen relative overflow-x-hidden">
+<!-- Ambient Sci-Fi Hex Background Elements -->
+<div class="fixed inset-0 pointer-events-none hud-grid-pattern opacity-60 z-0"></div>
+<div class="fixed inset-0 pointer-events-none via-grid-pattern opacity-40 z-0"></div>
+<div class="fixed -top-40 -left-40 w-96 h-96 bg-neon-cyan/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
+<div class="fixed -bottom-40 -right-40 w-[500px] h-[500px] bg-neon-emerald/10 rounded-full blur-[140px] pointer-events-none z-0"></div>
+<!-- TOP MASTER HUD HEADER -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#03070c]/90 backdrop-blur-xl border-b border-neon-cyan/20 shadow-[0_4px_30px_rgba(0,240,255,0.12)]">
+<div class="h-16 px-6 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-3">
+<div class="relative w-10 h-10 rounded bg-[#07131e] border border-neon-cyan/60 flex items-center justify-center shadow-[0_0_15px_rgba(0,240,255,0.4)]">
+<span class="material-symbols-outlined text-neon-cyan text-[22px] animate-pulse">memory</span>
+<span class="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-neon-emerald rounded-full shadow-[0_0_6px_#00ff66]"></span>
+<span class="absolute -bottom-0.5 -left-0.5 w-1.5 h-1.5 bg-neon-cyan rounded-full"></span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-cyber font-black tracking-wider text-primary text-[17px] drop-shadow-[0_0_8px_rgba(0,240,255,0.6)]">SENTINEL-IoT</span>
+<span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-neon-cyan/10 border border-neon-cyan/40 text-neon-cyan uppercase tracking-widest font-bold">MK-VII SILICON</span>
+</div>
+<span class="font-mono text-[10px] text-neon-emerald tracking-widest flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-neon-emerald animate-ping"></span>
+            TACTICAL SOC // ICS DEFENSE ACCELERATOR
+          </span>
+</div>
+</div>
+<div class="hidden xl:flex items-center gap-2 px-3 py-1 rounded bg-[#091522] border border-[#162e47]">
+<span class="font-mono text-[10px] text-on-surface-variant uppercase tracking-wider">HARDWARE CORE:</span>
+<span class="font-mono text-[11px] text-neon-cyan font-bold">FPGA-GEN4-OCTA</span>
+<span class="text-neon-emerald font-mono text-[10px] border-l border-[#1c3652] pl-2">VCC 0.85V</span>
+</div>
+<div class="hidden 2xl:flex items-center gap-2 px-3 py-1 rounded bg-[#091522] border border-[#162e47]">
+<span class="font-mono text-[10px] text-on-surface-variant uppercase">INTERCONNECT LATENCY:</span>
+<span class="font-mono text-[12px] text-neon-emerald font-bold drop-shadow-[0_0_6px_rgba(0,255,102,0.5)]">21.5 ms</span>
+<span class="w-2 h-2 rounded-full bg-neon-emerald animate-ping"></span>
+</div>
+</div>
+<!-- Center/Right Operations Controls -->
+<div class="flex items-center gap-3">
+<div class="hidden lg:flex items-center p-1 rounded-lg bg-[#07121d] border border-[#14283b]">
+<button class="px-3 py-1 rounded text-[10px] font-mono tracking-wider bg-neon-cyan/20 border border-neon-cyan/50 text-neon-cyan font-bold shadow-[0_0_10px_rgba(0,240,255,0.3)]" type="button">LIVE WS (FastAPI)</button>
+<button class="px-3 py-1 rounded text-[10px] font-mono tracking-wider text-on-surface-variant hover:text-on-surface transition-colors" type="button">OFFLINE MOCK</button>
+</div>
+<div class="hidden md:flex items-center gap-3 px-3 py-1.5 rounded bg-[#07131e] border border-[#162c42]">
+<div class="flex flex-col text-right">
+<span class="font-mono text-[9px] text-on-surface-variant">UTC MASTER</span>
+<span class="font-mono text-[12px] text-neon-cyan font-bold tracking-wider">14:22:09.412</span>
+</div>
+<div class="w-px h-6 bg-[#162c42]"></div>
+<div class="flex flex-col">
+<span class="font-mono text-[9px] text-on-surface-variant">THROUGHPUT</span>
+<span class="font-mono text-[12px] text-neon-emerald font-bold tracking-wider">2,841,920 EVT</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded bg-error-container/80 border border-laser-crimson text-white font-mono text-[11px] font-bold shadow-[0_0_18px_rgba(255,42,95,0.45)] hover:shadow-[0_0_26px_rgba(255,42,95,0.8)] transition-all active:scale-95" type="button">
+<span class="material-symbols-outlined text-[16px] text-laser-crimson animate-pulse">lock</span>
+<span>EMERGENCY LOCKDOWN</span>
+</button>
+<div class="w-8 h-8 rounded bg-[#081726] border border-neon-cyan/40 flex items-center justify-center text-neon-cyan">
+<span class="material-symbols-outlined text-[18px]">fingerprint</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Sub-header Substrate Bus Ticker -->
+<div class="h-9 px-6 flex items-center justify-between bg-[#02070d]/95 border-t border-[#0d1d2d] text-[11px] font-mono">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="text-on-surface-variant uppercase tracking-wider text-[10px]">DOMAIN BUS:</span>
+<select class="bg-[#091522] border border-[#162c42] text-neon-cyan font-mono text-[11px] px-2 py-0.5 rounded focus:outline-none focus:border-neon-cyan">
+<option>Modbus Industrial PLC (ToN_IoT #04)</option>
+<option>Network Core Telemetry (ToN_IoT #01)</option>
+<option>SCADA Thermostat Rig (ToN_IoT #07)</option>
+<option>Smart Grid Energy Meter (ToN_IoT #11)</option>
+<option>ICS Robotic Actuator (ToN_IoT #09)</option>
+</select>
+</div>
+<div class="hidden md:flex items-center gap-1">
+<span class="text-on-surface-variant text-[10px] mr-1">RATE:</span>
+<span class="px-2 py-0.5 rounded bg-neon-cyan/10 text-neon-cyan font-bold border border-neon-cyan/30 text-[10px]">1.0x LIVE</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1.5">
+<span class="text-on-surface-variant">TENSOR SHM:</span>
+<span class="text-neon-cyan bg-[#081827] px-2 py-0.5 rounded border border-neon-cyan/30 font-bold">[B, 10, D=64] LOCKED</span>
+</div>
+<div class="hidden sm:flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-neon-emerald shadow-[0_0_8px_#00ff66]"></span>
+<span class="text-neon-emerald">TPM 2.0 HARDWARE ROOT VERIFIED</span>
+</div>
+</div>
+</div>
+</header>
+<!-- MAIN HARDWARE CANVAS VIEWPORT -->
+<main class="w-full pt-28 pb-28 min-h-screen px-4 lg:px-6 relative z-10">
+<div class="flex flex-col w-full text-on-surface max-w-[1720px] mx-auto">
+<!-- TOP CONTROL & ACCELERATOR TELEMETRY BAR -->
+<div class="w-full bg-[#060e18]/90 backdrop-blur-xl border border-neon-cyan/25 rounded-xl p-3.5 mb-4 shadow-[0_0_30px_rgba(0,240,255,0.08)] flex flex-col xl:flex-row items-start xl:items-center justify-between gap-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2 font-mono text-[10px] text-on-surface-variant">
+<a class="flex items-center gap-1 text-neon-cyan hover:underline transition-colors" href="#">
+<span class="material-symbols-outlined text-[13px]">arrow_back</span>
+<span>RETURN TO SOC RADAR</span>
+</a>
+<span class="text-outline-variant">/</span>
+<span class="text-neon-emerald font-bold">NODE_ARRAY: ACCELERATOR-X</span>
+<span class="text-outline-variant">/</span>
+<span class="text-solar-amber font-mono">HEX: 0x7FF09A</span>
+</div>
+<div class="flex items-center gap-3">
+<h1 class="font-cyber text-lg tracking-wider text-primary uppercase font-bold flex items-center gap-2">
+<span class="inline-block w-2.5 h-2.5 bg-neon-cyan rotate-45 shadow-[0_0_8px_#00f0ff]"></span>
+            Cyber-Physical Silicon Pipeline Topology &amp; Conformer Core
+          </h1>
+<span class="px-2 py-0.5 rounded bg-neon-cyan/15 border border-neon-cyan/40 text-neon-cyan font-mono text-[10px] font-bold shadow-[0_0_8px_rgba(0,240,255,0.3)]">
+            REV 4.2.0-SILICON
+          </span>
+</div>
+</div>
+<!-- Center Trace Prescaler & Pulse Triggers -->
+<div class="flex flex-wrap items-center gap-3">
+<div class="flex items-center p-0.5 rounded-lg bg-[#030910] border border-[#12283e]">
+<button class="px-3 py-1 rounded text-[11px] font-mono tracking-wider bg-neon-cyan/20 text-neon-cyan font-bold border border-neon-cyan/50 shadow-[0_0_10px_rgba(0,240,255,0.3)]" id="clock-10s" onclick="setTraceSpeed('1.0s')">1.0s REALTIME</button>
+<button class="px-3 py-1 rounded text-[11px] font-mono tracking-wider text-on-surface-variant hover:text-on-surface transition-all" id="clock-20s" onclick="setTraceSpeed('2.0s')">2.0s SLOW-MO</button>
+<button class="px-3 py-1 rounded text-[11px] font-mono tracking-wider text-on-surface-variant hover:text-on-surface transition-all" id="clock-35s" onclick="setTraceSpeed('3.5s')">3.5s STEP TRACE</button>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-neon-cyan to-neon-emerald text-black font-cyber text-[11px] font-black tracking-wider shadow-[0_0_24px_rgba(0,255,102,0.6)] hover:shadow-[0_0_35px_rgba(0,240,255,0.8)] active:scale-95 transition-all" id="execPipelineBtn" onclick="triggerPcbPulse()">
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+<span>FIRE PIPELINE PULSE</span>
+</button>
+</div>
+<!-- Quick Substrate Telemetry Readings -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 w-full xl:w-auto font-mono">
+<div class="px-2.5 py-1 rounded bg-[#030911] border border-[#14283c] flex flex-col">
+<span class="text-[9px] text-on-surface-variant uppercase">SYS PIPELINE MTTR</span>
+<span class="text-neon-cyan font-bold text-sm tracking-tight drop-shadow-[0_0_6px_rgba(0,240,255,0.4)]">21.50 ms</span>
+</div>
+<div class="px-2.5 py-1 rounded bg-[#030911] border border-[#14283c] flex flex-col">
+<span class="text-[9px] text-on-surface-variant uppercase">CLOCK OSCILLATOR</span>
+<span class="text-neon-emerald font-bold text-sm tracking-tight drop-shadow-[0_0_6px_rgba(0,255,102,0.4)]">450.0 MHz</span>
+</div>
+<div class="px-2.5 py-1 rounded bg-[#030911] border border-[#14283c] flex flex-col">
+<span class="text-[9px] text-on-surface-variant uppercase">CONFORMER LATENCY</span>
+<span class="text-solar-amber font-bold text-sm tracking-tight">0.78 ms</span>
+</div>
+<div class="px-2.5 py-1 rounded bg-[#030911] border border-[#14283c] flex flex-col">
+<span class="text-[9px] text-on-surface-variant uppercase">FP16 TENSOR BAND</span>
+<span class="text-primary font-bold text-sm tracking-tight">2.84 M/s</span>
+</div>
+</div>
+</div>
+<!-- MAIN DUAL-PANE HUD: LEFT SILICON SUBSTRATE + RIGHT HOLOGRAPHIC INSPECTOR -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-4 w-full">
+<!-- LEFT: SILICON MOTHERBOARD SUBSTRATE (8 COLS) -->
+<div class="lg:col-span-8 flex flex-col bg-[#03070d]/95 border border-neon-cyan/30 rounded-xl p-4 relative overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.9)]">
+<!-- Subtle Animated Laser Scanline across Motherboard -->
+<div class="absolute inset-x-0 h-2 bg-gradient-to-r from-transparent via-neon-cyan/20 to-transparent pointer-events-none z-0" style="animation: laserSweep 7s linear infinite;"></div>
+<!-- PCB Silkscreen Tactical Header Bar -->
+<div class="relative z-10 flex flex-wrap items-center justify-between pb-2 mb-2 bg-[#050f1a] border border-[#11273f] px-3 py-1.5 rounded-lg font-mono text-[10px]">
+<div class="flex items-center gap-3">
+<span class="text-neon-cyan font-bold tracking-widest flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-neon-cyan animate-pulse"></span>
+              SILICON WAFER LAYER 01 // 7nm FinFET OPTICAL BUS
+            </span>
+<span class="text-outline">|</span>
+<span class="text-on-surface-variant">SUBSTRATE: <strong class="text-neon-emerald">IMMERSION GOLD (ENIG)</strong></span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span>CORE_VOLTAGE: <strong class="text-neon-cyan">0.850V</strong></span>
+<span>THERMAL_JUNCTION: <strong class="text-solar-amber">42.8°C</strong></span>
+<span>VIAS: <strong class="text-neon-emerald">4,096 CONNECTED</strong></span>
+</div>
+</div>
+<!-- STAGE DESIGNATOR BANNER -->
+<div class="relative z-10 grid grid-cols-5 gap-2 px-1 mb-2 font-mono text-[10px] uppercase font-bold text-center tracking-wider">
+<div class="py-1 px-1 rounded bg-[#061423] border border-neon-emerald/30 text-neon-emerald shadow-[0_0_8px_rgba(0,255,102,0.15)]">STAGE 01: SENSING</div>
+<div class="py-1 px-1 rounded bg-[#061423] border border-neon-cyan/30 text-neon-cyan shadow-[0_0_8px_rgba(0,240,255,0.15)]">STAGE 02: TENSOR</div>
+<div class="py-1 px-1 rounded bg-[#16170d] border border-solar-amber/40 text-solar-amber shadow-[0_0_8px_rgba(255,183,0,0.15)]">STAGE 03: CONFORMER</div>
+<div class="py-1 px-1 rounded bg-[#061423] border border-neon-cyan/30 text-primary shadow-[0_0_8px_rgba(0,240,255,0.15)]">STAGE 04: HEADS</div>
+<div class="py-1 px-1 rounded bg-[#1a0810] border border-laser-crimson/40 text-laser-crimson shadow-[0_0_8px_rgba(255,42,95,0.2)]">STAGE 05: CONTAIN</div>
+</div>
+<!-- INTERACTIVE PCB CANVAS WITH 11 SCI-FI IC MODULES -->
+<div class="relative z-10 flex-1 min-h-[740px] rounded-lg bg-[#02060b]/90 border border-[#0d2238] p-3 overflow-x-auto relative">
+<!-- Motherboard Visual Routing Canvas (Glowing Traces & Wave Buslines) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none z-0" id="pcbTraces" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="neonTraceGreen" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#00ff66" stop-opacity="0.9"></stop>
+<stop offset="100%" stop-color="#00f0ff" stop-opacity="0.9"></stop>
+</lineargradient>
+<lineargradient id="neonTraceAmber" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#00f0ff" stop-opacity="0.9"></stop>
+<stop offset="100%" stop-color="#ffb700" stop-opacity="0.9"></stop>
+</lineargradient>
+<lineargradient id="neonTraceRed" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#ffb700" stop-opacity="0.9"></stop>
+<stop offset="100%" stop-color="#ff2a5f" stop-opacity="0.9"></stop>
+</lineargradient>
+<filter height="200%" id="scifiGlow" width="200%" x="-50%" y="-50%">
+<fegaussianblur result="blur" stddeviation="4"></fegaussianblur>
+<femerge>
+<femergenode in="blur"></femergenode>
+<femergenode in="SourceGraphic"></femergenode>
+</femerge>
+</filter>
+</defs>
+<!-- Heavy Background Copper Buslines -->
+<path d="M 125 75 L 180 75 L 180 145 L 225 145" fill="none" stroke="#081c2f" stroke-linecap="round" stroke-width="6"></path>
+<path d="M 125 175 L 225 175" fill="none" stroke="#081c2f" stroke-linecap="round" stroke-width="6"></path>
+<path d="M 125 285 L 180 285 L 180 205 L 225 205" fill="none" stroke="#081c2f" stroke-linecap="round" stroke-width="6"></path>
+<path d="M 335 155 L 380 155 L 380 175 L 430 175" fill="none" stroke="#081c2f" stroke-linecap="round" stroke-width="8"></path>
+<path d="M 335 255 L 380 255 L 380 325 L 430 325" fill="none" stroke="#081c2f" stroke-linecap="round" stroke-width="6"></path>
+<path d="M 545 175 L 595 175 L 595 115 L 640 115" fill="none" stroke="#081c2f" stroke-linecap="round" stroke-width="6"></path>
+<path d="M 545 220 L 595 220 L 595 255 L 640 255" fill="none" stroke="#081c2f" stroke-linecap="round" stroke-width="6"></path>
+<path d="M 545 325 L 615 325 L 615 265 L 640 265" fill="none" stroke="#081c2f" stroke-linecap="round" stroke-width="4"></path>
+<path d="M 750 115 L 795 115 L 795 145 L 840 145" fill="none" stroke="#081c2f" stroke-width="6"></path>
+<path d="M 750 255 L 795 255 L 795 275 L 840 275" fill="none" stroke="#081c2f" stroke-width="6"></path>
+<!-- Luminous Glowing Data Highways -->
+<path class="transition-all duration-300" d="M 125 75 L 180 75 L 180 145 L 225 145" fill="none" filter="url(#scifiGlow)" id="activePulse1" stroke="#00ff66" stroke-dasharray="8,6" stroke-width="2.5"></path>
+<path class="transition-all duration-300" d="M 125 175 L 225 175" fill="none" filter="url(#scifiGlow)" id="activePulse2" stroke="#00f0ff" stroke-dasharray="10,6" stroke-width="2.5"></path>
+<path class="transition-all duration-300" d="M 335 155 L 380 155 L 380 175 L 430 175" fill="none" filter="url(#scifiGlow)" id="activePulse3" stroke="url(#neonTraceGreen)" stroke-dasharray="12,6" stroke-width="3.5"></path>
+<path class="transition-all duration-300" d="M 545 175 L 595 175 L 595 115 L 640 115" fill="none" filter="url(#scifiGlow)" id="activePulse4" stroke="url(#neonTraceAmber)" stroke-dasharray="12,8" stroke-width="3"></path>
+<path class="transition-all duration-300" d="M 750 115 L 795 115 L 795 145 L 840 145" fill="none" filter="url(#scifiGlow)" id="activePulse5" stroke="url(#neonTraceRed)" stroke-dasharray="6,8" stroke-width="3"></path>
+<!-- Micro-Via Grid Nodes & Hex Test Points with Radiant Rings -->
+<g>
+<!-- TP-01 -->
+<circle cx="165" cy="50" fill="#00ff66" filter="url(#scifiGlow)" r="3"></circle>
+<circle cx="165" cy="50" fill="none" r="6" stroke="#00ff66" stroke-dasharray="2,2" stroke-width="0.8"></circle>
+<text fill="#00ff66" font-family="JetBrains Mono" font-size="8" font-weight="bold" x="175" y="53">TP-01 [RAW_ETH]</text>
+<!-- TP-02 -->
+<circle cx="165" cy="305" fill="#00f0ff" filter="url(#scifiGlow)" r="3"></circle>
+<circle cx="165" cy="305" fill="none" r="6" stroke="#00f0ff" stroke-dasharray="2,2" stroke-width="0.8"></circle>
+<text fill="#00f0ff" font-family="JetBrains Mono" font-size="8" font-weight="bold" x="175" y="308">TP-02 [eBPF_HOOK]</text>
+<!-- TP-05 -->
+<circle cx="365" cy="130" fill="#00f0ff" filter="url(#scifiGlow)" r="3.5"></circle>
+<circle cx="365" cy="130" fill="none" r="7" stroke="#00f0ff" stroke-dasharray="3,3" stroke-width="0.8"></circle>
+<text fill="#00f0ff" font-family="JetBrains Mono" font-size="8" font-weight="bold" x="375" y="133">TP-05 [FP16_TENS]</text>
+<!-- TP-07 -->
+<circle cx="565" cy="145" fill="#ffb700" filter="url(#scifiGlow)" r="3.5"></circle>
+<circle cx="565" cy="145" fill="none" r="7" stroke="#ffb700" stroke-dasharray="3,3" stroke-width="0.8"></circle>
+<text fill="#ffb700" font-family="JetBrains Mono" font-size="8" font-weight="bold" x="575" y="148">TP-07 [CONF_EMB]</text>
+<!-- TP-09 -->
+<circle cx="775" cy="90" fill="#ff2a5f" filter="url(#scifiGlow)" r="3.5"></circle>
+<circle cx="775" cy="90" fill="none" r="7" stroke="#ff2a5f" stroke-dasharray="3,3" stroke-width="0.8"></circle>
+<text fill="#ff2a5f" font-family="JetBrains Mono" font-size="8" font-weight="bold" x="785" y="93">TP-09 [ALARM_SIG]</text>
+</g>
+</svg>
+<!-- 5-COLUMN LOGICAL MATRIX OF TRANSLUCENT IC NODES -->
+<div class="relative z-10 grid grid-cols-5 gap-3.5 h-full">
+<!-- STAGE 1: INGESTION & SENSING -->
+<div class="flex flex-col gap-3.5 justify-around">
+<!-- IC-01 -->
+<div class="cursor-pointer group relative p-3 rounded-lg bg-[#07131e]/85 backdrop-blur-md border border-[#16334f] hover:border-neon-cyan shadow-[0_4px_16px_rgba(0,0,0,0.6)] hover:shadow-[0_0_20px_rgba(0,240,255,0.35)] transition-all transform hover:-translate-y-0.5 chamfer-card" id="card-IC-01" onclick="selectNode('IC-01')">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-neon-cyan shadow-[0_0_6px_#00f0ff] animate-ping"></span>
+<span class="font-mono text-[10px] text-neon-cyan font-bold tracking-wider">IC-01 // QFP-48</span>
+</div>
+<span class="text-[9px] font-mono px-1 py-0.2 bg-[#0d2238] text-on-surface-variant rounded">RX:10G</span>
+</div>
+<div class="font-cyber text-[12px] text-primary font-bold tracking-wide">Network PCAP TAP</div>
+<div class="font-mono text-[10px] text-on-surface-variant mt-0.5">eth0 line-rate ring</div>
+<div class="mt-2 pt-1 border-t border-[#122b42] flex items-center justify-between text-[10px] font-mono">
+<span class="text-neon-emerald">14.88 Mpps</span>
+<span class="text-neon-cyan font-bold">0% DROP</span>
+</div>
+<!-- Precision Laser Pinout Indicators -->
+<div class="absolute -left-1 top-3 bottom-3 flex flex-col justify-between pointer-events-none">
+<span class="w-1.5 h-0.5 bg-neon-cyan/70"></span><span class="w-1.5 h-0.5 bg-neon-cyan/70"></span><span class="w-1.5 h-0.5 bg-neon-cyan/70"></span>
+</div>
+</div>
+<!-- IC-02 -->
+<div class="cursor-pointer group relative p-3 rounded-lg bg-[#07131e]/85 backdrop-blur-md border border-[#16334f] hover:border-neon-emerald shadow-[0_4px_16px_rgba(0,0,0,0.6)] hover:shadow-[0_0_20px_rgba(0,255,102,0.3)] transition-all transform hover:-translate-y-0.5 chamfer-card" id="card-IC-02" onclick="selectNode('IC-02')">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-neon-emerald shadow-[0_0_6px_#00ff66]"></span>
+<span class="font-mono text-[10px] text-neon-emerald font-bold tracking-wider">IC-02 // SOIC-28</span>
+</div>
+<span class="text-[9px] font-mono px-1 py-0.2 bg-[#0d2238] text-neon-emerald rounded">50Hz</span>
+</div>
+<div class="font-cyber text-[12px] text-primary font-bold tracking-wide">IoT Sensor Rig</div>
+<div class="font-mono text-[10px] text-on-surface-variant mt-0.5">Modbus / OPC-UA / MQTT</div>
+<div class="mt-2 pt-1 border-t border-[#122b42] flex items-center justify-between text-[10px] font-mono">
+<span class="text-on-surface-variant">32 ANALOG</span>
+<span class="text-neon-emerald font-bold">SYNC: OK</span>
+</div>
+<div class="absolute -left-1 top-3 bottom-3 flex flex-col justify-between pointer-events-none">
+<span class="w-1.5 h-0.5 bg-neon-emerald/70"></span><span class="w-1.5 h-0.5 bg-neon-emerald/70"></span><span class="w-1.5 h-0.5 bg-neon-emerald/70"></span>
+</div>
+</div>
+<!-- IC-03 -->
+<div class="cursor-pointer group relative p-3 rounded-lg bg-[#07131e]/85 backdrop-blur-md border border-[#16334f] hover:border-neon-cyan shadow-[0_4px_16px_rgba(0,0,0,0.6)] hover:shadow-[0_0_20px_rgba(0,240,255,0.3)] transition-all transform hover:-translate-y-0.5 chamfer-card" id="card-IC-03" onclick="selectNode('IC-03')">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-neon-cyan"></span>
+<span class="font-mono text-[10px] text-neon-cyan font-bold tracking-wider">IC-03 // TSSOP-20</span>
+</div>
+<span class="text-[9px] font-mono px-1 py-0.2 bg-[#0d2238] text-on-surface-variant rounded">eBPF</span>
+</div>
+<div class="font-cyber text-[12px] text-primary font-bold tracking-wide">Host OS Telemetry</div>
+<div class="font-mono text-[10px] text-on-surface-variant mt-0.5">Linux eBPF kprobes</div>
+<div class="mt-2 pt-1 border-t border-[#122b42] flex items-center justify-between text-[10px] font-mono">
+<span class="text-on-surface-variant">1,420 HOOKS</span>
+<span class="text-neon-cyan font-bold">NO OVERFLOW</span>
+</div>
+<div class="absolute -left-1 top-3 bottom-3 flex flex-col justify-between pointer-events-none">
+<span class="w-1.5 h-0.5 bg-neon-cyan/70"></span><span class="w-1.5 h-0.5 bg-neon-cyan/70"></span><span class="w-1.5 h-0.5 bg-neon-cyan/70"></span>
+</div>
+</div>
+</div>
+<!-- STAGE 2: NORMALIZATION & TENSOR ENGINE -->
+<div class="flex flex-col gap-4 justify-center">
+<!-- IC-04 -->
+<div class="cursor-pointer group relative p-3 rounded-lg bg-[#07131e]/85 backdrop-blur-md border border-[#16334f] hover:border-neon-cyan shadow-[0_4px_16px_rgba(0,0,0,0.6)] hover:shadow-[0_0_20px_rgba(0,240,255,0.3)] transition-all transform hover:-translate-y-0.5 chamfer-card" id="card-IC-04" onclick="selectNode('IC-04')">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-neon-cyan"></span>
+<span class="font-mono text-[10px] text-neon-cyan font-bold tracking-wider">IC-04 // BGA-256</span>
+</div>
+<span class="text-[9px] font-mono px-1 py-0.2 bg-[#0d2238] text-neon-cyan rounded">FP16</span>
+</div>
+<div class="font-cyber text-[12px] text-primary font-bold tracking-wide">MinMax Scaler</div>
+<div class="font-mono text-[10px] text-on-surface-variant mt-0.5">Dynamic Range [0, 1]</div>
+<div class="mt-2 pt-1 border-t border-[#122b42] flex items-center justify-between text-[10px] font-mono">
+<span class="text-on-surface-variant">43 FEATS</span>
+<span class="text-neon-emerald font-bold">90 ns/vec</span>
+</div>
+</div>
+<!-- IC-05 -->
+<div class="cursor-pointer group relative p-3 rounded-lg bg-[#07131e]/85 backdrop-blur-md border border-[#16334f] hover:border-neon-emerald shadow-[0_4px_16px_rgba(0,0,0,0.6)] hover:shadow-[0_0_20px_rgba(0,255,102,0.3)] transition-all transform hover:-translate-y-0.5 chamfer-card" id="card-IC-05" onclick="selectNode('IC-05')">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-neon-emerald"></span>
+<span class="font-mono text-[10px] text-neon-emerald font-bold tracking-wider">IC-05 // SRAM-FIFO</span>
+</div>
+<span class="text-[9px] font-mono px-1 py-0.2 bg-[#0d2238] text-neon-emerald rounded">10-STEP</span>
+</div>
+<div class="font-cyber text-[12px] text-primary font-bold tracking-wide">Sliding Buffer</div>
+<div class="font-mono text-[10px] text-on-surface-variant mt-0.5">Tensor [B, 10, D=64]</div>
+<div class="mt-2 pt-1 border-t border-[#122b42] flex items-center justify-between text-[10px] font-mono">
+<span class="text-on-surface-variant">CIRCULAR</span>
+<span class="text-neon-cyan font-bold">100% LOCK</span>
+</div>
+</div>
+</div>
+<!-- STAGE 3: NEURAL REASONING CORE (CONFORMER ACTIVE INSPECTION) -->
+<div class="flex flex-col gap-4 justify-center">
+<!-- IC-06: Google Conformer Core (HERO COMPONENT) -->
+<div class="cursor-pointer relative p-3.5 rounded-xl bg-[#091829]/95 border-2 border-solar-amber shadow-[0_0_35px_rgba(255,183,0,0.3)] transition-all transform scale-[1.03] chamfer-card-lg" id="card-IC-06" onclick="selectNode('IC-06')">
+<!-- Corner Sci-Fi Tactical Brackets -->
+<div class="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-solar-amber"></div>
+<div class="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-solar-amber"></div>
+<div class="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-solar-amber"></div>
+<div class="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-solar-amber"></div>
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-solar-amber shadow-[0_0_10px_#ffb700] animate-pulse"></span>
+<span class="font-mono text-[10px] text-solar-amber font-extrabold tracking-wider">IC-06 // BGA-1156</span>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-solar-amber/20 border border-solar-amber/60 text-solar-amber font-mono text-[9px] font-black uppercase tracking-wider">
+                    TARGET LOCKED
+                  </span>
+</div>
+<div class="font-cyber text-[14px] text-primary font-black tracking-wide leading-tight">
+                  Google Conformer Core
+                </div>
+<div class="font-mono text-[10px] text-neon-cyan mt-0.5">Macaron Conv-MHSA Engine</div>
+<!-- Internal Micro-Architecture Matrix -->
+<div class="my-2 p-2 rounded bg-[#030910] border border-[#152e47] font-mono text-[10px] grid grid-cols-2 gap-1 text-on-surface">
+<div>HEADS: <span class="text-solar-amber font-bold">8 MHSA</span></div>
+<div>DEPTH: <span class="text-neon-emerald font-bold">4 LAYERS</span></div>
+<div>KERNEL: <span class="text-neon-cyan font-bold">k=31 DEPTH</span></div>
+<div>EMBED: <span class="text-primary font-bold">D=64 FP16</span></div>
+</div>
+<div class="flex items-center justify-between text-[10px] font-mono pt-1 border-t border-[#1a3754]">
+<span class="text-on-surface-variant">LATENCY: <strong class="text-neon-emerald">0.78 ms</strong></span>
+<span class="text-solar-amber font-bold">1.42 TFLOPS</span>
+</div>
+</div>
+<!-- IC-07: Jacobian Saliency XAI -->
+<div class="cursor-pointer group relative p-3 rounded-lg bg-[#07131e]/85 backdrop-blur-md border border-[#16334f] hover:border-solar-amber shadow-[0_4px_16px_rgba(0,0,0,0.6)] hover:shadow-[0_0_20px_rgba(255,183,0,0.25)] transition-all transform hover:-translate-y-0.5 chamfer-card" id="card-IC-07" onclick="selectNode('IC-07')">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-solar-amber"></span>
+<span class="font-mono text-[10px] text-solar-amber font-bold tracking-wider">IC-07 // DSP-64</span>
+</div>
+<span class="text-[9px] font-mono px-1 py-0.2 bg-[#0d2238] text-solar-amber rounded">XAI</span>
+</div>
+<div class="font-cyber text-[12px] text-primary font-bold tracking-wide">Jacobian Saliency</div>
+<div class="font-mono text-[10px] text-on-surface-variant mt-0.5">∇_x y_bin Backprop</div>
+<div class="mt-2 pt-1 border-t border-[#122b42] flex items-center justify-between text-[10px] font-mono">
+<span class="text-on-surface-variant">TOP-10 ATTRIB</span>
+<span class="text-solar-amber font-bold">LIVE MAP</span>
+</div>
+</div>
+</div>
+<!-- STAGE 4: DUAL FORENSIC HEADS -->
+<div class="flex flex-col gap-4 justify-center">
+<!-- IC-08 -->
+<div class="cursor-pointer group relative p-3 rounded-lg bg-[#140810]/85 backdrop-blur-md border border-[#3d1420] hover:border-laser-crimson shadow-[0_4px_16px_rgba(0,0,0,0.6)] hover:shadow-[0_0_20px_rgba(255,42,95,0.4)] transition-all transform hover:-translate-y-0.5 chamfer-card" id="card-IC-08" onclick="selectNode('IC-08')">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-laser-crimson shadow-[0_0_8px_#ff2a5f] animate-ping"></span>
+<span class="font-mono text-[10px] text-laser-crimson font-bold tracking-wider">IC-08 // HEAD-1</span>
+</div>
+<span class="text-[9px] font-mono px-1 py-0.2 bg-laser-crimson/20 text-laser-crimson font-bold rounded">ALARM</span>
+</div>
+<div class="font-cyber text-[12px] text-primary font-bold tracking-wide">Zero-Day Sigmoid</div>
+<div class="font-mono text-[10px] text-on-surface-variant mt-0.5">Threshold τ &gt; 0.85</div>
+<div class="mt-2 pt-1 border-t border-[#3d1420] flex items-center justify-between text-[10px] font-mono">
+<span class="text-laser-crimson font-bold">SCORE: 0.941</span>
+<span class="text-laser-crimson">BREACH</span>
+</div>
+</div>
+<!-- IC-09 -->
+<div class="cursor-pointer group relative p-3 rounded-lg bg-[#07131e]/85 backdrop-blur-md border border-[#16334f] hover:border-neon-cyan shadow-[0_4px_16px_rgba(0,0,0,0.6)] hover:shadow-[0_0_20px_rgba(0,240,255,0.3)] transition-all transform hover:-translate-y-0.5 chamfer-card" id="card-IC-09" onclick="selectNode('IC-09')">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-neon-cyan"></span>
+<span class="font-mono text-[10px] text-neon-cyan font-bold tracking-wider">IC-09 // HEAD-2</span>
+</div>
+<span class="text-[9px] font-mono px-1 py-0.2 bg-[#0d2238] text-neon-cyan rounded">10-CLASS</span>
+</div>
+<div class="font-cyber text-[12px] text-primary font-bold tracking-wide">Multi-Class Softmax</div>
+<div class="font-mono text-[10px] text-on-surface-variant mt-0.5">ToN_IoT Taxonomy Match</div>
+<div class="mt-2 pt-1 border-t border-[#122b42] flex items-center justify-between text-[10px] font-mono">
+<span class="text-neon-cyan font-bold">Modbus_Fuzz</span>
+<span class="text-neon-emerald">97.4%</span>
+</div>
+</div>
+</div>
+<!-- STAGE 5: ZERO-TRUST CONTAINMENT -->
+<div class="flex flex-col gap-4 justify-center">
+<!-- IC-10 -->
+<div class="cursor-pointer group relative p-3 rounded-lg bg-[#140810]/85 backdrop-blur-md border border-[#3d1420] hover:border-laser-crimson shadow-[0_4px_16px_rgba(0,0,0,0.6)] hover:shadow-[0_0_20px_rgba(255,42,95,0.4)] transition-all transform hover:-translate-y-0.5 chamfer-card" id="card-IC-10" onclick="selectNode('IC-10')">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-laser-crimson"></span>
+<span class="font-mono text-[10px] text-laser-crimson font-bold tracking-wider">IC-10 // SOC-SEC</span>
+</div>
+<span class="text-[9px] font-mono px-1 py-0.2 bg-laser-crimson/20 text-laser-crimson font-bold rounded">RING-0</span>
+</div>
+<div class="font-cyber text-[12px] text-primary font-bold tracking-wide">Wazuh &amp; AF_XDP Ring</div>
+<div class="font-mono text-[10px] text-on-surface-variant mt-0.5">Kernel Hardware Drop</div>
+<div class="mt-2 pt-1 border-t border-[#3d1420] flex items-center justify-between text-[10px] font-mono">
+<span class="text-laser-crimson font-bold">ISOLATED</span>
+<span class="text-on-surface-variant">&lt;10µs DROP</span>
+</div>
+</div>
+<!-- IC-11 -->
+<div class="cursor-pointer group relative p-3 rounded-lg bg-[#07131e]/85 backdrop-blur-md border border-[#16334f] hover:border-neon-emerald shadow-[0_4px_16px_rgba(0,0,0,0.6)] hover:shadow-[0_0_20px_rgba(0,255,102,0.3)] transition-all transform hover:-translate-y-0.5 chamfer-card" id="card-IC-11" onclick="selectNode('IC-11')">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-neon-emerald"></span>
+<span class="font-mono text-[10px] text-neon-emerald font-bold tracking-wider">IC-11 // CRYPTO</span>
+</div>
+<span class="text-[9px] font-mono px-1 py-0.2 bg-[#0d2238] text-neon-emerald rounded">TPM 2.0</span>
+</div>
+<div class="font-cyber text-[12px] text-primary font-bold tracking-wide">GRC Merkle Vault</div>
+<div class="font-mono text-[10px] text-on-surface-variant mt-0.5">Hardware RoT Attestation</div>
+<div class="mt-2 pt-1 border-t border-[#122b42] flex items-center justify-between text-[10px] font-mono">
+<span class="text-neon-emerald font-bold">PCR-7 SIGNED</span>
+<span class="text-neon-cyan">SHA-256</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Canvas Bottom Status Trace Ticker -->
+<div class="relative z-10 mt-2 p-2 rounded-lg bg-[#040c14] border border-[#102438] flex flex-wrap items-center justify-between gap-2 font-mono text-[10px]">
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="text-neon-cyan font-bold">BUS_INTERCONNECT:</span>
+<span>AXI4-Stream 512-bit Wide</span>
+<span class="text-outline">/</span>
+<span>FIFO Queue: <strong class="text-primary">12/1024</strong></span>
+<span class="text-outline">/</span>
+<span>Clock Jitter: <strong class="text-neon-emerald">±0.04ps</strong></span>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-block w-2 h-2 rounded-full bg-neon-emerald shadow-[0_0_6px_#00ff66]"></span>
+<span class="text-neon-emerald font-bold uppercase tracking-wider">Zero Frame Drops in Kernel Ring</span>
+</div>
+</div>
+</div>
+<!-- RIGHT: FUTURISTIC SCI-FI DIAGNOSTIC HUD & MATHEMATICAL FORMULATION (4 COLS) -->
+<div class="lg:col-span-4 flex flex-col gap-3 bg-[#040c16]/95 border border-neon-cyan/35 rounded-xl p-4 shadow-[0_0_35px_rgba(0,240,255,0.12)] relative" id="inspectorPanel">
+<!-- Reticle Target HUD Header -->
+<div class="p-3 rounded-lg bg-[#061423] border border-[#163654] flex flex-col gap-1 relative overflow-hidden chamfer-card">
+<div class="absolute top-1 right-2 font-mono text-[9px] text-neon-cyan/50">COORDS: [42.109, 88.001]</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 font-mono text-[11px] text-solar-amber font-bold">
+<span class="material-symbols-outlined text-[16px] text-solar-amber">radar</span>
+<span id="inspChipId">IC-06 // SILICON ARCHITECTURE</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-neon-cyan/15 border border-neon-cyan/40 text-neon-cyan font-mono text-[10px] font-bold">
+              STATE: LOCKED
+            </span>
+</div>
+<div class="font-cyber text-xl text-primary font-black tracking-wide" id="inspTitle">Google Conformer Core</div>
+<div class="flex items-center gap-3 text-[10px] font-mono text-on-surface-variant pt-1">
+<span>PKG: <strong class="text-neon-cyan" id="inspPackage">BGA-1156 TensorRT</strong></span>
+<span>•</span>
+<span>FREQ: <strong class="text-neon-emerald" id="inspClock">450 MHz</strong></span>
+<span>•</span>
+<span>LAT: <strong class="text-solar-amber" id="inspLat">0.78 ms</strong></span>
+</div>
+</div>
+<!-- Real-Time Holographic Waveform & Silicon Thermals Diagnostic -->
+<div class="p-2.5 rounded-lg bg-[#02070d] border border-[#10253b] flex flex-col gap-2">
+<div class="flex items-center justify-between text-[10px] font-mono">
+<span class="text-neon-cyan font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-neon-cyan animate-pulse"></span>
+              HOLOGRAPHIC WAVEFORM &amp; DIE THERMALS
+            </span>
+<span class="text-on-surface-variant">DIE 0 // CORE #4</span>
+</div>
+<!-- Animated SVG Oscilloscope Waveform -->
+<div class="h-16 w-full bg-[#030d17] rounded border border-[#122e49] relative overflow-hidden flex items-center">
+<div class="absolute inset-0 hud-grid-pattern opacity-40"></div>
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 300 60">
+<!-- Sine Waveform 1 -->
+<path d="M 0,30 Q 25,5 50,30 T 100,30 T 150,30 T 200,30 T 250,30 T 300,30" fill="none" filter="url(#scifiGlow)" stroke="#00f0ff" stroke-width="1.8" style="stroke-dasharray: 200; animation: waveFlow 4s linear infinite;"></path>
+<!-- Attention Spikes Waveform 2 -->
+<path d="M 0,35 L 30,35 L 45,10 L 60,45 L 75,35 L 140,35 L 155,8 L 170,50 L 185,35 L 240,35 L 255,14 L 270,35 L 300,35" fill="none" stroke="#00ff66" stroke-opacity="0.85" stroke-width="1.2"></path>
+</svg>
+<div class="absolute bottom-1 left-2 font-mono text-[9px] text-neon-cyan">AMP: 1.08 Vpp</div>
+<div class="absolute bottom-1 right-2 font-mono text-[9px] text-neon-emerald">SNR: 48.2 dB</div>
+</div>
+<!-- Silicon Die Temperature Gauge Bars -->
+<div class="grid grid-cols-3 gap-2 font-mono text-[9px]">
+<div class="p-1 rounded bg-[#061421] border border-[#112a42]">
+<div class="text-on-surface-variant flex justify-between"><span>CORE TEMP</span><span class="text-neon-emerald font-bold">42.8°C</span></div>
+<div class="w-full bg-[#0a1f33] h-1.5 rounded-full mt-1 overflow-hidden">
+<div class="bg-gradient-to-r from-neon-emerald to-neon-cyan h-full w-[45%]"></div>
+</div>
+</div>
+<div class="p-1 rounded bg-[#061421] border border-[#112a42]">
+<div class="text-on-surface-variant flex justify-between"><span>VRAM HOTSPOT</span><span class="text-solar-amber font-bold">54.1°C</span></div>
+<div class="w-full bg-[#0a1f33] h-1.5 rounded-full mt-1 overflow-hidden">
+<div class="bg-gradient-to-r from-neon-cyan to-solar-amber h-full w-[60%]"></div>
+</div>
+</div>
+<div class="p-1 rounded bg-[#061421] border border-[#112a42]">
+<div class="text-on-surface-variant flex justify-between"><span>POWER DRAW</span><span class="text-neon-cyan font-bold">18.4 W</span></div>
+<div class="w-full bg-[#0a1f33] h-1.5 rounded-full mt-1 overflow-hidden">
+<div class="bg-gradient-to-r from-neon-cyan to-neon-emerald h-full w-[38%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Glowing Mathematical Formulation Card -->
+<div class="p-3 rounded-lg bg-[#02070d] border border-[#10253b] flex flex-col gap-2" id="inspFormulaBlock">
+<div class="flex items-center justify-between text-[10px] font-mono">
+<span class="text-solar-amber font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">functions</span>
+              MATHEMATICAL FORMULATION
+            </span>
+<span class="text-neon-cyan">MACARON CONV-MHSA</span>
+</div>
+<div class="p-2.5 rounded bg-[#040e18] border border-[#13304c] font-mono text-[11px] leading-relaxed text-primary overflow-x-auto shadow-inner" id="inspFormula">
+<div class="text-on-surface-variant font-bold mb-1">// Macaron-Style Conformer Formulation:</div>
+<div class="text-neon-cyan font-semibold">y_i = x_i + ½ FFN(x_i)</div>
+<div class="text-neon-emerald font-semibold">x'_i = MHSA(y_i) + y_i</div>
+<div class="text-solar-amber font-semibold">x''_i = DepthwiseConv(x'_i) + x'_i</div>
+<div class="text-primary font-semibold">Out = LayerNorm(½ FFN(x''_i) + x''_i)</div>
+</div>
+<div class="font-body-sm text-[11px] text-on-surface-variant leading-relaxed" id="inspDesc">
+            Combines multi-head self-attention for capturing long-term protocol context with localized depthwise separable convolutions to detect subtle high-frequency Modbus register injection tampering.
+          </div>
+</div>
+<!-- Architecture Specifications Table -->
+<div class="p-2.5 rounded-lg bg-[#061423] border border-[#122e49] flex flex-col gap-1.5 font-mono text-[10px]">
+<div class="flex items-center justify-between text-neon-cyan font-bold">
+<span>REGISTER SPECS &amp; DIMENSIONS</span>
+<span class="text-on-surface-variant">IEEE FP16</span>
+</div>
+<div class="grid grid-cols-2 gap-1.5 mt-0.5">
+<div class="p-1.5 rounded bg-[#030a12] border border-[#0d2238] flex flex-col" id="specBox1">
+<span class="text-on-surface-variant text-[9px]">ATTENTION HEADS</span>
+<span class="text-solar-amber font-bold text-[11px]">8 MHSA Heads</span>
+</div>
+<div class="p-1.5 rounded bg-[#030a12] border border-[#0d2238] flex flex-col" id="specBox2">
+<span class="text-on-surface-variant text-[9px]">ENCODER DEPTH</span>
+<span class="text-neon-emerald font-bold text-[11px]">4 Layers</span>
+</div>
+<div class="p-1.5 rounded bg-[#030a12] border border-[#0d2238] flex flex-col" id="specBox3">
+<span class="text-on-surface-variant text-[9px]">EMBEDDING DIM (D)</span>
+<span class="text-neon-cyan font-bold text-[11px]">64 Channels</span>
+</div>
+<div class="p-1.5 rounded bg-[#030a12] border border-[#0d2238] flex flex-col" id="specBox4">
+<span class="text-on-surface-variant text-[9px]">CONV KERNEL SIZE</span>
+<span class="text-primary font-bold text-[11px]">k = 31 Depthwise</span>
+</div>
+</div>
+</div>
+<!-- Microcode Dispatch Snippet -->
+<div class="p-2.5 rounded-lg bg-[#02070d] border border-[#10253b] flex flex-col gap-1.5">
+<div class="flex items-center justify-between text-[10px] font-mono">
+<span class="text-on-surface-variant font-bold">MICROCODE DISPATCH</span>
+<span class="text-neon-cyan">torch.cuda.amp (FP16)</span>
+</div>
+<pre class="p-2 rounded bg-[#030a12] border border-[#0e243a] font-mono text-[10px] leading-tight text-on-surface overflow-x-auto" id="inspCode"><span class="text-neon-cyan">class</span> <span class="text-solar-amber">ConformerBlock</span>(nn.Module):
+    <span class="text-neon-cyan">def</span> <span class="text-neon-emerald">forward</span>(self, x):
+        x = x + 0.5 * self.ffn1(x)
+        x = x + self.self_attn(x, x, x)[0]
+        x = x + self.conv_block(x)
+        <span class="text-neon-cyan">return</span> self.norm(x + 0.5 * self.ffn2(x))</pre>
+</div>
+<!-- Interactive Diagnostic Action Buttons -->
+<div class="flex items-center gap-2 mt-auto pt-1 font-mono text-[11px]">
+<button class="flex-1 py-2 rounded bg-[#07192b] border border-neon-cyan/40 hover:bg-neon-cyan/20 text-neon-cyan font-bold transition-all flex items-center justify-center gap-1 active:scale-95 shadow-[0_0_12px_rgba(0,240,255,0.15)]" onclick="benchmarkComponent()">
+<span class="material-symbols-outlined text-[15px]">speed</span>
+<span>BENCHMARK</span>
+</button>
+<button class="flex-1 py-2 rounded bg-[#07192b] border border-neon-emerald/40 hover:bg-neon-emerald/20 text-neon-emerald font-bold transition-all flex items-center justify-center gap-1 active:scale-95 shadow-[0_0_12px_rgba(0,255,102,0.15)]" onclick="dumpTensorShm()">
+<span class="material-symbols-outlined text-[15px]">download</span>
+<span>DUMP SHM</span>
+</button>
+<button class="flex-1 py-2 rounded bg-[#07192b] border border-solar-amber/40 hover:bg-solar-amber/20 text-solar-amber font-bold transition-all flex items-center justify-center gap-1 active:scale-95 shadow-[0_0_12px_rgba(255,183,0,0.15)]" onclick="viewGradientSaliency()">
+<span class="material-symbols-outlined text-[15px]">visibility</span>
+<span>GRADIENT</span>
+</button>
+</div>
+</div>
+</div>
+<!-- PERSISTENT NOTIFICATION TOAST -->
+<div class="fixed top-20 right-6 z-50 transform translate-x-full transition-transform duration-300 pointer-events-none p-4 rounded-xl bg-[#061423]/95 backdrop-blur-xl border border-neon-cyan/60 shadow-[0_0_30px_rgba(0,240,255,0.35)] flex items-center gap-3 text-on-surface" id="pcbAlertToast">
+<div class="w-8 h-8 rounded bg-neon-cyan/20 border border-neon-cyan flex items-center justify-center">
+<span class="material-symbols-outlined text-neon-cyan text-[20px]">bolt</span>
+</div>
+<div class="flex flex-col">
+<span class="font-mono text-[11px] text-neon-cyan font-bold tracking-wider" id="toastTitle">END-TO-END PIPELINE FIRED</span>
+<span class="font-mono text-[11px] text-on-surface" id="toastMsg">Simulated 10-step telemetry tensor propagated across all 5 stages in 0.78ms.</span>
+</div>
+</div>
+</div>
+</main>
+<!-- BOTTOM GLOBAL HUD NAVIGATOR -->
+<div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[96%] max-w-6xl">
+<div class="bg-[#030811]/90 backdrop-blur-2xl border border-neon-cyan/30 rounded-xl p-1.5 shadow-[0_0_30px_rgba(0,240,255,0.18)] flex flex-wrap items-center justify-between gap-2">
+<nav class="flex items-center gap-1 overflow-x-auto py-0.5 font-mono text-[11px]">
+<a class="px-3 py-1.5 rounded text-on-surface-variant hover:bg-[#0c2033] hover:text-neon-cyan whitespace-nowrap transition-colors" data-path="overview" href="#">OVERVIEW</a>
+<a class="px-3 py-1.5 rounded text-on-surface-variant hover:bg-[#0c2033] hover:text-neon-cyan whitespace-nowrap transition-colors" data-path="threat-lab" href="#">THREAT LAB</a>
+<a class="px-3 py-1.5 rounded text-on-surface-variant hover:bg-[#0c2033] hover:text-neon-cyan whitespace-nowrap transition-colors" data-path="xai-engine" href="#">XAI ENGINE</a>
+<a class="px-3 py-1.5 rounded text-on-surface-variant hover:bg-[#0c2033] hover:text-neon-cyan whitespace-nowrap transition-colors" data-path="adversarial" href="#">ADVERSARIAL</a>
+<a class="px-3 py-1.5 rounded text-on-surface-variant hover:bg-[#0c2033] hover:text-neon-cyan whitespace-nowrap transition-colors" data-path="remediation" href="#">REMEDIATION</a>
+<a class="px-3 py-1.5 rounded text-on-surface-variant hover:bg-[#0c2033] hover:text-neon-cyan whitespace-nowrap transition-colors" data-path="compliance" href="#">COMPLIANCE</a>
+</nav>
+<div class="flex items-center gap-2">
+<a class="px-3 py-1.5 rounded bg-neon-cyan/20 border border-neon-cyan text-neon-cyan font-mono text-[11px] font-bold whitespace-nowrap shadow-[0_0_12px_rgba(0,240,255,0.3)]" data-path="execute" href="#">Execute Silicon</a>
+<a class="px-3 py-1.5 rounded bg-[#091829] border border-[#173756] hover:bg-[#10273f] text-on-surface font-mono text-[11px] whitespace-nowrap" data-path="live-sniffer" href="#">Sniffer</a>
+<a class="px-3 py-1.5 rounded bg-gradient-to-r from-neon-cyan to-neon-emerald text-black font-cyber text-[10px] font-black tracking-wider whitespace-nowrap shadow-[0_0_15px_rgba(0,255,102,0.4)]" data-path="agentic-soc" href="#">AGENTIC SOC</a>
+</div>
+</div>
+</div>
+<!-- COMPREHENSIVE SCRIPT CONTROLLER -->
+<script>
+  const nodeData = {
+    'IC-01': {
+      title: 'Network PCAP TAP (IC-01)',
+      package: 'QFP-48 Industrial',
+      clock: '10 GbE Line-Rate',
+      latency: '0.04 ms',
+      formula: '// Zero-Copy AF_XDP Ring Ingestion:\\nRing_Buffer = rx_ring_mmap(eth0, ifindex, &sock_opt);\\nPacket_Tuple = ParseHeader(Ethernet || IP || TCP || Modbus);',
+      desc: 'Ingests physical raw telemetry off the OT network core TAP mirror with zero memory copying direct to user-space memory.',
+      s1_t: 'PORT ASSIGN', s1_v: 'eth0 Mirror TAP',
+      s2_t: 'LINE RATE', s2_v: '14.88 Mpps',
+      s3_t: 'DESCRIPTORS', s3_v: '4,096 Ring Buff',
+      s4_t: 'FRAME DROPS', s4_v: '0 Detected (0%)',
+      code: 'def ingest_raw_frame(socket_fd):\\n    frame = xdp_recv(socket_fd)\\n    return parse_scada_fields(frame)'
+    },
+    'IC-02': {
+      title: 'IoT Sensor Rig (IC-02)',
+      package: 'SOIC-28 Opto-Coupled',
+      clock: '50 Hz Sampling',
+      latency: '0.12 ms',
+      formula: '// Industrial Fieldbus polling protocol stack:\\nModbus_Holding_Regs = Read_Holding_Registers(Unit=1, Addr=40001, Len=32);\\nOPC_Nodes = UA_Client_readValues(client, NodeIDs);',
+      desc: 'Direct optical galvanic isolation interface collecting temperature, vibration, pressure, and voltage telemetry from SCADA RTUs.',
+      s1_t: 'BUS PROTOCOL', s1_v: 'RS-485 Modbus',
+      s2_t: 'INPUT CHANNELS', s2_v: '32 Differential',
+      s3_t: 'ISOLATION', s3_v: '2.5 kV Optical',
+      s4_t: 'BAUD RATE', s4_v: '115,200 Baud',
+      code: 'def read_modbus_registers(slave_id):\\n    regs = client.read_holding_registers(0x00, 32)\\n    return np.array(regs.registers, dtype=np.float32)'
+    },
+    'IC-03': {
+      title: 'Host OS Telemetry (IC-03)',
+      package: 'TSSOP-20 Micro',
+      clock: 'eBPF Hook Engine',
+      latency: '0.08 ms',
+      formula: '// eBPF Syscall Hook Interception:\\nSEC("kprobe/sys_enter") int trace_syscall(struct pt_regs *ctx) {\\n    u64 pid_tgid = bpf_get_current_pid_tgid();\\n    return ringbuf_submit(event);\\n}',
+      desc: 'Deep kernel observability monitoring file descriptor modifications, process spawns, and IPC sockets without kernel recompile.',
+      s1_t: 'ACTIVE HOOKS', s1_v: '1,420 Kprobes',
+      s2_t: 'BPF MAPS', s2_v: 'LRU Hash Sync',
+      s3_t: 'MEM OVERHEAD', s3_v: '4.2 MB RingBuffer',
+      s4_t: 'VERIFIER', s4_v: 'JIT Verified',
+      code: 'SEC("kprobe/tcp_connect")\\nint BPF_KPROBE(trace_connect, struct sock *sk) {\\n    return record_network_flow(sk);\\n}'
+    },
+    'IC-04': {
+      title: 'MinMax Precision Scaler (IC-04)',
+      package: 'BGA-256 DSP Array',
+      clock: '300 MHz Math Core',
+      latency: '0.09 ms',
+      formula: '// Floating Point 16 Feature Normalization:\\nx_norm = (x - x_min) / (x_max - x_min + 1e-7);\\nx_fp16 = float16_cast(clip(x_norm, 0.0, 1.0));',
+      desc: 'Converts diverse heterogenous telemetry into canonical scale-invariant FP16 vectors for neural accelerator ingestion.',
+      s1_t: 'PRECISION', s1_v: 'IEEE FP16 Half',
+      s2_t: 'DIMENSIONS', s2_v: '43 Raw Feats',
+      s3_t: 'NAN POLICY', s3_v: 'Zero-Fill Clip',
+      s4_t: 'LATENCY', s4_v: '90 ns / vector',
+      code: 'def normalize_vector(raw_features):\\n    scaled = (raw_features - min_vec) / (max_vec - min_vec)\\n    return np.clip(scaled, 0.0, 1.0).astype(np.float16)'
+    },
+    'IC-05': {
+      title: '10-Step Sliding Buffer (IC-05)',
+      package: 'SRAM FIFO Ultra-Dense',
+      clock: 'Direct Memory Bus',
+      latency: '0.05 ms',
+      formula: '// Temporal Rolling Window Sliding Matrix Construction:\\nX_t = [ x_{t-9}, x_{t-8}, ..., x_{t-1}, x_t ] \\in \\mathbb{R}^{B \\times 10 \\times D}',
+      desc: 'Guarantees temporal context retention for sequence reasoning across consecutive OT communication bursts.',
+      s1_t: 'WINDOW LENGTH', s1_v: 'T = 10 Steps',
+      s2_t: 'CHANNELS', s2_v: 'D = 64 Features',
+      s3_t: 'ALLOCATION', s3_v: 'Locked SHM',
+      s4_t: 'STRUCTURE', s4_v: 'Circular Ring FIFO',
+      code: 'class SlidingBuffer:\\n    def push(self, sample):\\n        self.buf.append(sample)\\n        return np.stack(self.buf[-10:], axis=0)'
+    },
+    'IC-06': {
+      title: 'Google Conformer Core (IC-06)',
+      package: 'BGA-1156 TensorRT',
+      clock: '450 MHz FPGA',
+      latency: '0.78 ms',
+      formula: '// Macaron-Style Conformer Formulation:\\ny_i = x_i + ½ FFN(x_i)\\nx\'_i = MHSA(y_i) + y_i\\nx\'\'_i = DepthwiseConv(x\'_i) + x\'_i\\nOut = LayerNorm(½ FFN(x\'\'_i) + x\'\'_i)',
+      desc: 'Combines multi-head self-attention for capturing long-term protocol context with localized depthwise separable convolutions to detect subtle high-frequency Modbus register injection tampering.',
+      s1_t: 'ATTENTION HEADS', s1_v: '8 MHSA Heads',
+      s2_t: 'ENCODER DEPTH', s2_v: '4 Layers',
+      s3_t: 'EMBEDDING DIM (D)', s3_v: '64 Channels',
+      s4_t: 'CONV KERNEL SIZE', s4_v: 'k = 31 Depthwise',
+      code: 'class ConformerBlock(nn.Module):\\n    def forward(self, x):\\n        x = x + 0.5 * self.ffn1(x)\\n        x = x + self.self_attn(x, x, x)[0]\\n        x = x + self.conv_block(x)\\n        return self.norm(x + 0.5 * self.ffn2(x))'
+    },
+    'IC-07': {
+      title: 'Jacobian Saliency XAI (IC-07)',
+      package: 'DSP-64 Vector Engine',
+      clock: 'Tensor Gradient Pipeline',
+      latency: '0.34 ms',
+      formula: '// Analytic Jacobian Input Saliency:\\nS(x) = \\left| \\frac{\\partial y_{bin}}{\\partial x} \\right| = \\left| \\nabla_x \\sigma(\\mathbf{W} \\cdot h_L) \\right|',
+      desc: 'Calculates instant feature-level sensitivity maps identifying precisely which register values triggered the alert.',
+      s1_t: 'TOP-K ATTRIBUTES', s1_v: '10 Features',
+      s2_t: 'METHOD', s2_v: 'Integrated Grads',
+      s3_t: 'OVERHEAD', s3_v: '0.34 ms Compute',
+      s4_t: 'FIDELITY', s4_v: '99.4% Verified',
+      code: 'def compute_jacobian(model, tensor_input):\\n    tensor_input.requires_grad = True\\n    out = model(tensor_input)\\n    out.backward(gradient=torch.ones_like(out))\\n    return tensor_input.grad.abs()'
+    },
+    'IC-08': {
+      title: 'Head 1: Zero-Day Sigmoid (IC-08)',
+      package: 'HEAD-1 Forensic Logic',
+      clock: 'Synchronous',
+      latency: '0.05 ms',
+      formula: '// Anomaly Probability Sigmoid Activation:\\n\\hat{y}_{anom} = \\frac{1}{1 + e^{-(\\mathbf{w}^T z + b)}}, \\quad \\text{Alarm if } \\hat{y}_{anom} > 0.85',
+      desc: 'Binary zero-day breach classifier tuned specifically for zero false-positive industrial shutdown prevention.',
+      s1_t: 'THRESHOLD', s1_v: 'tau = 0.85',
+      s2_t: 'PRECISION', s2_v: '99.1% Verified',
+      s3_t: 'RECALL', s3_v: '98.6% Rate',
+      s4_t: 'F1-SCORE', s4_v: '0.988 Score',
+      code: 'def eval_anomaly_head(latent_vector):\\n    prob = torch.sigmoid(self.head1_linear(latent_vector))\\n    return prob.item(), prob.item() > 0.85'
+    },
+    'IC-09': {
+      title: 'Head 2: Multi-Class Softmax (IC-09)',
+      package: 'HEAD-2 Forensic Class',
+      clock: 'Synchronous',
+      latency: '0.07 ms',
+      formula: '// 10-Class Categorical Softmax Distribution:\\nP(C_k | z) = \\frac{e^{\\mathbf{w}_k^T z}}{\\sum_{j=1}^{10} e^{\\mathbf{w}_j^T z}}, \\quad k \\in \\{ \\text{DDoS, Backdoor, Modbus\\_Fuzz, ...} \\}',
+      desc: 'Multi-class forensic discriminator matching traffic behaviors against the 10 standard ToN_IoT attack taxonomies.',
+      s1_t: 'ATTACK TAXONOMY', s1_v: '10 ToN_IoT Classes',
+      s2_t: 'TOP-1 ACCURACY', s2_v: '97.4%',
+      s3_t: 'TOP-2 ACCURACY', s3_v: '99.8%',
+      s4_t: 'LOSS FORMULA', s4_v: 'Focal Cross-Ent',
+      code: 'def classify_attack(latent_vector):\\n    logits = self.head2_linear(latent_vector)\\n    return torch.softmax(logits, dim=-1)'
+    },
+    'IC-10': {
+      title: 'Wazuh & AF_XDP Ring (IC-10)',
+      package: 'SOC-SEC Ring0 Gate',
+      clock: 'Kernel Fast Path',
+      latency: '0.01 ms',
+      formula: '// Ring-0 Fast Packet Dropping Filter:\\nSEC("xdp") int xdp_containment(struct xdp_md *ctx) {\\n    if (bpf_map_lookup_elem(&quarantine_ips, &ip)) return XDP_DROP;\\n    return XDP_PASS;\\n}',
+      desc: 'Instantly halts hostile industrial packets inside NIC driver memory before reaching SCADA controller memory.',
+      s1_t: 'KERNEL ACTION', s1_v: 'XDP_DROP Ring-0',
+      s2_t: 'DISPATCH LAT', s2_v: '< 10 microseconds',
+      s3_t: 'WAZUH ACTIVE', s3_v: 'Bi-directional sync',
+      s4_t: 'ACTIVE RULE', s4_v: 'SIG-9942 MODBUS_FUZZ',
+      code: 'SEC("xdp")\\nint xdp_drop_hostile(struct xdp_md *ctx) {\\n    return XDP_DROP;\\n}'
+    },
+    'IC-11': {
+      title: 'GRC Merkle Vault (IC-11)',
+      package: 'CRYPTO TPM-2.0 RoT',
+      clock: 'Hardware Root of Trust',
+      latency: '0.15 ms',
+      formula: '// Cryptographic Audit Trail Attestation:\\nPCR_7 \\leftarrow \\text{SHA-256}(PCR_7 \\;\\Vert\\; \\text{MerkleRoot}(\\text{Incident\\_Log}))',
+      desc: 'Tamper-proof evidentiary ledger anchoring triage telemetry to hardware TPM PCR registers for compliance.',
+      s1_t: 'COMPLIANCE', s1_v: 'NIST 800-82 Rev2',
+      s2_t: 'PCR REGISTER', s2_v: 'PCR-7 Hardware',
+      s3_t: 'HASH DIGEST', s3_v: 'SHA-256 Digest',
+      s4_t: 'SIGNATURE', s4_v: 'ECDSA P-256 Valid',
+      code: 'def anchor_evidence_pcr(log_hash):\\n    tpm.extend_pcr(index=7, digest=hashlib.sha256(log_hash).digest())'
+    }
+  };
+
+  function selectNode(chipId) {
+    const data = nodeData[chipId];
+    if (!data) return;
+
+    // Reset styles on all cards
+    document.querySelectorAll('[id^="card-IC-"]').forEach(card => {
+      card.classList.remove('scale-[1.03]', 'border-solar-amber', 'border-2', 'shadow-[0_0_35px_rgba(255,183,0,0.3)]');
+    });
+
+    const activeCard = document.getElementById('card-' + chipId);
+    if (activeCard) {
+      activeCard.classList.add('scale-[1.03]', 'border-solar-amber', 'border-2', 'shadow-[0_0_35px_rgba(255,183,0,0.3)]');
+    }
+
+    // Update inspector view
+    document.getElementById('inspChipId').innerText = chipId + ' // ARCHITECTURE SPEC';
+    document.getElementById('inspTitle').innerText = data.title;
+    document.getElementById('inspPackage').innerText = data.package;
+    document.getElementById('inspClock').innerText = data.clock;
+    document.getElementById('inspLat').innerText = data.latency;
+    document.getElementById('inspFormula').innerHTML = data.formula.replace(/\\n/g, '<br/>');
+    document.getElementById('inspDesc').innerText = data.desc;
+    document.getElementById('inspCode').innerText = data.code.replace(/\\n/g, '\n');
+
+    // Update spec boxes
+    document.getElementById('specBox1').innerHTML = `<span class="text-on-surface-variant text-[9px]">${data.s1_t}</span><span class="text-solar-amber font-bold text-[11px]">${data.s1_v}</span>`;
+    document.getElementById('specBox2').innerHTML = `<span class="text-on-surface-variant text-[9px]">${data.s2_t}</span><span class="text-neon-emerald font-bold text-[11px]">${data.s2_v}</span>`;
+    document.getElementById('specBox3').innerHTML = `<span class="text-on-surface-variant text-[9px]">${data.s3_t}</span><span class="text-neon-cyan font-bold text-[11px]">${data.s3_v}</span>`;
+    document.getElementById('specBox4').innerHTML = `<span class="text-on-surface-variant text-[9px]">${data.s4_t}</span><span class="text-primary font-bold text-[11px]">${data.s4_v}</span>`;
+
+    showToast('TARGET LOCKED: ' + chipId, 'Loaded hardware registers and mathematical schema for ' + data.title);
+  }
+
+  function setTraceSpeed(speed) {
+    document.querySelectorAll('#clock-10s, #clock-20s, #clock-35s').forEach(el => {
+      el.classList.remove('bg-neon-cyan/20', 'text-neon-cyan', 'font-bold', 'border', 'border-neon-cyan/50', 'shadow-[0_0_10px_rgba(0,240,255,0.3)]');
+      el.classList.add('text-on-surface-variant');
+    });
+    event.target.classList.add('bg-neon-cyan/20', 'text-neon-cyan', 'font-bold', 'border', 'border-neon-cyan/50', 'shadow-[0_0_10px_rgba(0,240,255,0.3)]');
+    event.target.classList.remove('text-on-surface-variant');
+
+    showToast('CLOCK PRESCALER MODIFIED', 'Pipeline step clock prescaled to ' + speed + ' interval.');
+  }
+
+  function triggerPcbPulse() {
+    const btn = document.getElementById('execPipelineBtn');
+    btn.classList.add('scale-95', 'brightness-125');
+    
+    const pulseElements = [
+      document.getElementById('activePulse1'),
+      document.getElementById('activePulse2'),
+      document.getElementById('activePulse3'),
+      document.getElementById('activePulse4'),
+      document.getElementById('activePulse5')
+    ];
+
+    pulseElements.forEach(el => {
+      if (el) {
+        el.setAttribute('stroke-width', '6');
+        el.setAttribute('stroke', '#00ff66');
+      }
+    });
+
+    showToast('END-TO-END PIPELINE FIRED', 'Simulated 10-step telemetry tensor propagated across all 5 stages in 0.78ms.');
+
+    setTimeout(() => {
+      btn.classList.remove('scale-95', 'brightness-125');
+      pulseElements.forEach(el => {
+        if (el) {
+          el.setAttribute('stroke-width', '2.5');
+        }
+      });
+    }, 1400);
+  }
+
+  function benchmarkComponent() {
+    showToast('BENCHMARK EXECUTED', '450 MHz FPGA Core verified at 1.42 TFLOPS with ±0.04ps clock jitter.');
+  }
+
+  function dumpTensorShm() {
+    showToast('TENSOR SHM DUMPED', 'Dumped [1, 10, 64] FP16 buffer to /dev/shm/sentinel_conformer.raw');
+  }
+
+  function viewGradientSaliency() {
+    showToast('SALIENCY OVERLAY', 'Backpropagated gradients |dY/dX| mapped across 10 temporal steps.');
+  }
+
+  function showToast(title, msg) {
+    const toast = document.getElementById('pcbAlertToast');
+    document.getElementById('toastTitle').innerText = title;
+    document.getElementById('toastMsg').innerText = msg;
+    toast.classList.remove('translate-x-full');
+    setTimeout(() => {
+      toast.classList.add('translate-x-full');
+    }, 3800);
+  }
+</script>
+</body></html>
