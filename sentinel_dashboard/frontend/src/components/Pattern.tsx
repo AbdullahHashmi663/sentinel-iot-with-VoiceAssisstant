@@ -2,20 +2,31 @@
 
 import React from 'react';
 
-const KATAKANA_STRING = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンガギグゲゴザジズゼゾダヂヅデドバビブベボパピプペポ";
+// Rich Cyber Defense Chinese Characters + Classic Matrix Katakana
+const CHINESE_CYBER_CHARS = "零日防御网络安全机密系统矩阵量子终端数据流监控态势雷达拦截核心协议加密信道破解漏洞烽火卫士智能审计威胁溯源认证节点溯流战术阻断凭证隔离侦测诱捕沙箱规避侵入防火墙指令代码追踪预警密钥拓扑集群算力节点";
+const KATAKANA_CHARS = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンガギグゲゴザジズゼゾダヂヅデドバビブベボパピプペポ";
 
-// Deterministic static distribution: 20% White/Black, 10% Green, 70% Blue (No animations)
-const KATAKANA_ITEMS = Array.from({ length: 2400 }, (_, i) => {
-  const char = KATAKANA_STRING[i % KATAKANA_STRING.length];
+// Interleave Chinese cyber words and Katakana for balanced digital rain distribution
+const MATRIX_STRING = Array.from(
+  { length: Math.max(CHINESE_CYBER_CHARS.length, KATAKANA_CHARS.length) * 2 },
+  (_, i) => (i % 2 === 0
+    ? CHINESE_CYBER_CHARS[(i / 2) % CHINESE_CYBER_CHARS.length]
+    : KATAKANA_CHARS[Math.floor(i / 2) % KATAKANA_CHARS.length])
+).join("");
+
+// Deterministic static distribution across 3200 cells (high density for all viewports)
+// 30% Slate/Carbon Ink, 18% Emerald Green, 52% Cyber Cobalt Blue
+const MATRIX_ITEMS = Array.from({ length: 3200 }, (_, i) => {
+  const char = MATRIX_STRING[i % MATRIX_STRING.length];
   // Deterministic pseudo-random hash across index
   const hash = (i * 9301 + 49297) % 233280;
   const ratio = hash / 233280;
 
-  let colorClass = "c-blue"; // Default 70%
-  if (ratio < 0.20) {
-    colorClass = "c-white"; // 20% White in dark mode, Carbon Black in light mode
-  } else if (ratio < 0.30) {
-    colorClass = "c-green"; // 10% Emerald Green
+  let colorClass = "c-blue"; // Default 52%
+  if (ratio < 0.30) {
+    colorClass = "c-white"; // 30% Carbon Black/Ink in light mode, White in dark mode
+  } else if (ratio < 0.48) {
+    colorClass = "c-green"; // 18% Emerald Cyber Green
   }
 
   return { char, colorClass };
@@ -23,9 +34,9 @@ const KATAKANA_ITEMS = Array.from({ length: 2400 }, (_, i) => {
 
 export default function Pattern() {
   return (
-    <div className="w-full h-full absolute inset-0 pointer-events-none select-none">
+    <div className="jp-matrix-wrapper w-full h-full absolute inset-0 pointer-events-none select-none">
       <div className="jp-matrix">
-        {KATAKANA_ITEMS.map((item, idx) => (
+        {MATRIX_ITEMS.map((item, idx) => (
           <span key={idx} className={item.colorClass}>
             {item.char}
           </span>

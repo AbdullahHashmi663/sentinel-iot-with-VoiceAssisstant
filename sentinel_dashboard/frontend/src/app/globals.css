@@ -236,25 +236,28 @@ body {
   transition: background-color 0.35s ease, color 0.35s ease;
 }
 
-/* Japanese Katakana Cyber Background Pattern */
+/* Chinese & Katakana Cyber Background Pattern */
 .jp-matrix {
-  background-color: #05050a;
+  background-color: transparent;
   width: 100%;
   height: 100%;
   overflow: hidden;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
-  grid-auto-rows: 40px;
+  grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+  grid-auto-rows: 36px;
   min-width: 100vw;
   min-height: 100vh;
-  font-size: 32px;
-  font-family: "Courier New", Courier, monospace;
-  justify-content: center;
-  align-content: center;
+  font-size: 24px;
+  font-family: "JetBrains Mono", "Space Grotesk", "Courier New", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Segoe UI", monospace;
+  justify-content: start;
+  align-content: start;
   transition: background-color 0.35s ease;
 }
 
 .jp-matrix > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   user-select: none;
   line-height: 1;
@@ -262,50 +265,89 @@ body {
 
 /* Dark Mode Glyphs */
 .jp-matrix > span.c-blue {
-  color: rgba(0, 150, 255, 0.4);
-  text-shadow: 0 0 5px rgba(0, 150, 255, 0.45);
+  color: rgba(0, 150, 255, 0.32);
+  text-shadow: 0 0 6px rgba(0, 150, 255, 0.35);
 }
 
 .jp-matrix > span.c-white {
-  color: #ffffff;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.72);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
 }
 
 .jp-matrix > span.c-green {
-  color: #00ff66;
-  text-shadow: 0 0 8px rgba(0, 255, 102, 0.75);
+  color: rgba(0, 255, 102, 0.65);
+  text-shadow: 0 0 8px rgba(0, 255, 102, 0.55);
 }
 
-/* Light Mode Glyphs (Alabaster Platinum Theme) */
+/* Matrix Chinese/Katakana Background Wrapper */
+.jp-matrix-wrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  user-select: none;
+  filter: blur(1.5px);
+  opacity: 0.75;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+html.light .jp-matrix-wrapper,
+[data-theme="alabaster"] .jp-matrix-wrapper,
+[data-theme="arctic"] .jp-matrix-wrapper,
+[data-theme="light"] .jp-matrix-wrapper {
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+/* Light Mode Glyphs (Alabaster Platinum & Arctic Light Themes) */
 html.light .jp-matrix,
 [data-theme="alabaster"] .jp-matrix,
 [data-theme="arctic"] .jp-matrix,
 [data-theme="light"] .jp-matrix {
-  background-color: #fafaff !important; /* Ghost White */
+  background-color: transparent !important; /* Allow clean light body canvas behind */
+}
+
+html.light .jp-matrix > span,
+[data-theme="alabaster"] .jp-matrix > span,
+[data-theme="arctic"] .jp-matrix > span,
+[data-theme="light"] .jp-matrix > span {
+  font-weight: 700 !important;
 }
 
 html.light .jp-matrix > span.c-blue,
 [data-theme="alabaster"] .jp-matrix > span.c-blue,
 [data-theme="arctic"] .jp-matrix > span.c-blue,
 [data-theme="light"] .jp-matrix > span.c-blue {
-  color: rgba(2, 132, 199, 0.28) !important; /* 70% Light Cyber Blue */
-  text-shadow: 0 0 2px rgba(2, 132, 199, 0.15) !important;
+  color: rgba(2, 132, 199, 0.65) !important; /* Crisp Vivid Cyber Blue (65% opacity) */
+  text-shadow: 0 0 1px rgba(2, 132, 199, 0.3) !important;
 }
 
 html.light .jp-matrix > span.c-white,
 [data-theme="alabaster"] .jp-matrix > span.c-white,
 [data-theme="arctic"] .jp-matrix > span.c-white,
 [data-theme="light"] .jp-matrix > span.c-white {
-  color: rgba(28, 28, 28, 0.32) !important; /* 20% Soft Carbon Black */
-  text-shadow: none !important;
+  color: rgba(15, 23, 42, 0.72) !important; /* Deep Carbon Slate Chinese & Katakana (72% opacity) */
+  text-shadow: 0 0 1px rgba(15, 23, 42, 0.25) !important;
 }
 
 html.light .jp-matrix > span.c-green,
 [data-theme="alabaster"] .jp-matrix > span.c-green,
 [data-theme="arctic"] .jp-matrix > span.c-green,
 [data-theme="light"] .jp-matrix > span.c-green {
-  color: rgba(5, 150, 105, 0.32) !important; /* 10% Soft Emerald Green */
-  text-shadow: 0 0 2px rgba(5, 150, 105, 0.15) !important;
+  color: rgba(5, 150, 105, 0.65) !important; /* Crisp Emerald Cyber Green (65% opacity) */
+  text-shadow: 0 0 1px rgba(5, 150, 105, 0.3) !important;
+}
+
+/* Ambient Radial Vignette */
+.ambient-vignette {
+  background: radial-gradient(ellipse at center, transparent 35%, rgba(0, 0, 0, 0.45) 100%);
+}
+html.light .ambient-vignette,
+[data-theme="alabaster"] .ambient-vignette,
+[data-theme="arctic"] .ambient-vignette,
+[data-theme="light"] .ambient-vignette {
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(203, 213, 225, 0.25) 100%) !important;
 }
 
 /* Background Cyber Grid */
@@ -611,7 +653,8 @@ html.light [class*="bg-[#0b0f19]"],
 [data-theme="alabaster"] [class*="bg-[#0b0f19]"],
 html.light [class*="bg-[#0e141a]"],
 [data-theme="alabaster"] [class*="bg-[#0e141a]"] {
-  background-color: #eef0f2 !important;
+  background-color: rgba(238, 240, 242, 0.88) !important;
+  backdrop-filter: blur(8px) !important;
 }
 
 html.light [class*="bg-[#0b131e]"],
@@ -634,12 +677,14 @@ html.light [class*="bg-[#162536]"],
 [data-theme="alabaster"] [class*="bg-[#162536]"],
 html.light [class*="bg-[#252b31]"],
 [data-theme="alabaster"] [class*="bg-[#252b31]"] {
-  background-color: #ecebe4 !important;
+  background-color: rgba(236, 235, 228, 0.88) !important;
+  backdrop-filter: blur(8px) !important;
 }
 
 html.light [class*="bg-[#04080c]"],
 [data-theme="alabaster"] [class*="bg-[#04080c]"] {
-  background-color: #eef0f2 !important;
+  background-color: rgba(238, 240, 242, 0.88) !important;
+  backdrop-filter: blur(8px) !important;
 }
 
 html.light [class*="bg-black/60"],
@@ -701,7 +746,9 @@ html.light .hud-box,
 [data-theme="alabaster"] .hud-box,
 [data-theme="arctic"] .hud-box,
 [data-theme="light"] .hud-box {
-  background: linear-gradient(145deg, rgba(238, 240, 242, 0.98) 0%, rgba(236, 235, 228, 0.98) 100%) !important;
+  background: linear-gradient(145deg, rgba(238, 240, 242, 0.88) 0%, rgba(236, 235, 228, 0.90) 100%) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
   border-color: #daddd8 !important;
   box-shadow: 0 2px 10px rgba(28, 28, 28, 0.04) !important;
   color: #1c1c1c !important;
@@ -723,7 +770,9 @@ html.light .cyber-card,
 [data-theme="alabaster"] .cyber-card,
 [data-theme="arctic"] .cyber-card,
 [data-theme="light"] .cyber-card {
-  background: #eef0f2 !important;
+  background: rgba(238, 240, 242, 0.88) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
   border-color: #daddd8 !important;
   box-shadow: 0 8px 24px rgba(28, 28, 28, 0.06) !important;
   color: #1c1c1c !important;
@@ -733,7 +782,9 @@ html.light .glass-panel-deep,
 [data-theme="alabaster"] .glass-panel-deep,
 [data-theme="arctic"] .glass-panel-deep,
 [data-theme="light"] .glass-panel-deep {
-  background: linear-gradient(145deg, #eef0f2 0%, #ecebe4 100%) !important;
+  background: linear-gradient(145deg, rgba(238, 240, 242, 0.88) 0%, rgba(236, 235, 228, 0.90) 100%) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
   border-color: #daddd8 !important;
   box-shadow: 0 10px 30px rgba(28, 28, 28, 0.07) !important;
   color: #1c1c1c !important;
@@ -1078,4 +1129,84 @@ html.light ::-webkit-scrollbar-thumb:hover,
 
 .clip-chamfer {
   clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+/* ==============================================================================
+   CUSTOM CONCENTRIC SEMICIRCLE HYPNOTIC LOADER
+   Theme-adaptive color & optical glow
+   ============================================================================== */
+:root {
+  --loader-color: var(--accent-primary, #00f3ff);
+}
+
+[data-theme="cyberpunk"] { --loader-color: #00f3ff; }
+[data-theme="matrix"] { --loader-color: #00ff66; }
+[data-theme="stealth"] { --loader-color: #2d79ff; }
+[data-theme="solar"] { --loader-color: #ff7700; }
+[data-theme="crimson"] { --loader-color: #ff1744; }
+[data-theme="synthwave"] { --loader-color: #e024c3; }
+[data-theme="cosmos"] { --loader-color: #a855f7; }
+[data-theme="alabaster"],
+[data-theme="arctic"],
+[data-theme="light"],
+html.light {
+  --loader-color: #0284c7;
+}
+
+.custom-loader-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.semicircle {
+  width: var(--loader-size, 170px);
+  height: var(--loader-size, 170px);
+  animation: 6s rotate141 infinite linear;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  filter: drop-shadow(0 0 14px var(--loader-color, #00f3ff));
+}
+
+.semicircle div {
+  width: 90% !important;
+  height: 90% !important;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  animation: 6s rotate141 infinite linear;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.semicircle:before,
+.semicircle div:before {
+  content: '';
+  width: 100%;
+  height: 50%;
+  display: block;
+  background: radial-gradient(
+    transparent,
+    transparent 65%,
+    var(--loader-color, #00f3ff) 65%,
+    var(--loader-color, #00f3ff)
+  );
+  background-size: 100% 200%;
+}
+
+@keyframes rotate141 {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Light Theme Semicircle Loader Contrast */
+html.light .semicircle,
+[data-theme="alabaster"] .semicircle,
+[data-theme="arctic"] .semicircle,
+[data-theme="light"] .semicircle {
+  filter: drop-shadow(0 0 8px rgba(2, 132, 199, 0.35));
 }

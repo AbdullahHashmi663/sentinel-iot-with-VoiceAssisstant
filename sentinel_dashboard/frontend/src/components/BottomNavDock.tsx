@@ -18,6 +18,7 @@ import {
   ShieldAlert,
   ShieldCheck,
   FileCheck,
+  Sliders,
 } from "lucide-react";
 import { useTelemetryStore } from "@/store/useTelemetryStore";
 import { ConsoleType } from "@/types/sentinel";
@@ -39,8 +40,8 @@ export default function BottomNavDock({ onOpenResearch }: BottomNavDockProps) {
   const handleNavigate = (consoleId: ConsoleType) => {
     setActiveConsole(consoleId);
 
-    // If currently on standalone /execute, /voice, or /audit page, return to /
-    if (pathname === "/execute" || pathname === "/voice" || pathname === "/audit") {
+    // If currently on standalone /execute, /voice, /audit, or /priority page, return to /
+    if (pathname === "/execute" || pathname === "/voice" || pathname === "/audit" || pathname === "/priority") {
       router.push("/");
     }
   };
@@ -103,6 +104,15 @@ export default function BottomNavDock({ onOpenResearch }: BottomNavDockProps) {
       color: "#a855f7",
       isActive: pathname === "/" && activeConsole === "compliance",
       onClick: () => handleNavigate("compliance"),
+    },
+    {
+      id: "priority",
+      label: "Priority Matrix",
+      description: "Asset Priority Tiers, 2D Criticality-Risk Matrix & Sensible Shutdown Reasoner",
+      icon: <Sliders className="w-full h-full" />,
+      color: "#00f0ff",
+      isActive: (pathname === "/" && activeConsole === "priority") || pathname === "/priority",
+      onClick: () => handleNavigate("priority"),
     },
   ];
 

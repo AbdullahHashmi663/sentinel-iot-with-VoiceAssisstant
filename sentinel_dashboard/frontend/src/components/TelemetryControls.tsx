@@ -82,7 +82,10 @@ export default function TelemetryControls(props: TelemetryControlsProps) {
         {/* MODE TOGGLE */}
         <div className="flex items-center gap-1.5 p-1 rounded-xl glass-inset border border-white/10">
           <button
-            onClick={() => onModeChange("simulator")}
+            onClick={() => {
+              store.triggerGlobalLoading(800, "INITIALIZING ToN_IoT DATASET BUNDLE", "Loading 13 industrial sensory domain models...");
+              onModeChange("simulator");
+            }}
             className={`cursor-pointer flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-['Rajdhani'] font-bold uppercase transition-all focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] focus-visible:outline-none ${
               mode === "simulator"
                 ? "bg-[var(--accent-primary)] text-black shadow-[0_0_15px_var(--accent-primary)] border border-white/30"
@@ -94,7 +97,10 @@ export default function TelemetryControls(props: TelemetryControlsProps) {
           </button>
 
           <button
-            onClick={() => onModeChange("live_host")}
+            onClick={() => {
+              store.triggerGlobalLoading(850, "CONNECTING TO LIVE WINDOWS HOST OS", "Streaming real-time WinEvent & process telemetry sockets...");
+              onModeChange("live_host");
+            }}
             className={`cursor-pointer flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-['Rajdhani'] font-bold uppercase transition-all focus-visible:ring-2 focus-visible:ring-[var(--alert-nominal)] focus-visible:outline-none ${
               mode === "live_host"
                 ? "bg-[var(--alert-nominal)] text-black shadow-[0_0_15px_var(--alert-nominal)] border border-white/30"
@@ -113,7 +119,16 @@ export default function TelemetryControls(props: TelemetryControlsProps) {
           </span>
           <select
             value={activeDomain}
-            onChange={(e) => onDomainChange(e.target.value)}
+            onChange={(e) => {
+              const newD = e.target.value;
+              const meta = domains[newD] || { num_features: 17, num_classes: 10 };
+              store.triggerGlobalLoading(
+                750,
+                `BUFFERING DOMAIN: ${newD.toUpperCase()}`,
+                `Calibrating 10-step sequence tensors (${meta.num_features} features, ${meta.num_classes} classes)...`
+              );
+              onDomainChange(newD);
+            }}
             disabled={mode === "live_host"}
             aria-label="Active Telemetry Domain Selection"
             className="flex-1 px-3.5 py-2 rounded-xl glass-inset border border-white/15 text-xs font-['JetBrains_Mono'] text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] cursor-pointer disabled:opacity-50 transition-colors shadow-inner"

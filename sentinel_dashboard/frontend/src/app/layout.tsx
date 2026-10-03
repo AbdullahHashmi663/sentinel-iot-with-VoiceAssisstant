@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Pattern from "@/components/Pattern";
+import GlobalLoaderHUD from "@/components/GlobalLoaderHUD";
 
 export const metadata: Metadata = {
   title: "Sentinel-IoT | Autonomous Explainable XDR & Compliance SOC",
@@ -30,13 +31,18 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-[#05050a] text-[#dee3eb] antialiased selection:bg-[#00f0ff]/30 selection:text-[#00f0ff] relative">
-        {/* Japanese Matrix Animated Cyber Background */}
-        <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none">
+        {/* Japanese Matrix Animated Cyber Background with Soft Ambient Blur & Vignette */}
+        <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none bg-[var(--bg-canvas)]">
           <Pattern />
+          {/* Subtle Ambient Radial Vignette */}
+          <div className="absolute inset-0 ambient-vignette pointer-events-none" />
         </div>
         <div className="relative z-10 flex flex-col min-h-full">
           {children}
         </div>
+
+        {/* Global Tactical Concentric Semicircle Loader HUD */}
+        <GlobalLoaderHUD />
       </body>
     </html>
   );

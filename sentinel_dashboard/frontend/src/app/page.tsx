@@ -26,6 +26,7 @@ import AdversarialConsole from "@/components/consoles/AdversarialConsole";
 import RemediationConsole from "@/components/consoles/RemediationConsole";
 import ComplianceConsole from "@/components/consoles/ComplianceConsole";
 import CryptographicAuditBundleConsole from "@/components/consoles/CryptographicAuditBundleConsole";
+import PriorityConsole from "@/components/consoles/PriorityConsole";
 import CryptographicAuditReportModal from "@/components/modals/CryptographicAuditReportModal";
 
 // Circuit Board Component for Embedded PCB Execution
@@ -284,6 +285,7 @@ export default function MasterDashboardPage() {
 
         {activeConsole === "compliance" && <ComplianceConsole />}
         {activeConsole === "audit" && <CryptographicAuditBundleConsole />}
+        {activeConsole === "priority" && <PriorityConsole />}
 
         {/* CIRCUIT BOARD FULL SYSTEM ARCHITECTURE TOPOLOGY */}
         {activeConsole === "execute" && (

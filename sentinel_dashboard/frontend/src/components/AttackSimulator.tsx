@@ -32,7 +32,10 @@ const ATTACK_VECTORS = [
   { id: "normal", label: "Nominal Baseline", icon: ShieldCheck, color: "#00ff66", desc: "Standard operating parameters and telemetry" },
 ];
 
+import { useTelemetryStore } from "@/store/useTelemetryStore";
+
 export default function AttackSimulator(props: AttackSimulatorProps) {
+  const { triggerGlobalLoading } = useTelemetryStore();
   const [selectedAttack, setSelectedAttack] = useState<string>("ddos");
   const [targetIp, setTargetIp] = useState<string>("192.168.1.105");
   const [targetPort, setTargetPort] = useState<string>("8080");
@@ -40,6 +43,11 @@ export default function AttackSimulator(props: AttackSimulatorProps) {
   const [lastInjected, setLastInjected] = useState<string | null>(null);
 
   const handleInject = () => {
+    triggerGlobalLoading(
+      900,
+      `INJECTING ${selectedAttack.toUpperCase()} ATTACK VECTOR`,
+      `Target: ${targetIp}:${targetPort} • Streaming adversarial tensor perturbations to Conformer...`
+    );
     if (props.onInjectAttack) {
       props.onInjectAttack(selectedAttack);
     } else {

@@ -12,7 +12,44 @@ export type ConsoleType =
   | 'compliance'
   | 'execute'
   | 'voice'
-  | 'audit';
+  | 'audit'
+  | 'priority';
+
+export type AssetPriorityTier = 'Tier 1 (Mission-Critical)' | 'Tier 2 (High)' | 'Tier 3 (Medium)' | 'Tier 4 (Low)';
+export type AssetCategory = 'device' | 'database' | 'server';
+
+export interface ManagedAsset {
+  id: string;
+  name: string;
+  category: AssetCategory;
+  ip: string;
+  port: number;
+  protocol: string;
+  priority: AssetPriorityTier;
+  business_criticality: number; // 0 to 100
+  downtime_cost_per_hour: number; // in USD
+  auto_shutdown_allowed: boolean;
+  connection_status: 'online' | 'offline' | 'degraded' | 'testing';
+  latency_ms: number;
+  packet_loss: number;
+  last_ping: string;
+  auto_discovered: boolean;
+  description: string;
+}
+
+export interface TriageDecision {
+  asset: ManagedAsset;
+  attack_type: string;
+  tau_score: number;
+  decision: string;
+  sensible_to_shutdown: boolean;
+  action_summary: string;
+  recommended_strategy: string;
+  estimated_breach_loss_usd: number;
+  downtime_cost_per_hour_usd: number;
+  quadrant: string;
+  timestamp: string;
+}
 
 export type DomainType =
   | 'Network_Traffic'

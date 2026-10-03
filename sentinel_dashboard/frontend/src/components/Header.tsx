@@ -18,7 +18,6 @@ import {
   SkipForward,
   Lock,
   Layers,
-  Palette,
   User,
   Activity,
   Mic,
@@ -28,8 +27,8 @@ import { useTelemetryStore } from "@/store/useTelemetryStore";
 import { DomainType } from "@/types/sentinel";
 
 interface HeaderProps {
-  theme: string;
-  setTheme: (t: string) => void;
+  theme?: string;
+  setTheme?: (t: string) => void;
   onOpenResearch: () => void;
 }
 
@@ -62,7 +61,7 @@ const DOMAINS_LIST: { id: DomainType; label: string }[] = [
 ];
 
 export default function Header({
-  theme,
+  theme = "cyberpunk",
   setTheme,
   onOpenResearch
 }: HeaderProps) {
@@ -216,34 +215,6 @@ export default function Header({
             <Clock className="w-3.5 h-3.5 text-[#00f0ff]" />
             <span className="text-white font-bold">{utcTime}</span>
           </div>
-
-          {/* THEME PICKER (PREVIOUS TOGGLE STYLING) */}
-          <select
-            value={theme}
-            aria-label="Theme Selection"
-            onChange={(e) => {
-              const newT = e.target.value;
-              setTheme(newT);
-              if (typeof window !== "undefined") {
-                localStorage.setItem("sentinel_theme", newT);
-                document.documentElement.setAttribute("data-theme", newT);
-                if (newT === "alabaster" || newT === "arctic" || newT === "light") {
-                  document.documentElement.classList.add("light");
-                  document.documentElement.classList.remove("dark");
-                } else {
-                  document.documentElement.classList.remove("light");
-                  document.documentElement.classList.add("dark");
-                }
-              }
-            }}
-            className="px-3 py-1.5 rounded-xl bg-black/60 border border-white/15 text-xs font-mono text-[#dee3eb] cursor-pointer focus-visible:ring-2 focus-visible:ring-[#00f0ff] focus-visible:outline-none transition-all shadow-[inset_0_1px_0_rgba(255,255,255,0.15)] hover:border-white/30 shrink-0"
-          >
-            {THEMES.map((t) => (
-              <option key={t.id} value={t.id} className="bg-[#0b0f19] text-white">
-                {t.icon} {t.name}
-              </option>
-            ))}
-          </select>
 
           {/* RESEARCH GALLERY (PREVIOUS TOGGLE STYLING) */}
           <button

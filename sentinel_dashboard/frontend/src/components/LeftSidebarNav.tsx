@@ -71,6 +71,16 @@ export default function LeftSidebarNav({ onOpenResearch }: LeftSidebarNavProps) 
 
   const navItems = [
     {
+      id: "priority",
+      label: "ASSET PRIORITY MATRIX",
+      sublabel: "2D Criticality-Risk Matrix & Sensible Shutdown",
+      icon: <Sliders className="w-4 h-4" />,
+      color: "#00f0ff",
+      isActive: pathname === "/priority" || activeConsole === "priority",
+      badge: "TRIAGE",
+      onClick: () => handleRoute("/priority", "priority"),
+    },
+    {
       id: "execute",
       label: "PCB SILICON CANVAS",
       sublabel: "Hardware IC Flow & Conformer Pipeline",
