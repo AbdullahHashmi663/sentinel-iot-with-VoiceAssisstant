@@ -209,12 +209,12 @@ export default function PriorityConsole() {
   const getCategoryIcon = (category: AssetCategory) => {
     switch (category) {
       case "database":
-        return <Database className={`w-3.5 h-3.5 ${isLightMode ? "text-[#0284c7]" : "text-[#38bdf8]"}`} />;
+        return <Database className={`w-3.5 h-3.5 ${isLightMode ? "text-[var(--ws-mint)]" : "text-[var(--ws-mint)]"}`} />;
       case "server":
-        return <Server className={`w-3.5 h-3.5 ${isLightMode ? "text-[#7c3aed]" : "text-[#a855f7]"}`} />;
+        return <Server className={`w-3.5 h-3.5 ${isLightMode ? "text-[var(--ws-mint)]" : "text-[var(--research-sand)]"}`} />;
       case "device":
       default:
-        return <Cpu className={`w-3.5 h-3.5 ${isLightMode ? "text-[#059669]" : "text-[#00ff66]"}`} />;
+        return <Cpu className={`w-3.5 h-3.5 ${isLightMode ? "text-[var(--ws-mint)]" : "text-[var(--ws-mint)]"}`} />;
     }
   };
 
@@ -225,8 +225,8 @@ export default function PriorityConsole() {
           <span
             className={`px-2 py-0.5 rounded text-[10px] font-bold border ${
               isLightMode
-                ? "bg-[#fee2e2] border-[#fca5a5] text-[#dc2626]"
-                : "bg-[#ff2a5f]/20 border-[#ff2a5f]/60 text-[#ff2a5f] shadow-[0_0_10px_rgba(255,42,95,0.3)]"
+                ? "bg-[#fee2e2] border-[var(--ws-coral)] text-[var(--ws-coral)]"
+                : "bg-[var(--ws-coral)]/20 border-[var(--ws-coral)]/60 text-[var(--ws-coral)] shadow-[0_0_10px_rgba(255,153,133,0.3)]"
             }`}
           >
             TIER 1 (CRITICAL)
@@ -237,8 +237,8 @@ export default function PriorityConsole() {
           <span
             className={`px-2 py-0.5 rounded text-[10px] font-bold border ${
               isLightMode
-                ? "bg-[#fef3c7] border-[#fcd34d] text-[#b45309]"
-                : "bg-[#ffb700]/20 border-[#ffb700]/60 text-[#ffb700]"
+                ? "bg-[#fef3c7] border-[var(--research-sand)] text-[var(--research-sand)]"
+                : "bg-[var(--research-sand)]/20 border-[var(--research-sand)]/60 text-[var(--research-sand)]"
             }`}
           >
             TIER 2 (HIGH)
@@ -249,8 +249,8 @@ export default function PriorityConsole() {
           <span
             className={`px-2 py-0.5 rounded text-[10px] font-bold border ${
               isLightMode
-                ? "bg-[#e0f2fe] border-[#7dd3fc] text-[#0369a1]"
-                : "bg-[#00f0ff]/20 border-[#00f0ff]/60 text-[#00f0ff]"
+                ? "bg-[#e0f2fe] border-[var(--ws-mint)] text-[var(--ws-mint)]"
+                : "bg-[var(--ws-mint)]/20 border-[var(--ws-mint)]/60 text-[var(--ws-mint)]"
             }`}
           >
             TIER 3 (MEDIUM)
@@ -262,8 +262,8 @@ export default function PriorityConsole() {
           <span
             className={`px-2 py-0.5 rounded text-[10px] font-bold border ${
               isLightMode
-                ? "bg-[#f1f5f9] border-[#cbd5e1] text-[#475569]"
-                : "bg-[#64748b]/20 border-[#64748b]/60 text-[#94a3b8]"
+                ? "bg-[#f1f5f9] border-[#cbd5e1] text-[var(--ws-muted)]"
+                : "bg-[var(--ws-muted)]/20 border-[var(--ws-muted)]/60 text-[var(--ws-muted)]"
             }`}
           >
             TIER 4 (LOW)
@@ -283,18 +283,18 @@ export default function PriorityConsole() {
         className={`p-4 sm:p-5 rounded-xl border transition-colors duration-200 relative overflow-hidden ${
           isLightMode
             ? "bg-[#ffffff] border-[#daddd8] shadow-[0_4px_24px_rgba(28,28,28,0.06)]"
-            : "cyber-card border-[var(--border-color)] bg-[#07101a]/85 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.6)]"
+            : "cyber-card border-[var(--border-color)] bg-[var(--ws-sidebar)]/85 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.6)]"
         }`}
       >
         <div
           className={`absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl pointer-events-none ${
-            isLightMode ? "bg-[#0284c7]/5" : "bg-[var(--accent-primary)]/5"
+            isLightMode ? "bg-[var(--ws-mint)]/5" : "bg-[var(--accent-primary)]/5"
           }`}
         />
 
         <div
           className={`flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 pb-4 border-b ${
-            isLightMode ? "border-[#e2e8f0]" : "border-[#162536]"
+            isLightMode ? "border-[#e2e8f0]" : "border-[var(--ws-line)]"
           }`}
         >
           <div className="flex items-center gap-3">
@@ -302,12 +302,12 @@ export default function PriorityConsole() {
               className={`p-2.5 rounded-lg border ${
                 isLightMode
                   ? "bg-[#e0f2fe] border-[#bae6fd] shadow-sm"
-                  : "bg-[#0a1a2b] border-[#00f0ff]/50 shadow-[0_0_20px_rgba(0,240,255,0.25)]"
+                  : "bg-[var(--ws-panel)] border-[var(--ws-mint)]/50 shadow-[0_0_20px_rgba(179,223,147,0.25)]"
               }`}
             >
               <Sliders
                 className={`w-5 h-5 ${
-                  isLightMode ? "text-[#0284c7]" : "text-[#00f0ff] animate-pulse"
+                  isLightMode ? "text-[var(--ws-mint)]" : "text-[var(--ws-mint)] animate-pulse"
                 }`}
               />
             </div>
@@ -315,7 +315,7 @@ export default function PriorityConsole() {
               <div className="flex items-center gap-2">
                 <h1
                   className={`font-['Orbitron'] text-base sm:text-lg font-bold tracking-wide m-0 ${
-                    isLightMode ? "text-[#0f172a]" : "text-[#dbfcff]"
+                    isLightMode ? "text-[#0f172a]" : "text-[var(--ws-text)]"
                   }`}
                 >
                   ASSET PRIORITY MATRIX & SENSIBLE SHUTDOWN REASONER
@@ -323,14 +323,14 @@ export default function PriorityConsole() {
                 <span
                   className={`px-2 py-0.5 rounded text-[9px] font-bold border ${
                     isLightMode
-                      ? "bg-[#dcfce7] border-[#86efac] text-[#15803d]"
-                      : "bg-[#00ff66]/15 border-[#00ff66]/40 text-[#00ff66]"
+                      ? "bg-[#dcfce7] border-[var(--ws-mint)] text-[var(--ws-mint)]"
+                      : "bg-[var(--ws-mint)]/15 border-[var(--ws-mint)]/40 text-[var(--ws-mint)]"
                   }`}
                 >
                   AIR-GAPPED ENGINE
                 </span>
               </div>
-              <p className={`text-xs mt-0.5 ${isLightMode ? "text-[#64748b]" : "text-[#64748b]"}`}>
+              <p className={`text-xs mt-0.5 ${isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"}`}>
                 Strategic asset value tiering, live socket diagnostic verification, and breach blast radius vs. downtime cost triage
               </p>
             </div>
@@ -343,13 +343,13 @@ export default function PriorityConsole() {
               disabled={isTestingAll}
               className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-bold transition-all shadow-sm active:scale-95 disabled:opacity-50 cursor-pointer border ${
                 isLightMode
-                  ? "bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#0284c7] border-[#cbd5e1]"
-                  : "bg-[#091522] hover:bg-[#12283e] text-[#00f0ff] border-[#00f0ff]/40 shadow-[0_0_15px_rgba(0,240,255,0.15)]"
+                  ? "bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[var(--ws-mint)] border-[#cbd5e1]"
+                  : "bg-[var(--ws-panel)] hover:bg-[var(--ws-line)] text-[var(--ws-mint)] border-[var(--ws-mint)]/40 shadow-[0_0_15px_rgba(179,223,147,0.15)]"
               }`}
             >
               <RefreshCw
                 className={`w-3.5 h-3.5 ${
-                  isTestingAll ? "animate-spin text-[#059669]" : ""
+                  isTestingAll ? "animate-spin text-[var(--ws-mint)]" : ""
                 }`}
               />
               <span>{isTestingAll ? "TESTING ALL ASSETS..." : "TEST ALL CONNECTIONS"}</span>
@@ -359,8 +359,8 @@ export default function PriorityConsole() {
               onClick={() => setIsConnectModalOpen(true)}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg font-['Orbitron'] text-xs font-black tracking-wider transition-all active:scale-95 cursor-pointer ${
                 isLightMode
-                  ? "bg-gradient-to-r from-[#0284c7] to-[#059669] text-white shadow-[0_4px_16px_rgba(2,132,199,0.25)] hover:shadow-[0_6px_20px_rgba(2,132,199,0.4)]"
-                  : "bg-gradient-to-r from-[#00f0ff] to-[#00ff66] text-black shadow-[0_0_25px_rgba(0,255,102,0.4)] hover:shadow-[0_0_35px_rgba(0,255,102,0.7)]"
+                  ? "bg-gradient-to-r from-[var(--ws-mint)] to-[var(--ws-mint)] text-white shadow-[0_4px_16px_rgba(2,132,199,0.25)] hover:shadow-[0_6px_20px_rgba(2,132,199,0.4)]"
+                  : "bg-gradient-to-r from-[var(--ws-mint)] to-[var(--ws-mint)] text-black shadow-[0_0_25px_rgba(179,223,147,0.4)] hover:shadow-[0_0_35px_rgba(179,223,147,0.7)]"
               }`}
             >
               <PlusCircle className="w-4 h-4" />
@@ -375,28 +375,28 @@ export default function PriorityConsole() {
             className={`p-3 rounded-lg border flex flex-col transition-colors ${
               isLightMode
                 ? "bg-[#f8fafc] border-[#e2e8f0] shadow-sm"
-                : "bg-[#040910] border-[#14283c]"
+                : "bg-[var(--ws-sidebar)] border-[var(--ws-line)]"
             }`}
           >
             <span
               className={`text-[10px] uppercase tracking-wider flex items-center justify-between font-bold ${
-                isLightMode ? "text-[#64748b]" : "text-[#64748b]"
+                isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"
               }`}
             >
               MANAGED ASSETS
-              <Cpu className={`w-3.5 h-3.5 ${isLightMode ? "text-[#0284c7]" : "text-[#00f0ff]"}`} />
+              <Cpu className={`w-3.5 h-3.5 ${isLightMode ? "text-[var(--ws-mint)]" : "text-[var(--ws-mint)]"}`} />
             </span>
             <div className="flex items-baseline gap-2 mt-1">
               <span
                 className={`font-['Orbitron'] text-xl font-bold ${
-                  isLightMode ? "text-[#0f172a]" : "text-[#dbfcff]"
+                  isLightMode ? "text-[#0f172a]" : "text-[var(--ws-text)]"
                 }`}
               >
                 {totalAssetsCount}
               </span>
               <span
                 className={`text-[10px] font-semibold ${
-                  isLightMode ? "text-[#059669]" : "text-[#00ff66]"
+                  isLightMode ? "text-[var(--ws-mint)]" : "text-[var(--ws-mint)]"
                 }`}
               >
                 Auto-Discovered & Manual
@@ -408,28 +408,28 @@ export default function PriorityConsole() {
             className={`p-3 rounded-lg border flex flex-col transition-colors ${
               isLightMode
                 ? "bg-[#f8fafc] border-[#e2e8f0] shadow-sm"
-                : "bg-[#040910] border-[#14283c]"
+                : "bg-[var(--ws-sidebar)] border-[var(--ws-line)]"
             }`}
           >
             <span
               className={`text-[10px] uppercase tracking-wider flex items-center justify-between font-bold ${
-                isLightMode ? "text-[#64748b]" : "text-[#64748b]"
+                isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"
               }`}
             >
               VERIFIED ONLINE
-              <Activity className={`w-3.5 h-3.5 ${isLightMode ? "text-[#059669]" : "text-[#00ff66]"}`} />
+              <Activity className={`w-3.5 h-3.5 ${isLightMode ? "text-[var(--ws-mint)]" : "text-[var(--ws-mint)]"}`} />
             </span>
             <div className="flex items-baseline gap-2 mt-1">
               <span
                 className={`font-['Orbitron'] text-xl font-bold ${
-                  isLightMode ? "text-[#059669]" : "text-[#00ff66]"
+                  isLightMode ? "text-[var(--ws-mint)]" : "text-[var(--ws-mint)]"
                 }`}
               >
                 {onlineCount} / {totalAssetsCount}
               </span>
               <span
                 className={`text-[10px] font-semibold ${
-                  isLightMode ? "text-[#059669]" : "text-[#00ff66]"
+                  isLightMode ? "text-[var(--ws-mint)]" : "text-[var(--ws-mint)]"
                 }`}
               >
                 100% Zero Packet Loss
@@ -441,28 +441,28 @@ export default function PriorityConsole() {
             className={`p-3 rounded-lg border flex flex-col transition-colors ${
               isLightMode
                 ? "bg-[#f8fafc] border-[#e2e8f0] shadow-sm"
-                : "bg-[#040910] border-[#14283c]"
+                : "bg-[var(--ws-sidebar)] border-[var(--ws-line)]"
             }`}
           >
             <span
               className={`text-[10px] uppercase tracking-wider flex items-center justify-between font-bold ${
-                isLightMode ? "text-[#64748b]" : "text-[#64748b]"
+                isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"
               }`}
             >
               MISSION-CRITICAL
-              <ShieldAlert className={`w-3.5 h-3.5 ${isLightMode ? "text-[#dc2626]" : "text-[#ff2a5f]"}`} />
+              <ShieldAlert className={`w-3.5 h-3.5 ${isLightMode ? "text-[var(--ws-coral)]" : "text-[var(--ws-coral)]"}`} />
             </span>
             <div className="flex items-baseline gap-2 mt-1">
               <span
                 className={`font-['Orbitron'] text-xl font-bold ${
-                  isLightMode ? "text-[#dc2626]" : "text-[#ff2a5f]"
+                  isLightMode ? "text-[var(--ws-coral)]" : "text-[var(--ws-coral)]"
                 }`}
               >
                 {tier1Count}
               </span>
               <span
                 className={`text-[10px] font-semibold ${
-                  isLightMode ? "text-[#d97706]" : "text-[#ffb700]"
+                  isLightMode ? "text-[var(--research-sand)]" : "text-[var(--research-sand)]"
                 }`}
               >
                 Protected by Dual Conformer
@@ -474,27 +474,27 @@ export default function PriorityConsole() {
             className={`p-3 rounded-lg border flex flex-col transition-colors ${
               isLightMode
                 ? "bg-[#f8fafc] border-[#e2e8f0] shadow-sm"
-                : "bg-[#040910] border-[#14283c]"
+                : "bg-[var(--ws-sidebar)] border-[var(--ws-line)]"
             }`}
           >
             <span
               className={`text-[10px] uppercase tracking-wider flex items-center justify-between font-bold ${
-                isLightMode ? "text-[#64748b]" : "text-[#64748b]"
+                isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"
               }`}
             >
               DOWNTIME RISK
-              <DollarSign className={`w-3.5 h-3.5 ${isLightMode ? "text-[#d97706]" : "text-[#ffb700]"}`} />
+              <DollarSign className={`w-3.5 h-3.5 ${isLightMode ? "text-[var(--research-sand)]" : "text-[var(--research-sand)]"}`} />
             </span>
             <div className="flex items-baseline gap-2 mt-1">
               <span
                 className={`font-['Orbitron'] text-xl font-bold ${
-                  isLightMode ? "text-[#d97706]" : "text-[#ffb700]"
+                  isLightMode ? "text-[var(--research-sand)]" : "text-[var(--research-sand)]"
                 }`}
               >
                 ${(totalDowntimeExposure / 1000).toFixed(0)}k
-                <span className={`text-xs ${isLightMode ? "text-[#64748b]" : "text-[#64748b]"}`}>/hr</span>
+                <span className={`text-xs ${isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"}`}>/hr</span>
               </span>
-              <span className={`text-[10px] ${isLightMode ? "text-[#64748b]" : "text-[#94a3b8]"}`}>
+              <span className={`text-[10px] ${isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"}`}>
                 Full-Fleet Aggregate
               </span>
             </div>
@@ -509,23 +509,23 @@ export default function PriorityConsole() {
           className={`lg:col-span-7 p-4 sm:p-5 rounded-xl border flex flex-col justify-between relative overflow-hidden transition-colors ${
             isLightMode
               ? "bg-[#ffffff] border-[#daddd8] shadow-[0_4px_24px_rgba(28,28,28,0.06)]"
-              : "cyber-card border-[var(--border-color)] bg-[#07101a]/85 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.6)]"
+              : "cyber-card border-[var(--border-color)] bg-[var(--ws-sidebar)]/85 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.6)]"
           }`}
         >
           <div
             className={`flex items-center justify-between pb-3 border-b ${
-              isLightMode ? "border-[#e2e8f0]" : "border-[#162536]"
+              isLightMode ? "border-[#e2e8f0]" : "border-[var(--ws-line)]"
             }`}
           >
             <div className="flex items-center gap-2">
               <span
                 className={`w-2.5 h-2.5 rounded-full ${
-                  isLightMode ? "bg-[#0284c7]" : "bg-[#00f0ff] shadow-[0_0_8px_#00f0ff]"
+                  isLightMode ? "bg-[var(--ws-mint)]" : "bg-[var(--ws-mint)] shadow-[0_0_8px_var(--ws-mint)]"
                 }`}
               />
               <h2
                 className={`font-['Orbitron'] text-sm font-bold m-0 ${
-                  isLightMode ? "text-[#0f172a]" : "text-[#dbfcff]"
+                  isLightMode ? "text-[#0f172a]" : "text-[var(--ws-text)]"
                 }`}
               >
                 2D RISK-CRITICALITY DECISION MATRIX
@@ -533,25 +533,25 @@ export default function PriorityConsole() {
             </div>
             <div
               className={`text-[10px] font-mono flex items-center gap-3 ${
-                isLightMode ? "text-[#64748b]" : "text-[#64748b]"
+                isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"
               }`}
             >
               <span className="flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-[#dc2626]" /> Tier 1
+                <span className="w-2 h-2 rounded-full bg-[var(--ws-coral)]" /> Tier 1
               </span>
               <span className="flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-[#d97706]" /> Tier 2
+                <span className="w-2 h-2 rounded-full bg-[var(--research-sand)]" /> Tier 2
               </span>
               <span className="flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-[#0284c7]" /> Tier 3
+                <span className="w-2 h-2 rounded-full bg-[var(--ws-mint)]" /> Tier 3
               </span>
               <span className="flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-[#64748b]" /> Tier 4
+                <span className="w-2 h-2 rounded-full bg-[var(--ws-muted)]" /> Tier 4
               </span>
             </div>
           </div>
 
-          <p className={`text-xs my-2 ${isLightMode ? "text-[#525252]" : "text-[#94a3b8]"}`}>
+          <p className={`text-xs my-2 ${isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"}`}>
             Plotted across <strong>Asset Business Value (Y-Axis)</strong> vs{" "}
             <strong>Threat Saliency / Anomaly Score (X-Axis)</strong>. Click any node to load into the Sensible Shutdown Simulator.
           </p>
@@ -559,7 +559,7 @@ export default function PriorityConsole() {
           {/* 2D CARTESIAN PLANE */}
           <div
             className={`relative w-full h-[440px] rounded-lg border p-4 flex flex-col justify-between select-none overflow-hidden my-1 transition-colors ${
-              isLightMode ? "bg-[#f8fafc] border-[#cbd5e1]" : "bg-[#02060b] border-[#162e47]"
+              isLightMode ? "bg-[#f8fafc] border-[#cbd5e1]" : "bg-[var(--ws-sidebar)] border-[var(--ws-line)]"
             }`}
           >
             {/* Quadrant Tint Overlays */}
@@ -569,7 +569,7 @@ export default function PriorityConsole() {
                 className={`border-r border-b border-dashed ${
                   isLightMode
                     ? "border-[#bae6fd] bg-[#e0f2fe]/45"
-                    : "border-[#00f0ff] bg-[#00f0ff]/10 opacity-20"
+                    : "border-[var(--ws-mint)] bg-[var(--ws-mint)]/10 opacity-20"
                 }`}
               />
               {/* Q1: Top-Right */}
@@ -577,7 +577,7 @@ export default function PriorityConsole() {
                 className={`border-b border-dashed ${
                   isLightMode
                     ? "border-[#fecaca] bg-[#fee2e2]/45"
-                    : "border-[#ff2a5f] bg-[#ff2a5f]/15 opacity-20"
+                    : "border-[var(--ws-coral)] bg-[var(--ws-coral)]/15 opacity-20"
                 }`}
               />
               {/* Q4: Bottom-Left */}
@@ -585,7 +585,7 @@ export default function PriorityConsole() {
                 className={`border-r border-dashed ${
                   isLightMode
                     ? "border-[#e2e8f0] bg-[#f1f5f9]/45"
-                    : "border-[#64748b] bg-[#64748b]/5 opacity-20"
+                    : "border-[var(--ws-muted)] bg-[var(--ws-muted)]/5 opacity-20"
                 }`}
               />
               {/* Q2: Bottom-Right */}
@@ -593,7 +593,7 @@ export default function PriorityConsole() {
                 className={`border-dashed ${
                   isLightMode
                     ? "border-[#bbf7d0] bg-[#dcfce7]/45"
-                    : "border-[#00ff66] bg-[#00ff66]/10 opacity-20"
+                    : "border-[var(--ws-mint)] bg-[var(--ws-mint)]/10 opacity-20"
                 }`}
               />
             </div>
@@ -601,28 +601,28 @@ export default function PriorityConsole() {
             {/* Quadrant Tactical Labels */}
             <div
               className={`absolute top-2 left-3 text-[10px] font-bold pointer-events-none ${
-                isLightMode ? "text-[#0284c7]" : "text-[#00f0ff]/80"
+                isLightMode ? "text-[var(--ws-mint)]" : "text-[var(--ws-mint)]/80"
               }`}
             >
               QUADRANT 3: ACTIVE SHADOW AUDITING (PRESERVE UPSTREAM)
             </div>
             <div
               className={`absolute top-2 right-3 text-[10px] font-bold text-right pointer-events-none ${
-                isLightMode ? "text-[#dc2626]" : "text-[#ff2a5f]/90"
+                isLightMode ? "text-[var(--ws-coral)]" : "text-[var(--ws-coral)]/90"
               }`}
             >
               QUADRANT 1: SURGICAL CONTAINMENT (NEVER SHUTDOWN - DOWNTIME CATASTROPHIC)
             </div>
             <div
               className={`absolute bottom-6 left-3 text-[10px] font-bold pointer-events-none ${
-                isLightMode ? "text-[#64748b]" : "text-[#64748b]"
+                isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"
               }`}
             >
               QUADRANT 4: NOMINAL RATE LIMITING & AUDIT
             </div>
             <div
               className={`absolute bottom-6 right-3 text-[10px] font-bold text-right pointer-events-none ${
-                isLightMode ? "text-[#059669]" : "text-[#00ff66]/90"
+                isLightMode ? "text-[var(--ws-mint)]" : "text-[var(--ws-mint)]/90"
               }`}
             >
               QUADRANT 2: AGGRESSIVE CUTOFF / HARDWARE KILL (SHUTDOWN SENSIBLE)
@@ -631,12 +631,12 @@ export default function PriorityConsole() {
             {/* Center Crosshair Lines */}
             <div
               className={`absolute top-0 bottom-0 left-1/2 w-[1px] -translate-x-1/2 ${
-                isLightMode ? "bg-[#cbd5e1]" : "bg-[#1a3854]"
+                isLightMode ? "bg-[#cbd5e1]" : "bg-[var(--ws-line)]"
               }`}
             />
             <div
               className={`absolute left-0 right-0 top-1/2 h-[1px] -translate-y-1/2 ${
-                isLightMode ? "bg-[#cbd5e1]" : "bg-[#1a3854]"
+                isLightMode ? "bg-[#cbd5e1]" : "bg-[var(--ws-line)]"
               }`}
             />
 
@@ -649,22 +649,22 @@ export default function PriorityConsole() {
               const getPillColor = () => {
                 if (asset.priority === "Tier 1 (Mission-Critical)") {
                   return isLightMode
-                    ? "border-[#f87171] bg-[#fee2e2] text-[#991b1b]"
-                    : "border-[#ff2a5f] bg-[#ff2a5f]/25 text-[#ff668b]";
+                    ? "border-[var(--ws-coral)] bg-[#fee2e2] text-[var(--ws-coral)]"
+                    : "border-[var(--ws-coral)] bg-[var(--ws-coral)]/25 text-[var(--ws-coral)]";
                 }
                 if (asset.priority === "Tier 2 (High)") {
                   return isLightMode
-                    ? "border-[#fcd34d] bg-[#fef3c7] text-[#92400e]"
-                    : "border-[#ffb700] bg-[#ffb700]/25 text-[#ffd166]";
+                    ? "border-[var(--research-sand)] bg-[#fef3c7] text-[var(--research-sand)]"
+                    : "border-[var(--research-sand)] bg-[var(--research-sand)]/25 text-[var(--research-sand)]";
                 }
                 if (asset.priority === "Tier 3 (Medium)") {
                   return isLightMode
-                    ? "border-[#7dd3fc] bg-[#e0f2fe] text-[#0369a1]"
-                    : "border-[#00f0ff] bg-[#00f0ff]/25 text-[#70f4ff]";
+                    ? "border-[var(--ws-mint)] bg-[#e0f2fe] text-[var(--ws-mint)]"
+                    : "border-[var(--ws-mint)] bg-[var(--ws-mint)]/25 text-[var(--ws-mint)]";
                 }
                 return isLightMode
-                  ? "border-[#cbd5e1] bg-[#f1f5f9] text-[#334155]"
-                  : "border-[#64748b] bg-[#64748b]/20 text-[#cbd5e1]";
+                  ? "border-[#cbd5e1] bg-[#f1f5f9] text-[var(--ws-line)]"
+                  : "border-[var(--ws-muted)] bg-[var(--ws-muted)]/20 text-[#cbd5e1]";
               };
 
               return (
@@ -687,8 +687,8 @@ export default function PriorityConsole() {
                     className={`flex items-center gap-1.5 px-2 py-1 rounded-md border text-[10px] font-bold shadow-md backdrop-blur-md ${getPillColor()} ${
                       isSelected
                         ? isLightMode
-                          ? "ring-2 ring-[#0284c7] shadow-[0_0_12px_rgba(2,132,199,0.35)]"
-                          : "ring-2 ring-[#00ff66] shadow-[0_0_15px_#00ff66]"
+                          ? "ring-2 ring-[var(--ws-mint)] shadow-[0_0_12px_rgba(2,132,199,0.35)]"
+                          : "ring-2 ring-[var(--ws-mint)] shadow-[0_0_15px_var(--ws-mint)]"
                         : ""
                     }`}
                   >
@@ -704,31 +704,31 @@ export default function PriorityConsole() {
                     className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 hidden group-hover:flex flex-col p-2.5 rounded border text-[10px] z-50 whitespace-nowrap min-w-[190px] ${
                       isLightMode
                         ? "bg-[#ffffff] border-[#cbd5e1] text-[#1c1c1c] shadow-xl"
-                        : "bg-[#050f1a] border-[#00f0ff]/50 text-[#dbfcff] shadow-2xl"
+                        : "bg-[var(--ws-sidebar)] border-[var(--ws-mint)]/50 text-[var(--ws-text)] shadow-2xl"
                     }`}
                   >
                     <div className="font-bold flex items-center gap-1.5">
                       {getCategoryIcon(asset.category)}
-                      <span className={isLightMode ? "text-[#0f172a]" : "text-[#dbfcff]"}>
+                      <span className={isLightMode ? "text-[#0f172a]" : "text-[var(--ws-text)]"}>
                         {asset.name}
                       </span>
                     </div>
-                    <div className={`text-[9px] mt-0.5 ${isLightMode ? "text-[#64748b]" : "text-[#64748b]"}`}>
+                    <div className={`text-[9px] mt-0.5 ${isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"}`}>
                       {asset.ip} · {asset.protocol}
                     </div>
                     <div
                       className={`mt-1.5 pt-1 border-t flex justify-between ${
-                        isLightMode ? "border-[#e2e8f0]" : "border-[#162536]"
+                        isLightMode ? "border-[#e2e8f0]" : "border-[var(--ws-line)]"
                       }`}
                     >
-                      <span className={isLightMode ? "text-[#b45309]" : "text-[#ffb700]"}>
+                      <span className={isLightMode ? "text-[var(--research-sand)]" : "text-[var(--research-sand)]"}>
                         Criticality: {asset.business_criticality}/100
                       </span>
-                      <span className={isLightMode ? "text-[#059669] font-bold" : "text-[#00ff66]"}>
+                      <span className={isLightMode ? "text-[var(--ws-mint)] font-bold" : "text-[var(--ws-mint)]"}>
                         ${asset.downtime_cost_per_hour.toLocaleString()}/hr
                       </span>
                     </div>
-                    <div className={`text-[9px] mt-1 font-semibold ${isLightMode ? "text-[#0284c7]" : "text-[#00f0ff]"}`}>
+                    <div className={`text-[9px] mt-1 font-semibold ${isLightMode ? "text-[var(--ws-mint)]" : "text-[var(--ws-mint)]"}`}>
                       Click to simulate sensible shutdown
                     </div>
                   </div>
@@ -739,14 +739,14 @@ export default function PriorityConsole() {
             {/* Matrix Axis Labels */}
             <div
               className={`absolute left-2 top-1/2 -translate-y-1/2 -rotate-90 text-[10px] font-bold tracking-wider pointer-events-none ${
-                isLightMode ? "text-[#64748b]" : "text-[#64748b]"
+                isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"
               }`}
             >
               ▲ BUSINESS CRITICALITY (0 → 100)
             </div>
             <div
               className={`absolute bottom-1 left-1/2 -translate-x-1/2 text-[10px] font-bold tracking-wider pointer-events-none ${
-                isLightMode ? "text-[#64748b]" : "text-[#64748b]"
+                isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"
               }`}
             >
               MODEL ANOMALY SALIENCY TAU (τ 0.0 → 1.0) ▶
@@ -755,18 +755,18 @@ export default function PriorityConsole() {
 
           <div
             className={`flex items-center justify-between text-[11px] pt-2 border-t ${
-              isLightMode ? "border-[#e2e8f0] text-[#64748b]" : "border-[#162536] text-[#64748b]"
+              isLightMode ? "border-[#e2e8f0] text-[var(--ws-muted)]" : "border-[var(--ws-line)] text-[var(--ws-muted)]"
             }`}
           >
             <span>
               Total Nodes Plotted:{" "}
-              <strong className={isLightMode ? "text-[#059669]" : "text-[#00ff66]"}>
+              <strong className={isLightMode ? "text-[var(--ws-mint)]" : "text-[var(--ws-mint)]"}>
                 {assets.length}
               </strong>
             </span>
             <span>
               Selected Node:{" "}
-              <strong className={isLightMode ? "text-[#0284c7]" : "text-[#00f0ff]"}>
+              <strong className={isLightMode ? "text-[var(--ws-mint)]" : "text-[var(--ws-mint)]"}>
                 {assets.find((a) => a.id === simAssetId)?.name || "None"}
               </strong>
             </span>
@@ -778,19 +778,19 @@ export default function PriorityConsole() {
           className={`lg:col-span-5 p-4 sm:p-5 rounded-xl border flex flex-col justify-between relative overflow-hidden transition-colors ${
             isLightMode
               ? "bg-[#ffffff] border-[#daddd8] shadow-[0_4px_24px_rgba(28,28,28,0.06)]"
-              : "cyber-card border-[var(--border-color)] bg-[#07101a]/85 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.6)]"
+              : "cyber-card border-[var(--border-color)] bg-[var(--ws-sidebar)]/85 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.6)]"
           }`}
         >
           <div
             className={`pb-3 border-b flex items-center justify-between ${
-              isLightMode ? "border-[#e2e8f0]" : "border-[#162536]"
+              isLightMode ? "border-[#e2e8f0]" : "border-[var(--ws-line)]"
             }`}
           >
             <div className="flex items-center gap-2">
-              <Crosshair className={`w-4 h-4 ${isLightMode ? "text-[#dc2626]" : "text-[#ff2a5f]"}`} />
+              <Crosshair className={`w-4 h-4 ${isLightMode ? "text-[var(--ws-coral)]" : "text-[var(--ws-coral)]"}`} />
               <h2
                 className={`font-['Orbitron'] text-sm font-bold m-0 ${
-                  isLightMode ? "text-[#0f172a]" : "text-[#dbfcff]"
+                  isLightMode ? "text-[#0f172a]" : "text-[var(--ws-text)]"
                 }`}
               >
                 SENSIBLE SHUTDOWN REASONER
@@ -799,8 +799,8 @@ export default function PriorityConsole() {
             <span
               className={`text-[9px] font-mono px-2 py-0.5 rounded border font-bold ${
                 isLightMode
-                  ? "bg-[#fee2e2] border-[#fca5a5] text-[#dc2626]"
-                  : "bg-[#ff2a5f]/15 border-[#ff2a5f]/40 text-[#ff2a5f]"
+                  ? "bg-[#fee2e2] border-[var(--ws-coral)] text-[var(--ws-coral)]"
+                  : "bg-[var(--ws-coral)]/15 border-[var(--ws-coral)]/40 text-[var(--ws-coral)]"
               }`}
             >
               AI TRIAGE ENGINE
@@ -811,7 +811,7 @@ export default function PriorityConsole() {
           <div className="space-y-3.5 my-3">
             {/* Select Asset */}
             <div>
-              <label className={`text-[11px] block mb-1 font-semibold ${isLightMode ? "text-[#475569]" : "text-[#64748b]"}`}>
+              <label className={`text-[11px] block mb-1 font-semibold ${isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"}`}>
                 TARGET INDUSTRIAL ASSET
               </label>
               <select
@@ -822,8 +822,8 @@ export default function PriorityConsole() {
                 }}
                 className={`w-full text-xs rounded-lg px-3 py-2 outline-none transition-all cursor-pointer font-mono border ${
                   isLightMode
-                    ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] focus:border-[#0284c7]"
-                    : "bg-[#030910] border-[#162e47] text-[#dbfcff] focus:border-[#00f0ff]"
+                    ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] focus:border-[var(--ws-mint)]"
+                    : "bg-[var(--ws-sidebar)] border-[var(--ws-line)] text-[var(--ws-text)] focus:border-[var(--ws-mint)]"
                 }`}
               >
                 {assets.map((a) => (
@@ -837,7 +837,7 @@ export default function PriorityConsole() {
             {/* Select Attack Type & Tau Severity */}
             <div className="grid grid-cols-2 gap-2">
               <div>
-                <label className={`text-[11px] block mb-1 font-semibold ${isLightMode ? "text-[#475569]" : "text-[#64748b]"}`}>
+                <label className={`text-[11px] block mb-1 font-semibold ${isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"}`}>
                   ATTACK VECTOR PROFILE
                 </label>
                 <select
@@ -845,8 +845,8 @@ export default function PriorityConsole() {
                   onChange={(e) => setSimAttackType(e.target.value)}
                   className={`w-full text-xs rounded-lg px-3 py-2 outline-none transition-all cursor-pointer font-mono border ${
                     isLightMode
-                      ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] focus:border-[#0284c7]"
-                      : "bg-[#030910] border-[#162e47] text-[#dbfcff] focus:border-[#00f0ff]"
+                      ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] focus:border-[var(--ws-mint)]"
+                      : "bg-[var(--ws-sidebar)] border-[var(--ws-line)] text-[var(--ws-text)] focus:border-[var(--ws-mint)]"
                   }`}
                 >
                   <option value="ransomware">Ransomware Lateral Loop</option>
@@ -860,12 +860,12 @@ export default function PriorityConsole() {
               {/* Tau Score Slider */}
               <div>
                 <div className="flex justify-between items-center mb-1">
-                  <label className={`text-[11px] font-semibold ${isLightMode ? "text-[#475569]" : "text-[#64748b]"}`}>
+                  <label className={`text-[11px] font-semibold ${isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"}`}>
                     TAU SEVERITY (τ)
                   </label>
                   <span
                     className={`text-xs font-bold font-mono ${
-                      isLightMode ? "text-[#059669]" : "text-[#00ff66]"
+                      isLightMode ? "text-[var(--ws-mint)]" : "text-[var(--ws-mint)]"
                     }`}
                   >
                     {simTauScore.toFixed(2)}
@@ -879,7 +879,7 @@ export default function PriorityConsole() {
                   value={simTauScore}
                   onChange={(e) => setSimTauScore(parseFloat(e.target.value))}
                   className={`w-full h-2 rounded-lg appearance-none cursor-pointer ${
-                    isLightMode ? "bg-[#e2e8f0] accent-[#0284c7]" : "bg-[#030910] accent-[#00f0ff]"
+                    isLightMode ? "bg-[#e2e8f0] accent-[var(--ws-mint)]" : "bg-[var(--ws-sidebar)] accent-[var(--ws-mint)]"
                   }`}
                 />
               </div>
@@ -889,7 +889,7 @@ export default function PriorityConsole() {
             {simResult && (
               <div
                 className={`p-3.5 rounded-lg border space-y-3 transition-colors ${
-                  isLightMode ? "bg-[#f8fafc] border-[#e2e8f0]" : "bg-[#030810] border-[#162536]"
+                  isLightMode ? "bg-[#f8fafc] border-[#e2e8f0]" : "bg-[var(--ws-sidebar)] border-[var(--ws-line)]"
                 }`}
               >
                 <div className="grid grid-cols-2 gap-2 font-mono">
@@ -897,19 +897,19 @@ export default function PriorityConsole() {
                     className={`p-2 rounded border ${
                       isLightMode
                         ? "bg-[#ffffff] border-[#cbd5e1] shadow-sm"
-                        : "bg-[#08131f] border-[#162e47]"
+                        : "bg-[var(--ws-panel)] border-[var(--ws-line)]"
                     }`}
                   >
-                    <span className={`text-[9px] block ${isLightMode ? "text-[#64748b]" : "text-[#64748b]"}`}>
+                    <span className={`text-[9px] block ${isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"}`}>
                       ASSET DOWNTIME LOSS:
                     </span>
                     <span
                       className={`text-sm font-bold ${
-                        isLightMode ? "text-[#d97706]" : "text-[#ffb700]"
+                        isLightMode ? "text-[var(--research-sand)]" : "text-[var(--research-sand)]"
                       }`}
                     >
                       ${simResult.downtime_cost_per_hour_usd.toLocaleString()}
-                      <span className={`text-[9px] ${isLightMode ? "text-[#64748b]" : "text-[#64748b]"}`}>
+                      <span className={`text-[9px] ${isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"}`}>
                         /hr
                       </span>
                     </span>
@@ -919,15 +919,15 @@ export default function PriorityConsole() {
                     className={`p-2 rounded border ${
                       isLightMode
                         ? "bg-[#ffffff] border-[#cbd5e1] shadow-sm"
-                        : "bg-[#08131f] border-[#162e47]"
+                        : "bg-[var(--ws-panel)] border-[var(--ws-line)]"
                     }`}
                   >
-                    <span className={`text-[9px] block ${isLightMode ? "text-[#64748b]" : "text-[#64748b]"}`}>
+                    <span className={`text-[9px] block ${isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"}`}>
                       EST. BREACH BLAST RADIUS:
                     </span>
                     <span
                       className={`text-sm font-bold ${
-                        isLightMode ? "text-[#dc2626]" : "text-[#ff2a5f]"
+                        isLightMode ? "text-[var(--ws-coral)]" : "text-[var(--ws-coral)]"
                       }`}
                     >
                       ${simResult.estimated_breach_loss_usd.toLocaleString()}
@@ -940,28 +940,28 @@ export default function PriorityConsole() {
                   className={`p-3 rounded-lg border flex flex-col gap-1.5 transition-all ${
                     simResult.sensible_to_shutdown
                       ? isLightMode
-                        ? "bg-[#fee2e2] border-[#f87171] text-[#991b1b]"
-                        : "bg-[#ff2a5f]/15 border-[#ff2a5f] text-[#ff8099]"
+                        ? "bg-[#fee2e2] border-[var(--ws-coral)] text-[var(--ws-coral)]"
+                        : "bg-[var(--ws-coral)]/15 border-[var(--ws-coral)] text-[var(--ws-coral)]"
                       : simResult.attack_type === "ddos"
                       ? isLightMode
-                        ? "bg-[#fef3c7] border-[#fcd34d] text-[#92400e]"
-                        : "bg-[#ffb700]/15 border-[#ffb700] text-[#ffd166]"
+                        ? "bg-[#fef3c7] border-[var(--research-sand)] text-[var(--research-sand)]"
+                        : "bg-[var(--research-sand)]/15 border-[var(--research-sand)] text-[var(--research-sand)]"
                       : isLightMode
-                      ? "bg-[#e0f2fe] border-[#7dd3fc] text-[#0369a1]"
-                      : "bg-[#00f0ff]/15 border-[#00f0ff] text-[#70f4ff]"
+                      ? "bg-[#e0f2fe] border-[var(--ws-mint)] text-[var(--ws-mint)]"
+                      : "bg-[var(--ws-mint)]/15 border-[var(--ws-mint)] text-[var(--ws-mint)]"
                   }`}
                 >
                   <div className="flex items-center gap-2">
                     {simResult.sensible_to_shutdown ? (
                       <PowerOff
                         className={`w-4 h-4 animate-pulse ${
-                          isLightMode ? "text-[#dc2626]" : "text-[#ff2a5f]"
+                          isLightMode ? "text-[var(--ws-coral)]" : "text-[var(--ws-coral)]"
                         }`}
                       />
                     ) : (
                       <ShieldCheck
                         className={`w-4 h-4 ${
-                          isLightMode ? "text-[#059669]" : "text-[#00ff66]"
+                          isLightMode ? "text-[var(--ws-mint)]" : "text-[var(--ws-mint)]"
                         }`}
                       />
                     )}
@@ -979,12 +979,12 @@ export default function PriorityConsole() {
                   className={`text-[11px] p-2.5 rounded border space-y-1 transition-colors ${
                     isLightMode
                       ? "bg-[#ffffff] border-[#e2e8f0] text-[#1c1c1c] shadow-sm"
-                      : "bg-[#050f1a] border-[#12283e] text-[#dbfcff]"
+                      : "bg-[var(--ws-sidebar)] border-[var(--ws-line)] text-[var(--ws-text)]"
                   }`}
                 >
                   <span
                     className={`text-[9px] uppercase tracking-wider block font-bold ${
-                      isLightMode ? "text-[#64748b]" : "text-[#64748b]"
+                      isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"
                     }`}
                   >
                     RECOMMENDED AIR-GAPPED ACTION:
@@ -998,11 +998,11 @@ export default function PriorityConsole() {
                   className={`w-full py-2.5 px-3 rounded-lg font-['Orbitron'] text-xs font-black tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md active:scale-95 ${
                     simResult.sensible_to_shutdown
                       ? isLightMode
-                        ? "bg-gradient-to-r from-[#dc2626] to-[#ea580c] text-white"
-                        : "bg-gradient-to-r from-[#ff2a5f] to-[#ff7700] text-black shadow-[0_0_20px_rgba(255,42,95,0.4)]"
+                        ? "bg-gradient-to-r from-[var(--ws-coral)] to-[var(--ws-coral)] text-white"
+                        : "bg-gradient-to-r from-[var(--ws-coral)] to-[var(--ws-coral)] text-black shadow-[0_0_20px_rgba(255,153,133,0.4)]"
                       : isLightMode
-                      ? "bg-gradient-to-r from-[#0284c7] to-[#059669] text-white"
-                      : "bg-gradient-to-r from-[#00f0ff] to-[#00ff66] text-black shadow-[0_0_20px_rgba(0,255,102,0.4)]"
+                      ? "bg-gradient-to-r from-[var(--ws-mint)] to-[var(--ws-mint)] text-white"
+                      : "bg-gradient-to-r from-[var(--ws-mint)] to-[var(--ws-mint)] text-black shadow-[0_0_20px_rgba(179,223,147,0.4)]"
                   }`}
                 >
                   <Play className="w-3.5 h-3.5" />
@@ -1020,8 +1020,8 @@ export default function PriorityConsole() {
               <div
                 className={`p-2.5 rounded border text-xs font-mono flex items-center gap-2 ${
                   isLightMode
-                    ? "bg-[#dcfce7] border-[#86efac] text-[#15803d]"
-                    : "bg-[#00ff66]/15 border-[#00ff66] text-[#00ff66]"
+                    ? "bg-[#dcfce7] border-[var(--ws-mint)] text-[var(--ws-mint)]"
+                    : "bg-[var(--ws-mint)]/15 border-[var(--ws-mint)] text-[var(--ws-mint)]"
                 }`}
               >
                 <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
@@ -1032,18 +1032,18 @@ export default function PriorityConsole() {
 
           <div
             className={`pt-2 border-t text-[10px] flex items-center justify-between ${
-              isLightMode ? "border-[#e2e8f0] text-[#64748b]" : "border-[#162536] text-[#64748b]"
+              isLightMode ? "border-[#e2e8f0] text-[var(--ws-muted)]" : "border-[var(--ws-line)] text-[var(--ws-muted)]"
             }`}
           >
             <span>
               DDoS Shield Logic:{" "}
-              <strong className={isLightMode ? "text-[#059669]" : "text-[#00ff66]"}>
+              <strong className={isLightMode ? "text-[var(--ws-mint)]" : "text-[var(--ws-mint)]"}>
                 Active
               </strong>
             </span>
             <span>
               NIST CSF Safety Floor:{" "}
-              <strong className={isLightMode ? "text-[#0284c7]" : "text-[#00f0ff]"}>
+              <strong className={isLightMode ? "text-[var(--ws-mint)]" : "text-[var(--ws-mint)]"}>
                 Preserved
               </strong>
             </span>
@@ -1056,17 +1056,17 @@ export default function PriorityConsole() {
         className={`p-4 sm:p-5 rounded-xl border space-y-4 transition-colors ${
           isLightMode
             ? "bg-[#ffffff] border-[#daddd8] shadow-[0_4px_24px_rgba(28,28,28,0.06)]"
-            : "cyber-card border-[var(--border-color)] bg-[#07101a]/85 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.6)]"
+            : "cyber-card border-[var(--border-color)] bg-[var(--ws-sidebar)]/85 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.6)]"
         }`}
       >
         {/* Table Filters & Search */}
         <div
           className={`flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b ${
-            isLightMode ? "border-[#e2e8f0]" : "border-[#162536]"
+            isLightMode ? "border-[#e2e8f0]" : "border-[var(--ws-line)]"
           }`}
         >
           <div className="flex flex-wrap items-center gap-2">
-            <span className={`text-xs uppercase tracking-wider font-bold ${isLightMode ? "text-[#64748b]" : "text-[#64748b]"}`}>
+            <span className={`text-xs uppercase tracking-wider font-bold ${isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"}`}>
               CATEGORY:
             </span>
             {(["all", "device", "database", "server"] as const).map((cat) => (
@@ -1076,11 +1076,11 @@ export default function PriorityConsole() {
                 className={`px-3 py-1 rounded text-xs uppercase font-bold tracking-wider transition-all cursor-pointer border ${
                   filterCategory === cat
                     ? isLightMode
-                      ? "bg-[#e0f2fe] text-[#0284c7] border-[#0284c7] shadow-sm"
-                      : "bg-[#00f0ff]/20 text-[#00f0ff] border-[#00f0ff] shadow-[0_0_10px_rgba(0,240,255,0.3)]"
+                      ? "bg-[#e0f2fe] text-[var(--ws-mint)] border-[var(--ws-mint)] shadow-sm"
+                      : "bg-[var(--ws-mint)]/20 text-[var(--ws-mint)] border-[var(--ws-mint)] shadow-[0_0_10px_rgba(179,223,147,0.3)]"
                     : isLightMode
-                    ? "text-[#64748b] hover:text-[#0f172a] border-transparent"
-                    : "text-[#64748b] hover:text-[#dee3eb] border-transparent"
+                    ? "text-[var(--ws-muted)] hover:text-[#0f172a] border-transparent"
+                    : "text-[var(--ws-muted)] hover:text-[var(--ws-text)] border-transparent"
                 }`}
               >
                 {cat === "all" ? "ALL ASSETS" : `${cat}S`}
@@ -1090,7 +1090,7 @@ export default function PriorityConsole() {
 
           {/* Search box */}
           <div className="relative w-full sm:w-64">
-            <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-[#64748b]" />
+            <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-[var(--ws-muted)]" />
             <input
               type="text"
               placeholder="Search IP, name, protocol..."
@@ -1098,8 +1098,8 @@ export default function PriorityConsole() {
               onChange={(e) => setSearchQuery(e.target.value)}
               className={`w-full pl-8 pr-3 py-1.5 rounded-lg text-xs outline-none font-mono border ${
                 isLightMode
-                  ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] placeholder-[#94a3b8] focus:border-[#0284c7]"
-                  : "bg-[#030910] border-[#162e47] text-[#dbfcff] placeholder-[#475569] focus:border-[#00f0ff]"
+                  ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] placeholder-[var(--ws-muted)] focus:border-[var(--ws-mint)]"
+                  : "bg-[var(--ws-sidebar)] border-[var(--ws-line)] text-[var(--ws-text)] placeholder-[var(--ws-muted)] focus:border-[var(--ws-mint)]"
               }`}
             />
           </div>
@@ -1112,8 +1112,8 @@ export default function PriorityConsole() {
               <tr
                 className={`border-b text-[10px] uppercase tracking-wider font-mono ${
                   isLightMode
-                    ? "border-[#e2e8f0] text-[#64748b] bg-[#f8fafc]"
-                    : "border-[#162536] text-[#64748b]"
+                    ? "border-[#e2e8f0] text-[var(--ws-muted)] bg-[#f8fafc]"
+                    : "border-[var(--ws-line)] text-[var(--ws-muted)]"
                 }`}
               >
                 <th className="py-2.5 px-3">ASSET & ENDPOINT</th>
@@ -1127,7 +1127,7 @@ export default function PriorityConsole() {
             </thead>
             <tbody
               className={`font-mono divide-y ${
-                isLightMode ? "divide-[#e2e8f0]" : "divide-[#0e1d2e]"
+                isLightMode ? "divide-[#e2e8f0]" : "divide-[var(--ws-panel)]"
               }`}
             >
               {filteredAssets.map((asset) => {
@@ -1141,8 +1141,8 @@ export default function PriorityConsole() {
                           ? "bg-[#e0f2fe]/40"
                           : "hover:bg-[#f1f5f9]"
                         : simAssetId === asset.id
-                        ? "bg-[#091828]/80"
-                        : "hover:bg-[#091522]/60"
+                        ? "bg-[var(--ws-panel)]/80"
+                        : "hover:bg-[var(--ws-panel)]/60"
                     }`}
                   >
                     {/* Name & Endpoint */}
@@ -1152,7 +1152,7 @@ export default function PriorityConsole() {
                           className={`p-1.5 rounded border ${
                             isLightMode
                               ? "bg-[#f1f5f9] border-[#cbd5e1]"
-                              : "bg-[#030910] border-[#162e47]"
+                              : "bg-[var(--ws-sidebar)] border-[var(--ws-line)]"
                           }`}
                         >
                           {getCategoryIcon(asset.category)}
@@ -1160,25 +1160,25 @@ export default function PriorityConsole() {
                         <div>
                           <div
                             className={`font-bold ${
-                              isLightMode ? "text-[#0f172a]" : "text-[#dbfcff]"
+                              isLightMode ? "text-[#0f172a]" : "text-[var(--ws-text)]"
                             }`}
                           >
                             {asset.name}
                           </div>
-                          <div className={`text-[10px] flex items-center gap-1.5 mt-0.5 ${isLightMode ? "text-[#64748b]" : "text-[#64748b]"}`}>
+                          <div className={`text-[10px] flex items-center gap-1.5 mt-0.5 ${isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"}`}>
                             <span>
                               {asset.ip}:{asset.port}
                             </span>
                             <span>·</span>
-                            <span className={isLightMode ? "text-[#0284c7] font-semibold" : "text-[#00f0ff]"}>
+                            <span className={isLightMode ? "text-[var(--ws-mint)] font-semibold" : "text-[var(--ws-mint)]"}>
                               {asset.protocol}
                             </span>
                             {asset.auto_discovered ? (
                               <span
                                 className={`text-[8px] px-1 rounded font-bold ${
                                   isLightMode
-                                    ? "bg-[#dcfce7] text-[#15803d]"
-                                    : "bg-[#00ff66]/10 text-[#00ff66]"
+                                    ? "bg-[#dcfce7] text-[var(--ws-mint)]"
+                                    : "bg-[var(--ws-mint)]/10 text-[var(--ws-mint)]"
                                 }`}
                               >
                                 AUTO
@@ -1187,8 +1187,8 @@ export default function PriorityConsole() {
                               <span
                                 className={`text-[8px] px-1 rounded font-bold ${
                                   isLightMode
-                                    ? "bg-[#fef3c7] text-[#b45309]"
-                                    : "bg-[#ffb700]/10 text-[#ffb700]"
+                                    ? "bg-[#fef3c7] text-[var(--research-sand)]"
+                                    : "bg-[var(--research-sand)]/10 text-[var(--research-sand)]"
                                 }`}
                               >
                                 MANUAL
@@ -1210,8 +1210,8 @@ export default function PriorityConsole() {
                         }
                         className={`text-xs rounded px-2 py-1 outline-none cursor-pointer border ${
                           isLightMode
-                            ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] focus:border-[#0284c7]"
-                            : "bg-[#030910] border-[#162e47] text-[#dbfcff] focus:border-[#00f0ff]"
+                            ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] focus:border-[var(--ws-mint)]"
+                            : "bg-[var(--ws-sidebar)] border-[var(--ws-line)] text-[var(--ws-text)] focus:border-[var(--ws-mint)]"
                         }`}
                       >
                         <option value="Tier 1 (Mission-Critical)">Tier 1 (Mission-Critical)</option>
@@ -1235,12 +1235,12 @@ export default function PriorityConsole() {
                             })
                           }
                           className={`w-20 h-1.5 rounded appearance-none cursor-pointer ${
-                            isLightMode ? "bg-[#e2e8f0] accent-[#0284c7]" : "bg-[#030910] accent-[#00f0ff]"
+                            isLightMode ? "bg-[#e2e8f0] accent-[var(--ws-mint)]" : "bg-[var(--ws-sidebar)] accent-[var(--ws-mint)]"
                           }`}
                         />
                         <span
                           className={`font-bold text-xs min-w-[28px] ${
-                            isLightMode ? "text-[#059669]" : "text-[#00ff66]"
+                            isLightMode ? "text-[var(--ws-mint)]" : "text-[var(--ws-mint)]"
                           }`}
                         >
                           {asset.business_criticality}
@@ -1252,7 +1252,7 @@ export default function PriorityConsole() {
                     <td className="py-3 px-3">
                       <span
                         className={`font-bold ${
-                          isLightMode ? "text-[#d97706]" : "text-[#ffb700]"
+                          isLightMode ? "text-[var(--research-sand)]" : "text-[var(--research-sand)]"
                         }`}
                       >
                         ${asset.downtime_cost_per_hour.toLocaleString()}/hr
@@ -1270,11 +1270,11 @@ export default function PriorityConsole() {
                         className={`px-2 py-1 rounded text-[10px] font-bold border transition-all cursor-pointer ${
                           asset.auto_shutdown_allowed
                             ? isLightMode
-                              ? "bg-[#dcfce7] border-[#86efac] text-[#15803d]"
-                              : "bg-[#00ff66]/15 border-[#00ff66]/50 text-[#00ff66]"
+                              ? "bg-[#dcfce7] border-[var(--ws-mint)] text-[var(--ws-mint)]"
+                              : "bg-[var(--ws-mint)]/15 border-[var(--ws-mint)]/50 text-[var(--ws-mint)]"
                             : isLightMode
-                            ? "bg-[#fee2e2] border-[#fca5a5] text-[#dc2626]"
-                            : "bg-[#ff2a5f]/15 border-[#ff2a5f]/50 text-[#ff2a5f]"
+                            ? "bg-[#fee2e2] border-[var(--ws-coral)] text-[var(--ws-coral)]"
+                            : "bg-[var(--ws-coral)]/15 border-[var(--ws-coral)]/50 text-[var(--ws-coral)]"
                         }`}
                       >
                         {asset.auto_shutdown_allowed ? "PERMITTED" : "FORBIDDEN"}
@@ -1288,24 +1288,24 @@ export default function PriorityConsole() {
                           className={`w-2 h-2 rounded-full ${
                             asset.connection_status === "online"
                               ? isLightMode
-                                ? "bg-[#059669]"
-                                : "bg-[#00ff66] animate-pulse shadow-[0_0_6px_#00ff66]"
+                                ? "bg-[var(--ws-mint)]"
+                                : "bg-[var(--ws-mint)] animate-pulse shadow-[0_0_6px_var(--ws-mint)]"
                               : asset.connection_status === "testing"
-                              ? "bg-[#d97706] animate-ping"
-                              : "bg-[#dc2626]"
+                              ? "bg-[var(--research-sand)] animate-ping"
+                              : "bg-[var(--ws-coral)]"
                           }`}
                         />
                         <div>
                           <div
                             className={`text-[11px] font-semibold ${
-                              isLightMode ? "text-[#0f172a]" : "text-[#dbfcff]"
+                              isLightMode ? "text-[#0f172a]" : "text-[var(--ws-text)]"
                             }`}
                           >
                             {asset.connection_status === "online"
                               ? `${asset.latency_ms} ms`
                               : asset.connection_status}
                           </div>
-                          <div className={`text-[9px] ${isLightMode ? "text-[#64748b]" : "text-[#64748b]"}`}>
+                          <div className={`text-[9px] ${isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"}`}>
                             {asset.last_ping}
                           </div>
                         </div>
@@ -1321,8 +1321,8 @@ export default function PriorityConsole() {
                           title="Ping & Test Socket Handshake"
                           className={`px-2.5 py-1 rounded text-[10px] font-bold transition-all cursor-pointer disabled:opacity-50 border ${
                             isLightMode
-                              ? "bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#0284c7] border-[#cbd5e1]"
-                              : "bg-[#091522] hover:bg-[#12283e] text-[#00f0ff] border-[#00f0ff]/30"
+                              ? "bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[var(--ws-mint)] border-[#cbd5e1]"
+                              : "bg-[var(--ws-panel)] hover:bg-[var(--ws-line)] text-[var(--ws-mint)] border-[var(--ws-mint)]/30"
                           }`}
                         >
                           {isTestingThis ? "PINGING..." : "TEST PING"}
@@ -1335,8 +1335,8 @@ export default function PriorityConsole() {
                           title="Load into Sensible Triage Simulator"
                           className={`px-2.5 py-1 rounded text-[10px] font-bold transition-all cursor-pointer border ${
                             isLightMode
-                              ? "bg-[#fef3c7] hover:bg-[#fde68a] text-[#92400e] border-[#fcd34d]"
-                              : "bg-[#ffb700]/15 hover:bg-[#ffb700]/30 text-[#ffb700] border-[#ffb700]/40"
+                              ? "bg-[#fef3c7] hover:bg-[var(--research-sand)] text-[var(--research-sand)] border-[var(--research-sand)]"
+                              : "bg-[var(--research-sand)]/15 hover:bg-[var(--research-sand)]/30 text-[var(--research-sand)] border-[var(--research-sand)]/40"
                           }`}
                         >
                           TRIAGE
@@ -1362,19 +1362,19 @@ export default function PriorityConsole() {
             className={`w-full max-w-lg p-5 rounded-xl border relative shadow-2xl transition-colors ${
               isLightMode
                 ? "bg-[#ffffff] border-[#cbd5e1] text-[#1c1c1c]"
-                : "cyber-card border-[#00f0ff]/40 bg-[#07101a] text-[#dbfcff] shadow-[0_0_50px_rgba(0,240,255,0.2)]"
+                : "cyber-card border-[var(--ws-mint)]/40 bg-[var(--ws-sidebar)] text-[var(--ws-text)] shadow-[0_0_50px_rgba(179,223,147,0.2)]"
             }`}
           >
             <div
               className={`flex items-center justify-between pb-3 border-b ${
-                isLightMode ? "border-[#e2e8f0]" : "border-[#162536]"
+                isLightMode ? "border-[#e2e8f0]" : "border-[var(--ws-line)]"
               }`}
             >
               <div className="flex items-center gap-2">
-                <PlusCircle className={`w-5 h-5 ${isLightMode ? "text-[#0284c7]" : "text-[#00f0ff]"}`} />
+                <PlusCircle className={`w-5 h-5 ${isLightMode ? "text-[var(--ws-mint)]" : "text-[var(--ws-mint)]"}`} />
                 <h3
                   className={`font-['Orbitron'] text-sm font-bold m-0 ${
-                    isLightMode ? "text-[#0f172a]" : "text-[#dbfcff]"
+                    isLightMode ? "text-[#0f172a]" : "text-[var(--ws-text)]"
                   }`}
                 >
                   MANUAL DEVICE / DATABASE / SERVER CONNECTION
@@ -1383,7 +1383,7 @@ export default function PriorityConsole() {
               <button
                 onClick={() => setIsConnectModalOpen(false)}
                 className={`cursor-pointer ${
-                  isLightMode ? "text-[#64748b] hover:text-[#0f172a]" : "text-[#64748b] hover:text-[#dbfcff]"
+                  isLightMode ? "text-[var(--ws-muted)] hover:text-[#0f172a]" : "text-[var(--ws-muted)] hover:text-[var(--ws-text)]"
                 }`}
               >
                 <X className="w-5 h-5" />
@@ -1395,8 +1395,8 @@ export default function PriorityConsole() {
                 <div
                   className={`p-2 rounded border text-[11px] ${
                     isLightMode
-                      ? "bg-[#fee2e2] border-[#fca5a5] text-[#dc2626]"
-                      : "bg-[#ff2a5f]/20 border-[#ff2a5f] text-[#ff8099]"
+                      ? "bg-[#fee2e2] border-[var(--ws-coral)] text-[var(--ws-coral)]"
+                      : "bg-[var(--ws-coral)]/20 border-[var(--ws-coral)] text-[var(--ws-coral)]"
                   }`}
                 >
                   {formError}
@@ -1406,7 +1406,7 @@ export default function PriorityConsole() {
               {/* Name & Category */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className={`text-[10px] block mb-1 font-semibold ${isLightMode ? "text-[#475569]" : "text-[#64748b]"}`}>
+                  <label className={`text-[10px] block mb-1 font-semibold ${isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"}`}>
                     ASSET NAME
                   </label>
                   <input
@@ -1417,13 +1417,13 @@ export default function PriorityConsole() {
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className={`w-full rounded px-2.5 py-1.5 outline-none border ${
                       isLightMode
-                        ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] focus:border-[#0284c7]"
-                        : "bg-[#030910] border-[#162e47] text-[#dbfcff] focus:border-[#00f0ff]"
+                        ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] focus:border-[var(--ws-mint)]"
+                        : "bg-[var(--ws-sidebar)] border-[var(--ws-line)] text-[var(--ws-text)] focus:border-[var(--ws-mint)]"
                     }`}
                   />
                 </div>
                 <div>
-                  <label className={`text-[10px] block mb-1 font-semibold ${isLightMode ? "text-[#475569]" : "text-[#64748b]"}`}>
+                  <label className={`text-[10px] block mb-1 font-semibold ${isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"}`}>
                     CATEGORY
                   </label>
                   <select
@@ -1431,8 +1431,8 @@ export default function PriorityConsole() {
                     onChange={(e) => setFormData({ ...formData, category: e.target.value as AssetCategory })}
                     className={`w-full rounded px-2.5 py-1.5 outline-none border ${
                       isLightMode
-                        ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] focus:border-[#0284c7]"
-                        : "bg-[#030910] border-[#162e47] text-[#dbfcff] focus:border-[#00f0ff]"
+                        ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] focus:border-[var(--ws-mint)]"
+                        : "bg-[var(--ws-sidebar)] border-[var(--ws-line)] text-[var(--ws-text)] focus:border-[var(--ws-mint)]"
                     }`}
                   >
                     <option value="device">Physical IoT Device</option>
@@ -1445,7 +1445,7 @@ export default function PriorityConsole() {
               {/* IP, Port, Protocol */}
               <div className="grid grid-cols-3 gap-2">
                 <div>
-                  <label className={`text-[10px] block mb-1 font-semibold ${isLightMode ? "text-[#475569]" : "text-[#64748b]"}`}>
+                  <label className={`text-[10px] block mb-1 font-semibold ${isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"}`}>
                     IP ADDRESS
                   </label>
                   <input
@@ -1455,13 +1455,13 @@ export default function PriorityConsole() {
                     onChange={(e) => setFormData({ ...formData, ip: e.target.value })}
                     className={`w-full rounded px-2 py-1.5 outline-none border ${
                       isLightMode
-                        ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] focus:border-[#0284c7]"
-                        : "bg-[#030910] border-[#162e47] text-[#dbfcff] focus:border-[#00f0ff]"
+                        ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] focus:border-[var(--ws-mint)]"
+                        : "bg-[var(--ws-sidebar)] border-[var(--ws-line)] text-[var(--ws-text)] focus:border-[var(--ws-mint)]"
                     }`}
                   />
                 </div>
                 <div>
-                  <label className={`text-[10px] block mb-1 font-semibold ${isLightMode ? "text-[#475569]" : "text-[#64748b]"}`}>
+                  <label className={`text-[10px] block mb-1 font-semibold ${isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"}`}>
                     PORT
                   </label>
                   <input
@@ -1471,13 +1471,13 @@ export default function PriorityConsole() {
                     onChange={(e) => setFormData({ ...formData, port: parseInt(e.target.value) || 0 })}
                     className={`w-full rounded px-2 py-1.5 outline-none border ${
                       isLightMode
-                        ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] focus:border-[#0284c7]"
-                        : "bg-[#030910] border-[#162e47] text-[#dbfcff] focus:border-[#00f0ff]"
+                        ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] focus:border-[var(--ws-mint)]"
+                        : "bg-[var(--ws-sidebar)] border-[var(--ws-line)] text-[var(--ws-text)] focus:border-[var(--ws-mint)]"
                     }`}
                   />
                 </div>
                 <div>
-                  <label className={`text-[10px] block mb-1 font-semibold ${isLightMode ? "text-[#475569]" : "text-[#64748b]"}`}>
+                  <label className={`text-[10px] block mb-1 font-semibold ${isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"}`}>
                     PROTOCOL
                   </label>
                   <input
@@ -1487,8 +1487,8 @@ export default function PriorityConsole() {
                     onChange={(e) => setFormData({ ...formData, protocol: e.target.value })}
                     className={`w-full rounded px-2 py-1.5 outline-none border ${
                       isLightMode
-                        ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] focus:border-[#0284c7]"
-                        : "bg-[#030910] border-[#162e47] text-[#dbfcff] focus:border-[#00f0ff]"
+                        ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] focus:border-[var(--ws-mint)]"
+                        : "bg-[var(--ws-sidebar)] border-[var(--ws-line)] text-[var(--ws-text)] focus:border-[var(--ws-mint)]"
                     }`}
                   />
                 </div>
@@ -1497,7 +1497,7 @@ export default function PriorityConsole() {
               {/* Priority Tier & Criticality */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className={`text-[10px] block mb-1 font-semibold ${isLightMode ? "text-[#475569]" : "text-[#64748b]"}`}>
+                  <label className={`text-[10px] block mb-1 font-semibold ${isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"}`}>
                     PRIORITY TIER
                   </label>
                   <select
@@ -1505,8 +1505,8 @@ export default function PriorityConsole() {
                     onChange={(e) => setFormData({ ...formData, priority: e.target.value as AssetPriorityTier })}
                     className={`w-full rounded px-2.5 py-1.5 outline-none border ${
                       isLightMode
-                        ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] focus:border-[#0284c7]"
-                        : "bg-[#030910] border-[#162e47] text-[#dbfcff] focus:border-[#00f0ff]"
+                        ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] focus:border-[var(--ws-mint)]"
+                        : "bg-[var(--ws-sidebar)] border-[var(--ws-line)] text-[var(--ws-text)] focus:border-[var(--ws-mint)]"
                     }`}
                   >
                     <option value="Tier 1 (Mission-Critical)">Tier 1 (Mission-Critical)</option>
@@ -1516,9 +1516,9 @@ export default function PriorityConsole() {
                   </select>
                 </div>
                 <div>
-                  <label className={`text-[10px] block mb-1 font-semibold ${isLightMode ? "text-[#475569]" : "text-[#64748b]"}`}>
+                  <label className={`text-[10px] block mb-1 font-semibold ${isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"}`}>
                     CRITICALITY (0-100):{" "}
-                    <strong className={isLightMode ? "text-[#059669]" : "text-[#00ff66]"}>
+                    <strong className={isLightMode ? "text-[var(--ws-mint)]" : "text-[var(--ws-mint)]"}>
                       {formData.business_criticality}
                     </strong>
                   </label>
@@ -1529,7 +1529,7 @@ export default function PriorityConsole() {
                     value={formData.business_criticality}
                     onChange={(e) => setFormData({ ...formData, business_criticality: parseInt(e.target.value) })}
                     className={`w-full h-1.5 rounded appearance-none cursor-pointer mt-2 ${
-                      isLightMode ? "bg-[#e2e8f0] accent-[#0284c7]" : "bg-[#030910] accent-[#00f0ff]"
+                      isLightMode ? "bg-[#e2e8f0] accent-[var(--ws-mint)]" : "bg-[var(--ws-sidebar)] accent-[var(--ws-mint)]"
                     }`}
                   />
                 </div>
@@ -1538,7 +1538,7 @@ export default function PriorityConsole() {
               {/* Downtime Cost & Auto-shutdown */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className={`text-[10px] block mb-1 font-semibold ${isLightMode ? "text-[#475569]" : "text-[#64748b]"}`}>
+                  <label className={`text-[10px] block mb-1 font-semibold ${isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"}`}>
                     DOWNTIME COST ($/HR)
                   </label>
                   <input
@@ -1547,13 +1547,13 @@ export default function PriorityConsole() {
                     onChange={(e) => setFormData({ ...formData, downtime_cost_per_hour: parseInt(e.target.value) || 0 })}
                     className={`w-full rounded px-2.5 py-1.5 outline-none border ${
                       isLightMode
-                        ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] focus:border-[#0284c7]"
-                        : "bg-[#030910] border-[#162e47] text-[#dbfcff] focus:border-[#00f0ff]"
+                        ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] focus:border-[var(--ws-mint)]"
+                        : "bg-[var(--ws-sidebar)] border-[var(--ws-line)] text-[var(--ws-text)] focus:border-[var(--ws-mint)]"
                     }`}
                   />
                 </div>
                 <div>
-                  <label className={`text-[10px] block mb-1 font-semibold ${isLightMode ? "text-[#475569]" : "text-[#64748b]"}`}>
+                  <label className={`text-[10px] block mb-1 font-semibold ${isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"}`}>
                     AUTO-SHUTDOWN PERMITTED?
                   </label>
                   <select
@@ -1561,8 +1561,8 @@ export default function PriorityConsole() {
                     onChange={(e) => setFormData({ ...formData, auto_shutdown_allowed: e.target.value === "yes" })}
                     className={`w-full rounded px-2.5 py-1.5 outline-none border ${
                       isLightMode
-                        ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] focus:border-[#0284c7]"
-                        : "bg-[#030910] border-[#162e47] text-[#dbfcff] focus:border-[#00f0ff]"
+                        ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] focus:border-[var(--ws-mint)]"
+                        : "bg-[var(--ws-sidebar)] border-[var(--ws-line)] text-[var(--ws-text)] focus:border-[var(--ws-mint)]"
                     }`}
                   >
                     <option value="no">No (Catastrophic / Physical Risk)</option>
@@ -1573,7 +1573,7 @@ export default function PriorityConsole() {
 
               {/* Description */}
               <div>
-                <label className={`text-[10px] block mb-1 font-semibold ${isLightMode ? "text-[#475569]" : "text-[#64748b]"}`}>
+                <label className={`text-[10px] block mb-1 font-semibold ${isLightMode ? "text-[var(--ws-muted)]" : "text-[var(--ws-muted)]"}`}>
                   OPERATIONAL DESCRIPTION
                 </label>
                 <textarea
@@ -1583,8 +1583,8 @@ export default function PriorityConsole() {
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   className={`w-full rounded px-2.5 py-1.5 outline-none resize-none border ${
                     isLightMode
-                      ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] focus:border-[#0284c7]"
-                      : "bg-[#030910] border-[#162e47] text-[#dbfcff] focus:border-[#00f0ff]"
+                      ? "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] focus:border-[var(--ws-mint)]"
+                      : "bg-[var(--ws-sidebar)] border-[var(--ws-line)] text-[var(--ws-text)] focus:border-[var(--ws-mint)]"
                   }`}
                 />
               </div>
@@ -1592,7 +1592,7 @@ export default function PriorityConsole() {
               {/* Submit Buttons */}
               <div
                 className={`flex items-center justify-end gap-2.5 pt-3 border-t ${
-                  isLightMode ? "border-[#e2e8f0]" : "border-[#162536]"
+                  isLightMode ? "border-[#e2e8f0]" : "border-[var(--ws-line)]"
                 }`}
               >
                 <button
@@ -1600,8 +1600,8 @@ export default function PriorityConsole() {
                   onClick={() => setIsConnectModalOpen(false)}
                   className={`px-4 py-2 rounded text-xs cursor-pointer border ${
                     isLightMode
-                      ? "bg-[#f1f5f9] text-[#475569] hover:text-[#0f172a] border-[#cbd5e1]"
-                      : "bg-[#091522] text-[#64748b] hover:text-[#dbfcff] border-[#162e47]"
+                      ? "bg-[#f1f5f9] text-[var(--ws-muted)] hover:text-[#0f172a] border-[#cbd5e1]"
+                      : "bg-[var(--ws-panel)] text-[var(--ws-muted)] hover:text-[var(--ws-text)] border-[var(--ws-line)]"
                   }`}
                 >
                   CANCEL
@@ -1611,8 +1611,8 @@ export default function PriorityConsole() {
                   disabled={isSubmitting}
                   className={`px-5 py-2 rounded-lg font-['Orbitron'] font-black text-xs transition-all active:scale-95 cursor-pointer disabled:opacity-50 shadow-md ${
                     isLightMode
-                      ? "bg-gradient-to-r from-[#0284c7] to-[#059669] text-white"
-                      : "bg-gradient-to-r from-[#00f0ff] to-[#00ff66] text-black shadow-[0_0_20px_rgba(0,255,102,0.4)]"
+                      ? "bg-gradient-to-r from-[var(--ws-mint)] to-[var(--ws-mint)] text-white"
+                      : "bg-gradient-to-r from-[var(--ws-mint)] to-[var(--ws-mint)] text-black shadow-[0_0_20px_rgba(179,223,147,0.4)]"
                   }`}
                 >
                   {isSubmitting ? "TESTING & REGISTERING..." : "REGISTER & CONNECT ASSET"}

@@ -139,46 +139,46 @@ export default function SOARPlaybookBuilder({ isModal = false, onClose }: SOARPl
   };
 
   return (
-    <div className="flex flex-col w-full bg-[#070d14] text-[#dee3eb] border border-[#00f0ff]/30 rounded shadow-[0_0_30px_rgba(0,0,0,0.8)] overflow-hidden">
+    <div className="flex flex-col w-full bg-[var(--ws-sidebar)] text-[var(--ws-text)] border border-[var(--ws-mint)]/30 rounded shadow-[0_0_30px_rgba(0,0,0,0.8)] overflow-hidden">
       {/* 1. TOP CONTROL RIBBON & COMMAND BAR */}
-      <section className="w-full bg-[#0b131e] px-4 py-3 border-b border-[#162536] relative">
+      <section className="w-full bg-[var(--ws-panel)] px-4 py-3 border-b border-[var(--ws-line)] relative">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
           <div className="flex flex-col gap-1">
-            <div className="flex items-center gap-2 font-mono text-[10px] text-[#64748b] tracking-wider flex-wrap">
+            <div className="flex items-center gap-2 font-mono text-[10px] text-[var(--ws-muted)] tracking-wider flex-wrap">
               <span>ORCHESTRATION STUDIO</span>
               <span>//</span>
-              <span className="text-[#00f0ff]">SOAR-ICS v2.4</span>
+              <span className="text-[var(--ws-mint)]">SOAR-ICS v2.4</span>
               <span>//</span>
-              <span className="text-[#00ff66] font-bold">CORE-RING0-INTERLOCK</span>
-              <span className="text-[#64748b]">[TARGET_ID: 0x7F41]</span>
-              <span className="text-[#00f0ff] font-bold">TARGET IP: {activePlaybook.targetIp}</span>
+              <span className="text-[var(--ws-mint)] font-bold">CORE-RING0-INTERLOCK</span>
+              <span className="text-[var(--ws-muted)]">[TARGET_ID: 0x7F41]</span>
+              <span className="text-[var(--ws-mint)] font-bold">TARGET IP: {activePlaybook.targetIp}</span>
             </div>
 
             <div className="flex items-center gap-2 flex-wrap">
-              <h1 className="font-['Orbitron'] text-base md:text-lg text-[#00ff66] tracking-tight font-bold m-0 leading-tight">
+              <h1 className="font-['Orbitron'] text-base md:text-lg text-[var(--ws-mint)] tracking-tight font-bold m-0 leading-tight">
                 {activePlaybook.id}
               </h1>
-              <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-[#00ff66]/10 border border-[#00ff66]/30 text-[#00ff66] uppercase shadow-sm">
+              <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-[var(--ws-mint)]/10 border border-[var(--ws-mint)]/30 text-[var(--ws-mint)] uppercase shadow-sm">
                 Line-Rate eBPF Drop + Cgroup Freeze + Air-Gap Dual Interlock
               </span>
             </div>
 
             <div className="flex items-center gap-2 flex-wrap mt-0.5">
-              <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-[#070d14] border border-[#162536] text-[10px] font-mono text-[#dee3eb]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#00ff66] animate-pulse"></span>
-                <span>CANARY RUNTIME: <strong className="text-[#00ff66]">ACTIVE</strong></span>
+              <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-[var(--ws-sidebar)] border border-[var(--ws-line)] text-[10px] font-mono text-[var(--ws-text)]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--ws-mint)] animate-pulse"></span>
+                <span>CANARY RUNTIME: <strong className="text-[var(--ws-mint)]">ACTIVE</strong></span>
               </div>
-              <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-[#070d14] border border-[#162536] text-[10px] font-mono text-[#dee3eb]">
-                <span className="material-symbols-outlined text-[13px] text-[#00f0ff]">verified</span>
-                <span>DRY-RUN: <strong className="text-[#00f0ff]">100% PASS</strong></span>
+              <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-[var(--ws-sidebar)] border border-[var(--ws-line)] text-[10px] font-mono text-[var(--ws-text)]">
+                <span className="material-symbols-outlined text-[13px] text-[var(--ws-mint)]">verified</span>
+                <span>DRY-RUN: <strong className="text-[var(--ws-mint)]">100% PASS</strong></span>
               </div>
-              <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-[#070d14] border border-[#162536] text-[10px] font-mono text-[#dee3eb]">
-                <span className="material-symbols-outlined text-[13px] text-[#ffb700]">lock_clock</span>
-                <span>IEC 62443-4-2 SR 3.1: <strong className="text-[#ffb700]">ENFORCED</strong></span>
+              <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-[var(--ws-sidebar)] border border-[var(--ws-line)] text-[10px] font-mono text-[var(--ws-text)]">
+                <span className="material-symbols-outlined text-[13px] text-[var(--research-sand)]">lock_clock</span>
+                <span>IEC 62443-4-2 SR 3.1: <strong className="text-[var(--research-sand)]">ENFORCED</strong></span>
               </div>
-              <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-[#070d14] border border-[#162536] text-[10px] font-mono text-[#64748b]">
+              <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-[var(--ws-sidebar)] border border-[var(--ws-line)] text-[10px] font-mono text-[var(--ws-muted)]">
                 <span className="material-symbols-outlined text-[13px]">memory</span>
-                <span>COMPILER: <strong className="text-[#dee3eb]">LLVM/Clang eBPF Target BPF (JIT)</strong></span>
+                <span>COMPILER: <strong className="text-[var(--ws-text)]">LLVM/Clang eBPF Target BPF (JIT)</strong></span>
               </div>
             </div>
           </div>
@@ -189,11 +189,11 @@ export default function SOARPlaybookBuilder({ isModal = false, onClose }: SOARPl
               disabled={isSimulating}
               className={`px-3 py-1.5 rounded font-mono text-xs font-bold flex items-center gap-1.5 border transition-all shadow-md ${
                 isSimulating
-                  ? "bg-[#ffb700]/20 text-[#ffb700] border-[#ffb700]/40 animate-pulse"
-                  : "bg-[#070d14] hover:bg-[#162536] text-[#00f0ff] border-[#00f0ff]/40"
+                  ? "bg-[var(--research-sand)]/20 text-[var(--research-sand)] border-[var(--research-sand)]/40 animate-pulse"
+                  : "bg-[var(--ws-sidebar)] hover:bg-[var(--ws-line)] text-[var(--ws-mint)] border-[var(--ws-mint)]/40"
               }`}
             >
-              <span className="material-symbols-outlined text-[15px] text-[#00f0ff]">science</span>
+              <span className="material-symbols-outlined text-[15px] text-[var(--ws-mint)]">science</span>
               <span>{isSimulating ? `Executing Stage ${simulationStep}...` : "Simulate (Dry-Run)"}</span>
             </button>
 
@@ -202,8 +202,8 @@ export default function SOARPlaybookBuilder({ isModal = false, onClose }: SOARPl
               disabled={officerSigned}
               className={`px-3 py-1.5 rounded font-mono text-xs font-bold flex items-center gap-1.5 border transition-all ${
                 officerSigned
-                  ? "bg-[#00ff66]/10 text-[#00ff66] border-[#00ff66]/30 cursor-default"
-                  : "bg-[#070d14] hover:bg-[#162536] text-[#ffb700] border-[#ffb700]/40"
+                  ? "bg-[var(--ws-mint)]/10 text-[var(--ws-mint)] border-[var(--ws-mint)]/30 cursor-default"
+                  : "bg-[var(--ws-sidebar)] hover:bg-[var(--ws-line)] text-[var(--research-sand)] border-[var(--research-sand)]/40"
               }`}
             >
               <span className="material-symbols-outlined text-[15px]">vpn_key</span>
@@ -212,7 +212,7 @@ export default function SOARPlaybookBuilder({ isModal = false, onClose }: SOARPl
 
             <button
               onClick={runSimulation}
-              className="px-3.5 py-1.5 rounded bg-[#00ff66] hover:bg-[#6bff83] text-[#003911] font-mono text-xs font-bold tracking-wide flex items-center gap-1.5 shadow-[0_0_16px_rgba(0,255,102,0.4)] transition-all active:scale-95"
+              className="px-3.5 py-1.5 rounded bg-[var(--ws-mint)] hover:bg-[var(--ws-mint)] text-[var(--ws-sidebar)] font-mono text-xs font-bold tracking-wide flex items-center gap-1.5 shadow-[0_0_16px_rgba(179,223,147,0.4)] transition-all active:scale-95"
             >
               <span className="material-symbols-outlined text-[16px]">bolt</span>
               <span>DEPLOY TO RING0</span>
@@ -221,7 +221,7 @@ export default function SOARPlaybookBuilder({ isModal = false, onClose }: SOARPl
             {isModal && onClose && (
               <button
                 onClick={onClose}
-                className="p-1.5 rounded bg-[#070d14] hover:bg-[#162536] text-[#64748b] hover:text-[#dee3eb] border border-[#162536]"
+                className="p-1.5 rounded bg-[var(--ws-sidebar)] hover:bg-[var(--ws-line)] text-[var(--ws-muted)] hover:text-[var(--ws-text)] border border-[var(--ws-line)]"
                 title="Close SOAR Studio"
               >
                 <span className="material-symbols-outlined text-[18px]">close</span>
@@ -236,26 +236,26 @@ export default function SOARPlaybookBuilder({ isModal = false, onClose }: SOARPl
         {/* LEFT PANEL: Playbook Catalog & Trigger Palette (3 Cols) */}
         <aside className="xl:col-span-3 flex flex-col gap-3 min-w-0">
           {/* Catalog Box */}
-          <div className="hud-box bg-[#0b131e] p-3 rounded border border-[#162536] flex flex-col gap-2">
-            <div className="flex items-center justify-between pb-1 border-b border-[#162536]">
+          <div className="hud-box bg-[var(--ws-panel)] p-3 rounded border border-[var(--ws-line)] flex flex-col gap-2">
+            <div className="flex items-center justify-between pb-1 border-b border-[var(--ws-line)]">
               <div className="flex items-center gap-1.5">
-                <span className="material-symbols-outlined text-[#00f0ff] text-[16px]">folder_special</span>
-                <span className="font-['Orbitron'] text-xs text-[#00ff66] uppercase font-bold tracking-wider">
+                <span className="material-symbols-outlined text-[var(--ws-mint)] text-[16px]">folder_special</span>
+                <span className="font-['Orbitron'] text-xs text-[var(--ws-mint)] uppercase font-bold tracking-wider">
                   Playbook Inventory
                 </span>
               </div>
-              <span className="font-mono text-[10px] text-[#64748b]">{PLAYBOOK_INVENTORY.length} TOTAL</span>
+              <span className="font-mono text-[10px] text-[var(--ws-muted)]">{PLAYBOOK_INVENTORY.length} TOTAL</span>
             </div>
 
             {/* Search Bar */}
             <div className="relative w-full">
-              <span className="material-symbols-outlined text-[14px] text-[#64748b] absolute left-2 top-2">search</span>
+              <span className="material-symbols-outlined text-[14px] text-[var(--ws-muted)] absolute left-2 top-2">search</span>
               <input
                 type="text"
                 value={searchFilter}
                 onChange={(e) => setSearchFilter(e.target.value)}
                 placeholder="FILTER SIGNATURE / PROTOCOL..."
-                className="w-full bg-[#070d14] text-[#dee3eb] font-mono text-[10px] pl-7 pr-2 py-1.5 rounded border border-[#162536] focus:outline-none focus:border-[#00f0ff] placeholder:text-[#64748b]"
+                className="w-full bg-[var(--ws-sidebar)] text-[var(--ws-text)] font-mono text-[10px] pl-7 pr-2 py-1.5 rounded border border-[var(--ws-line)] focus:outline-none focus:border-[var(--ws-mint)] placeholder:text-[var(--ws-muted)]"
               />
             </div>
 
@@ -267,8 +267,8 @@ export default function SOARPlaybookBuilder({ isModal = false, onClose }: SOARPl
                   onClick={() => setFilterCategory(cat)}
                   className={`px-2 py-0.5 rounded font-mono text-[9px] whitespace-nowrap transition-colors ${
                     filterCategory === cat
-                      ? "bg-[#00f0ff]/20 text-[#00f0ff] border border-[#00f0ff]/40 font-bold"
-                      : "bg-[#070d14] text-[#64748b] hover:text-[#dee3eb] border border-[#162536]"
+                      ? "bg-[var(--ws-mint)]/20 text-[var(--ws-mint)] border border-[var(--ws-mint)]/40 font-bold"
+                      : "bg-[var(--ws-sidebar)] text-[var(--ws-muted)] hover:text-[var(--ws-text)] border border-[var(--ws-line)]"
                   }`}
                 >
                   {cat}
@@ -286,37 +286,37 @@ export default function SOARPlaybookBuilder({ isModal = false, onClose }: SOARPl
                     onClick={() => setSelectedPlaybookId(pb.id)}
                     className={`p-2 rounded cursor-pointer transition-all border relative overflow-hidden ${
                       isSelected
-                        ? "bg-[#070d14] border-[#00ff66] shadow-[0_0_12px_rgba(0,255,102,0.15)]"
-                        : "bg-[#070d14]/70 border-[#162536] hover:bg-[#162536]/40"
+                        ? "bg-[var(--ws-sidebar)] border-[var(--ws-mint)] shadow-[0_0_12px_rgba(179,223,147,0.15)]"
+                        : "bg-[var(--ws-sidebar)]/70 border-[var(--ws-line)] hover:bg-[var(--ws-line)]/40"
                     }`}
                   >
-                    {isSelected && <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#00ff66]"></div>}
+                    {isSelected && <div className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--ws-mint)]"></div>}
                     <div className="pl-1">
                       <div className="flex items-center justify-between">
                         <span
                           className={`font-mono text-[9px] font-bold flex items-center gap-1 ${
-                            isSelected ? "text-[#00ff66]" : "text-[#64748b]"
+                            isSelected ? "text-[var(--ws-mint)]" : "text-[var(--ws-muted)]"
                           }`}
                         >
-                          {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-[#00ff66] animate-ping"></span>}
+                          {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-[var(--ws-mint)] animate-ping"></span>}
                           [{pb.status}]
                         </span>
-                        <span className="font-mono text-[9px] text-[#64748b]">MTTR: {pb.mttr}</span>
+                        <span className="font-mono text-[9px] text-[var(--ws-muted)]">MTTR: {pb.mttr}</span>
                       </div>
-                      <div className="font-mono text-xs text-[#dee3eb] font-bold mt-0.5 truncate">
+                      <div className="font-mono text-xs text-[var(--ws-text)] font-bold mt-0.5 truncate">
                         {pb.id}
                       </div>
-                      <p className="font-['Space_Grotesk'] text-[10px] text-[#64748b] line-clamp-1 mt-0.5">
+                      <p className="font-['Space_Grotesk'] text-[10px] text-[var(--ws-muted)] line-clamp-1 mt-0.5">
                         {pb.description}
                       </p>
                       <div className="flex items-center gap-1 mt-1 text-[9px] font-mono">
-                        <span className="px-1 rounded bg-[#0b131e] text-[#00f0ff] border border-[#00f0ff]/20">
+                        <span className="px-1 rounded bg-[var(--ws-panel)] text-[var(--ws-mint)] border border-[var(--ws-mint)]/20">
                           {pb.stages} STAGES
                         </span>
-                        <span className="px-1 rounded bg-[#0b131e] text-[#64748b] border border-[#162536]">
+                        <span className="px-1 rounded bg-[var(--ws-panel)] text-[var(--ws-muted)] border border-[var(--ws-line)]">
                           TPM 2.0 PCR-7
                         </span>
-                        <span className="px-1 rounded bg-[#0b131e] text-[#00ff66] border border-[#00ff66]/20">
+                        <span className="px-1 rounded bg-[var(--ws-panel)] text-[var(--ws-mint)] border border-[var(--ws-mint)]/20">
                           {pb.targetIp}
                         </span>
                       </div>
@@ -328,55 +328,55 @@ export default function SOARPlaybookBuilder({ isModal = false, onClose }: SOARPl
           </div>
 
           {/* Quick Add Step Node Palette */}
-          <div className="hud-box bg-[#0b131e] p-3 rounded border border-[#162536] flex flex-col gap-2">
-            <div className="flex items-center justify-between pb-1 border-b border-[#162536]">
-              <span className="font-['Orbitron'] text-xs text-[#00ff66] uppercase font-bold tracking-wider">
+          <div className="hud-box bg-[var(--ws-panel)] p-3 rounded border border-[var(--ws-line)] flex flex-col gap-2">
+            <div className="flex items-center justify-between pb-1 border-b border-[var(--ws-line)]">
+              <span className="font-['Orbitron'] text-xs text-[var(--ws-mint)] uppercase font-bold tracking-wider">
                 Step Node Palette
               </span>
-              <span className="font-mono text-[9px] text-[#64748b]">DRAG TO CANVAS</span>
+              <span className="font-mono text-[9px] text-[var(--ws-muted)]">DRAG TO CANVAS</span>
             </div>
             <div className="grid grid-cols-2 gap-1.5">
-              <div className="p-2 rounded bg-[#070d14] border border-[#162536] text-left">
-                <div className="flex items-center gap-1 text-[#00f0ff]">
+              <div className="p-2 rounded bg-[var(--ws-sidebar)] border border-[var(--ws-line)] text-left">
+                <div className="flex items-center gap-1 text-[var(--ws-mint)]">
                   <span className="material-symbols-outlined text-[15px]">sensors</span>
                   <span className="font-mono text-[10px] font-bold uppercase">Ingest Trigger</span>
                 </div>
-                <span className="font-mono text-[#64748b] text-[9px] block mt-0.5">Suricata / Kafka</span>
+                <span className="font-mono text-[var(--ws-muted)] text-[9px] block mt-0.5">Suricata / Kafka</span>
               </div>
-              <div className="p-2 rounded bg-[#070d14] border border-[#162536] text-left">
-                <div className="flex items-center gap-1 text-[#00ff66]">
+              <div className="p-2 rounded bg-[var(--ws-sidebar)] border border-[var(--ws-line)] text-left">
+                <div className="flex items-center gap-1 text-[var(--ws-mint)]">
                   <span className="material-symbols-outlined text-[15px]">filter_alt</span>
                   <span className="font-mono text-[10px] font-bold uppercase">eBPF Filter</span>
                 </div>
-                <span className="font-mono text-[#64748b] text-[9px] block mt-0.5">XDP / TC Kernel Drop</span>
+                <span className="font-mono text-[var(--ws-muted)] text-[9px] block mt-0.5">XDP / TC Kernel Drop</span>
               </div>
-              <div className="p-2 rounded bg-[#070d14] border border-[#162536] text-left">
-                <div className="flex items-center gap-1 text-[#ffb700]">
+              <div className="p-2 rounded bg-[var(--ws-sidebar)] border border-[var(--ws-line)] text-left">
+                <div className="flex items-center gap-1 text-[var(--research-sand)]">
                   <span className="material-symbols-outlined text-[15px]">pause_circle</span>
                   <span className="font-mono text-[10px] font-bold uppercase">Cgroup Freeze</span>
                 </div>
-                <span className="font-mono text-[#64748b] text-[9px] block mt-0.5">Process SIGSTOP Lock</span>
+                <span className="font-mono text-[var(--ws-muted)] text-[9px] block mt-0.5">Process SIGSTOP Lock</span>
               </div>
-              <div className="p-2 rounded bg-[#070d14] border border-[#162536] text-left">
-                <div className="flex items-center gap-1 text-[#00f0ff]">
+              <div className="p-2 rounded bg-[var(--ws-sidebar)] border border-[var(--ws-line)] text-left">
+                <div className="flex items-center gap-1 text-[var(--ws-mint)]">
                   <span className="material-symbols-outlined text-[15px]">terminal</span>
                   <span className="font-mono text-[10px] font-bold uppercase">Agent Task</span>
                 </div>
-                <span className="font-mono text-[#64748b] text-[9px] block mt-0.5">Wazuh RPC Probe</span>
+                <span className="font-mono text-[var(--ws-muted)] text-[9px] block mt-0.5">Wazuh RPC Probe</span>
               </div>
-              <div className="p-2 rounded bg-[#070d14] border border-[#162536] text-left">
-                <div className="flex items-center gap-1 text-[#ff2a5f]">
+              <div className="p-2 rounded bg-[var(--ws-sidebar)] border border-[var(--ws-line)] text-left">
+                <div className="flex items-center gap-1 text-[var(--ws-coral)]">
                   <span className="material-symbols-outlined text-[15px]">power_off</span>
                   <span className="font-mono text-[10px] font-bold uppercase">Hardware Relay</span>
                 </div>
-                <span className="font-mono text-[#64748b] text-[9px] block mt-0.5">Four-Eyes Air-Gap</span>
+                <span className="font-mono text-[var(--ws-muted)] text-[9px] block mt-0.5">Four-Eyes Air-Gap</span>
               </div>
-              <div className="p-2 rounded bg-[#070d14] border border-[#162536] text-left">
-                <div className="flex items-center gap-1 text-[#00ff66]">
+              <div className="p-2 rounded bg-[var(--ws-sidebar)] border border-[var(--ws-line)] text-left">
+                <div className="flex items-center gap-1 text-[var(--ws-mint)]">
                   <span className="material-symbols-outlined text-[15px]">verified_user</span>
                   <span className="font-mono text-[10px] font-bold uppercase">Merkle Audit</span>
                 </div>
-                <span className="font-mono text-[#64748b] text-[9px] block mt-0.5">TPM 2.0 PCR Signature</span>
+                <span className="font-mono text-[var(--ws-muted)] text-[9px] block mt-0.5">TPM 2.0 PCR Signature</span>
               </div>
             </div>
           </div>
@@ -384,69 +384,69 @@ export default function SOARPlaybookBuilder({ isModal = false, onClose }: SOARPl
 
         {/* CENTER PANEL: Visual Directed Acyclic Graph (DAG) Execution Flow (5 Cols) */}
         <main className="xl:col-span-5 flex flex-col gap-3 min-w-0">
-          <div className="bg-[#0b131e] p-2.5 rounded border border-[#00f0ff]/30 shadow-md flex items-center justify-between flex-wrap gap-2 relative">
+          <div className="bg-[var(--ws-panel)] p-2.5 rounded border border-[var(--ws-mint)]/30 shadow-md flex items-center justify-between flex-wrap gap-2 relative">
             <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-[#00ff66] text-[18px]">account_tree</span>
+              <span className="material-symbols-outlined text-[var(--ws-mint)] text-[18px]">account_tree</span>
               <div>
-                <div className="font-mono text-[9px] text-[#64748b] tracking-wider uppercase">
+                <div className="font-mono text-[9px] text-[var(--ws-muted)] tracking-wider uppercase">
                   EXECUTION PIPELINE // HARDWARE GRAPH
                 </div>
-                <div className="font-['Orbitron'] text-xs text-[#00ff66] font-bold">
+                <div className="font-['Orbitron'] text-xs text-[var(--ws-mint)] font-bold">
                   Directed Acyclic Graph (DAG)
                 </div>
               </div>
             </div>
             <div className="flex items-center gap-1 font-mono text-[10px]">
-              <span className="px-1.5 py-0.5 rounded bg-[#00ff66]/10 border border-[#00ff66]/30 text-[#00ff66] font-bold">
+              <span className="px-1.5 py-0.5 rounded bg-[var(--ws-mint)]/10 border border-[var(--ws-mint)]/30 text-[var(--ws-mint)] font-bold">
                 0 ERRORS
               </span>
-              <span className="px-1.5 py-0.5 rounded bg-[#00f0ff]/10 border border-[#00f0ff]/30 text-[#00f0ff] font-bold">
+              <span className="px-1.5 py-0.5 rounded bg-[var(--ws-mint)]/10 border border-[var(--ws-mint)]/30 text-[var(--ws-mint)] font-bold">
                 CYCLE-FREE
               </span>
-              <span className="px-1.5 py-0.5 rounded bg-[#070d14] text-[#64748b]">
+              <span className="px-1.5 py-0.5 rounded bg-[var(--ws-sidebar)] text-[var(--ws-muted)]">
                 SNAP 16px
               </span>
             </div>
           </div>
 
           {/* Visual DAG Canvas */}
-          <div className="relative w-full bg-[#070d14] p-3 rounded border border-[#162536] flex flex-col gap-3 overflow-hidden shadow-inner">
+          <div className="relative w-full bg-[var(--ws-sidebar)] p-3 rounded border border-[var(--ws-line)] flex flex-col gap-3 overflow-hidden shadow-inner">
             <div className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(#00f0ff_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
             {/* NODE 01: Ingest Trigger */}
             <div
-              className={`relative z-10 w-full p-2.5 rounded bg-[#0b131e] border-l-2 shadow-md transition-all ${
+              className={`relative z-10 w-full p-2.5 rounded bg-[var(--ws-panel)] border-l-2 shadow-md transition-all ${
                 simulationStep === 1
-                  ? "border-[#00ff66] ring-1 ring-[#00ff66] shadow-[0_0_15px_rgba(0,255,102,0.3)]"
-                  : "border-[#00ff66]/60"
+                  ? "border-[var(--ws-mint)] ring-1 ring-[var(--ws-mint)] shadow-[0_0_15px_rgba(179,223,147,0.3)]"
+                  : "border-[var(--ws-mint)]/60"
               }`}
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-1.5">
-                  <span className="px-1.5 py-0.2 rounded bg-[#00ff66]/20 text-[#00ff66] font-mono text-[9px] uppercase font-bold border border-[#00ff66]/30">
+                  <span className="px-1.5 py-0.2 rounded bg-[var(--ws-mint)]/20 text-[var(--ws-mint)] font-mono text-[9px] uppercase font-bold border border-[var(--ws-mint)]/30">
                     NODE 01
                   </span>
-                  <span className="font-mono text-[10px] text-[#64748b]">INGEST TRIGGER // ANOMALY EVENT</span>
+                  <span className="font-mono text-[10px] text-[var(--ws-muted)]">INGEST TRIGGER // ANOMALY EVENT</span>
                 </div>
-                <span className="font-mono text-[10px] px-1.5 py-0.2 rounded bg-[#00ff66]/20 text-[#00ff66] font-bold flex items-center gap-1 border border-[#00ff66]/40">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00ff66] animate-ping"></span>
+                <span className="font-mono text-[10px] px-1.5 py-0.2 rounded bg-[var(--ws-mint)]/20 text-[var(--ws-mint)] font-bold flex items-center gap-1 border border-[var(--ws-mint)]/40">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--ws-mint)] animate-ping"></span>
                   RESOLVED (0.00ms)
                 </span>
               </div>
-              <div className="font-mono text-xs text-[#dbfcff] font-bold mt-1">Modbus FC16 Anomaly Detected</div>
-              <div className="font-mono text-[10px] text-[#64748b] mt-0.5">
-                Source: <code className="text-[#00f0ff]">Conformer Deep Model (τ ≥ 0.850)</code> OR <code className="text-[#00f0ff]">Suricata Alert #20491</code>
+              <div className="font-mono text-xs text-[var(--ws-text)] font-bold mt-1">Modbus FC16 Anomaly Detected</div>
+              <div className="font-mono text-[10px] text-[var(--ws-muted)] mt-0.5">
+                Source: <code className="text-[var(--ws-mint)]">Conformer Deep Model (τ ≥ 0.850)</code> OR <code className="text-[var(--ws-mint)]">Suricata Alert #20491</code>
               </div>
-              <div className="mt-1.5 flex items-center justify-between font-mono text-[9px] pt-1 bg-[#070d14] px-2 py-1 rounded border border-[#162536]">
-                <span className="text-[#64748b]">REGISTER EXCURSION: 40001 &gt; 9,800 RPM</span>
-                <span className="text-[#00ff66] font-bold">BURST: 38 PKTS</span>
+              <div className="mt-1.5 flex items-center justify-between font-mono text-[9px] pt-1 bg-[var(--ws-sidebar)] px-2 py-1 rounded border border-[var(--ws-line)]">
+                <span className="text-[var(--ws-muted)]">REGISTER EXCURSION: 40001 &gt; 9,800 RPM</span>
+                <span className="text-[var(--ws-mint)] font-bold">BURST: 38 PKTS</span>
               </div>
             </div>
 
             {/* Parallel Fork */}
             <div className="relative flex items-center justify-center -my-1.5 z-10">
-              <div className="h-6 w-0.5 bg-[#00ff66] shadow-[0_0_8px_#00ff66]"></div>
-              <span className="absolute font-mono text-[9px] text-[#00ff66] bg-[#070d14] px-2 py-0.2 rounded border border-[#00ff66]/40">
+              <div className="h-6 w-0.5 bg-[var(--ws-mint)] shadow-[0_0_8px_var(--ws-mint)]"></div>
+              <span className="absolute font-mono text-[9px] text-[var(--ws-mint)] bg-[var(--ws-sidebar)] px-2 py-0.2 rounded border border-[var(--ws-mint)]/40">
                 PARALLEL FORK [2 CHANNELS]
               </span>
             </div>
@@ -455,26 +455,26 @@ export default function SOARPlaybookBuilder({ isModal = false, onClose }: SOARPl
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 relative z-10">
               {/* NODE 02: eBPF XDP Drop */}
               <div
-                className={`p-2.5 rounded bg-[#0b131e] shadow-md border transition-all ${
+                className={`p-2.5 rounded bg-[var(--ws-panel)] shadow-md border transition-all ${
                   simulationStep === 2
-                    ? "border-[#00ff66] ring-1 ring-[#00ff66] shadow-[0_0_15px_rgba(0,255,102,0.3)]"
-                    : "border-[#00ff66]/40"
+                    ? "border-[var(--ws-mint)] ring-1 ring-[var(--ws-mint)] shadow-[0_0_15px_rgba(179,223,147,0.3)]"
+                    : "border-[var(--ws-mint)]/40"
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="px-1.5 py-0.2 rounded bg-[#00ff66]/10 text-[#00ff66] font-mono text-[9px] uppercase font-bold border border-[#00ff66]/30">
+                  <span className="px-1.5 py-0.2 rounded bg-[var(--ws-mint)]/10 text-[var(--ws-mint)] font-mono text-[9px] uppercase font-bold border border-[var(--ws-mint)]/30">
                     NODE 02 [RING0]
                   </span>
-                  <span className="font-mono text-[10px] text-[#00ff66] font-bold">0.082ms</span>
+                  <span className="font-mono text-[10px] text-[var(--ws-mint)] font-bold">0.082ms</span>
                 </div>
-                <div className="font-mono text-xs text-[#dbfcff] font-bold mt-1">eBPF XDP Line Drop</div>
-                <p className="font-['Space_Grotesk'] text-[10px] text-[#64748b] mt-0.5">NIC hardware drop via AF_XDP hook</p>
-                <div className="mt-1.5 bg-[#070d14] p-1.5 rounded font-mono text-[9px] text-[#dee3eb] border border-[#162536] space-y-0.5">
+                <div className="font-mono text-xs text-[var(--ws-text)] font-bold mt-1">eBPF XDP Line Drop</div>
+                <p className="font-['Space_Grotesk'] text-[10px] text-[var(--ws-muted)] mt-0.5">NIC hardware drop via AF_XDP hook</p>
+                <div className="mt-1.5 bg-[var(--ws-sidebar)] p-1.5 rounded font-mono text-[9px] text-[var(--ws-text)] border border-[var(--ws-line)] space-y-0.5">
                   <div>IFACE: eth0 [100GbE]</div>
-                  <div className="text-[#00ff66] font-bold">SRC: {activePlaybook.targetIp}</div>
-                  <div className="text-[#ff2a5f]">ACTION: XDP_DROP</div>
+                  <div className="text-[var(--ws-mint)] font-bold">SRC: {activePlaybook.targetIp}</div>
+                  <div className="text-[var(--ws-coral)]">ACTION: XDP_DROP</div>
                 </div>
-                <div className="mt-1.5 flex items-center gap-1 font-mono text-[9px] text-[#00ff66] font-bold">
+                <div className="mt-1.5 flex items-center gap-1 font-mono text-[9px] text-[var(--ws-mint)] font-bold">
                   <span className="material-symbols-outlined text-[13px]">done_all</span>
                   <span>ENFORCED IN HARDWARE</span>
                 </div>
@@ -482,26 +482,26 @@ export default function SOARPlaybookBuilder({ isModal = false, onClose }: SOARPl
 
               {/* NODE 03: cgroup-v2 Freeze */}
               <div
-                className={`p-2.5 rounded bg-[#0b131e] shadow-md border transition-all ${
+                className={`p-2.5 rounded bg-[var(--ws-panel)] shadow-md border transition-all ${
                   simulationStep === 3
-                    ? "border-[#ffb700] ring-1 ring-[#ffb700] shadow-[0_0_15px_rgba(255,183,0,0.3)]"
-                    : "border-[#ffb700]/40"
+                    ? "border-[var(--research-sand)] ring-1 ring-[var(--research-sand)] shadow-[0_0_15px_rgba(214,199,156,0.3)]"
+                    : "border-[var(--research-sand)]/40"
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="px-1.5 py-0.2 rounded bg-[#ffb700]/20 text-[#ffb700] font-mono text-[9px] uppercase font-bold border border-[#ffb700]/30">
+                  <span className="px-1.5 py-0.2 rounded bg-[var(--research-sand)]/20 text-[var(--research-sand)] font-mono text-[9px] uppercase font-bold border border-[var(--research-sand)]/30">
                     NODE 03 [HOST]
                   </span>
-                  <span className="font-mono text-[10px] text-[#ffb700] font-bold">2.15ms</span>
+                  <span className="font-mono text-[10px] text-[var(--research-sand)] font-bold">2.15ms</span>
                 </div>
-                <div className="font-mono text-xs text-[#dbfcff] font-bold mt-1">cgroup-v2 Freeze</div>
-                <p className="font-['Space_Grotesk'] text-[10px] text-[#64748b] mt-0.5">Quarantine corrupted daemon thread</p>
-                <div className="mt-1.5 bg-[#070d14] p-1.5 rounded font-mono text-[9px] text-[#dee3eb] border border-[#162536] space-y-0.5">
+                <div className="font-mono text-xs text-[var(--ws-text)] font-bold mt-1">cgroup-v2 Freeze</div>
+                <p className="font-['Space_Grotesk'] text-[10px] text-[var(--ws-muted)] mt-0.5">Quarantine corrupted daemon thread</p>
+                <div className="mt-1.5 bg-[var(--ws-sidebar)] p-1.5 rounded font-mono text-[9px] text-[var(--ws-text)] border border-[var(--ws-line)] space-y-0.5">
                   <div>PID: 49102 [modbus_srv]</div>
-                  <div className="text-[#ffb700] font-bold">SIGNAL: SIGSTOP</div>
-                  <div className="text-[#64748b]">CPU QUOTA: 0%</div>
+                  <div className="text-[var(--research-sand)] font-bold">SIGNAL: SIGSTOP</div>
+                  <div className="text-[var(--ws-muted)]">CPU QUOTA: 0%</div>
                 </div>
-                <div className="mt-1.5 flex items-center gap-1 font-mono text-[9px] text-[#00ff66] font-bold">
+                <div className="mt-1.5 flex items-center gap-1 font-mono text-[9px] text-[var(--ws-mint)] font-bold">
                   <span className="material-symbols-outlined text-[13px]">done_all</span>
                   <span>STATE: FROZEN</span>
                 </div>
@@ -510,76 +510,76 @@ export default function SOARPlaybookBuilder({ isModal = false, onClose }: SOARPl
 
             {/* Converge */}
             <div className="relative flex items-center justify-center -my-1.5 z-10">
-              <div className="h-6 w-0.5 bg-[#00f0ff] shadow-[0_0_8px_#00f0ff]"></div>
-              <span className="absolute font-mono text-[9px] text-[#00f0ff] bg-[#070d14] px-2 py-0.2 rounded border border-[#00f0ff]/40">
+              <div className="h-6 w-0.5 bg-[var(--ws-mint)] shadow-[0_0_8px_var(--ws-mint)]"></div>
+              <span className="absolute font-mono text-[9px] text-[var(--ws-mint)] bg-[var(--ws-sidebar)] px-2 py-0.2 rounded border border-[var(--ws-mint)]/40">
                 CONVERGE
               </span>
             </div>
 
             {/* NODE 04: Safety Gate */}
             <div
-              className={`relative z-10 w-full p-2.5 rounded bg-[#0b131e] border-l-2 border-[#00f0ff] shadow-md transition-all ${
-                simulationStep === 4 ? "ring-1 ring-[#00f0ff] shadow-[0_0_15px_rgba(0,240,255,0.3)]" : ""
+              className={`relative z-10 w-full p-2.5 rounded bg-[var(--ws-panel)] border-l-2 border-[var(--ws-mint)] shadow-md transition-all ${
+                simulationStep === 4 ? "ring-1 ring-[var(--ws-mint)] shadow-[0_0_15px_rgba(179,223,147,0.3)]" : ""
               }`}
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-1.5">
-                  <span className="px-1.5 py-0.2 rounded bg-[#00f0ff]/20 text-[#00f0ff] font-mono text-[9px] uppercase font-bold border border-[#00f0ff]/30">
+                  <span className="px-1.5 py-0.2 rounded bg-[var(--ws-mint)]/20 text-[var(--ws-mint)] font-mono text-[9px] uppercase font-bold border border-[var(--ws-mint)]/30">
                     NODE 04 [SAFETY GATE]
                   </span>
-                  <span className="font-mono text-[10px] text-[#64748b]">PHYSICAL ENVELOPE</span>
+                  <span className="font-mono text-[10px] text-[var(--ws-muted)]">PHYSICAL ENVELOPE</span>
                 </div>
-                <span className="font-mono text-[10px] text-[#00ff66] font-bold flex items-center gap-1">
+                <span className="font-mono text-[10px] text-[var(--ws-mint)] font-bold flex items-center gap-1">
                   <span className="material-symbols-outlined text-[13px]">check_circle</span>
                   CRITERIA SATISFIED
                 </span>
               </div>
-              <div className="font-mono text-xs text-[#dbfcff] font-bold mt-1">Operational Boundary Verification</div>
+              <div className="font-mono text-xs text-[var(--ws-text)] font-bold mt-1">Operational Boundary Verification</div>
               <div className="grid grid-cols-2 gap-2 mt-1.5 font-mono text-[9px]">
-                <div className="bg-[#070d14] p-1.5 rounded border border-[#162536]">
-                  <div className="text-[#64748b]">PLANT SAFETY MARGIN</div>
-                  <div className="text-xs text-[#00ff66] font-bold">92.4% <span className="text-[9px] text-[#64748b] font-normal">(&gt; 85% THRESH)</span></div>
+                <div className="bg-[var(--ws-sidebar)] p-1.5 rounded border border-[var(--ws-line)]">
+                  <div className="text-[var(--ws-muted)]">PLANT SAFETY MARGIN</div>
+                  <div className="text-xs text-[var(--ws-mint)] font-bold">92.4% <span className="text-[9px] text-[var(--ws-muted)] font-normal">(&gt; 85% THRESH)</span></div>
                 </div>
-                <div className="bg-[#070d14] p-1.5 rounded border border-[#162536]">
-                  <div className="text-[#64748b]">PRESSURE Δ LIMIT</div>
-                  <div className="text-xs text-[#00f0ff] font-bold">118 kPa <span className="text-[9px] text-[#64748b] font-normal">(&lt; 200 kPa MAX)</span></div>
+                <div className="bg-[var(--ws-sidebar)] p-1.5 rounded border border-[var(--ws-line)]">
+                  <div className="text-[var(--ws-muted)]">PRESSURE Δ LIMIT</div>
+                  <div className="text-xs text-[var(--ws-mint)] font-bold">118 kPa <span className="text-[9px] text-[var(--ws-muted)] font-normal">(&lt; 200 kPa MAX)</span></div>
                 </div>
               </div>
             </div>
 
             {/* Connector */}
             <div className="relative flex items-center justify-center -my-1.5 z-10">
-              <div className="h-6 w-0.5 bg-[#ff2a5f] shadow-[0_0_8px_#ff2a5f]"></div>
+              <div className="h-6 w-0.5 bg-[var(--ws-coral)] shadow-[0_0_8px_var(--ws-coral)]"></div>
             </div>
 
             {/* NODE 05: Hardware Air-Gap Relay */}
             <div
-              className={`relative z-10 w-full p-2.5 rounded bg-[#0b131e] shadow-xl border-2 transition-all ${
+              className={`relative z-10 w-full p-2.5 rounded bg-[var(--ws-panel)] shadow-xl border-2 transition-all ${
                 officerSigned
-                  ? "border-[#00ff66]/60 shadow-[0_0_15px_rgba(0,255,102,0.2)]"
-                  : "border-[#ff2a5f]/60 shadow-[0_0_15px_rgba(255,42,95,0.2)]"
+                  ? "border-[var(--ws-mint)]/60 shadow-[0_0_15px_rgba(179,223,147,0.2)]"
+                  : "border-[var(--ws-coral)]/60 shadow-[0_0_15px_rgba(255,153,133,0.2)]"
               }`}
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-1.5">
-                  <span className="px-1.5 py-0.2 rounded bg-[#ff2a5f]/20 text-[#ff2a5f] font-mono text-[9px] uppercase font-bold border border-[#ff2a5f]/40">
+                  <span className="px-1.5 py-0.2 rounded bg-[var(--ws-coral)]/20 text-[var(--ws-coral)] font-mono text-[9px] uppercase font-bold border border-[var(--ws-coral)]/40">
                     NODE 05 [HARDWARE AIR-GAP]
                   </span>
-                  <span className="font-mono text-[10px] text-[#64748b]">PHYSICAL RELAY #3</span>
+                  <span className="font-mono text-[10px] text-[var(--ws-muted)]">PHYSICAL RELAY #3</span>
                 </div>
                 <span
                   className={`font-mono text-[10px] px-2 py-0.2 rounded font-bold flex items-center gap-1 border ${
                     officerSigned
-                      ? "bg-[#00ff66]/20 text-[#00ff66] border-[#00ff66]/40"
-                      : "bg-[#ff2a5f]/20 text-[#ff2a5f] border-[#ff2a5f]/40 animate-pulse"
+                      ? "bg-[var(--ws-mint)]/20 text-[var(--ws-mint)] border-[var(--ws-mint)]/40"
+                      : "bg-[var(--ws-coral)]/20 text-[var(--ws-coral)] border-[var(--ws-coral)]/40 animate-pulse"
                   }`}
                 >
-                  <span className={`w-1.5 h-1.5 rounded-full ${officerSigned ? "bg-[#00ff66]" : "bg-[#ff2a5f]"}`}></span>
+                  <span className={`w-1.5 h-1.5 rounded-full ${officerSigned ? "bg-[var(--ws-mint)]" : "bg-[var(--ws-coral)]"}`}></span>
                   {officerSigned ? "INTERLOCK SIGNED" : "AWAITING DUAL-SIGNATURE"}
                 </span>
               </div>
-              <div className="font-mono text-xs text-[#ff2a5f] font-bold mt-1">Dual-Custody Physical Relay Trip</div>
-              <p className="font-mono text-[10px] text-[#64748b] mt-0.5">
+              <div className="font-mono text-xs text-[var(--ws-coral)] font-bold mt-1">Dual-Custody Physical Relay Trip</div>
+              <p className="font-mono text-[10px] text-[var(--ws-muted)] mt-0.5">
                 De-energize PLC output actuator to establish cold galvanically isolated air-gap
               </p>
               <div className="mt-2 flex items-center gap-2 flex-wrap">
@@ -588,14 +588,14 @@ export default function SOARPlaybookBuilder({ isModal = false, onClose }: SOARPl
                   disabled={officerSigned}
                   className={`px-2.5 py-1 rounded font-mono text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 transition-all ${
                     officerSigned
-                      ? "bg-[#00ff66]/20 text-[#00ff66] border border-[#00ff66]/40 cursor-default"
-                      : "bg-[#ff2a5f] hover:bg-[#ff2a5f]/80 text-[#070d14] shadow-[0_0_12px_rgba(255,42,95,0.4)]"
+                      ? "bg-[var(--ws-mint)]/20 text-[var(--ws-mint)] border border-[var(--ws-mint)]/40 cursor-default"
+                      : "bg-[var(--ws-coral)] hover:bg-[var(--ws-coral)]/80 text-[var(--ws-sidebar)] shadow-[0_0_12px_rgba(255,153,133,0.4)]"
                   }`}
                 >
                   <span className="material-symbols-outlined text-[13px]">key</span>
                   <span>{officerSigned ? "Officer Signed" : "Sign Interlock (SecOps)"}</span>
                 </button>
-                <span className="font-mono text-[9px] text-[#64748b]">
+                <span className="font-mono text-[9px] text-[var(--ws-muted)]">
                   {officerSigned ? "Dual-signature quorum reached" : "Requires 2nd Safety Key from Plant Floor"}
                 </span>
               </div>
@@ -603,30 +603,30 @@ export default function SOARPlaybookBuilder({ isModal = false, onClose }: SOARPl
 
             {/* Connector */}
             <div className="relative flex items-center justify-center -my-1.5 z-10">
-              <div className="h-6 w-0.5 bg-[#64748b] opacity-40"></div>
+              <div className="h-6 w-0.5 bg-[var(--ws-muted)] opacity-40"></div>
             </div>
 
             {/* NODE 06: Merkle Commit */}
             <div
-              className={`relative z-10 w-full p-2.5 rounded bg-[#0b131e]/70 shadow-md border transition-all ${
+              className={`relative z-10 w-full p-2.5 rounded bg-[var(--ws-panel)]/70 shadow-md border transition-all ${
                 simulationStep === 6
-                  ? "border-[#00ff66] ring-1 ring-[#00ff66] shadow-[0_0_15px_rgba(0,255,102,0.3)]"
-                  : "border-[#162536]"
+                  ? "border-[var(--ws-mint)] ring-1 ring-[var(--ws-mint)] shadow-[0_0_15px_rgba(179,223,147,0.3)]"
+                  : "border-[var(--ws-line)]"
               }`}
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-1.5">
-                  <span className="px-1.5 py-0.2 rounded bg-[#070d14] text-[#64748b] font-mono text-[9px] uppercase border border-[#162536]">
+                  <span className="px-1.5 py-0.2 rounded bg-[var(--ws-sidebar)] text-[var(--ws-muted)] font-mono text-[9px] uppercase border border-[var(--ws-line)]">
                     NODE 06 [AUDIT]
                   </span>
-                  <span className="font-mono text-[10px] text-[#64748b]">IMMUTABLE ANCHOR</span>
+                  <span className="font-mono text-[10px] text-[var(--ws-muted)]">IMMUTABLE ANCHOR</span>
                 </div>
-                <span className="font-mono text-[10px] text-[#00ff66] font-bold">
+                <span className="font-mono text-[10px] text-[var(--ws-mint)] font-bold">
                   {simulationStep === 6 ? "COMMITTED" : "QUEUED"}
                 </span>
               </div>
-              <div className="font-mono text-xs text-[#dee3eb] mt-1 font-bold">TPM 2.0 PCR-7 Attestation & Merkle Commit</div>
-              <div className="font-mono text-[10px] text-[#64748b] mt-0.5">
+              <div className="font-mono text-xs text-[var(--ws-text)] mt-1 font-bold">TPM 2.0 PCR-7 Attestation & Merkle Commit</div>
+              <div className="font-mono text-[10px] text-[var(--ws-muted)] mt-0.5">
                 Hardware root of trust block commitment: SHA-256 state seal
               </div>
             </div>
@@ -635,16 +635,16 @@ export default function SOARPlaybookBuilder({ isModal = false, onClose }: SOARPl
 
         {/* RIGHT PANEL: Bytecode Dissection & Safety Policies (4 Cols) */}
         <aside className="xl:col-span-4 flex flex-col gap-3 min-w-0">
-          <div className="hud-box bg-[#0b131e] p-3 rounded border border-[#162536] flex flex-col gap-2.5">
+          <div className="hud-box bg-[var(--ws-panel)] p-3 rounded border border-[var(--ws-line)] flex flex-col gap-2.5">
             {/* Tab Selector */}
-            <div className="flex items-center justify-between pb-1 border-b border-[#162536]">
+            <div className="flex items-center justify-between pb-1 border-b border-[var(--ws-line)]">
               <div className="flex items-center gap-1">
                 <button
                   onClick={() => setRightTab("ebpf")}
                   className={`px-2.5 py-1 rounded font-mono text-[10px] font-bold flex items-center gap-1 transition-all ${
                     rightTab === "ebpf"
-                      ? "bg-[#00ff66] text-[#003911]"
-                      : "bg-[#070d14] text-[#64748b] hover:text-[#dee3eb] border border-[#162536]"
+                      ? "bg-[var(--ws-mint)] text-[var(--ws-sidebar)]"
+                      : "bg-[var(--ws-sidebar)] text-[var(--ws-muted)] hover:text-[var(--ws-text)] border border-[var(--ws-line)]"
                   }`}
                 >
                   <span className="material-symbols-outlined text-[13px]">code</span>
@@ -654,25 +654,25 @@ export default function SOARPlaybookBuilder({ isModal = false, onClose }: SOARPl
                   onClick={() => setRightTab("safety")}
                   className={`px-2.5 py-1 rounded font-mono text-[10px] font-bold flex items-center gap-1 transition-all ${
                     rightTab === "safety"
-                      ? "bg-[#00f0ff] text-[#00363d]"
-                      : "bg-[#070d14] text-[#64748b] hover:text-[#dee3eb] border border-[#162536]"
+                      ? "bg-[var(--ws-mint)] text-[var(--ws-sidebar)]"
+                      : "bg-[var(--ws-sidebar)] text-[var(--ws-muted)] hover:text-[var(--ws-text)] border border-[var(--ws-line)]"
                   }`}
                 >
                   <span className="material-symbols-outlined text-[13px]">policy</span>
                   <span>Safety Policies</span>
                 </button>
               </div>
-              <span className="font-mono text-[9px] text-[#64748b]">TARGET: X86_64</span>
+              <span className="font-mono text-[9px] text-[var(--ws-muted)]">TARGET: X86_64</span>
             </div>
 
             {/* Code / Policies View */}
             {rightTab === "ebpf" ? (
-              <div className="bg-[#070d14] p-2.5 rounded font-mono text-[10px] flex flex-col gap-2 border border-[#162536]">
-                <div className="flex items-center justify-between text-[#64748b] text-[9px] pb-1 border-b border-[#162536]">
+              <div className="bg-[var(--ws-sidebar)] p-2.5 rounded font-mono text-[10px] flex flex-col gap-2 border border-[var(--ws-line)]">
+                <div className="flex items-center justify-between text-[var(--ws-muted)] text-[9px] pb-1 border-b border-[var(--ws-line)]">
                   <span>xdp_drop_modbus_excursion.c</span>
-                  <span className="text-[#00ff66]">LLVM-BPF OK</span>
+                  <span className="text-[var(--ws-mint)]">LLVM-BPF OK</span>
                 </div>
-                <pre className="text-[#dee3eb] text-[10px] leading-[15px] overflow-x-auto whitespace-pre font-mono max-h-[170px] overflow-y-auto">
+                <pre className="text-[var(--ws-text)] text-[10px] leading-[15px] overflow-x-auto whitespace-pre font-mono max-h-[170px] overflow-y-auto">
 {`SEC("xdp")
 int xdp_drop_modbus_excursion(struct xdp_md *ctx) {
     void *data = (void *)(long)ctx->data;
@@ -698,54 +698,54 @@ int xdp_drop_modbus_excursion(struct xdp_md *ctx) {
 }`}
                 </pre>
                 {/* Stats */}
-                <div className="grid grid-cols-2 gap-2 pt-1 border-t border-[#162536] text-[9px] font-mono">
+                <div className="grid grid-cols-2 gap-2 pt-1 border-t border-[var(--ws-line)] text-[9px] font-mono">
                   <div>
-                    <div className="text-[#64748b] uppercase">Instruction Count</div>
-                    <div className="text-[#00ff66] font-bold">48 INSN</div>
+                    <div className="text-[var(--ws-muted)] uppercase">Instruction Count</div>
+                    <div className="text-[var(--ws-mint)] font-bold">48 INSN</div>
                   </div>
                   <div>
-                    <div className="text-[#64748b] uppercase">Verifier Logs</div>
-                    <div className="text-[#00f0ff] font-bold">0 ERRORS</div>
+                    <div className="text-[var(--ws-muted)] uppercase">Verifier Logs</div>
+                    <div className="text-[var(--ws-mint)] font-bold">0 ERRORS</div>
                   </div>
                   <div>
-                    <div className="text-[#64748b] uppercase">BPF Map Type</div>
-                    <div className="text-[#dee3eb] truncate">LPM_TRIE (65K)</div>
+                    <div className="text-[var(--ws-muted)] uppercase">BPF Map Type</div>
+                    <div className="text-[var(--ws-text)] truncate">LPM_TRIE (65K)</div>
                   </div>
                   <div>
-                    <div className="text-[#64748b] uppercase">JIT Target</div>
-                    <div className="text-[#dee3eb]">x86_64 native</div>
+                    <div className="text-[var(--ws-muted)] uppercase">JIT Target</div>
+                    <div className="text-[var(--ws-text)]">x86_64 native</div>
                   </div>
                 </div>
               </div>
             ) : (
-              <div className="bg-[#070d14] p-2.5 rounded font-mono text-[10px] flex flex-col gap-2 border border-[#162536]">
-                <div className="flex items-center justify-between text-[#64748b] text-[9px] pb-1 border-b border-[#162536]">
+              <div className="bg-[var(--ws-sidebar)] p-2.5 rounded font-mono text-[10px] flex flex-col gap-2 border border-[var(--ws-line)]">
+                <div className="flex items-center justify-between text-[var(--ws-muted)] text-[9px] pb-1 border-b border-[var(--ws-line)]">
                   <span>Four-Eyes Safety Constraints</span>
-                  <span className="text-[#ff2a5f] font-bold">M-OF-N: 2/2</span>
+                  <span className="text-[var(--ws-coral)] font-bold">M-OF-N: 2/2</span>
                 </div>
                 <div className="space-y-1.5">
-                  <div className="p-1.5 rounded bg-[#0b131e] border border-[#162536] flex items-center justify-between">
+                  <div className="p-1.5 rounded bg-[var(--ws-panel)] border border-[var(--ws-line)] flex items-center justify-between">
                     <div>
-                      <div className="text-[#dee3eb] font-bold">SecOps Admin (Officer 1)</div>
-                      <div className="text-[#64748b] text-[9px]">ID: #99214 // TOKEN SIGNED</div>
+                      <div className="text-[var(--ws-text)] font-bold">SecOps Admin (Officer 1)</div>
+                      <div className="text-[var(--ws-muted)] text-[9px]">ID: #99214 // TOKEN SIGNED</div>
                     </div>
-                    <span className="px-1.5 py-0.2 rounded bg-[#00ff66]/20 text-[#00ff66] font-bold text-[9px]">
+                    <span className="px-1.5 py-0.2 rounded bg-[var(--ws-mint)]/20 text-[var(--ws-mint)] font-bold text-[9px]">
                       AUTH OK
                     </span>
                   </div>
 
-                  <div className="p-1.5 rounded bg-[#0b131e] border border-[#162536] flex items-center justify-between">
+                  <div className="p-1.5 rounded bg-[var(--ws-panel)] border border-[var(--ws-line)] flex items-center justify-between">
                     <div>
-                      <div className="text-[#dee3eb] font-bold">Plant Safety Engineer (Officer 2)</div>
-                      <div className="text-[#64748b] text-[9px]">
+                      <div className="text-[var(--ws-text)] font-bold">Plant Safety Engineer (Officer 2)</div>
+                      <div className="text-[var(--ws-muted)] text-[9px]">
                         {officerSigned ? "Hardware FIDO2 Key Verified" : "Hardware FIDO2 Key Pending"}
                       </div>
                     </div>
                     <span
                       className={`px-1.5 py-0.2 rounded font-bold text-[9px] ${
                         officerSigned
-                          ? "bg-[#00ff66]/20 text-[#00ff66]"
-                          : "bg-[#ff2a5f]/20 text-[#ff2a5f] animate-pulse"
+                          ? "bg-[var(--ws-mint)]/20 text-[var(--ws-mint)]"
+                          : "bg-[var(--ws-coral)]/20 text-[var(--ws-coral)] animate-pulse"
                       }`}
                     >
                       {officerSigned ? "VERIFIED" : "WAITING"}
@@ -753,30 +753,30 @@ int xdp_drop_modbus_excursion(struct xdp_md *ctx) {
                   </div>
                 </div>
 
-                <div className="pt-1.5 border-t border-[#162536] text-[9px] space-y-1">
+                <div className="pt-1.5 border-t border-[var(--ws-line)] text-[9px] space-y-1">
                   <div className="flex justify-between">
-                    <span className="text-[#64748b]">Fail-Safe Topology:</span>
-                    <span className="text-[#dee3eb]">Normally Open (NO) De-energize</span>
+                    <span className="text-[var(--ws-muted)]">Fail-Safe Topology:</span>
+                    <span className="text-[var(--ws-text)]">Normally Open (NO) De-energize</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#64748b]">Max Outage Window:</span>
-                    <span className="text-[#00f0ff]">450ms (No Water Hammer)</span>
+                    <span className="text-[var(--ws-muted)]">Max Outage Window:</span>
+                    <span className="text-[var(--ws-mint)]">450ms (No Water Hammer)</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#64748b]">Relay Protocol:</span>
-                    <span className="text-[#00ff66]">Modbus Coil #0003 Direct</span>
+                    <span className="text-[var(--ws-muted)]">Relay Protocol:</span>
+                    <span className="text-[var(--ws-mint)]">Modbus Coil #0003 Direct</span>
                   </div>
                 </div>
               </div>
             )}
 
             {/* Simulation Trace Output Feed */}
-            <div className="p-2.5 rounded bg-[#070d14] border border-[#162536] flex flex-col gap-1 font-mono text-[9px]">
-              <div className="flex items-center justify-between text-[#64748b] pb-1 border-b border-[#162536]">
+            <div className="p-2.5 rounded bg-[var(--ws-sidebar)] border border-[var(--ws-line)] flex flex-col gap-1 font-mono text-[9px]">
+              <div className="flex items-center justify-between text-[var(--ws-muted)] pb-1 border-b border-[var(--ws-line)]">
                 <span>LIVE KERNEL TRACE (RING BUFFER)</span>
-                <span className="text-[#00f0ff]">POLLING 10ms</span>
+                <span className="text-[var(--ws-mint)]">POLLING 10ms</span>
               </div>
-              <div className="text-[#b9cacb] font-mono space-y-1 max-h-[100px] overflow-y-auto pr-1">
+              <div className="text-[var(--ws-muted)] font-mono space-y-1 max-h-[100px] overflow-y-auto pr-1">
                 {traceLogs.map((log, i) => (
                   <div key={i} className="truncate">
                     {log}

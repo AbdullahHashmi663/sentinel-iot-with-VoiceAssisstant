@@ -40,25 +40,25 @@ export default function XaiConsole() {
       stage: "Ingestion & Sanitization",
       latency: 3.80,
       description: "Sensor stream MinMax normalization & 10-step tensor framing",
-      color: "#00f0ff"
+      color: "var(--ws-mint)"
     },
     {
       stage: "Conformer Core Forward",
       latency: 0.78,
       description: "Depthwise Conv1D + Multi-Head Self-Attention dual forward pass",
-      color: "#00ff66"
+      color: "var(--ws-mint)"
     },
     {
       stage: "Saliency Analytical Gradient",
       latency: 0.65,
       description: "First-order backprop gradient attribution ∇_x ŷ_bin",
-      color: "#ffb700"
+      color: "var(--research-sand)"
     },
     {
       stage: "eBPF XDP Containment",
       latency: 16.27,
       description: "AF_XDP line-rate drop & Wazuh iptables / kill -9 dispatch",
-      color: "#ff2a5f"
+      color: "var(--ws-coral)"
     }
   ];
 
@@ -72,30 +72,30 @@ export default function XaiConsole() {
         <div className="hud-box p-3 rounded relative overflow-hidden group">
           <span className="hud-corner-tr">┐</span>
           <span className="hud-corner-bl">└</span>
-          <div className="flex items-center justify-between text-[10px] text-[#64748b]">
-            <span className="flex items-center gap-1 text-[#00f0ff] font-bold tracking-wider">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00f0ff] animate-pulse" />
+          <div className="flex items-center justify-between text-[10px] text-[var(--ws-muted)]">
+            <span className="flex items-center gap-1 text-[var(--ws-mint)] font-bold tracking-wider">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--ws-mint)] animate-pulse" />
               INFERENCE + BACKPROP
             </span>
             <span>GPU CUDA_0</span>
           </div>
           <div className="flex items-baseline justify-between mt-1">
             <div className="flex items-baseline gap-1">
-              <span className="text-2xl lg:text-3xl text-[#00f0ff] font-bold font-['Orbitron'] text-glow-cyan">
+              <span className="text-2xl lg:text-3xl text-[var(--ws-mint)] font-bold font-['Orbitron'] text-glow-cyan">
                 0.78
               </span>
-              <span className="text-xs text-[#00f0ff]">ms</span>
+              <span className="text-xs text-[var(--ws-mint)]">ms</span>
             </div>
-            <span className="px-1.5 py-0.5 rounded bg-[#00f0ff]/10 border border-[#00f0ff]/30 text-[#00f0ff] text-[10px] font-bold">
+            <span className="px-1.5 py-0.5 rounded bg-[var(--ws-mint)]/10 border border-[var(--ws-mint)]/30 text-[var(--ws-mint)] text-[10px] font-bold">
               99.97% &gt; SHAP
             </span>
           </div>
-          <div className="w-full bg-[#03070c] h-1.5 rounded mt-2 overflow-hidden flex">
-            <div className="bg-[#00f0ff] h-full shadow-[0_0_6px_#00f0ff]" style={{ width: "15.6%" }} />
+          <div className="w-full bg-[var(--ws-sidebar)] h-1.5 rounded mt-2 overflow-hidden flex">
+            <div className="bg-[var(--ws-mint)] h-full shadow-[0_0_6px_var(--ws-mint)]" style={{ width: "15.6%" }} />
           </div>
-          <div className="flex justify-between items-center text-[9px] text-[#64748b] mt-1.5">
+          <div className="flex justify-between items-center text-[9px] text-[var(--ws-muted)] mt-1.5">
             <span>BUDGET: 5.0ms</span>
-            <span className="text-[#00ff66] font-bold">HARD SLA COMPLIANT</span>
+            <span className="text-[var(--ws-mint)] font-bold">HARD SLA COMPLIANT</span>
           </div>
         </div>
 
@@ -103,25 +103,25 @@ export default function XaiConsole() {
         <div className="hud-box p-3 rounded relative overflow-hidden group">
           <span className="hud-corner-tr">┐</span>
           <span className="hud-corner-bl">└</span>
-          <div className="flex items-center justify-between text-[10px] text-[#64748b]">
-            <span className="text-[#00ff66] font-bold tracking-wider">ATTRIBUTION SPARSITY</span>
+          <div className="flex items-center justify-between text-[10px] text-[var(--ws-muted)]">
+            <span className="text-[var(--ws-mint)] font-bold tracking-wider">ATTRIBUTION SPARSITY</span>
             <span>L0 MASK</span>
           </div>
           <div className="flex items-baseline justify-between mt-1">
             <div className="flex items-baseline gap-1">
-              <span className="text-2xl lg:text-3xl text-[#00ff66] font-bold font-['Orbitron'] text-glow-emerald">
+              <span className="text-2xl lg:text-3xl text-[var(--ws-mint)] font-bold font-['Orbitron'] text-glow-emerald">
                 84.2
               </span>
-              <span className="text-xs text-[#00ff66]">%</span>
+              <span className="text-xs text-[var(--ws-mint)]">%</span>
             </div>
-            <span className="text-[10px] text-[#dee3eb]">3 / 8 TOKENS SALIENT</span>
+            <span className="text-[10px] text-[var(--ws-text)]">3 / 8 TOKENS SALIENT</span>
           </div>
-          <div className="w-full bg-[#03070c] h-1.5 rounded mt-2 overflow-hidden flex">
-            <div className="bg-[#00ff66] h-full shadow-[0_0_6px_#00ff66]" style={{ width: "84.2%" }} />
+          <div className="w-full bg-[var(--ws-sidebar)] h-1.5 rounded mt-2 overflow-hidden flex">
+            <div className="bg-[var(--ws-mint)] h-full shadow-[0_0_6px_var(--ws-mint)]" style={{ width: "84.2%" }} />
           </div>
-          <div className="flex justify-between items-center text-[9px] text-[#64748b] mt-1.5">
+          <div className="flex justify-between items-center text-[9px] text-[var(--ws-muted)] mt-1.5">
             <span>THRESHOLD: &gt;75%</span>
-            <span className="text-[#00ff66] font-bold">REDUCED COGNITIVE LOAD</span>
+            <span className="text-[var(--ws-mint)] font-bold">REDUCED COGNITIVE LOAD</span>
           </div>
         </div>
 
@@ -129,27 +129,27 @@ export default function XaiConsole() {
         <div className="hud-box p-3 rounded relative overflow-hidden group">
           <span className="hud-corner-tr">┐</span>
           <span className="hud-corner-bl">└</span>
-          <div className="flex items-center justify-between text-[10px] text-[#64748b]">
-            <span className="text-[#ffb700] font-bold tracking-wider">FAITHFULNESS SCORE</span>
+          <div className="flex items-center justify-between text-[10px] text-[var(--ws-muted)]">
+            <span className="text-[var(--research-sand)] font-bold tracking-wider">FAITHFULNESS SCORE</span>
             <span>PEARSON r</span>
           </div>
           <div className="flex items-baseline justify-between mt-1">
             <div className="flex items-baseline gap-1">
-              <span className="text-2xl lg:text-3xl text-[#ffb700] font-bold font-['Orbitron'] text-glow-amber">
+              <span className="text-2xl lg:text-3xl text-[var(--research-sand)] font-bold font-['Orbitron'] text-glow-amber">
                 0.964
               </span>
-              <span className="text-xs text-[#ffb700]">r</span>
+              <span className="text-xs text-[var(--research-sand)]">r</span>
             </div>
-            <span className="px-1.5 py-0.5 rounded bg-[#ffb700]/10 border border-[#ffb700]/30 text-[#ffb700] text-[10px]">
+            <span className="px-1.5 py-0.5 rounded bg-[var(--research-sand)]/10 border border-[var(--research-sand)]/30 text-[var(--research-sand)] text-[10px]">
               ±0.002 ERR
             </span>
           </div>
-          <div className="w-full bg-[#03070c] h-1.5 rounded mt-2 overflow-hidden flex">
-            <div className="bg-[#ffb700] h-full shadow-[0_0_6px_#ffb700]" style={{ width: "96.4%" }} />
+          <div className="w-full bg-[var(--ws-sidebar)] h-1.5 rounded mt-2 overflow-hidden flex">
+            <div className="bg-[var(--research-sand)] h-full shadow-[0_0_6px_var(--research-sand)]" style={{ width: "96.4%" }} />
           </div>
-          <div className="flex justify-between items-center text-[9px] text-[#64748b] mt-1.5">
+          <div className="flex justify-between items-center text-[9px] text-[var(--ws-muted)] mt-1.5">
             <span>MODEL FIDELITY</span>
-            <span className="text-[#ffb700] font-bold">GROUND TRUTH ALIGNED</span>
+            <span className="text-[var(--research-sand)] font-bold">GROUND TRUTH ALIGNED</span>
           </div>
         </div>
 
@@ -157,25 +157,25 @@ export default function XaiConsole() {
         <div className="hud-box p-3 rounded relative overflow-hidden group">
           <span className="hud-corner-tr">┐</span>
           <span className="hud-corner-bl">└</span>
-          <div className="flex items-center justify-between text-[10px] text-[#64748b]">
-            <span className="text-[#a855f7] font-bold tracking-wider">MHSA ENTROPY // DRIFT</span>
+          <div className="flex items-center justify-between text-[10px] text-[var(--ws-muted)]">
+            <span className="text-[var(--research-sand)] font-bold tracking-wider">MHSA ENTROPY // DRIFT</span>
             <span>HEADS 4/8</span>
           </div>
           <div className="flex items-baseline justify-between mt-1">
             <div className="flex items-baseline gap-1">
-              <span className="text-2xl lg:text-3xl text-[#a855f7] font-bold font-['Orbitron']">
+              <span className="text-2xl lg:text-3xl text-[var(--research-sand)] font-bold font-['Orbitron']">
                 1.42
               </span>
-              <span className="text-xs text-[#a855f7]">nats</span>
+              <span className="text-xs text-[var(--research-sand)]">nats</span>
             </div>
-            <span className="text-[10px] text-[#00f0ff]">Δ = 0.0031 NOMINAL</span>
+            <span className="text-[10px] text-[var(--ws-mint)]">Δ = 0.0031 NOMINAL</span>
           </div>
-          <div className="w-full bg-[#03070c] h-1.5 rounded mt-2 overflow-hidden flex">
-            <div className="bg-[#a855f7] h-full shadow-[0_0_6px_#a855f7]" style={{ width: "68%" }} />
+          <div className="w-full bg-[var(--ws-sidebar)] h-1.5 rounded mt-2 overflow-hidden flex">
+            <div className="bg-[var(--research-sand)] h-full shadow-[0_0_6px_var(--research-sand)]" style={{ width: "68%" }} />
           </div>
-          <div className="flex justify-between items-center text-[9px] text-[#64748b] mt-1.5">
+          <div className="flex justify-between items-center text-[9px] text-[var(--ws-muted)] mt-1.5">
             <span>SHANNON ENTROPY</span>
-            <span className="text-[#00f0ff] font-bold">LOW COGNITIVE JITTER</span>
+            <span className="text-[var(--ws-mint)] font-bold">LOW COGNITIVE JITTER</span>
           </div>
         </div>
       </div>
@@ -189,31 +189,31 @@ export default function XaiConsole() {
             <span className="hud-corner-tr">┐</span>
             <span className="hud-corner-bl">└</span>
 
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-[#162536] pb-3">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-[var(--ws-line)] pb-3">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-3.5 bg-[#00f0ff] glow-cyan" />
+                  <span className="w-1.5 h-3.5 bg-[var(--ws-mint)] glow-cyan" />
                   <h3 className="font-['Orbitron'] text-sm font-bold text-white tracking-wider uppercase">
                     GRADIENT SALIENCY ATTRIBUTION MAP
                   </h3>
-                  <span className="px-1.5 py-0.2 rounded bg-[#ff2a5f]/20 border border-[#ff2a5f]/50 text-[#ff2a5f] text-[10px] font-bold">
+                  <span className="px-1.5 py-0.2 rounded bg-[var(--ws-coral)]/20 border border-[var(--ws-coral)]/50 text-[var(--ws-coral)] text-[10px] font-bold">
                     ROGUE ATTACK DETECTED
                   </span>
                 </div>
-                <p className="text-[11px] text-[#64748b] mt-0.5">
+                <p className="text-[11px] text-[var(--ws-muted)] mt-0.5">
                   Formula: [∇_x ŷ_bin ⊗ (x - x_baseline)] // Conformer Latent Layer Projection
                 </p>
               </div>
 
               {/* Mode Selector */}
-              <div className="flex items-center p-0.5 bg-[#03070c] border border-[#162536] rounded text-[11px]">
+              <div className="flex items-center p-0.5 bg-[var(--ws-sidebar)] border border-[var(--ws-line)] rounded text-[11px]">
                 <button
                   type="button"
                   onClick={() => setXaiMode("input_grad")}
                   className={`px-2 py-0.5 rounded transition-all cursor-pointer ${
                     xaiMode === "input_grad"
-                      ? "bg-[#00f0ff] text-[#03070c] font-bold shadow-[0_0_8px_rgba(0,240,255,0.6)]"
-                      : "text-[#64748b] hover:text-white"
+                      ? "bg-[var(--ws-mint)] text-[var(--ws-sidebar)] font-bold shadow-[0_0_8px_rgba(179,223,147,0.6)]"
+                      : "text-[var(--ws-muted)] hover:text-white"
                   }`}
                 >
                   Input × Grad
@@ -223,8 +223,8 @@ export default function XaiConsole() {
                   onClick={() => setXaiMode("integ_grad")}
                   className={`px-2 py-0.5 rounded transition-all cursor-pointer ${
                     xaiMode === "integ_grad"
-                      ? "bg-[#00f0ff] text-[#03070c] font-bold shadow-[0_0_8px_rgba(0,240,255,0.6)]"
-                      : "text-[#64748b] hover:text-white"
+                      ? "bg-[var(--ws-mint)] text-[var(--ws-sidebar)] font-bold shadow-[0_0_8px_rgba(179,223,147,0.6)]"
+                      : "text-[var(--ws-muted)] hover:text-white"
                   }`}
                 >
                   IntGrad (m=50)
@@ -234,8 +234,8 @@ export default function XaiConsole() {
                   onClick={() => setXaiMode("smooth_grad")}
                   className={`px-2 py-0.5 rounded transition-all cursor-pointer ${
                     xaiMode === "smooth_grad"
-                      ? "bg-[#00f0ff] text-[#03070c] font-bold shadow-[0_0_8px_rgba(0,240,255,0.6)]"
-                      : "text-[#64748b] hover:text-white"
+                      ? "bg-[var(--ws-mint)] text-[var(--ws-sidebar)] font-bold shadow-[0_0_8px_rgba(179,223,147,0.6)]"
+                      : "text-[var(--ws-muted)] hover:text-white"
                   }`}
                 >
                   SmoothGrad
@@ -245,8 +245,8 @@ export default function XaiConsole() {
                   onClick={() => setXaiMode("attn_map")}
                   className={`px-2 py-0.5 rounded transition-all cursor-pointer ${
                     xaiMode === "attn_map"
-                      ? "bg-[#00f0ff] text-[#03070c] font-bold shadow-[0_0_8px_rgba(0,240,255,0.6)]"
-                      : "text-[#64748b] hover:text-white"
+                      ? "bg-[var(--ws-mint)] text-[var(--ws-sidebar)] font-bold shadow-[0_0_8px_rgba(179,223,147,0.6)]"
+                      : "text-[var(--ws-muted)] hover:text-white"
                   }`}
                 >
                   Attn Map
@@ -255,14 +255,14 @@ export default function XaiConsole() {
             </div>
 
             {/* Target Banner */}
-            <div className="mt-3 px-3 py-1.5 rounded bg-[#ff2a5f]/10 border border-[#ff2a5f]/30 flex items-center justify-between text-xs">
+            <div className="mt-3 px-3 py-1.5 rounded bg-[var(--ws-coral)]/10 border border-[var(--ws-coral)]/30 flex items-center justify-between text-xs">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#ff2a5f] animate-ping" />
-                <span className="text-[#ff2a5f] font-bold">TARGET: MODBUS REPLAY INJECTION #0981</span>
-                <span className="text-[#64748b] hidden sm:inline">| PLC ID: 0x192.168.1.104</span>
+                <span className="w-2 h-2 rounded-full bg-[var(--ws-coral)] animate-ping" />
+                <span className="text-[var(--ws-coral)] font-bold">TARGET: MODBUS REPLAY INJECTION #0981</span>
+                <span className="text-[var(--ws-muted)] hidden sm:inline">| PLC ID: 0x192.168.1.104</span>
               </div>
               <div className="text-white font-bold">
-                ||∇L|| = <span className="text-[#00f0ff]">4.881e-02</span>
+                ||∇L|| = <span className="text-[var(--ws-mint)]">4.881e-02</span>
               </div>
             </div>
 
@@ -271,32 +271,32 @@ export default function XaiConsole() {
               {saliencyFeatures.map((feat, idx) => (
                 <div
                   key={feat.featureName}
-                  className="bg-[#070d14] border border-[#162536] hover:border-[#00f0ff]/40 p-2.5 rounded transition-all"
+                  className="bg-[var(--ws-sidebar)] border border-[var(--ws-line)] hover:border-[var(--ws-mint)]/40 p-2.5 rounded transition-all"
                 >
                   <div className="flex items-center justify-between text-xs mb-1">
                     <div className="flex items-center gap-2">
-                      <span className={`px-1.5 py-0.2 font-bold text-[10px] rounded ${idx === 0 ? "bg-[#ff2a5f] text-white" : "bg-[#00f0ff] text-black"}`}>
+                      <span className={`px-1.5 py-0.2 font-bold text-[10px] rounded ${idx === 0 ? "bg-[var(--ws-coral)] text-white" : "bg-[var(--ws-mint)] text-black"}`}>
                         #{idx + 1}
                       </span>
                       <span className="text-white font-bold">{feat.featureName}</span>
                     </div>
                     <div className="flex items-center gap-3">
                       {idx === 0 && (
-                        <span className="text-[#ff2a5f] text-[11px] font-bold tracking-wider">
+                        <span className="text-[var(--ws-coral)] text-[11px] font-bold tracking-wider">
                           [CRITICAL VECTOR]
                         </span>
                       )}
-                      <span className="text-[#00f0ff] font-bold text-sm">
+                      <span className="text-[var(--ws-mint)] font-bold text-sm">
                         {(feat.importanceScore / 100).toFixed(3)}
                       </span>
                     </div>
                   </div>
-                  <div className="w-full bg-[#03070c] h-2 rounded-full overflow-hidden">
+                  <div className="w-full bg-[var(--ws-sidebar)] h-2 rounded-full overflow-hidden">
                     <div
                       className={`h-full rounded-full transition-all duration-500 ${
                         idx === 0
-                          ? "bg-gradient-to-r from-[#ff2a5f] to-[#ffb700] shadow-[0_0_8px_#ff2a5f]"
-                          : "bg-gradient-to-r from-[#00f0ff] to-[#00ff66]"
+                          ? "bg-gradient-to-r from-[var(--ws-coral)] to-[var(--research-sand)] shadow-[0_0_8px_var(--ws-coral)]"
+                          : "bg-gradient-to-r from-[var(--ws-mint)] to-[var(--ws-mint)]"
                       }`}
                       style={{ width: `${feat.importanceScore}%` }}
                     />
@@ -306,12 +306,12 @@ export default function XaiConsole() {
             </div>
 
             {/* Mathematical Equation Box */}
-            <div className="mt-3 p-3 rounded bg-[#03070c] border border-[#162536] text-xs text-[#64748b] space-y-1">
+            <div className="mt-3 p-3 rounded bg-[var(--ws-sidebar)] border border-[var(--ws-line)] text-xs text-[var(--ws-muted)] space-y-1">
               <div className="text-white font-bold">Mathematical Jacobian Formulation:</div>
-              <div className="text-[#00f0ff] font-mono">
+              <div className="text-[var(--ws-mint)] font-mono">
                 S_i = | ∂ŷ_binary / ∂x_i | / ∑_j | ∂ŷ_binary / ∂x_j |
               </div>
-              <div className="text-[10px] text-[#64748b]">
+              <div className="text-[10px] text-[var(--ws-muted)]">
                 Sub-millisecond analytical gradient backpropagation directly through PyTorch Conformer tensor graph.
               </div>
             </div>
@@ -321,9 +321,9 @@ export default function XaiConsole() {
           <div className="hud-box p-4 rounded relative">
             <span className="hud-corner-tr">┐</span>
             <span className="hud-corner-bl">└</span>
-            <div className="flex items-center justify-between border-b border-[#162536] pb-2 mb-3">
+            <div className="flex items-center justify-between border-b border-[var(--ws-line)] pb-2 mb-3">
               <div className="flex items-center gap-2">
-                <span className="w-1.5 h-3.5 bg-[#a855f7]" />
+                <span className="w-1.5 h-3.5 bg-[var(--research-sand)]" />
                 <h3 className="font-['Orbitron'] text-xs uppercase text-white font-bold tracking-wide">
                   MULTI-HEAD SELF-ATTENTION (MHSA) TOKEN COUPLING [8×8]
                 </h3>
@@ -334,7 +334,7 @@ export default function XaiConsole() {
                     key={h}
                     type="button"
                     onClick={() => setActiveHead(h)}
-                    className={`px-1.5 py-0.5 rounded cursor-pointer ${activeHead === h ? "bg-[#a855f7] text-white font-bold" : "bg-[#070d14] text-[#64748b]"}`}
+                    className={`px-1.5 py-0.5 rounded cursor-pointer ${activeHead === h ? "bg-[var(--research-sand)] text-white font-bold" : "bg-[var(--ws-sidebar)] text-[var(--ws-muted)]"}`}
                   >
                     Head #{h}
                   </button>
@@ -342,7 +342,7 @@ export default function XaiConsole() {
               </div>
             </div>
 
-            <div className="grid grid-cols-8 gap-1 p-2 bg-[#03070c] rounded border border-[#162536]">
+            <div className="grid grid-cols-8 gap-1 p-2 bg-[var(--ws-sidebar)] rounded border border-[var(--ws-line)]">
               {Array.from({ length: 64 }).map((_, i) => {
                 const opacity = Math.sin(i * 0.4 + activeHead) * 0.45 + 0.5;
                 const isBright = opacity > 0.75;
@@ -351,8 +351,8 @@ export default function XaiConsole() {
                     key={i}
                     className={`h-6 rounded flex items-center justify-center text-[9px] transition-all ${
                       isBright
-                        ? "bg-[#00f0ff] text-black font-bold shadow-[0_0_6px_#00f0ff]"
-                        : "bg-[#070d14] text-[#64748b] border border-[#162536]"
+                        ? "bg-[var(--ws-mint)] text-black font-bold shadow-[0_0_6px_var(--ws-mint)]"
+                        : "bg-[var(--ws-sidebar)] text-[var(--ws-muted)] border border-[var(--ws-line)]"
                     }`}
                     style={{ opacity: isBright ? 1 : Math.max(0.15, opacity) }}
                   >
@@ -370,63 +370,63 @@ export default function XaiConsole() {
           <div className="hud-box p-4 rounded relative">
             <span className="hud-corner-tr">┐</span>
             <span className="hud-corner-bl">└</span>
-            <div className="flex items-center justify-between border-b border-[#162536] pb-2 mb-3">
+            <div className="flex items-center justify-between border-b border-[var(--ws-line)] pb-2 mb-3">
               <div className="flex items-center gap-2">
-                <TrendingDown className="w-4 h-4 text-[#00ff66]" />
+                <TrendingDown className="w-4 h-4 text-[var(--ws-mint)]" />
                 <h3 className="font-['Orbitron'] text-xs uppercase text-white font-bold tracking-wide">
                   XAI LATENCY BENCHMARK COMPARISON
                 </h3>
               </div>
-              <span className="text-[10px] text-[#00ff66] font-bold">99.97% Speedup</span>
+              <span className="text-[10px] text-[var(--ws-mint)] font-bold">99.97% Speedup</span>
             </div>
 
             <div className="space-y-3">
               {/* Kernel SHAP */}
-              <div className="p-3 rounded bg-[#070d14] border border-[#162536] space-y-1.5">
+              <div className="p-3 rounded bg-[var(--ws-sidebar)] border border-[var(--ws-line)] space-y-1.5">
                 <div className="flex justify-between text-xs">
-                  <span className="text-[#ff2a5f] font-bold">Standard Kernel SHAP:</span>
-                  <span className="text-[#ff2a5f] font-bold">3,120.0 ms</span>
+                  <span className="text-[var(--ws-coral)] font-bold">Standard Kernel SHAP:</span>
+                  <span className="text-[var(--ws-coral)] font-bold">3,120.0 ms</span>
                 </div>
-                <div className="w-full h-2 rounded-full bg-[#03070c] overflow-hidden">
-                  <div className="h-full rounded-full bg-[#ff2a5f] w-full" />
+                <div className="w-full h-2 rounded-full bg-[var(--ws-sidebar)] overflow-hidden">
+                  <div className="h-full rounded-full bg-[var(--ws-coral)] w-full" />
                 </div>
-                <div className="text-[10px] text-[#64748b]">
+                <div className="text-[10px] text-[var(--ws-muted)]">
                   Violates SOC 1,000 ms SLA requirement by 312%.
                 </div>
               </div>
 
               {/* LIME */}
-              <div className="p-3 rounded bg-[#070d14] border border-[#162536] space-y-1.5">
+              <div className="p-3 rounded bg-[var(--ws-sidebar)] border border-[var(--ws-line)] space-y-1.5">
                 <div className="flex justify-between text-xs">
-                  <span className="text-[#ffb700] font-bold">LIME Perturbation:</span>
-                  <span className="text-[#ffb700] font-bold">1,840.0 ms</span>
+                  <span className="text-[var(--research-sand)] font-bold">LIME Perturbation:</span>
+                  <span className="text-[var(--research-sand)] font-bold">1,840.0 ms</span>
                 </div>
-                <div className="w-full h-2 rounded-full bg-[#03070c] overflow-hidden">
-                  <div className="h-full rounded-full bg-[#ffb700] w-[59%]" />
+                <div className="w-full h-2 rounded-full bg-[var(--ws-sidebar)] overflow-hidden">
+                  <div className="h-full rounded-full bg-[var(--research-sand)] w-[59%]" />
                 </div>
-                <div className="text-[10px] text-[#64748b]">
+                <div className="text-[10px] text-[var(--ws-muted)]">
                   Fails real-time autonomous OT mitigation constraints.
                 </div>
               </div>
 
               {/* Sentinel Gradient Saliency */}
-              <div className="p-3 rounded bg-[#00f0ff]/10 border border-[#00f0ff]/50 space-y-1.5 glow-cyan">
+              <div className="p-3 rounded bg-[var(--ws-mint)]/10 border border-[var(--ws-mint)]/50 space-y-1.5 glow-cyan">
                 <div className="flex justify-between text-xs">
-                  <span className="text-[#00ff66] font-bold">Sentinel-IoT Gradient:</span>
-                  <span className="text-[#00ff66] font-black text-sm">0.78 ms</span>
+                  <span className="text-[var(--ws-mint)] font-bold">Sentinel-IoT Gradient:</span>
+                  <span className="text-[var(--ws-mint)] font-black text-sm">0.78 ms</span>
                 </div>
-                <div className="w-full h-2 rounded-full bg-[#03070c] overflow-hidden">
-                  <div className="h-full rounded-full bg-[#00ff66] w-[2%]" />
+                <div className="w-full h-2 rounded-full bg-[var(--ws-sidebar)] overflow-hidden">
+                  <div className="h-full rounded-full bg-[var(--ws-mint)] w-[2%]" />
                 </div>
-                <div className="text-[10px] text-[#00ff66] font-bold">
+                <div className="text-[10px] text-[var(--ws-mint)] font-bold">
                   100% compliant with industrial sub-second closed loop response!
                 </div>
               </div>
             </div>
 
-            <div className="text-[10px] text-[#64748b] border-t border-[#162536] pt-2 mt-3 flex justify-between">
+            <div className="text-[10px] text-[var(--ws-muted)] border-t border-[var(--ws-line)] pt-2 mt-3 flex justify-between">
               <span>Kernel SHAP: 3.12 s</span>
-              <span className="text-[#00f0ff] font-bold">Sentinel: 0.78 ms</span>
+              <span className="text-[var(--ws-mint)] font-bold">Sentinel: 0.78 ms</span>
             </div>
           </div>
 
@@ -434,14 +434,14 @@ export default function XaiConsole() {
           <div className="hud-box p-4 rounded relative">
             <span className="hud-corner-tr">┐</span>
             <span className="hud-corner-bl">└</span>
-            <div className="flex items-center justify-between border-b border-[#162536] pb-2 mb-3">
+            <div className="flex items-center justify-between border-b border-[var(--ws-line)] pb-2 mb-3">
               <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-[#00f0ff]" />
+                <Clock className="w-4 h-4 text-[var(--ws-mint)]" />
                 <h3 className="font-['Orbitron'] text-xs uppercase text-white font-bold tracking-wide">
                   LATENCY DECOMPOSITION WATERFALL
                 </h3>
               </div>
-              <span className="text-xs font-['Orbitron'] font-bold text-[#00ff66]">
+              <span className="text-xs font-['Orbitron'] font-bold text-[var(--ws-mint)]">
                 TOTAL MTTR: {totalMttr.toFixed(2)} ms
               </span>
             </div>
@@ -450,15 +450,15 @@ export default function XaiConsole() {
               {latencyWaterfall.map((item, idx) => (
                 <div
                   key={item.stage}
-                  className="p-3 rounded bg-[#070d14] border border-[#162536] space-y-1 relative overflow-hidden"
+                  className="p-3 rounded bg-[var(--ws-sidebar)] border border-[var(--ws-line)] space-y-1 relative overflow-hidden"
                 >
                   <div className="flex items-center justify-between text-[10px]">
-                    <span className="text-[#64748b] uppercase">Stage {idx + 1}: {item.stage}</span>
+                    <span className="text-[var(--ws-muted)] uppercase">Stage {idx + 1}: {item.stage}</span>
                     <span className="font-bold text-sm" style={{ color: item.color }}>
                       {item.latency.toFixed(2)} ms
                     </span>
                   </div>
-                  <div className="text-[10px] text-[#64748b]">
+                  <div className="text-[10px] text-[var(--ws-muted)]">
                     {item.description}
                   </div>
                   <div
@@ -469,7 +469,7 @@ export default function XaiConsole() {
               ))}
             </div>
 
-            <div className="mt-3 p-2 bg-[#00ff66]/10 border border-[#00ff66]/30 rounded text-center text-xs text-[#00ff66] font-bold">
+            <div className="mt-3 p-2 bg-[var(--ws-mint)]/10 border border-[var(--ws-mint)]/30 rounded text-center text-xs text-[var(--ws-mint)] font-bold">
               ✓ MTTR 21.5 ms &lt;&lt; 1,000 ms Industrial Closed-Loop SLA
             </div>
           </div>

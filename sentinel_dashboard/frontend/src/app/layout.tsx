@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "./workspace.css";
 import "./endpoint.css";
+import "./research.css";
 
 export const metadata: Metadata = {
   title: "Sentinel IoT — Your control room",

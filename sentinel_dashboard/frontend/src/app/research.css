@@ -1,0 +1,47 @@
+/* Research tools share the control room's palette and surface treatment. */
+[data-theme="sentinel"] {
+  --research-sand: #d6c79c;
+}
+
+[data-theme="sentinel"] .legacy-workspace {
+  color: var(--ws-text);
+  accent-color: var(--ws-mint);
+}
+
+[data-theme="sentinel"] .legacy-workspace .hud-box,
+[data-theme="sentinel"] .legacy-workspace .hud-panel {
+  background: var(--ws-panel);
+  border: 1px solid var(--ws-line);
+  border-radius: 8px;
+  box-shadow: none;
+  clip-path: none;
+}
+
+[data-theme="sentinel"] .legacy-workspace .hud-box::before,
+[data-theme="sentinel"] .legacy-workspace .hud-box::after,
+[data-theme="sentinel"] .legacy-workspace .hud-corner-tr,
+[data-theme="sentinel"] .legacy-workspace .hud-corner-bl {
+  display: none;
+}
+
+/* Keep the dense research diagrams clear without the old neon glow. */
+[data-theme="sentinel"] .legacy-workspace [class*="shadow-"],
+[data-theme="sentinel"] .legacy-workspace [class*="drop-shadow-"],
+[data-theme="sentinel"] .legacy-workspace [class*="glow-"] {
+  box-shadow: none;
+  filter: none;
+  text-shadow: none;
+}
+
+[data-theme="sentinel"] .legacy-workspace .text-white {
+  color: var(--ws-text);
+}
+
+[data-theme="sentinel"] .legacy-workspace :is(input, select, textarea) {
+  color-scheme: dark;
+}
+
+[data-theme="sentinel"] .legacy-workspace :is(button, input, select, textarea):focus-visible {
+  outline: 2px solid var(--ws-mint);
+  outline-offset: 3px;
+}
