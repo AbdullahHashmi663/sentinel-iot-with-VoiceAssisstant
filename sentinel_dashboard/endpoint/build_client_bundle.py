@@ -10,7 +10,7 @@ OUTPUT = ROOT / 'deliverables' / 'Sentinel_Client_Runtime.zip'
 
 def main():
     files = [ROOT / name for name in ['START_SENTINEL_CLIENT.bat', 'SETUP_SENTINEL_CLIENT.bat']]
-    files += [ROOT / 'sentinel_dashboard' / name for name in ['start_client.ps1', 'start_endpoint.ps1', 'setup_client.ps1', 'find_python.ps1']]
+    files += [ROOT / 'sentinel_dashboard' / name for name in ['start_client.ps1', 'start_endpoint.ps1', 'setup_client.ps1', 'find_python.ps1', 'windows_common.ps1']]
     endpoint = ROOT / 'sentinel_dashboard' / 'endpoint'
     files += [endpoint / name for name in ['__init__.py', 'common.py', 'agent.py', 'fleet.py', 'requirements.txt', 'README.md']]
     frontend = ROOT / 'sentinel_dashboard' / 'frontend'
@@ -27,14 +27,14 @@ def main():
 
 This is the client runtime for a separate Windows computer.
 
-1. Install Python 3.10+ and a Node.js version supported by the included Next.js release (20.9+; this project was tested with Node 24.11.1). Enable their PATH options.
-2. Run SETUP_SENTINEL_CLIENT.bat once. It downloads the dependencies and builds the client dashboard.
+1. Use a 64-bit Windows computer with internet access for initial setup and Microsoft App Installer (WinGet) available.
+2. Run SETUP_SENTINEL_CLIENT.bat once. It installs missing Python/Node runtimes through WinGet, creates an isolated .venv-client environment, installs monitoring/dashboard dependencies, and builds the client dashboard. Windows may ask for installer permission.
 3. Ask the main Sentinel operator for a one-time client key and a private relay connection. See sentinel_dashboard/endpoint/README.md for the SSH tunnel instructions.
 4. Run START_SENTINEL_CLIENT.bat. Open http://127.0.0.1:3001/client on this computer and pair in Connection.
 
 The client dashboard reports this computer's actual health measurements. It does not need the main system's Python ML dependencies, datasets, model weights, or Ollama installation. Mereoleona here is a built-in local guide; the main control room retains its separate local AI model.
 
-The bundle contains source and setup files, not installed Python/Node runtimes or preinstalled packages. Initial setup requires internet access for dependency downloads. Monitoring and communication then use your own private network/tunnel.
+The bundle contains source and setup files, not preinstalled packages. Setup checks for compatible existing runtimes before installing missing ones. If App Installer is unavailable, install/update it from Microsoft Store or install 64-bit Python 3.10-3.14 and Node.js 20.9+ yourself, then rerun setup. Monitoring and communication then use your own private network/tunnel.
 
 Keep the generated sentinel_dashboard/.local folder private. Do not transfer the main operator's state or credentials into this bundle. Closing the browser does not stop reporting; pause sharing or disconnect in the client dashboard to control it.
 '''

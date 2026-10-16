@@ -4,6 +4,8 @@ The dashboard follows the Sentinel portfolio's charcoal, ivory, mint, and coral 
 
 ## Run
 
+For Windows installation, use the project-root `SETUP_SENTINEL_HOST.bat` then `START_SENTINEL_HOST.bat` on the host, or `SETUP_SENTINEL_CLIENT.bat` then `START_SENTINEL_CLIENT.bat` on each separate client. Setup installs missing Python/Node runtimes through WinGet and uses role-specific `.venv-host` / `.venv-client` Python environments. Only host setup installs CPU PyTorch, private Ollama, and the local chat model. Full setup, prerequisites, and pairing instructions are in the project-root README. Run scripts start the production build, check readiness, and reuse healthy services.
+
 With dependencies installed, run `npm run dev` here and open http://127.0.0.1:3000. Both `dev` and production `start` bind the dashboard to this computer's loopback address. Generated demo mode works without Python, model weights, or Ollama. Use the project-root `START_SENTINEL_DASHBOARD.bat` for the existing Python backend and frontend together.
 
 The first visit opens the welcome; Settings → Replay welcome opens it again. Ctrl+K focuses observation search. Conversation remains in page memory while the assistant is closed and clears on reload. Source preference is stored locally; the new workspace does not persist observations.

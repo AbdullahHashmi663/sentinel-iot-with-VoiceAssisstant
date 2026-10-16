@@ -7,8 +7,8 @@ $env:OLLAMA_NUM_PARALLEL = '1'
 $env:OLLAMA_MAX_LOADED_MODELS = '1'
 $env:OLLAMA_CONTEXT_LENGTH = '4096'
 
-$ollamaExecutable = Join-Path $env:LOCALAPPDATA 'Programs/Ollama/ollama.exe'
-if (-not (Test-Path -LiteralPath $ollamaExecutable)) {
+. (Join-Path $PSScriptRoot 'windows_common.ps1')
+try { $ollamaExecutable = Get-SentinelOllama } catch {
     Write-Warning 'Ollama is not installed. Sentinel will use its built-in project guide.'
     exit 0
 }

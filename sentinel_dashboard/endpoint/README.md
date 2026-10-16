@@ -6,15 +6,15 @@ Each dashboard runs independently on its own machine. The client continues displ
 
 ## On the main Sentinel computer
 
-1. Run `START_SENTINEL_DASHBOARD.bat`. It now starts the dedicated relay on `127.0.0.1:8010` as well as the existing services.
+1. Run `SETUP_SENTINEL_HOST.bat` once, then `START_SENTINEL_HOST.bat`. The host launcher starts the dedicated relay on `127.0.0.1:8010` as well as the main services. `START_SENTINEL_DASHBOARD.bat` is a compatibility alias.
 2. Open **Client machines** in the main dashboard, or visit `http://127.0.0.1:3000/clients`.
 3. Choose **Enroll client**, give the computer a recognizable name, and create a key. Copy it directly to the client operator. The key is displayed once in page state and is usable once for pairing. The relay retains only its hash.
 
 ## On the separate Windows client
 
 1. Extract `Sentinel_Client_Runtime.zip` to a folder owned by the client user. Do not copy the main computer's `.local` folder, `.env.local`, model weights, or Ollama profile.
-2. Install Python 3.10+ and Node.js compatible with the included Next.js version (20.9+; use an active supported Node release), available from their official installers. Ensure `python`, `node`, and `npm` work in a new terminal.
-3. Run `SETUP_SENTINEL_CLIENT.bat` once. It installs `psutil` and the pinned dashboard packages, then builds the client interface for production. This initial dependency download requires internet access. Client monitoring does not require PyTorch, the Conformer weights, Ollama, or a cloud account.
+2. Ensure Microsoft App Installer (WinGet) is available if Python or Node is missing. The setup file installs missing runtimes automatically. Alternatively, install 64-bit Python 3.10-3.14 and Node.js 20.9+ yourself.
+3. Run `SETUP_SENTINEL_CLIENT.bat` once. It creates an isolated `.venv-client`, installs `psutil` and the pinned dashboard packages, then builds the client interface for production. Initial downloads need internet access; Windows may ask for installer permission. Client monitoring does not require PyTorch, the Conformer weights, Ollama, or a cloud account.
 4. Establish a private connection to the main relay using the transport instructions below.
 5. Run `START_SENTINEL_CLIENT.bat`. Open `http://127.0.0.1:3001/client` on the client computer. Its Connection page accepts the private relay address and pairing key.
 6. The client says **Connected to Sentinel** only after a report is accepted. The main dashboard then lists the device's received measurements. A report is normally sent every five seconds.

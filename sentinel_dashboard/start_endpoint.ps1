@@ -12,7 +12,8 @@ if ($health) {
 }
 
 . (Join-Path $PSScriptRoot 'find_python.ps1')
-$pythonExecutable = Get-SentinelPython
+$pythonRole = if ($Mode -eq 'fleet') { 'host' } else { 'client' }
+$pythonExecutable = Get-SentinelPython -Role $pythonRole
 if ($Mode -eq 'client') {
     & $pythonExecutable -c 'import psutil' 2>$null
     if ($LASTEXITCODE -ne 0) { throw 'Client dependencies are missing. Run SETUP_SENTINEL_CLIENT.bat first.' }

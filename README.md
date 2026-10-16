@@ -135,19 +135,35 @@ Sentinel_IOT/
 ## ⚡ Quick Start Guide
 
 ### Prerequisites
-- **Node.js**: v18.0.0 or higher
-- **Python**: v3.10 to v3.14+
+- **Node.js**: v20.9.0 or higher
+- **Python**: 64-bit v3.11–3.14 on the host, v3.10–3.14 on clients (setup installs v3.12 when needed)
 - **Git**: v2.30+
 
 ### Option A: One-Click Launch (Recommended for Windows)
+Use these four Windows batch files in the project root:
+
+- **`SETUP_SENTINEL_HOST.bat`** — run once on the host. Installs missing Python/Node runtimes through WinGet, creates `.venv-host`, installs the tested host packages and CPU PyTorch, installs private Ollama if missing, downloads `qwen2.5:1.5b`, checks the thirteen domains' model/data assets, and builds the host dashboard.
+- **`START_SENTINEL_HOST.bat`** — run on the host after setup. Starts/reuses local AI, the dedicated relay, the detection backend, and the production dashboard; opens `http://127.0.0.1:3000` after readiness checks.
+- **`SETUP_SENTINEL_CLIENT.bat`** — run once on each client. Installs missing Python/Node runtimes through WinGet, creates `.venv-client`, installs the lightweight monitoring/dashboard dependencies, and builds the client interface. It does not install PyTorch, Ollama, or detection-model weights.
+- **`START_SENTINEL_CLIENT.bat`** — run on the client after setup. Starts/reuses its local agent and dashboard; opens `http://127.0.0.1:3001/client`.
+
+Initial setup needs internet access. On a machine missing Python or Node, Microsoft App Installer (WinGet) must be available; Windows may ask for installation permission. Existing compatible runtimes are reused. The host needs the full repository and its existing `FYP_WORK` model/data files; setup reports missing files instead of fabricating weights or downloading unrelated models. Use the client ZIP only on clients. Keep each machine's generated `.local` and Python environments on that machine. Rerun setup after changing dependency versions; close that machine's dashboard services before rebuilding dependencies.
+
+The host installer also checks for the Visual C++ runtime required by the inference stack. Installer behavior follows [Microsoft's WinGet documentation](https://learn.microsoft.com/en-us/windows/package-manager/winget/install), CPU inference packages use [PyTorch's official index](https://download.pytorch.org/whl/cpu/torch/), and local-AI privacy uses [Ollama's documented cloud-disable settings](https://docs.ollama.com/faq#how-do-i-disable-ollamas-cloud-features). Restart an already-running Ollama instance after changing its privacy configuration so those persisted settings take effect.
+
+The scripts resolve their own folder, so the project can be moved to another Windows path. The older `START_SENTINEL_DASHBOARD.bat` remains a compatibility alias for `START_SENTINEL_HOST.bat`. The run files reuse healthy services and do not install packages. Logs are under `sentinel_dashboard/.local/host/` and `.local/client/` (the relay helper uses `.local/fleet/`). `SETUP_SENTINEL_HOST.bat -CheckOnly` and `SETUP_SENTINEL_CLIENT.bat -CheckOnly` check runtime prerequisites without installing/rebuilding. `START_SENTINEL_HOST.bat -NoBrowser` and `START_SENTINEL_CLIENT.bat -NoBrowser` run without opening a browser. The execution-policy override applies only to the helper process; no machine execution policy is changed.
+
+Setup preserves the tested scikit-learn 1.8.0 runtime; older saved scalers may report that they were serialized with 1.9.0. Dependency installation does not retrain or certify those research artifacts. Private model inference stays local; initial dependency/model downloads use the internet. SSH/private HTTPS pairing still follows the separate connection guide below; setup does not enable SSH or alter firewall rules.
+
 Simply double-click the root batch file:
 ```cmd
-START_SENTINEL_DASHBOARD.bat
+START_SENTINEL_HOST.bat
 ```
 This automatically boots:
 1. The **FastAPI Conformer Neural Core** on `http://127.0.0.1:8000`
 2. The **Next.js SOC Interface** on `http://localhost:3000`
-3. Launches your default browser directly into the SOC
+3. Private Ollama and the client relay on loopback
+4. Launches your default browser directly into the SOC
 
 ---
 

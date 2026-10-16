@@ -27,6 +27,8 @@ __pycache__/
 .Python
 env/
 venv/
+.venv-host/
+.venv-client/
 ENV/
 env.bak/
 venv.bak/

@@ -1,9 +1,10 @@
 param([switch]$NoBrowser)
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'windows_common.ps1')
 $frontendDirectory = Join-Path $PSScriptRoot 'frontend'
 $nextExecutable = Join-Path $frontendDirectory 'node_modules/next/dist/bin/next'
 if (-not (Test-Path -LiteralPath $nextExecutable) -or -not (Test-Path -LiteralPath (Join-Path $frontendDirectory '.next-client/BUILD_ID'))) { throw 'Run SETUP_SENTINEL_CLIENT.bat first to install and build the client dashboard.' }
-& powershell -NoProfile -File (Join-Path $PSScriptRoot 'start_endpoint.ps1') -Mode client
+& powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot 'start_endpoint.ps1') -Mode client
 if ($LASTEXITCODE -ne 0) { throw 'The local client agent could not start.' }
 $alreadyRunning = $false
 $clientProfile = $null
@@ -13,11 +14,11 @@ if ($clientProfile) {
     $alreadyRunning = $true
 }
 if (-not $alreadyRunning) {
-    $nodeCommand = Get-Command node -ErrorAction Stop
+    $nodeExecutable = Get-SentinelNode
     $env:SENTINEL_INTERFACE = 'client'
     $env:NEXT_TELEMETRY_DISABLED = '1'
     $stateDirectory = Join-Path $PSScriptRoot '.local/client'
-    $process = Start-Process -FilePath $nodeCommand.Source -ArgumentList @("`"$nextExecutable`"", 'start', '--hostname', '127.0.0.1', '--port', '3001') -WorkingDirectory $frontendDirectory -WindowStyle Hidden -PassThru `
+    $process = Start-Process -FilePath $nodeExecutable -ArgumentList @("`"$nextExecutable`"", 'start', '--hostname', '127.0.0.1', '--port', '3001') -WorkingDirectory $frontendDirectory -WindowStyle Hidden -PassThru `
         -RedirectStandardOutput (Join-Path $stateDirectory 'dashboard-stdout.log') -RedirectStandardError (Join-Path $stateDirectory 'dashboard-stderr.log')
     for ($attempt = 0; $attempt -lt 30; $attempt++) {
         try {
