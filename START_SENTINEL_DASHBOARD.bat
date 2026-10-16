@@ -4,6 +4,10 @@ color 0b
 echo =========================================================================
 echo             SENTINEL-IOT: AUTONOMOUS EXPLAINABLE XDR SOC
 echo =========================================================================
+echo Starting Mereoleona private local AI...
+powershell -NoProfile -File "%~dp0sentinel_dashboard\start_local_ai.ps1"
+echo Starting private client-machine relay...
+powershell -NoProfile -File "%~dp0sentinel_dashboard\start_endpoint.ps1" -Mode fleet
 echo [1/3] Initializing Python FastAPI Conformer Neural Core on port 8000...
 start "Sentinel-IoT Backend (FastAPI)" /D "c:\Users\01-135231-001\Desktop\Sentinel_IOT\sentinel_dashboard" "C:\Users\01-135231-001\AppData\Local\Python\bin\python.exe" -m uvicorn backend.server:app --host 127.0.0.1 --port 8000
 

@@ -178,6 +178,42 @@ Open **`http://localhost:3000`** in your browser.
 
 ---
 
+## Connecting a separate Windows client to the host
+
+The host dashboard and client dashboard run independently on their own computers. The host runs the main Sentinel dashboard, local AI, and health-report relay. Each client runs its own dashboard and monitoring agent. The client can display local measurements while the host is offline; sharing resumes when the private connection is available. `127.0.0.1` always means the computer where you enter the address.
+
+### 1. Prepare the host computer
+
+1. Run `START_SENTINEL_DASHBOARD.bat` on the host. The dedicated relay listens on `127.0.0.1:8010`.
+2. Open `http://127.0.0.1:3000/clients`, select **Enroll client**, name the client computer, and create a one-time pairing key.
+3. Have the host's Windows SSH account and private network IP address ready. The host must already have an SSH server configured and reachable from the client through your private network. The Sentinel launchers do not configure SSH or firewall rules.
+
+### 2. Prepare the client computer
+
+1. Transfer and extract `deliverables/Sentinel_Client_Runtime.zip` on the separate Windows client. Install Python 3.10+ and a supported Node.js release compatible with Next.js 16 (minimum 20.9). Initial dependency setup requires internet access.
+2. Run `SETUP_SENTINEL_CLIENT.bat` once, then `START_SENTINEL_CLIENT.bat`.
+3. In a terminal **on the client**, establish the private tunnel:
+
+```text
+ssh -N -o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -L 127.0.0.1:18010:127.0.0.1:8010 YOUR_USER@HOST_PRIVATE_IP
+```
+
+Replace `YOUR_USER` with the host's SSH-enabled Windows account and `HOST_PRIVATE_IP` with the host's private network address. Verify the SSH host key with the host operator and sign in. Keep this terminal open while sharing measurements.
+
+### 3. Pair and verify
+
+1. On the client, open `http://127.0.0.1:3001/client` and go to **Connection**.
+2. Enter **Relay address:** `http://127.0.0.1:18010` and **Pairing key:** the key created on the host, then select **Pair**.
+3. Wait for **Connected to Sentinel**. The host's **Client machines** page then receives this client's health measurements, normally every five seconds.
+
+The tunnel carries client reports to the host relay; neither computer needs to open the other computer's dashboard. Keep the host relay and SSH tunnel running for sharing. **Pause sharing** stops new reports, **Disconnect** removes the client's saved credential, and **Revoke access** on the host blocks future reports from that device. Local monitoring continues when the connection is unavailable.
+
+If SSH reports a refused connection or timeout, check the host's SSH service, private IP, and private-network firewall access. If pairing fails, check that the tunnel and host launcher are running and use a fresh enrollment key if the previous key was already used or revoked. Do not enter the host's `127.0.0.1:8010` address directly on the separate client: without a tunnel, that address refers to the client itself.
+
+See [the detailed client connection guide](sentinel_dashboard/endpoint/README.md) for the private HTTPS alternative, collection details, and manual startup instructions.
+
+---
+
 ## 🎙️ Mereoleona Voice Command Reference
 
 The voice copilot operates continuously with acoustic barge-in. You can speak naturally or click the tactical prompt chips:
