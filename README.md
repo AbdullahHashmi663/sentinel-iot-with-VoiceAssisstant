@@ -1,286 +1,375 @@
-# 🛡️ SENTINEL-IOT: Autonomous Explainable XDR & Compliance SOC
-### Featuring M.E.R.E.O.L.E.O.N.A. 3D Combat Voice Copilot (100% Local & Air-Gapped)
+# Sentinel IoT — Independent Host & Client Dashboards
 
-[![Next.js 16](https://img.shields.io/badge/Next.js-16.3-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
-[![PyTorch Conformer](https://img.shields.io/badge/PyTorch-Conformer_Neural_Core-ee4c2c?style=for-the-badge&logo=pytorch)](https://pytorch.org/)
-[![Three.js](https://img.shields.io/badge/Three.js-3D_Avatar_WebGL-000000?style=for-the-badge&logo=three.js)](https://threejs.org/)
-[![NIST SP 800-53](https://img.shields.io/badge/NIST-SP_800--53_Rev._5-blue?style=for-the-badge)](https://csrc.nist.gov/)
-[![IEC 62443](https://img.shields.io/badge/IEC-62443--4--2_Safety-red?style=for-the-badge)](https://www.isa.org/)
-[![Air-Gapped Offline](https://img.shields.io/badge/Security-100%25_Air--Gapped_Local-brightgreen?style=for-the-badge)]()
+Sentinel combines a local IoT research dashboard, explainable Conformer predictions, a private Mereoleona assistant, and resource-health reports from separately paired Windows computers. This guide documents the **`sentinel-host-client`** branch.
 
----
+The host and client run on **different computers**. They share source code, but use separate launchers, Python environments, interface profiles, and private state. A client keeps monitoring itself even when the host is unavailable.
 
-## 📑 Executive Overview
+> Research scope: the application includes working inference and health collection alongside legacy simulations. A resource warning, model prediction, control mapping, or simulated response is not proof of compromise, hardware enforcement, or compliance certification.
 
-**Sentinel-IoT** is an enterprise-grade Autonomous Extended Detection and Response (**XDR**) and Security Operations Center (**SOC**) platform tailored for mission-critical Industrial IoT (IIoT), SCADA, and cyber-physical infrastructures. 
+## Contents
 
-Powered by a hybrid **Conformer** neural architecture (combining depthwise separable convolutions for local packet-level transients with multi-head self-attention for macroscopic multi-step attack sequences), Sentinel-IoT achieves **sub-25ms Mean Time to Respond (MTTR)** without requiring cloud processing or external telemetry offloading.
+- [Four Windows launchers](#four-windows-launchers)
+- [Requirements](#requirements)
+- [Host setup](#host-setup)
+- [Client setup](#client-setup)
+- [Private connection and pairing](#private-connection-and-pairing)
+- [Dashboard features](#dashboard-features)
+- [Mereoleona](#mereoleona)
+- [Privacy and retained data](#privacy-and-retained-data)
+- [Ports, configuration, and logs](#ports-configuration-and-logs)
+- [Updating and stopping](#updating-and-stopping)
+- [Troubleshooting](#troubleshooting)
+- [Development and verification](#development-and-verification)
+- [Project layout and limits](#project-layout-and-limits)
 
-The platform is directed by **M.E.R.E.O.L.E.O.N.A.** (*Multi-Domain Explainable Real-Time Engine for Operational Logistics, Event Observation, and Networked Autonomy*) — an interactive, 100% air-gapped 3D combat voice copilot rendered in Three.js with deep local Retrieval-Augmented Generation (RAG).
+## Four Windows launchers
 
----
+Run setup once, then start whenever needed, on the respective machine:
 
-## 🌟 Key Architecture & Capabilities
+- **[SETUP_SENTINEL_HOST.bat](SETUP_SENTINEL_HOST.bat):** installs host requirements and local AI, verifies research assets, and builds the operator interface.
+- **[START_SENTINEL_HOST.bat](START_SENTINEL_HOST.bat):** starts/reuses host services and opens the dashboard.
+- **[SETUP_SENTINEL_CLIENT.bat](SETUP_SENTINEL_CLIENT.bat):** installs monitoring/frontend requirements and builds the client interface.
+- **[START_SENTINEL_CLIENT.bat](START_SENTINEL_CLIENT.bat):** starts/reuses the local agent and client dashboard.
 
-### 1. 🧠 Conformer Deep Learning Core (13 IoT Sensor Domains)
-- **Hybrid Conformer Architecture**: Simultaneously captures fine-grained millisecond feature fluctuations and long-range temporal dependencies across 10-step sliding sliding sequence buffers.
-- **13 Industrial IoT Domains**: Comprehensive multi-vector protection spanning Network Traffic, Modbus PLC coils, SCADA actuators, Windows 10/11 endpoints, Linux IoT gateways, GPS trackers, environmental sensors, and smart city telemetry.
-- **Deep Feature Saliency Vectors**: Instantaneous mathematical explainability detailing exact feature attributions ($p < 0.001$) for every anomaly score ($\tau$).
+Keep the BAT files beside `sentinel_dashboard`; copying a BAT alone is insufficient. Initial setup requires internet. `START_SENTINEL_DASHBOARD.bat` remains a host compatibility alias. Run setup again after updates requiring new dependencies or a rebuild.
 
-### 2. 🦁 M.E.R.E.O.L.E.O.N.A. 3D Combat Voice Copilot
-- **Real-Time Three.js Avatar**: Animated 3D persona (inspired by Mereoleona Vermillion from *Black Clover*) featuring dynamic mana embers, holographic cyber-rings, and audio-reactive lip synchronization (~7 Hz mouth movement when speaking) with natural blinking.
-- **Static Holographic Orientation**: Calibrated with a locked, front-facing combat pose that remains stable without mouse jitter or tilt.
-- **Dynamic 8-Theme Adaptability**: Synchronizes ambient lights, point lights, and mana particles in real time using native CSS variables across 8 themes: *Cyberpunk 2077, Midnight Stealth, Matrix Green, Deep Navy, Solarized Dark, Synthwave 84, Clean Light,* and *High Contrast Lab*.
-- **Floating Picture-in-Picture (PiP) Mini-HUD**: Automatically docks in the bottom-right corner when scrolling through forensic graphs, maintaining voice awareness and instant push-to-talk capability anywhere on the page.
-- **100% Local RAG Engine**: Zero external API keys or cloud dependencies. Continuous Web Speech recognition with instant Web Audio API chime synthesis and acoustic barge-in interruption.
+## Requirements
 
-### 3. 🛡️ Autonomous Response & IEC 62443 Four-Eyes Safety
-- **High-Velocity Active Containment**: Automated execution of `iptables -A INPUT -s <IP> -j DROP`, host process termination (`SIGKILL -9`), and Modbus actuator coil isolations.
-- **Predictive Velocity Interlock ($d\tau/dt$)**: Evaluates threat acceleration and arms a two-phase cryptographic safety barrier requiring human authorization before physical actuator commands can trip.
-- **GRC Compliance Radar**: Real-time automated cross-mapping against **NIST SP 800-53 Rev. 5** (SI-3, SI-4, SC-7, CP-9), **NIST CSF 2.0**, and **ISO/IEC 27001:2022**.
+Both machines need a 64-bit Windows environment, a writable project folder, and internet for initial installers/packages. Required runtimes are Node.js **20.9+** with npm, and 64-bit Python **3.11–3.14 on the host**, **3.10–3.14 on clients**. Setup reuses compatible runtimes or installs Python 3.12 and Node.js LTS through WinGet when needed.
 
----
+Automatic installation requires Microsoft App Installer / WinGet. Alternatively install compatible Python/Node yourself and rerun setup. Windows may request installer permission; Node.js and the host Visual C++ runtime use machine-scoped installation. Installer commands follow [Microsoft's WinGet interface](https://learn.microsoft.com/en-us/windows/package-manager/winget/install).
 
-## 🖥️ System Architecture Diagram
+The **host needs the full project** with actual weights, scalers, metadata, and datasets under `FYP_WORK`. Setup checks all thirteen domains and detects missing files/LFS pointers; it does not fabricate models or download missing private research datasets from guessed sources.
 
-```mermaid
-flowchart TB
-    subgraph SENSORS["13 Industrial IoT Telemetry Ingestion Streams"]
-        N[Network Traffic PCAP]
-        M[Modbus PLC Coils]
-        L[Linux IoT Gateway]
-        W[Windows OS Endpoints]
-        S[SCADA Telemetry]
-    end
+Host dependencies are in [requirements-host.txt](sentinel_dashboard/backend/requirements-host.txt). CPU PyTorch 2.11.0 is installed from [the official PyTorch CPU index](https://download.pytorch.org/whl/cpu/torch/). Setup checks Visual C++ and installs private Ollama plus `qwen2.5:1.5b`. Clients need only [psutil](sentinel_dashboard/endpoint/requirements.txt) and the frontend packages, not PyTorch, research data, or Ollama.
 
-    subgraph ENGINE["FastAPI Conformer Neural Core (Port 8000)"]
-        BUF[10-Step Sliding Buffer]
-        CONF["Conformer Model (CNN + Multi-Head Self-Attention)"]
-        SALIENCY[Saliency Attribution Engine]
-        RAG["100% Local Vector RAG Engine"]
-        SOAR[SOAR Autonomous Mitigation Runner]
-    end
+Allow disk space for data, weights, Python/Node packages, builds, and the chat model. Performance and memory needs vary; the project does not enforce a measured hardware minimum.
 
-    subgraph FRONTEND["Next.js 16 Autonomous SOC Dashboard (Port 3000)"]
-        HUD[Conformer Threat Horizon HUD]
-        TOPOLOGY[Blast Radius & Lateral Provenance Map]
-        SNIFFER[Real-Time Packet Sniffer]
-        GRC[NIST/IEC Compliance Radar]
-        COPILOT["M.E.R.E.O.L.E.O.N.A. 3D Avatar (Three.js)"]
-        PIP[Floating PiP Mini-HUD on Scroll]
-    end
+Private SSH transport requires an already configured SSH server/account on the host, an SSH command on the client, and private-network/VPN reachability. Setup does **not** configure SSH, firewall rules, or the tunnel.
 
-    SENSORS --> BUF
-    BUF --> CONF
-    CONF --> SALIENCY
-    SALIENCY --> FRONTEND
-    RAG <--> COPILOT
-    COPILOT --> SOAR
-    SOAR -.->|iptables / SIGKILL| SENSORS
+## Host setup
+
+### Get this branch
+
+With Git installed:
+
+```powershell
+git clone --branch sentinel-host-client --single-branch https://github.com/AbdullahHashmi663/sentinel-iot-with-VoiceAssisstant.git
+cd sentinel-iot-with-VoiceAssisstant
 ```
 
----
+Or download/extract this branch through GitHub. Ensure the actual `FYP_WORK` assets are present. The client-only ZIP cannot run the full host.
 
-## 📂 Project Repository Structure
+### Install, then start
 
-```
-Sentinel_IOT/
-├── START_SENTINEL_DASHBOARD.bat       # Single-click unified system launcher
-├── .gitignore                          # Configured for Node, Next, PyTorch & LaTeX
-├── README.md                           # Master system documentation
-│
-├── sentinel_dashboard/                 # Production SOC Platform
-│   ├── .env                            # Local air-gapped configuration
-│   ├── desktop_launcher.py             # Desktop process manager
-│   │
-│   ├── backend/                        # Python FastAPI Neural Engine
-│   │   ├── server.py                   # FastAPI WebSocket & REST endpoints
-│   │   ├── conformer_engine.py         # PyTorch Conformer & Saliency calculator
-│   │   ├── rag_engine.py               # Local vector RAG & Mereoleona persona
-│   │   ├── telemetry_streamer.py       # High-density multi-domain sensor replay
-│   │   ├── grc_mitigation.py           # NIST SP 800-53 compliance & SOAR playbooks
-│   │   └── host_monitor.py             # Live local host OS telemetry listener
-│   │
-│   └── frontend/                       # Next.js 16 WebGL Frontend
-│       ├── package.json                # Dependencies: Three.js, Lucide, Tailwind
-│       ├── tsconfig.json               # TypeScript strict configuration
-│       ├── public/
-│       │   └── mereoleona/             # High-resolution expressions (idle, speaking, blink)
-│       └── src/
-│           ├── app/
-│           │   ├── globals.css         # 8 theme palettes & HUD styling
-│           │   └── page.tsx            # Master SOC Dashboard page
-│           ├── store/
-│           │   └── useTelemetryStore.ts# Zustand real-time SOC state store
-│           └── components/
-│               ├── Header.tsx          # Dynamic theme switcher & defense metrics
-│               ├── VoiceCopilot.tsx    # FUI Voice HUD & Floating Mini-HUD dock
-│               ├── MereoleonaFace3D.tsx# Three.js 3D avatar & mana core system
-│               ├── AttackSimulator.tsx # Real-time multi-vector adversarial injection
-│               ├── BlastRadiusMap.tsx  # Interactive lateral containment topology
-│               ├── PacketSniffer.tsx   # Live deep packet inspection modal
-│               └── GRCMatrix.tsx       # NIST CSF 2.0 & IEC 62443 radar
-│
-└── FYP_WORK/                           # Research, Datasets & Manuscripts
-    ├── main_manuscript.pdf             # Complete academic thesis / paper
-    ├── conformer_sentinel_model_opt.pth# Optimized PyTorch Conformer weights
-    ├── network_scaler.joblib           # Pre-fitted MinMaxScaler transformers
-    ├── cleaned_network_dataset.csv     # Industrial benchmark dataset
-    └── train_all_models_conformer.py   # Training and ablation pipeline
+From the project root, or by double-clicking:
+
+```powershell
+.\SETUP_SENTINEL_HOST.bat
+.\START_SENTINEL_HOST.bat
 ```
 
----
+Host setup finds/installs runtimes, checks thirteen domains' assets, creates `sentinel_dashboard/.venv-host`, installs host packages/CPU PyTorch, verifies imports, configures private Ollama, downloads the chat model, runs `npm ci`, and builds the production interface. If any stage fails, read the error, fix it, and rerun; partial setup is not success.
 
-## ⚡ Quick Start Guide
+The start file reuses healthy services or starts local AI, the dedicated relay, detection backend, and operator frontend. It checks backend/interface readiness before opening the browser.
 
-### Prerequisites
-- **Node.js**: v20.9.0 or higher
-- **Python**: 64-bit v3.11–3.14 on the host, v3.10–3.14 on clients (setup installs v3.12 when needed)
-- **Git**: v2.30+
+- Host dashboard: `http://127.0.0.1:3000`
+- Client management: `http://127.0.0.1:3000/clients`
+- Backend status: `http://127.0.0.1:8000/api/status`
+- Backend API docs: `http://127.0.0.1:8000/docs`
 
-### Option A: One-Click Launch (Recommended for Windows)
-Use these four Windows batch files in the project root:
+The welcome offers a tour. Generated demo observations are labeled. Choose **Settings → Local backend** to connect the main feed to the detection engine.
 
-- **`SETUP_SENTINEL_HOST.bat`** — run once on the host. Installs missing Python/Node runtimes through WinGet, creates `.venv-host`, installs the tested host packages and CPU PyTorch, installs private Ollama if missing, downloads `qwen2.5:1.5b`, checks the thirteen domains' model/data assets, and builds the host dashboard.
-- **`START_SENTINEL_HOST.bat`** — run on the host after setup. Starts/reuses local AI, the dedicated relay, the detection backend, and the production dashboard; opens `http://127.0.0.1:3000` after readiness checks.
-- **`SETUP_SENTINEL_CLIENT.bat`** — run once on each client. Installs missing Python/Node runtimes through WinGet, creates `.venv-client`, installs the lightweight monitoring/dashboard dependencies, and builds the client interface. It does not install PyTorch, Ollama, or detection-model weights.
-- **`START_SENTINEL_CLIENT.bat`** — run on the client after setup. Starts/reuses its local agent and dashboard; opens `http://127.0.0.1:3001/client`.
+## Client setup
 
-Initial setup needs internet access. On a machine missing Python or Node, Microsoft App Installer (WinGet) must be available; Windows may ask for installation permission. Existing compatible runtimes are reused. The host needs the full repository and its existing `FYP_WORK` model/data files; setup reports missing files instead of fabricating weights or downloading unrelated models. Use the client ZIP only on clients. Keep each machine's generated `.local` and Python environments on that machine. Rerun setup after changing dependency versions; close that machine's dashboard services before rebuilding dependencies.
+Use a separate checkout or generate a client ZIP on the host after setup. From the project root:
 
-The host installer also checks for the Visual C++ runtime required by the inference stack. Installer behavior follows [Microsoft's WinGet documentation](https://learn.microsoft.com/en-us/windows/package-manager/winget/install), CPU inference packages use [PyTorch's official index](https://download.pytorch.org/whl/cpu/torch/), and local-AI privacy uses [Ollama's documented cloud-disable settings](https://docs.ollama.com/faq#how-do-i-disable-ollamas-cloud-features). Restart an already-running Ollama instance after changing its privacy configuration so those persisted settings take effect.
-
-The scripts resolve their own folder, so the project can be moved to another Windows path. The older `START_SENTINEL_DASHBOARD.bat` remains a compatibility alias for `START_SENTINEL_HOST.bat`. The run files reuse healthy services and do not install packages. Logs are under `sentinel_dashboard/.local/host/` and `.local/client/` (the relay helper uses `.local/fleet/`). `SETUP_SENTINEL_HOST.bat -CheckOnly` and `SETUP_SENTINEL_CLIENT.bat -CheckOnly` check runtime prerequisites without installing/rebuilding. `START_SENTINEL_HOST.bat -NoBrowser` and `START_SENTINEL_CLIENT.bat -NoBrowser` run without opening a browser. The execution-policy override applies only to the helper process; no machine execution policy is changed.
-
-Setup preserves the tested scikit-learn 1.8.0 runtime; older saved scalers may report that they were serialized with 1.9.0. Dependency installation does not retrain or certify those research artifacts. Private model inference stays local; initial dependency/model downloads use the internet. SSH/private HTTPS pairing still follows the separate connection guide below; setup does not enable SSH or alter firewall rules.
-
-Simply double-click the root batch file:
-```cmd
-START_SENTINEL_HOST.bat
-```
-This automatically boots:
-1. The **FastAPI Conformer Neural Core** on `http://127.0.0.1:8000`
-2. The **Next.js SOC Interface** on `http://localhost:3000`
-3. Private Ollama and the client relay on loopback
-4. Launches your default browser directly into the SOC
-
----
-
-### Option B: Manual Terminal Launch
-
-#### Step 1: Initialize the Python Backend
-```bash
-cd sentinel_dashboard
-# Install required dependencies
-pip install fastapi uvicorn torch scikit-learn pandas numpy psutil
-
-# Start the neural inference server
-python -m uvicorn backend.server:app --host 127.0.0.1 --port 8000
+```powershell
+Set-Location sentinel_dashboard
+.\.venv-host\Scripts\python.exe -m endpoint.build_client_bundle
+Set-Location ..
 ```
 
-#### Step 2: Initialize the Next.js Frontend
-In a second terminal window:
-```bash
-cd sentinel_dashboard/frontend
-# Install npm dependencies
-npm install
+Outputs are `deliverables/Sentinel_Client_Runtime.zip` and its `.sha256` checksum. The ZIP is generated locally, **not committed to GitHub**. Transfer it to the separate client and extract completely. It contains source, helpers, client launchers, instructions, and a source hash manifest; it excludes credentials, state, installed packages, research weights, and Ollama models.
 
-# Start the Turbopack development server
-npm run dev
+On the client, run:
+
+```powershell
+.\SETUP_SENTINEL_CLIENT.bat
+.\START_SENTINEL_CLIENT.bat
 ```
 
-Open **`http://localhost:3000`** in your browser.
+Setup creates `.venv-client`, installs monitoring/frontend dependencies, and builds the client profile. Open `http://127.0.0.1:3001/client` **on that computer**. Real local measurements appear before pairing; an unpaired client reports nothing to the host.
 
----
+## Private connection and pairing
 
-## Connecting a separate Windows client to the host
+### How the machines connect
 
-The host dashboard and client dashboard run independently on their own computers. The host runs the main Sentinel dashboard, local AI, and health-report relay. Each client runs its own dashboard and monitoring agent. The client can display local measurements while the host is offline; sharing resumes when the private connection is available. `127.0.0.1` always means the computer where you enter the address.
+The host runs the operator interface, inference engine, endpoint relay, and Ollama. The client runs its own interface and monitoring agent. The agent sends authenticated health reports through a private tunnel or trusted private HTTPS endpoint. The relay accepts measurements; it cannot send arbitrary commands, shut down endpoints, or change their firewall rules.
 
-### 1. Prepare the host computer
+`127.0.0.1` refers to the machine where it is entered. The tunnel connects local client port `18010` to host relay port `8010`; neither dashboard needs to open the other's interface. Resource reports are separate from the host's IoT threat-prediction stream.
 
-1. Run `START_SENTINEL_DASHBOARD.bat` on the host. The dedicated relay listens on `127.0.0.1:8010`.
-2. Open `http://127.0.0.1:3000/clients`, select **Enroll client**, name the client computer, and create a one-time pairing key.
-3. Have the host's Windows SSH account and private network IP address ready. The host must already have an SSH server configured and reachable from the client through your private network. The Sentinel launchers do not configure SSH or firewall rules.
+### 1. Enroll on the host
 
-### 2. Prepare the client computer
+1. Keep host services running and open **Client machines → Enroll client**.
+2. Enter a recognizable name, such as `Workshop laptop`.
+3. Choose **Create client key** and give it directly to the client operator.
 
-1. Transfer and extract `deliverables/Sentinel_Client_Runtime.zip` on the separate Windows client. Install Python 3.10+ and a supported Node.js release compatible with Next.js 16 (minimum 20.9). Initial dependency setup requires internet access.
-2. Run `SETUP_SENTINEL_CLIENT.bat` once, then `START_SENTINEL_CLIENT.bat`.
-3. In a terminal **on the client**, establish the private tunnel:
+The key claims one enrollment once. Its display is held only in current page state. Losing it before pairing means revoking that enrollment and creating another. After pairing, the agent saves its credential for subsequent reports; the relay stores a hash.
+
+### 2. Open the tunnel on the client
+
+Run in a terminal **on the client**:
 
 ```text
 ssh -N -o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -L 127.0.0.1:18010:127.0.0.1:8010 YOUR_USER@HOST_PRIVATE_IP
 ```
 
-Replace `YOUR_USER` with the host's SSH-enabled Windows account and `HOST_PRIVATE_IP` with the host's private network address. Verify the SSH host key with the host operator and sign in. Keep this terminal open while sharing measurements.
+Replace `YOUR_USER` with the host's SSH-enabled account and `HOST_PRIVATE_IP` with its actual private address. Verify the SSH host key with the operator, authenticate, and **keep the terminal open**. The tunnel forwards only the dedicated relay, not the research backend, dashboards, or Ollama.
 
-### 3. Pair and verify
+### 3. Pair in the client dashboard
 
-1. On the client, open `http://127.0.0.1:3001/client` and go to **Connection**.
-2. Enter **Relay address:** `http://127.0.0.1:18010` and **Pairing key:** the key created on the host, then select **Pair**.
-3. Wait for **Connected to Sentinel**. The host's **Client machines** page then receives this client's health measurements, normally every five seconds.
+1. Open `http://127.0.0.1:3001/client` on the client and choose **Connection**.
+2. Enter **Private relay address:** `http://127.0.0.1:18010`.
+3. Paste **Client pairing key:** the host-generated key.
+4. Choose **Pair this computer** and wait for **Connected to Sentinel**.
+5. Inspect the reporting device on the host's **Client machines** page.
 
-The tunnel carries client reports to the host relay; neither computer needs to open the other computer's dashboard. Keep the host relay and SSH tunnel running for sharing. **Pause sharing** stops new reports, **Disconnect** removes the client's saved credential, and **Revoke access** on the host blocks future reports from that device. Local monitoring continues when the connection is unavailable.
+Connected status requires an accepted report. Reporting normally occurs every five seconds; thirty seconds without a report makes the host mark the device offline. Both computers can use identical loopback ports because they are separate machines.
 
-If SSH reports a refused connection or timeout, check the host's SSH service, private IP, and private-network firewall access. If pairing fails, check that the tunnel and host launcher are running and use a fresh enrollment key if the previous key was already used or revoked. Do not enter the host's `127.0.0.1:8010` address directly on the separate client: without a tunnel, that address refers to the client itself.
+Do not enter `127.0.0.1:8010` directly on a separate client unless a local tunnel forwards that port; it otherwise points to the client itself. A lost tunnel/host does not stop local monitoring; a running paired, unpaused agent retries reporting. Revoked credentials need a new enrollment.
 
-See [the detailed client connection guide](sentinel_dashboard/endpoint/README.md) for the private HTTPS alternative, collection details, and manual startup instructions.
+### Private HTTPS alternative
 
----
+An operator may configure a private-IP HTTPS reverse proxy forwarding to the loopback relay. Its certificate must match the IP and be trusted by the client's Python environment. TLS verification is never disabled. The client accepts private literal-IP HTTPS and loopback HTTP, rejecting public destinations, arbitrary hostnames, URL credentials, custom paths, queries/fragments, and redirects. Relay requests bypass system HTTP proxies.
 
-## 🎙️ Mereoleona Voice Command Reference
+Setup does not create the proxy. See the [endpoint transport guide](sentinel_dashboard/endpoint/README.md).
 
-The voice copilot operates continuously with acoustic barge-in. You can speak naturally or click the tactical prompt chips:
+## Dashboard features
 
-| Spoken Command | Tactical Function | System Action |
-| :--- | :--- | :--- |
-| **"Mereoleona, threat status"** | Fleet Situation Report | Synthesizes current anomaly score ($\tau$), ingestion rate, and highest-risk node. |
-| **"Why did alert fire?"** | Forensic Saliency Breakdown | Interrogates the Conformer's saliency vector and reports the top 3 deviating features with attribution percentages. |
-| **"Show live packet sniffer"** | Deep Packet Inspection | Automatically launches the real-time modal packet sniffer window. |
-| **"Incinerate intruder"** | Active Ingress Termination | Deploys an immediate `iptables DROP` and process termination for the active attack vector. |
-| **"Explain Conformer vs LSTM"** | Architecture Defense Briefing | Delivers a technical comparison highlighting CNN local feature extraction and Self-Attention temporal modeling. |
-| **"Start 3-min defense tour"** | Guided FYP-II Oral Defense | Autonomously navigates through all 6 consoles of the dashboard with speech narration. |
-| **"Authorize & execute"** / **"Stand down"** | Two-Phase Safety Interlock | Confirms or aborts high-impact industrial actuator containment actions. |
+### Host
 
----
+- **Overview:** counts, provenance, activity chart, recent observations, architecture illustration, and System check.
+- **Network & devices:** select a telemetry domain. The map illustrates architecture; it is not physical-device discovery.
+- **Incidents:** search/filter, inspect scores, classifications, sources, response records, and influential features.
+- **Intelligence:** saliency and model context. Attribution describes influence, not proven causation.
+- **Response:** source-reported response statuses and research playbooks; verify actual enforcement independently.
+- **Evidence & audit:** reported control mappings and observation JSON export.
+- **Client machines:** enroll, search, inspect resource reports/last-seen state, and revoke device access.
+- **Settings:** demo/backend selection, local readiness, reconnect, welcome replay, tour, and assistant guidance.
+- **Research lab:** scenarios, XAI modes, robustness examples, remediation/interlocks, GRC, asset priority, audit console, and playbook dry runs. Some outputs are illustrative.
 
-## 🎨 Theme Matrix & Design System
+Thirteen model/data domains: Network Traffic; Modbus; Fridge; GPS Tracker; Garage Door; Motion Light; Thermostat; Weather; Linux process, disk, and memory; Windows 10; Windows 7. These are not discovered client machines.
 
-Sentinel-IoT features 8 dynamic color themes tailored for darkroom SOCs, executive briefings, and high-visibility environments:
+`Ctrl+K` focuses search. Pause retains the current window; Resume restarts updates. Source/domain changes and reconnection clear the observation window. Up to fifty host observations are retained in page memory.
 
-| Theme Identifier | Visual Profile | Accent Color | Primary Base |
-| :--- | :--- | :--- | :--- |
-| **Cyberpunk 2077** *(Default)* | High-contrast neon dystopian FUI | `#00f3ff` (Cyan) | `#030712` (Onyx) |
-| **Midnight Stealth** | Minimalist military stealth HUD | `#38bdf8` (Sky) | `#020617` (Deep Obsidian) |
-| **Matrix Green** | Phosphor terminal monochrome | `#22c55e` (Emerald) | `#051307` (Terminal Black) |
-| **Deep Navy** | Enterprise defense operations | `#60a5fa` (Cobalt) | `#0a192f` (Navy) |
-| **Solarized Dark** | Low-fatigue engineering palette | `#2aa198` (Teal) | `#002b36` (Solar Base) |
-| **Synthwave 84** | Retro-futuristic sunset neon | `#f43f5e` (Hot Pink) | `#180828` (Purple Abyss) |
-| **Clean Light** | High-illumination laboratory mode | `#0284c7` (Electric Blue)| `#f8fafc` (Pure Slate) |
-| **High Contrast Lab**| Accessibility and auditor inspection | `#e11d48` (Crimson) | `#ffffff` (White) |
+**Undo** reverses recent navigation, source, domain, and pause changes in the current session. It cannot recover cleared observations, reverse downloads/simulations, or undo host actions. Export, confirmed simulation, manual reconnection, and page reload clear history.
 
----
+JSON snapshots include retained observations, provenance, and export time. The GRC **Print observation report / PDF** opens a printable report; use Print / Save PDF there. Research audit JSON identifies illustrative provenance. None of these exports issues compliance certification.
 
-## 🔬 Research & Empirical Benchmarks
+### Client
 
-Extensive ablation studies and multi-class evaluations are documented in `FYP_WORK/main_manuscript.pdf`:
+Measures host name, OS, logical cores, CPU/memory/system-drive use, uptime, and aggregate upload/download rates. It displays trends, connection status, privacy guidance, and resource warnings at 90% CPU/memory/storage. These warnings are not threat predictions and do not feed trained IoT models automatically.
 
-- **Detection Accuracy**: 99.84% across multi-class Ton_IoT and industrial network datasets.
-- **Latency (Inference)**: 21.5 ms per 10-step sequence window on standard CPU hardware.
-- **False Positive Rate**: Reduced by 41.2% compared to standard bidirectional LSTM baselines.
-- **Adversarial Robustness**: Evaluated against FGSM and PGD perturbations with dynamic threshold tuning.
+- **Pause sharing:** stops future reports while collection continues; a request already in flight may finish.
+- **Resume sharing:** waits for a fresh accepted report before showing connected.
+- **Disconnect:** removes the saved credential; reconnecting needs a new enrollment.
+- **Host Revoke access:** rejects future reports from that credential; historical reports remain.
 
----
+Closing the browser does not stop reporting. A paused/disconnected client eventually appears offline on the host. Stale measurements/retained snapshots are explicitly labeled.
 
-## 👨‍💻 Author & Academic Attribution
+## Mereoleona
 
-- **Project Lead & Developer**: Abdullah Bin Zubair Hashmi
-- **Academic Department**: Computer Science & Cybersecurity (Final Year Project FYP-II)
-- **Institution**: Bahria University
+Host setup downloads `qwen2.5:1.5b`. The assistant sends bounded recent conversation and dashboard context to local Ollama at `127.0.0.1:11434`. Badges distinguish model replies from the built-in guide; no cloud fallback is used.
 
----
+Try `Give me a tour`, `Summarize my telemetry`, `Show Modbus`, `Open incidents`, `Explain the latest alert`, `Pause the telemetry feed`, `Resume the telemetry feed`, `Check system readiness`, `Undo that`, `Export snapshot`, or `Simulate a threat`.
 
-## 📄 License
-This project is released under the **MIT License**. Free for academic research, industrial evaluation, and cyber defense training.
+Application actions come from a fixed allowlist, never from arbitrary generated commands. Chat cannot shut down devices, terminate processes, or change firewall rules. Demonstrations require confirmation and use generated data. The built-in guide supports commands/help when generation fails.
+
+To select a particular installed local chat model, set `sentinel_dashboard/frontend/.env.local`, then restart the frontend:
+
+```dotenv
+SENTINEL_OLLAMA_MODEL=qwen2.5:1.5b
+```
+
+Without an explicit setting, a suitable installed local chat model is selected. Cloud aliases, remote model metadata, and embedding models are rejected. Conversation stays in page memory while the panel is closed and clears on reload.
+
+The helper sets `OLLAMA_NO_CLOUD=1`, loopback binding, one loaded model, and one parallel request. Setup persists `disable_ollama_cloud` in `%USERPROFILE%/.ollama/server.json`; restart an older running instance after configuration changes. See [Ollama's privacy settings](https://docs.ollama.com/faq#how-do-i-disable-ollamas-cloud-features).
+
+Client Mereoleona is a **built-in local guide**, not an Ollama chatbot, and does not reuse the host's AI connection. Host private voice input depends on browser on-device recognition, English speech resources, and permission. Text remains available when these are missing; transcripts can be reviewed before sending. Spoken responses use local system voices.
+
+## Privacy and retained data
+
+The endpoint agent collects no file contents, browser history, keystrokes, process lists, or packet contents. Separate research host/packet tools are not the endpoint collector.
+
+Private state under `sentinel_dashboard/.local/` includes:
+
+- `fleet/operator.key`: host-only operator credential.
+- `fleet/devices.sqlite3`: enrollments, hashed device credentials, reports/history.
+- `client/control.key`: local agent API credential.
+- `client/connection.json`: saved device credential, identity, relay, and sharing state.
+
+Keep state private to its owning Windows account. Never publish or copy host state to clients. Files are not encrypted at rest by the application. State, virtual environments, builds, and client ZIP/checksum are ignored by Git.
+
+Client trends retain sixty samples in memory. The relay stores up to 120 samples per device, plus latest state/enrollment; revocation retains history. The host browser keeps fifty observations in memory and stores source preference locally. Research backend audit logs have separate retention behavior.
+
+Supplied launchers bind services to loopback. Client profile restrictions block operator pages/APIs. Device/operator credentials are distinct. These local interfaces rely on the Windows user/session boundary and are not a complete multi-user internet deployment.
+
+Initial setup contacts package, installer, and model sources. Tested local runtime browser flows made no external requests. Local/private inference does not make an internet-connected installation physically air-gapped. Do not expose the original research backend or Ollama publicly.
+
+## Ports, configuration, and logs
+
+Host services use **3000** (dashboard), **8000** (backend and `/ws/telemetry`), **8010** (relay), **11434** (Ollama). Client services use **3001** (dashboard), **8011** (agent), and **18010** for the example tunnel.
+
+Advanced environment variables:
+
+- `SENTINEL_PYTHON`: explicit compatible interpreter, overriding normal role-environment lookup.
+- `SENTINEL_STATE_DIR`: alternate state root; associated frontend/services must agree. Launcher logs still use their normal project paths.
+- `SENTINEL_INTERFACE`: `client` selects restricted routes/`.next-client`; host launcher selects `operator`/`.next`. Prefer the launchers.
+- `SENTINEL_OLLAMA_MODEL`: installed host chat-model selection.
+
+Logs are under `.local/host/` (host backend/dashboard), `.local/client/` (agent/dashboard), and `.local/fleet/` (relay). Ollama helper logs are `%LOCALAPPDATA%/Ollama/sentinel-server.log` and `sentinel-stdout.log`. Older/manual launches may log elsewhere; read the path printed in the error.
+
+```powershell
+.\SETUP_SENTINEL_HOST.bat -CheckOnly
+.\SETUP_SENTINEL_CLIENT.bat -CheckOnly
+.\START_SENTINEL_HOST.bat -NoBrowser
+.\START_SENTINEL_CLIENT.bat -NoBrowser
+```
+
+`-CheckOnly` checks runtime prerequisites without installs/rebuilds; host also checks assets/Ollama executable. It is not a complete dependency/generation test. `-NoBrowser` starts without opening the browser. The BAT execution-policy override is process-scoped, not a permanent machine-policy change; organization-managed policies may still restrict execution.
+
+## Updating and stopping
+
+```powershell
+git switch sentinel-host-client
+git pull --ff-only origin sentinel-host-client
+```
+
+Stop the relevant application's services before replacing dependencies/rebuilding, rerun its setup, then start. ZIP clients need a newly generated/transferred bundle rather than `git pull`; retain only their own private state as appropriate. Recreate environments instead of copying them across computers.
+
+No startup tasks, Windows services, or stop BAT are installed. Closing the browser/launcher terminal does not stop hidden processes. Pause/Disconnect stops client sharing; to stop the application, identify its project Python/Node command lines in Task Manager and end only those processes, or sign out/restart Windows. Closing the SSH terminal ends its tunnel. Avoid ending unrelated workloads.
+
+Start files reuse healthy services; restart older processes deliberately after updates so new code is loaded.
+
+## Troubleshooting
+
+### Missing WinGet/Python/Node/npm or failed setup
+
+Install/update Microsoft App Installer or manually install compatible Python/Node with npm. Open a fresh terminal and rerun. Store Python aliases are skipped. Use `SENTINEL_PYTHON` only for a compatible explicit interpreter. Read the first installer/pip/npm/build error, resolve network/proxy/permission issues, and rerun. A partial run is not completed setup; restart Windows first if an installer requires it.
+
+### Missing host assets or build
+
+Use the full host project and restore paths reported by `backend/verify_install.py` from real research assets, resolving LFS pointers where necessary. The client ZIP deliberately excludes weights/data. Host startup needs `.next/BUILD_ID`; client startup needs `.next-client/BUILD_ID`. Run the matching setup and inspect stderr logs.
+
+### Port conflict or stale service
+
+Check which application owns the required port and deliberately stop/reconfigure it. Sentinel does not kill unrelated services. After code changes, restart the actual old processes before assuming a reused service loaded the update.
+
+### Assistant uses the built-in guide
+
+Inspect System check, Ollama logs, and `ollama list`. Confirm loopback service availability and installed/configured model name. Restart the frontend after `.env.local` changes. First replies can be slower while weights load; failure falls back to the guide.
+
+### SSH, pairing, or offline client
+
+Verify host SSH/account, private IP, routing/VPN, firewall access, credentials, and server host key with the operator. Port 18010 may already belong to another tunnel. Keep it open; use `http://127.0.0.1:18010`, an unused enrollment key, and unpaused sharing. Lost/used/revoked credentials need a new enrollment and client re-pairing. Connected status waits for acceptance; thirty seconds without a report yields offline.
+
+### HTTPS/certificate error
+
+Use a private literal IP and certificate matching that IP and trusted by the Python environment. Do not disable validation. Public URLs, remote HTTP, redirects, custom paths, and hostname-only URLs do not meet relay policy.
+
+### Empty/stale data or scaler warning
+
+Check source badge/playback and reconnect as appropriate. Domain/source changes reset observations; warmup frames are not predictions. Connection alone does not prove physical-device monitoring. Saved scalers report scikit-learn 1.9.0 serialization while the tested host pins 1.8.0; inference checks passed with a warning, not statistical certification. Align/re-export scalers in a validated environment before operational reliance.
+
+### Voice or PDF window unavailable
+
+Text works when private recognition resources/permission or local voices are missing. Allow local pop-ups for the printable observation report and use Print / Save PDF. Blocked report windows report failure rather than claiming an export.
+
+## Development and verification
+
+The frontend uses Next.js 16.3.6, React 19, TypeScript, and Zustand. Backend inference uses CPU PyTorch Conformer sequences/saliency. Endpoint HTTP uses Python's standard library, psutil, and local SQLite.
+
+Frontend development, from `sentinel_dashboard/frontend` after installing dependencies:
+
+```powershell
+npm run dev
+```
+
+Client commands are `npm run dev:client`, `npm run build:client`, and `npm run start:client`. Run one process per chosen port. BAT launchers use production builds.
+
+Manual host Python commands from `sentinel_dashboard`, each in its own terminal:
+
+```powershell
+.\.venv-host\Scripts\python.exe -m uvicorn backend.server:app --host 127.0.0.1 --port 8000
+.\.venv-host\Scripts\python.exe -m endpoint.fleet
+```
+
+On clients use `.\.venv-client\Scripts\python.exe -m endpoint.agent`. The agent is portable Python; double-click launchers target Windows.
+
+Frontend checks:
+
+```powershell
+npm run test:assistant
+npm run build
+npx tsc --noEmit
+npm run lint
+```
+
+Python checks from `sentinel_dashboard`:
+
+```powershell
+.\.venv-host\Scripts\python.exe -m unittest endpoint.test_endpoint -v
+.\.venv-host\Scripts\python.exe backend/verify_install.py
+```
+
+Optional Playwright/Chrome checks: set `SENTINEL_E2E_ARTIFACTS` to a writable output directory and run `node tests/host-browser.cjs` from the frontend with services running. `SENTINEL_E2E_FILTER` supports focused name matches. `node tests/backend-live.cjs` temporarily changes global domain/playback and restores them; run without another operator changing those settings. `tests/client-browser.cjs` uses isolated `endpoint.verify_runtime` and `SENTINEL_E2E_STATE`; see its source/[frontend guide](sentinel_dashboard/frontend/README.md). Do not use production enrollments as test state.
+
+### Recorded checks — 16 October 2026
+
+- Thirty host browser workflows, including domains, navigation, assistant commands/conversation, exports, research controls, mobile layouts, and recovery; one timing-sensitive scenario assertion passed on focused rerun.
+- Twenty-four backend checks covering ten APIs, thirteen models' predictions/explanations, and pause/step/resume.
+- Seventeen frontend regressions and ten endpoint protocol tests passed.
+- Isolated pairing/reporting, pause/resume, revocation, and credential removal passed.
+- Production build/type checks passed; tested browser flows recorded no uncaught errors or external requests.
+- Windows prerequisite/run checks passed, including isolated client startup and a path with spaces. Fresh-machine WinGet installation was not tested on a clean Windows installation.
+
+Older repository-wide lint findings remain; targeted changed-feature lint passed. Actual microphone hardware, a separate physical client, and SSH/HTTPS deployment need environment-specific verification. These recorded checks are not guarantees for every installation.
+
+## Project layout and limits
+
+```text
+Sentinel_IOT/
+├── README.md
+├── SETUP_SENTINEL_HOST.bat / START_SENTINEL_HOST.bat
+├── SETUP_SENTINEL_CLIENT.bat / START_SENTINEL_CLIENT.bat
+├── START_SENTINEL_DASHBOARD.bat           # Host compatibility alias
+├── sentinel_dashboard/
+│   ├── setup_host.ps1 / start_host.ps1
+│   ├── setup_client.ps1 / start_client.ps1
+│   ├── windows_common.ps1 / find_python.ps1
+│   ├── start_local_ai.ps1 / start_endpoint.ps1
+│   ├── backend/                         # Inference/research APIs
+│   ├── endpoint/                        # Agent, relay, tests, bundle builder
+│   ├── frontend/                        # Shared UI, separate profiles
+│   ├── .venv-host/ / .venv-client/       # Generated, ignored
+│   └── .local/                          # Private state/logs, ignored
+├── FYP_WORK/                            # Host weights/scalers/data
+└── deliverables/                        # Generated client ZIP/checksum
+```
+
+Current limits:
+
+- Local research deployment, not complete multi-user internet hosting or a production SOC.
+- Backend data may be replay or configured host-derived features; client resource reports remain a separate stream.
+- Maps are illustrative. Packet, TPM/ZK, hardware attestation, playbook traces, and some metrics contain research simulations.
+- Robustness examples run only in demo; unimplemented Carlini-Wagner/DeepFool kernels cannot execute another algorithm under their names.
+- Interlock/rule-revocation research controls are local simulations; backend firewall reversal is not implemented there. Response records need independent verification.
+- Observation/research exports do not perform cryptographic or compliance certification. Historical accuracy/latency/benchmark claims are not independently validated here.
+- Client Mereoleona is a guide; full conversation runs on the host. Voice capability depends on installed local resources.
+- Initial downloads need internet, transport needs configuration, and state is not application-encrypted.
+- Scaler compatibility and legacy lint issues require further validation before operational use.
+
+Further documentation: [Endpoint transport/privacy](sentinel_dashboard/endpoint/README.md), [frontend/assistant guide](sentinel_dashboard/frontend/README.md), [host package versions](sentinel_dashboard/backend/requirements-host.txt). The [historical research overview](sentinel_dashboard/RESEARCH_OVERVIEW_LEGACY.md) is retained for history; this guide supersedes its older operational/certification descriptions.
+
+Project lead: **Abdullah Bin Zubair Hashmi**, Computer Science & Cybersecurity Final Year Project, Bahria University. Research artifacts are in `FYP_WORK`. Review bundled third-party licenses before redistribution; no single project-wide license file was added by this dashboard branch.
