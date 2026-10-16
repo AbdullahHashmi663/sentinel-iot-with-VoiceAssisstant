@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import { useTelemetryStore } from "@/store/useTelemetryStore";
 import { DomainType, AttackClass } from "@/types/sentinel";
+import { mockTelemetry } from "@/services/mockTelemetryService";
 
 const ALL_DOMAINS: DomainType[] = [
   "IoT_Modbus",
@@ -54,7 +55,7 @@ const ATTACK_CLASSES: { name: AttackClass; label: string; prob: number }[] = [
   { name: "xss", label: "Script Payload XSS", prob: 0.01 }
 ];
 
-export default function ThreatLabConsole() {
+export default function ThreatLabConsole({ onInjectAttack }: { onInjectAttack?: (attack: "injection" | "ddos") => boolean }) {
   const {
     activeDomain,
     setActiveDomain,
@@ -66,6 +67,7 @@ export default function ThreatLabConsole() {
   const [activeScenario, setActiveScenario] = useState<string>("Modbus FC16 Excursion");
   const [burstRate, setBurstRate] = useState<number>(4820);
   const [isSimulating, setIsSimulating] = useState<boolean>(true);
+  const [scenarioNotice, setScenarioNotice] = useState("");
 
   const tau = latestEvent?.anomalyProbability ?? 0.892;
   const isCritical = tau > 0.85;
@@ -100,15 +102,24 @@ export default function ThreatLabConsole() {
     setActiveScenario(name);
     setBurstRate(rate);
     setIsSimulating(true);
-    fetch("http://127.0.0.1:8000/api/inject-attack", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ attack_type: name.toLowerCase().includes("modbus") ? "injection" : "ddos" })
-    }).catch(() => {});
+    const attack = name.toLowerCase().includes("modbus") ? "injection" : "ddos";
+    if (useTelemetryStore.getState().isMockMode) {
+      const event = mockTelemetry.generateSyntheticEvent();
+      useTelemetryStore.getState().addEvent({ ...event, isAnomaly: true, anomalyProbability: 0.96, confidence: 0.98, predictedClass: attack, remediationStatus: "NONE", remediationAction: "Generated scenario only. No real traffic or containment action." });
+      setScenarioNotice("Generated scenario added to the demo. No backend traffic or device was changed.");
+      return;
+    }
+    if (onInjectAttack?.(attack)) {
+      setScenarioNotice("Scenario requested from the research backend. This is simulated traffic.");
+    } else {
+      setIsSimulating(false);
+      setScenarioNotice("The backend could not accept this scenario. Check its connection or switch to Demo workspace.");
+    }
   };
 
   return (
     <div className="space-y-4">
+      {scenarioNotice && <p role="status" className="text-sm p-3 border rounded">{scenarioNotice}</p>}
       {/* 1. SUB-HEADER METRIC STRIP: NEURAL REASONING CORES BANNER */}
       <div className="hud-box p-3 rounded flex flex-wrap items-center justify-between gap-3 clip-chamfer font-mono">
         <span className="hud-corner-tr">┐</span>

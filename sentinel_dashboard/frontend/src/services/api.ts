@@ -4,6 +4,7 @@
 // ==============================================================================
 
 const API_BASE = 'http://127.0.0.1:8000';
+import type { TelemetryEvent } from '@/types/sentinel';
 
 export async function fetchSystemStatus() {
   try {
@@ -64,71 +65,19 @@ export async function unblockTargetAPI(target: string) {
   }
 }
 
-export async function downloadCompliancePDF() {
-  try {
-    // Generate certified compliant print preview or blob download
-    const res = await fetch(`${API_BASE}/api/compliance/report?format=pdf`);
-    if (res.ok) {
-      const blob = await res.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `Sentinel_IoT_NIST_Compliance_Certificate_${Date.now()}.pdf`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      return true;
-    }
-  } catch (err) {
-    console.warn('[API] PDF endpoint failed, generating client-side compliance certificate.');
-  }
-
-  // Fallback: Generate Client-side printable Certificate Document
-  const certWindow = window.open('', '_blank');
-  if (certWindow) {
-    certWindow.document.write(`
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <title>NIST SP 800-53 / ISO 27001 Cryptographic Compliance Certificate</title>
-        <style>
-          body { font-family: monospace; background: #070D17; color: #F8FAFC; padding: 40px; }
-          .header { border-bottom: 2px solid #0284C7; padding-bottom: 20px; margin-bottom: 30px; }
-          .title { font-size: 24px; font-weight: bold; color: #0284C7; }
-          .meta { font-size: 13px; color: #94A3B8; margin-top: 8px; }
-          .box { border: 1px solid #1E293B; background: #0F172A; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
-          .hash { color: #00ff66; word-break: break-all; font-weight: bold; }
-          table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-          th, td { border: 1px solid #1E293B; padding: 8px; text-align: left; font-size: 12px; }
-          th { background: #1E293B; color: #00f3ff; }
-        </style>
-      </head>
-      <body>
-        <div class="header">
-          <div class="title">SENTINEL-IOT CRYPTOGRAPHIC AUDIT CERTIFICATE</div>
-          <div class="meta">Bahria University, Islamabad Campus | FYP-II Official Compliance Record</div>
-          <div class="meta">Certified Timestamp: ${new Date().toUTCString()}</div>
-        </div>
-        <div class="box">
-          <h3>NIST SP 800-53 Rev. 5 & ISO/IEC 27001:2022 Validation</h3>
-          <p>This document certifies zero-tamper integrity for autonomous XDR containment actions.</p>
-          <p>Merkle Chain Root Hash: <span class="hash">7f01a9b4c12d8e33fbc8294a0058b76c8e31</span></p>
-          <p>NIST Control AU-9 (Audit Records Protection): <strong>VERIFIED PASSED</strong></p>
-        </div>
-        <table>
-          <tr><th>Control ID</th><th>Standard</th><th>Technical Action</th><th>Status</th></tr>
-          <tr><td>SC-5</td><td>NIST SP 800-53</td><td>Autonomous Rate-Limiting & IP Containment</td><td>COMPLIANT</td></tr>
-          <tr><td>SI-3</td><td>NIST SP 800-53</td><td>Compromised Process Memory Interception</td><td>COMPLIANT</td></tr>
-          <tr><td>IA-5</td><td>NIST SP 800-53</td><td>Brute-Force Credential Stuffing Throttling</td><td>COMPLIANT</td></tr>
-          <tr><td>A.12.1.3</td><td>ISO/IEC 27001</td><td>Operational Capacity & DDoS Resiliency</td><td>COMPLIANT</td></tr>
-          <tr><td>A.12.6.1</td><td>ISO/IEC 27001</td><td>Technical Vulnerability & Exploit Remediation</td><td>COMPLIANT</td></tr>
-        </table>
-        <br/>
-        <button onclick="window.print()" style="padding: 10px 20px; background: #0284C7; color: white; border: none; cursor: pointer; font-weight: bold; border-radius: 4px;">PRINT / SAVE PDF</button>
-      </body>
-      </html>
-    `);
-    certWindow.document.close();
-  }
+export async function downloadCompliancePDF(snapshot: { source: string; domain: string; events: TelemetryEvent[] }) {
+  // This is an observation report, never a fabricated certificate or proof.
+  const report = window.open('', '_blank');
+  if (!report) return false;
+  report.opener = null;
+  const escape = (value: unknown) => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]!);
+  const records = snapshot.events.slice(0, 50);
+  const rows = records.map(event => `<tr><td>${escape(event.timestamp)}</td><td>${escape(event.sourceIp)}</td><td>${escape(event.predictedClass)}</td><td>${escape((event.anomalyProbability * 100).toFixed(1))}%</td><td>${escape(event.compliance.nistControlId)}</td></tr>`).join('');
+  report.document.write(`<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Sentinel observation report</title><style>
+    body{font:14px system-ui,sans-serif;color:#222;max-width:1100px;margin:40px auto;padding:0 20px}h1{font-size:30px}p{line-height:1.6}table{width:100%;border-collapse:collapse}th,td{border:1px solid #ccc;padding:8px;text-align:left;font-size:12px;overflow-wrap:anywhere}button{padding:12px 18px;margin:20px 0;cursor:pointer}@media print{button{display:none}body{margin:0}}
+    </style></head><body><h1>Sentinel observation report</h1><p>Source: <strong>${escape(snapshot.source)}</strong><br>Domain: ${escape(snapshot.domain)}<br>Exported: ${escape(new Date().toISOString())}<br>Retained observations: ${records.length}</p>
+    <p>This report contains source-reported observations and control mappings. It is not a compliance certificate, cryptographic verification, or proof of containment. Generated demo data describes no real devices.</p>
+    <button onclick="window.print()">Print / Save PDF</button><table><thead><tr><th>Observed</th><th>Source IP</th><th>Classification</th><th>Anomaly score</th><th>Reported control</th></tr></thead><tbody>${rows || '<tr><td colspan="5">No observations available.</td></tr>'}</tbody></table></body></html>`);
+  report.document.close();
   return true;
 }

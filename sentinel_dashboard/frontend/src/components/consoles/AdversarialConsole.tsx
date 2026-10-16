@@ -26,6 +26,7 @@ export default function AdversarialConsole() {
     setAdversarialAttackType,
     triggerAdversarialAttack
   } = useTelemetryStore();
+  const isDemo = useTelemetryStore(state => state.isMockMode);
 
   const {
     epsilon,
@@ -411,7 +412,7 @@ export default function AdversarialConsole() {
             <button
               type="button"
               onClick={triggerAdversarialAttack}
-              disabled={isAttacking}
+              disabled={isAttacking || !isDemo || !["fgsm", "pgd20"].includes(activeKernel)}
               className={`w-full py-2.5 rounded font-['Orbitron'] font-bold text-xs uppercase tracking-wider transition-all shadow-md cursor-pointer flex items-center justify-center gap-2 ${
                 isAttacking
                   ? "bg-[#ff2a5f] text-white animate-pulse shadow-[0_0_16px_#ff2a5f]"
@@ -419,7 +420,7 @@ export default function AdversarialConsole() {
               }`}
             >
               <Play className="w-4 h-4 fill-current" />
-              <span>{isAttacking ? "INJECTING NOISE TENSOR..." : `EXECUTE ${attackType} ATTACK`}</span>
+              <span>{!isDemo ? "SWITCH TO DEMO TO SIMULATE" : !["fgsm", "pgd20"].includes(activeKernel) ? "THIS KERNEL IS NOT IMPLEMENTED" : isAttacking ? "GENERATING DEMO OBSERVATION..." : `SIMULATE ${attackType} OBSERVATION`}</span>
             </button>
           </div>
         </div>

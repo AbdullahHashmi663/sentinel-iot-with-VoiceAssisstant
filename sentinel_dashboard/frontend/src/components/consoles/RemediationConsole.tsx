@@ -22,7 +22,6 @@ import {
   Activity
 } from "lucide-react";
 import { useTelemetryStore } from "@/store/useTelemetryStore";
-import { unblockTargetAPI, overrideInterlockAPI } from "@/services/api";
 import SOARPlaybookBuilder from "@/components/SOARPlaybookBuilder";
 
 export default function RemediationConsole() {
@@ -40,10 +39,13 @@ export default function RemediationConsole() {
 
   const [operatorBadge, setOperatorBadge] = useState<string>("OPERATOR-SEC-091");
   const [badgeError, setBadgeError] = useState<string>("");
+  const [notice, setNotice] = useState("");
+  const isDemo = useTelemetryStore(state => state.isMockMode);
 
-  const handleRevoke = async (ruleId: string, target: string) => {
+  const handleRevoke = (ruleId: string) => {
+    if (!isDemo) return;
     revokeRule(ruleId);
-    await unblockTargetAPI(target);
+    setNotice("Demo rule revoked locally. No host firewall was changed.");
   };
 
   const handleConfirmOverride = async (e: React.FormEvent) => {
@@ -54,11 +56,12 @@ export default function RemediationConsole() {
     }
     setBadgeError("");
     overrideInterlock(operatorBadge);
-    await overrideInterlockAPI(interlockTargetNode || "192.168.100.45", operatorBadge);
+    setNotice("Research interlock canceled locally. No shutdown or host action was performed.");
   };
 
   return (
     <div className="space-y-4 font-mono">
+      <p className="text-xs p-3 border rounded" role="status">{notice || (isDemo ? "Research simulation: rules and interlocks affect this page only." : "Backend response records are read-only here. Host firewall reversal is not implemented by this research tool.")}</p>
       {/* 1. TOP HEADER & MODE CONTROLS */}
       <div className="hud-box p-3 rounded">
         <span className="hud-corner-tr">┐</span>
@@ -218,7 +221,8 @@ export default function RemediationConsole() {
                         {isBlocked ? (
                           <button
                             type="button"
-                            onClick={() => handleRevoke(rule.id, rule.targetIp)}
+                            onClick={() => handleRevoke(rule.id)}
+                            disabled={!isDemo}
                             aria-label={`Revoke rule ${rule.id}`}
                             className="px-2.5 py-1 rounded bg-[#070d14] hover:bg-[#00ff66]/20 border border-[#162536] hover:border-[#00ff66] text-[#dee3eb] hover:text-[#00ff66] text-[10px] font-bold uppercase transition-colors cursor-pointer"
                           >

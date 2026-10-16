@@ -84,5 +84,10 @@ export function useSentinelFeed() {
     setPaused(value);
     if (notifyBackend && !demo && socket.current?.readyState === WebSocket.OPEN) socket.current.send(JSON.stringify({ action: "SET_PLAYBACK", is_playing: !value }));
   };
-  return { ready, paused, setPaused: changePaused, getPaused: () => pausedRef.current, lastSeen, stale, reconnect: () => setConnectionAttempt(value => value + 1) };
+  const injectAttack = (attack: "injection" | "ddos") => {
+    if (demo || socket.current?.readyState !== WebSocket.OPEN) return false;
+    socket.current.send(JSON.stringify({ action: "INJECT_ATTACK", attack_type: attack }));
+    return true;
+  };
+  return { ready, paused, setPaused: changePaused, getPaused: () => pausedRef.current, lastSeen, stale, injectAttack, reconnect: () => setConnectionAttempt(value => value + 1) };
 }

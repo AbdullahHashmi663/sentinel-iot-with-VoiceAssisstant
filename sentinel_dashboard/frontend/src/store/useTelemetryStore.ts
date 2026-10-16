@@ -87,8 +87,8 @@ export interface TelemetryStoreState {
   closeSoarBuilder: () => void;
 
   isAgenticSocOpen: boolean;
-  agenticIncident: any | null;
-  openAgenticSoc: (incident?: any) => void;
+  agenticIncident: TelemetryEvent | null;
+  openAgenticSoc: (incident?: TelemetryEvent | null) => void;
   closeAgenticSoc: () => void;
 
   isAuditReportModalOpen: boolean;
@@ -628,6 +628,8 @@ export const useTelemetryStore = create<TelemetryStoreState>((set, get) => ({
   },
 
   triggerAdversarialAttack: () => {
+    // Research examples must never enter a window labeled as backend data.
+    if (!get().isMockMode) return;
     const { adversarialState } = get();
     set((state) => ({
       adversarialState: { ...state.adversarialState, isAttacking: true }

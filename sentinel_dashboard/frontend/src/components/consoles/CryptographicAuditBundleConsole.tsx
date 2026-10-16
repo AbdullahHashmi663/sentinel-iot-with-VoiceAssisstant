@@ -151,11 +151,15 @@ export default function CryptographicAuditBundleConsole() {
         { text: "[PASS] STMicro ST33TPHF20 Enclave locked and authenticated", color: "text-[#00ff66] font-bold", isPass: true }
       ];
     } else if (cmd.includes("export") || cmd.includes("json")) {
+      const snapshot = { source: "research-simulation", exportedAt: new Date().toISOString(), note: "Illustrative terminal output. No cryptographic verification was performed.", terminal: terminalHistory };
+      const url = URL.createObjectURL(new Blob([JSON.stringify(snapshot, null, 2)], { type: "application/json" }));
+      const link = document.createElement("a"); link.href = url; link.download = "sentinel-research-audit.json"; link.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
       outputLines = [
         { text: "[EXPORTING AUDIT BUNDLE]", color: "text-[#dee3eb] font-bold" },
         { text: "> Compressing 7 signed audit artifacts into archive..." },
         { text: "> Generating SHA256 checksum seal..." },
-        { text: "[SUCCESS] Bundle exported: sentinel-audit-bundle-v2.4.9-AUD-2025.tar.gz", color: "text-[#00ff66] font-bold", isPass: true }
+        { text: "[DOWNLOADED] sentinel-research-audit.json — illustrative research output only", color: "text-[#00ff66] font-bold", isPass: true }
       ];
     } else {
       outputLines = [
@@ -340,7 +344,7 @@ export default function CryptographicAuditBundleConsole() {
 
               <button
                 type="button"
-                onClick={() => handleRunCommand("tar -czvf sentinel-audit-export.tar.gz proof.json public.json")}
+                onClick={() => handleRunCommand("export research-json")}
                 className="px-2.5 py-1 bg-[#162536] hover:bg-[#252b31] text-[#64748b] hover:text-[#dee3eb] transition-colors rounded cursor-pointer"
               >
                 &gt; EXPORT JSON

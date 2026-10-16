@@ -119,11 +119,12 @@ const REGULATORY_CONTROLS: ControlItem[] = [
   }
 ];
 
-export default function ComplianceConsole() {
+export default function ComplianceConsole({ onOpenAuditCli }: { onOpenAuditCli?: () => void }) {
   const router = useRouter();
   const { nistCsfScore, openAuditReportModal, setActiveConsole, theme } = useTelemetryStore();
   const isLightMode = theme === "alabaster" || theme === "arctic" || theme === "light";
   const [isExporting, setIsExporting] = useState<boolean>(false);
+  const [exportNotice, setExportNotice] = useState("");
   const [activeFamily, setActiveFamily] = useState<string>("ALL");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [zkpRunning, setZkpRunning] = useState<boolean>(false);
@@ -156,7 +157,9 @@ export default function ComplianceConsole() {
 
   const handleExportPDF = async () => {
     setIsExporting(true);
-    await downloadCompliancePDF();
+    const state = useTelemetryStore.getState();
+    const opened = await downloadCompliancePDF({ source: state.isMockMode ? "generated-demo" : "local-backend", domain: state.activeDomain, events: state.events });
+    setExportNotice(opened ? "Observation report opened. Use Print / Save PDF in that window. This is not a compliance certificate." : "The report window was blocked. Allow pop-ups for this local dashboard and try again.");
     setTimeout(() => setIsExporting(false), 1400);
   };
 
@@ -177,6 +180,7 @@ export default function ComplianceConsole() {
 
   return (
     <div className="space-y-4">
+      {exportNotice && <p role="status" className="text-sm p-3 border rounded">{exportNotice}</p>}
       {/* 1. TOP HEADER & TACTICAL EXPORT CONTROLS BAR */}
       <section
         className={`flex flex-col lg:flex-row lg:items-center justify-between gap-4 p-4 rounded relative overflow-hidden transition-all duration-200 border ${
@@ -280,8 +284,9 @@ export default function ComplianceConsole() {
           <button
             type="button"
             onClick={() => {
+              if (onOpenAuditCli) { onOpenAuditCli(); return; }
               setActiveConsole("audit");
-              router.push("/audit");
+              router.push("/audit?tool=audit#lab");
             }}
             className={`px-3.5 py-2 rounded font-mono text-xs flex items-center gap-2 transition-all active:scale-95 cursor-pointer border ${
               isLightMode
@@ -299,7 +304,7 @@ export default function ComplianceConsole() {
             className="px-3.5 py-2 rounded bg-[#059669] hover:bg-[#10b981] text-white font-mono text-xs font-bold flex items-center gap-2 shadow-[0_0_16px_rgba(5,150,105,0.3)] transition-all active:scale-95 disabled:opacity-50"
           >
             <span className="material-symbols-outlined text-[16px]">workspace_premium</span>
-            <span>{isExporting ? "GENERATING CERTIFICATE..." : "Export Certified PDF Audit"}</span>
+            <span>{isExporting ? "OPENING REPORT..." : "Print observation report / PDF"}</span>
           </button>
         </div>
       </section>

@@ -21,6 +21,49 @@ const { clientGuide, formatAge } = load("endpoint");
 const { sameOrigin } = load("endpoint-service");
 const context = { demo: true, connected: false, paused: false, domain: "IoT_Modbus", section: "overview", events: 28, anomalies: 5, latest: null };
 
+function reportApi() {
+  const source = fs.readFileSync(path.join(__dirname, "../src/services/api.ts"), "utf8");
+  const output = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
+  const module = { exports: {} };
+  new Function("require", "module", "exports", output)(require, module, module.exports);
+  return module.exports;
+}
+
+test("printable observation reports escape untrusted fields and preserve provenance", async () => {
+  const previous = globalThis.window;
+  let html = "";
+  const popup = { opener: {}, document: { write: value => { html = value; }, close() {} } };
+  globalThis.window = { open: () => popup };
+  try {
+    const event = { timestamp: "now", sourceIp: '<img src=x onerror="alert(1)">', predictedClass: "<script>attack()</script>", anomalyProbability: 0.9, compliance: { nistControlId: "<control>" } };
+    assert.equal(await reportApi().downloadCompliancePDF({ source: "generated-demo", domain: "<domain>", events: Array(60).fill(event) }), true);
+    assert.match(html, /generated-demo/); assert.match(html, /Retained observations: 50/);
+    assert.match(html, /not a compliance certificate/); assert.match(html, /&lt;script&gt;/);
+    assert.ok(!html.includes('<script>attack()')); assert.ok(!html.includes('<img src=x'));
+    assert.equal(popup.opener, null);
+  } finally { if (previous === undefined) delete globalThis.window; else globalThis.window = previous; }
+});
+
+test("blocked report windows return failure instead of claiming an export", async () => {
+  const previous = globalThis.window;
+  globalThis.window = { open: () => null };
+  try { assert.equal(await reportApi().downloadCompliancePDF({ source: "generated-demo", domain: "Network_Traffic", events: [] }), false); }
+  finally { if (previous === undefined) delete globalThis.window; else globalThis.window = previous; }
+});
+
+test("research robustness commands cannot insert demo events into backend observations", () => {
+  const source = fs.readFileSync(path.join(__dirname, "../src/store/useTelemetryStore.ts"), "utf8");
+  const output = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
+  const module = { exports: {} };
+  const forbiddenMock = { triggerAdversarialEvent() { throw Error("Demo generator must not run in backend mode"); } };
+  new Function("require", "module", "exports", output)(id => id === "../services/mockTelemetryService" ? { mockTelemetry: forbiddenMock } : require(id), module, module.exports);
+  const store = module.exports.useTelemetryStore;
+  assert.equal(store.getState().isMockMode, false);
+  store.getState().triggerAdversarialAttack();
+  assert.deepEqual(store.getState().events, []);
+  assert.equal(store.getState().adversarialState.isAttacking, false);
+});
+
 test("local control accepts the browser authority even when Next uses an internal localhost URL", () => {
   const request = (origin, host = "127.0.0.1:3001", site = "same-origin") => ({ nextUrl: new URL("http://localhost:3001/api/client"), headers: new Headers({ ...(origin ? { origin } : {}), host, "sec-fetch-site": site }) });
   assert.equal(sameOrigin(request("http://127.0.0.1:3001")), true);

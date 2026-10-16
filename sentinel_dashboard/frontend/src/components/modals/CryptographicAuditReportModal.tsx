@@ -28,7 +28,7 @@ import {
 } from "lucide-react";
 import { useTelemetryStore } from "@/store/useTelemetryStore";
 
-export default function CryptographicAuditReportModal() {
+export default function CryptographicAuditReportModal({ onOpenCli }: { onOpenCli?: () => void }) {
   const router = useRouter();
   const {
     isAuditReportModalOpen,
@@ -49,6 +49,8 @@ export default function CryptographicAuditReportModal() {
 
   const handleDownloadBundle = () => {
     const bundleData = {
+      source: "research-simulation",
+      note: "Illustrative research artifact. No TPM attestation, ZK proof, signature verification, or compliance certification was performed.",
       report_id: "AUD-2025-0891-ZK",
       timestamp: new Date().toISOString(),
       standards: ["FIPS 140-3 Level 4", "IEC 62443-4-2 SL-3", "NIST SP 800-53 AU-9"],
@@ -99,9 +101,10 @@ export default function CryptographicAuditReportModal() {
   };
 
   const handleOpenCliSimulation = () => {
+    if (onOpenCli) { onOpenCli(); return; }
     closeAuditReportModal();
     setActiveConsole("audit");
-    router.push("/audit");
+    router.push("/audit?tool=audit#lab");
   };
 
   return (
