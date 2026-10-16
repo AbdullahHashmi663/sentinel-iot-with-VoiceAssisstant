@@ -19,6 +19,28 @@ const { backendReadiness, feedReadiness } = load("readiness");
 const { inspectLocalAi } = load("local-ai");
 const { clientGuide, formatAge } = load("endpoint");
 const { sameOrigin } = load("endpoint-service");
+const { preferredVoice, speechText, installEnglishPack } = load("speech");
+
+test("voice selection prefers local adult female English and excludes remote engines", () => {
+  const make = (name, localService = true, lang = 'en-US') => ({ name, voiceURI: name, localService, lang });
+  const david = make('Microsoft David'), zira = make('Microsoft Zira');
+  assert.equal(preferredVoice([david, zira]).name, zira.name);
+  assert.equal(preferredVoice([make('Jenny Online', false), david, zira]).name, zira.name);
+  assert.equal(preferredVoice([david, zira], david.voiceURI).name, david.name);
+  assert.equal(preferredVoice([make('Remote Aria', false), make('French', true, 'fr-FR')]), undefined);
+  assert.match(speechText('**CPU** [details](http://example.test) IoT ```shell\nsecret```'), /C P U details I O T/);
+  assert.ok(!speechText('```shell\nsecret```').includes('secret'));
+});
+
+test("English pack installation verifies completion and never permits cloud fallback", async () => {
+  let calls = 0, installed = false;
+  const engine = { available: async options => { assert.equal(options.processLocally, true); return installed ? 'available' : 'downloadable'; }, install: async options => { assert.deepEqual(options.langs, ['en-US']); calls++; installed = true; return true; } };
+  assert.match(await installEnglishPack(engine), /installed/); assert.equal(calls, 1);
+  assert.match(await installEnglishPack(engine), /installed/); assert.equal(calls, 1);
+  await assert.rejects(installEnglishPack({ available: async () => 'unavailable', install: async () => { throw Error('Must not download unavailable resources'); } }), /cannot download/);
+  await assert.rejects(installEnglishPack({ available: async () => 'downloadable', install: async () => false }), /could not install/);
+  await assert.rejects(installEnglishPack(undefined), /does not support/);
+});
 const context = { demo: true, connected: false, paused: false, domain: "IoT_Modbus", section: "overview", events: 28, anomalies: 5, latest: null };
 
 function reportApi() {

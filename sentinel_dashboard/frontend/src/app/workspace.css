@@ -134,3 +134,4 @@ html[data-theme="sentinel"], [data-theme="sentinel"] body { margin:0; background
   .assistant-compose textarea { font-size:12px; }
   .assistant-suggestions button { min-height:38px; }
 }
+.assistant-voice-settings{padding:16px 22px;border-bottom:1px solid var(--ws-line);background:var(--ws-panel);max-height:55vh;overflow:auto}.assistant-voice-settings h3{font-size:13px;margin:8px 0}.assistant-voice-settings p{font-size:10px;line-height:1.65;color:var(--ws-muted);margin:9px 0}.assistant-voice-settings label{display:block;font-size:10px;margin-bottom:6px}.assistant-voice-settings select{width:100%;max-width:100%;padding:8px;background:#292b24;color:var(--ws-text);border:1px solid var(--ws-line);border-radius:5px;font-size:10px;margin-bottom:12px}.assistant-voice-settings>div{display:flex;gap:10px;align-items:center}.assistant-voice-settings button{font-size:10px}

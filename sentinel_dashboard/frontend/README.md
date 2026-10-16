@@ -39,7 +39,11 @@ Conversations use a 4,096-token context, bounded recent history, concise replies
 
 Try “give me a tour”, “summarize my telemetry”, “show Modbus”, “open incidents”, “pause the telemetry feed”, “resume the feed”, “connect the backend”, “start demo”, “explain the latest alert”, “export snapshot”, or “simulate a threat”. Application actions use a fixed allowlist. Model output cannot execute actions. Demonstrations require explicit review and affect generated observations only. Chat cannot run arbitrary commands, terminate processes, change firewall rules, or shut down devices.
 
-The microphone uses browser on-device recognition only, when an English speech pack is available. Unsupported browsers explain the limitation and retain text input. Transcripts are editable before sending. Spoken replies use local English system voices only. The new workspace does not request remote fonts. Legacy research tools retain their original implementations and assumptions.
+The microphone uses browser on-device recognition only. Voice settings includes an English pack installer using the browser's experimental `SpeechRecognition.install` API, with a post-install check. Unsupported/unavailable/failed downloads explain the limitation and retain text input; cloud recognition is never enabled. Transcripts are editable before sending. The embedded browser failed its pack download in the live verification, so microphone installation there remains unresolved.
+
+Spoken replies prefer the installed Kokoro neural female Heart voice, with Bella selectable in Voice settings; both synthesize on the host through `/api/speech` and loopback service 8012. The service uses its preinstalled local model cache and blocks outbound fetch. Enable the speaker button for replies, audition Preview voice, select a system voice explicitly, or stop playback. Local English system voices provide fallback, preferring recognized female voice names. Web Speech does not provide a reliable gender field, so the selector remains available. Host setup installs the separate neural runtime/model; client setup does not. See [the neural voice guide](../voice/README.md).
+
+The workspace does not request remote fonts. Legacy research tools retain their original implementations and assumptions.
 
 ## Telemetry and provenance
 

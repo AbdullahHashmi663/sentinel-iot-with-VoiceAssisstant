@@ -10,6 +10,8 @@ $logDirectory = Join-Path $PSScriptRoot '.local/host'
 $null = New-Item -ItemType Directory -Path $logDirectory -Force
 & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot 'start_local_ai.ps1')
 if ($LASTEXITCODE -ne 0) { throw 'The local AI helper failed. Check its message above.' }
+& powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot 'start_voice.ps1')
+if ($LASTEXITCODE -ne 0) { Write-Warning 'Neural speech is unavailable. Local system voices remain available; see .local/voice/stderr.log.' }
 & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot 'start_endpoint.ps1') -Mode fleet
 if ($LASTEXITCODE -ne 0) { throw 'The private host relay could not start.' }
 $backend = $null

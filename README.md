@@ -196,7 +196,17 @@ Without an explicit setting, a suitable installed local chat model is selected. 
 
 The helper sets `OLLAMA_NO_CLOUD=1`, loopback binding, one loaded model, and one parallel request. Setup persists `disable_ollama_cloud` in `%USERPROFILE%/.ollama/server.json`; restart an older running instance after configuration changes. See [Ollama's privacy settings](https://docs.ollama.com/faq#how-do-i-disable-ollamas-cloud-features).
 
-Client Mereoleona is a **built-in local guide**, not an Ollama chatbot, and does not reuse the host's AI connection. Host private voice input depends on browser on-device recognition, English speech resources, and permission. Text remains available when these are missing; transcripts can be reviewed before sending. Spoken responses use local system voices.
+Client Mereoleona is a **built-in local guide**, not an Ollama chatbot, and does not reuse the host's AI connection. Host private voice input depends on browser on-device recognition, English speech resources, and permission. Text remains available when these are missing; transcripts can be reviewed before sending.
+
+### Natural female voice
+
+Host setup now also prepares Kokoro's quantized local neural voice. Mereoleona defaults to the published **Heart** female voice, with **Bella** as an alternative. Speech is generated on this computer at a slightly calmer pace, using sentence chunks and cleaned-up text for spoken punctuation/technical abbreviations. This is synthetic speech, not a clone of a person.
+
+Open **Mereoleona → Voice settings → Preview voice** to audition her, or select another installed local English system voice. Enable spoken replies using the speaker button. Closing the panel, disabling speech, changing voices, or starting the microphone stops speech. If the neural service is unavailable, the app uses a local system voice, preferring a known female English voice such as Microsoft Zira.
+
+The dedicated service uses loopback **8012** with a separate local credential. Setup downloads approximately 92 MB of model weights plus runtime packages; inference blocks outbound fetch and uses the installed cache. Runtime text/audio is not saved; setup/test preview WAV files are retained in `.local/voice/`. See the [neural voice guide](sentinel_dashboard/voice/README.md).
+
+The microphone's English recognition pack is a separate browser resource. **Voice settings → Install English speech pack** checks/downloads it through the browser's experimental on-device API and verifies completion. A failed download is shown honestly and never enables cloud recognition. This embedded browser returned a failed download during verification; the speaking voice was installed successfully, but that microphone pack was not. Use a browser installation supporting local pack downloads and retry there. See [the browser pack API](https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition/install_static).
 
 ## Privacy and retained data
 
@@ -219,7 +229,7 @@ Initial setup contacts package, installer, and model sources. Tested local runti
 
 ## Ports, configuration, and logs
 
-Host services use **3000** (dashboard), **8000** (backend and `/ws/telemetry`), **8010** (relay), **11434** (Ollama). Client services use **3001** (dashboard), **8011** (agent), and **18010** for the example tunnel.
+Host services use **3000** (dashboard), **8000** (backend and `/ws/telemetry`), **8010** (relay), **8012** (private neural voice), **11434** (Ollama). Client services use **3001** (dashboard), **8011** (agent), and **18010** for the example tunnel.
 
 Advanced environment variables:
 
@@ -229,6 +239,8 @@ Advanced environment variables:
 - `SENTINEL_OLLAMA_MODEL`: installed host chat-model selection.
 
 Logs are under `.local/host/` (host backend/dashboard), `.local/client/` (agent/dashboard), and `.local/fleet/` (relay). Ollama helper logs are `%LOCALAPPDATA%/Ollama/sentinel-server.log` and `sentinel-stdout.log`. Older/manual launches may log elsewhere; read the path printed in the error.
+
+Neural voice logs, credential, installed model cache, and previews are in `.local/voice/`. `start_voice.ps1` starts that host-only service. The client bundle does not install this runtime or its model.
 
 ```powershell
 .\SETUP_SENTINEL_HOST.bat -CheckOnly

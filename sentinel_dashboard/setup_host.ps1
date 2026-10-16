@@ -30,6 +30,11 @@ for ($attempt = 0; $attempt -lt 40; $attempt++) {
 }
 if (-not $aiReady) { throw 'Ollama did not become ready. Check its local server log and rerun setup.' }
 Invoke-SentinelChecked -Executable $ollama -Arguments @('pull','qwen2.5:1.5b') -Failure 'The local conversation model could not be downloaded'
+Push-Location (Join-Path $PSScriptRoot 'voice')
+try {
+    Invoke-SentinelChecked -Executable $tools.Npm -Arguments @('ci','--no-audit','--no-fund') -Failure 'Local neural speech runtime installation failed'
+    Invoke-SentinelChecked -Executable $tools.Npm -Arguments @('run','setup') -Failure 'Local female voice model could not be prepared'
+} finally { Pop-Location }
 Push-Location (Join-Path $PSScriptRoot 'frontend')
 try {
     $env:SENTINEL_INTERFACE = 'operator'

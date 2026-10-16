@@ -1,0 +1,12 @@
+import { mkdir, writeFile } from 'node:fs/promises';
+import path from 'node:path';
+import { directory, loadModel, defaultVoice, wav, modelId } from './runtime.mjs';
+console.log('Downloading the local Kokoro neural voice model. Speech text is never sent to a hosted synthesis service.');
+await mkdir(directory, { recursive: true });
+const tts = await loadModel(true);
+const audio = await tts.generate('Hello, I am Mereoleona. I am here to help you understand your system, one step at a time.', { voice: defaultVoice, speed: 0.96 });
+if (!(audio.audio instanceof Float32Array) || !audio.audio.length) throw Error('Neural voice returned no audio.');
+await writeFile(path.join(directory, 'preview.wav'), wav(audio.audio));
+await writeFile(path.join(directory, 'ready.json'), JSON.stringify({ model: modelId, voice: defaultVoice, dtype: 'q8' }));
+console.log('Local neural female voice verified. Preview saved to the private voice folder.');
+await tts.model.dispose();
